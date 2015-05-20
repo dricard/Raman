@@ -16,6 +16,7 @@
 		92011B0D1B0D1A4300611519 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B0C1B0D1A4300611519 /* ViewController.swift */; };
 		92011B0F1B0D1A5500611519 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92011B0E1B0D1A5500611519 /* Main.storyboard */; };
 		92011B111B0D1B9300611519 /* Raman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B101B0D1B9300611519 /* Raman.swift */; };
+		92011B131B0D1E8000611519 /* Default568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92011B121B0D1E8000611519 /* Default568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		92011B0C1B0D1A4300611519 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		92011B0E1B0D1A5500611519 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		92011B101B0D1B9300611519 /* Raman.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Raman.swift; sourceTree = "<group>"; };
+		92011B121B0D1E8000611519 /* Default568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 		92011ADA1B0D197200611519 = {
 			isa = PBXGroup;
 			children = (
+				92011B121B0D1E8000611519 /* Default568h@2x.png */,
 				92011AE51B0D197200611519 /* Raman */,
 				92011AFB1B0D197300611519 /* RamanTests */,
 				92011AE41B0D197200611519 /* Products */,
@@ -204,6 +207,7 @@
 				92011B0F1B0D1A5500611519 /* Main.storyboard in Resources */,
 				92011AF31B0D197300611519 /* LaunchScreen.xib in Resources */,
 				92011AF01B0D197300611519 /* Images.xcassets in Resources */,
+				92011B131B0D1E8000611519 /* Default568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
