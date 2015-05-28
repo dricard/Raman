@@ -27,9 +27,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     let appDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
     
-    let ramanShift = ["1. Excitation wavelenth", "2. Signal wavelength", "3. Raman shift", "4. Raman shift", "5. Raman shift"]
+    let ramanShift = ["1. Excitation wavelenth (nm)", "2. Signal wavelength (nm)", "3. Raman shift (cm-1)", "4. Raman shift (GHz)", "5. Raman shift (meV)"]
     
-    let ramanBandwidth = ["6. Wavelength for bw calculations", "7. Bandwidth", "8. Bandwidth", "9. Bandwidth"]
+    let ramanBandwidth = ["6. Wavelength for bw calculations (nm)", "7. Bandwidth (cm-1)", "8. Bandwidth (GHz)", "9. Bandwidth (nm)"]
     
     let cellImage = [UIImage(named: "excitationInNmIcon"), UIImage(named: "signalInNmIcon"), UIImage(named: "shiftInCmIcon"), UIImage(named: "shiftInGhzIcon"), UIImage(named: "shiftInMevIcon"), UIImage(named: "bwInCmIcon"), UIImage(named: "bwInGhzIcon"), UIImage(named: "bwInNmIcon")]
    
