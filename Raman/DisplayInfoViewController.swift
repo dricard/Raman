@@ -16,6 +16,11 @@ class DisplayInfoViewController: UIViewController {
         UIApplication.sharedApplication().openURL(url!)
     }
     
+    @IBAction func photonPressed(sender: AnyObject) {
+        let url = NSURL(string: "http://www.photonetc.com")
+        UIApplication.sharedApplication().openURL(url!)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Info"

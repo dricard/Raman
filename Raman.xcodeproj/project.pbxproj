@@ -419,6 +419,7 @@
 				92011B041B0D197300611519 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		92011B051B0D197300611519 /* Build configuration list for PBXNativeTarget "RamanTests" */ = {
 			isa = XCConfigurationList;
@@ -427,6 +428,7 @@
 				92011B071B0D197300611519 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
