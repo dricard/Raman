@@ -11,13 +11,24 @@ import UIKit
 class DisplayInfoViewController: UIViewController {
 
     @IBAction func namePressed(sender: AnyObject) {
-        let url = NSURL(string: "http://hexaedre.com")
+        let url = NSURL(string: "https://about.me/dricard")
 //        let request = NSURLRequest(URL: url!)
         UIApplication.sharedApplication().openURL(url!)
     }
     
     @IBAction func photonPressed(sender: AnyObject) {
-        let url = NSURL(string: "http://www.photonetc.com")
+        let url = NSURL(string: "http://www.photonetc.com/raman-imaging")
+        UIApplication.sharedApplication().openURL(url!)
+    }
+    
+    @IBAction func helpPressed(sender: AnyObject) {
+        let url = NSURL(string: "http://hexaedre.com/Raman.html")
+        UIApplication.sharedApplication().openURL(url!)
+    }
+    
+    
+    @IBAction func supportPressed(sender: AnyObject) {
+        let url = NSURL(string: "http://hexaedre.com/Ramansupport.html")
         UIApplication.sharedApplication().openURL(url!)
     }
     
