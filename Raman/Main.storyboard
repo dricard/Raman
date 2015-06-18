@@ -530,9 +530,9 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LF2-0y-O7q">
-                                <rect key="frame" x="202" y="575" width="37" height="17"/>
+                                <rect key="frame" x="212" y="575" width="27" height="17"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="v 1.0.1">
+                                    <fragment content="v 1.1">
                                         <attributes>
                                             <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <font key="NSFont" size="12" name="AvenirNext-Medium"/>

@@ -28,7 +28,7 @@ class DisplayInfoViewController: UIViewController {
     
     
     @IBAction func supportPressed(sender: AnyObject) {
-        let url = NSURL(string: "http://hexaedre.com/Ramansupport.html")
+        let url = NSURL(string: "mailto:dr@hexaedre.com?subject=Raman%20App%20support%20request&body=Please%20ask%20your%20quetion%20or%20make%20your%20comment%20here.%20Thank%20you!")
         UIApplication.sharedApplication().openURL(url!)
     }
     
