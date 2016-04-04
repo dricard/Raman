@@ -16,6 +16,7 @@ class Raman {
     let cInAir = 299709000
     let cInVacuum = 299792458
     
+
     // properties
     var signal : Double
     var pump : Double

@@ -10,8 +10,10 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var ramanData = [0.0, 0.0, 0.0, 0.0, 0.0]
     
+    // MARK: Properties
+    
+    var ramanData = [0.0, 0.0, 0.0, 0.0, 0.0]
     var bwData = [0.0, 0.0, 0.0, 0.0]
 
     let excitation = 0
@@ -38,7 +40,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var whichDataValueChanged : Int = 0
     var newValueForChangedData : Double = 0.0
     
+    // MARK: Outlets
+    
     @IBOutlet var myTableView: UITableView!
+    
+    // Mark: Tableview delegates
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
@@ -54,6 +60,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
         // var myImage = UIImage(named: "placeHolderImage")
         
@@ -202,15 +209,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
      override func viewDidLoad() {
+        super.viewDidLoad()
         
 //        println("In view did load. New Value is \(newValueForChangedData)")
         
         // Do any additional setup after loading the view, typically from a nib.
     }
-    
-    override func didReceiveMemoryWarning() {
-        // Dispose of any resources that can be recreated.
-    }
+ 
 }
 
 
