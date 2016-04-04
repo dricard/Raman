@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		214414A81CB2AA6100A1958D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214414A71CB2AA6100A1958D /* Model.swift */; };
 		92011AE91B0D197300611519 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011AE81B0D197300611519 /* AppDelegate.swift */; };
 		92011AF01B0D197300611519 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92011AEF1B0D197300611519 /* Images.xcassets */; };
 		92011AF31B0D197300611519 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92011AF11B0D197300611519 /* LaunchScreen.xib */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		214414A71CB2AA6100A1958D /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		92011AE31B0D197200611519 /* Raman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92011AE71B0D197300611519 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92011AE81B0D197300611519 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				92011B0A1B0D1A3100611519 /* DisplayInfoViewController.swift */,
 				92011B081B0D1A1600611519 /* ChangeValueViewController.swift */,
 				92011AE61B0D197200611519 /* Supporting Files */,
+				214414A71CB2AA6100A1958D /* Model.swift */,
 			);
 			path = Raman;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				92011B091B0D1A1600611519 /* ChangeValueViewController.swift in Sources */,
 				92011B111B0D1B9300611519 /* Raman.swift in Sources */,
 				92011B0B1B0D1A3100611519 /* DisplayInfoViewController.swift in Sources */,
+				214414A81CB2AA6100A1958D /* Model.swift in Sources */,
 				92011B0D1B0D1A4300611519 /* ViewController.swift in Sources */,
 				92011AE91B0D197300611519 /* AppDelegate.swift in Sources */,
 			);

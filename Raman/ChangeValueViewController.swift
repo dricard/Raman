@@ -21,7 +21,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     let bwGhz = 2
     let bwMev = 3
     
-    let appDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+    let ramanData = Model.sharedInstance
     
     let ramanShift = ["Excitation wavelenth", "Signal wavelength", "Raman shift", "Raman shift", "Raman shift"]
     
@@ -56,15 +56,15 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
             if selectedSection! == 0 {
                 switch selectedDataSource! {
                 case 0:
-                    appDelegate.spectro.pump = selectedValue!
+                    ramanData.spectro.pump = selectedValue!
                 case 1:
-                    appDelegate.spectro.signal = selectedValue!
+                    ramanData.spectro.signal = selectedValue!
                 case 2:
-                    appDelegate.spectro.shiftInCm = selectedValue!
+                    ramanData.spectro.shiftInCm = selectedValue!
                 case 3:
-                    appDelegate.spectro.shiftInGhz = selectedValue!
+                    ramanData.spectro.shiftInGhz = selectedValue!
                 case 4:
-                    appDelegate.spectro.shiftInMev = selectedValue!
+                    ramanData.spectro.shiftInMev = selectedValue!
                 default:
                     print("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
                     break
@@ -72,13 +72,13 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
             } else {
                 switch selectedDataSource! {
                 case 0:
-                    appDelegate.spectro.bwLambda = selectedValue!
+                    ramanData.spectro.bwLambda = selectedValue!
                 case 1:
-                    appDelegate.spectro.bwInCm = selectedValue!
+                    ramanData.spectro.bwInCm = selectedValue!
                 case 2:
-                    appDelegate.spectro.bwInGhz = selectedValue!
+                    ramanData.spectro.bwInGhz = selectedValue!
                 case 3:
-                    appDelegate.spectro.bwInNm = selectedValue!
+                    ramanData.spectro.bwInNm = selectedValue!
                 default:
                     print("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
                 }
@@ -190,7 +190,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
 //        println(newValue.text)
-//        println("test: spectro variable is accessible if this gives a value: \(appDelegate.spectro.pump)")
+//        println("test: spectro variable is accessible if this gives a value: \(ramanData.spectro.pump)")
 //        theReturnValue = newValue.text as! doubleValue
         if let theReturnValue = Double(textField.text!) {
             if checkForValidValue(theReturnValue) {
@@ -211,15 +211,15 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
             if selectedSection! == 0 {
                 switch selectedDataSource! {
                 case 0:
-                    appDelegate.spectro.pump = theReturnValue
+                    ramanData.spectro.pump = theReturnValue
                 case 1:
-                    appDelegate.spectro.signal = theReturnValue
+                    ramanData.spectro.signal = theReturnValue
                 case 2:
-                    appDelegate.spectro.shiftInCm = theReturnValue
+                    ramanData.spectro.shiftInCm = theReturnValue
                 case 3:
-                    appDelegate.spectro.shiftInGhz = theReturnValue
+                    ramanData.spectro.shiftInGhz = theReturnValue
                 case 4:
-                    appDelegate.spectro.shiftInMev = theReturnValue
+                    ramanData.spectro.shiftInMev = theReturnValue
                 default:
                     print("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
                     break
@@ -227,13 +227,13 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
             } else {
                 switch selectedDataSource! {
                 case 0:
-                    appDelegate.spectro.bwLambda = theReturnValue
+                    ramanData.spectro.bwLambda = theReturnValue
                 case 1:
-                    appDelegate.spectro.bwInCm = theReturnValue
+                    ramanData.spectro.bwInCm = theReturnValue
                 case 2:
-                    appDelegate.spectro.bwInGhz = theReturnValue
+                    ramanData.spectro.bwInGhz = theReturnValue
                 case 3:
-                    appDelegate.spectro.bwInNm = theReturnValue
+                    ramanData.spectro.bwInNm = theReturnValue
                 default:
                     print("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
                 }

@@ -25,7 +25,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let bwGhz = 2
     let bwMev = 3
     
-    let appDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+    let modelData = Model.sharedInstance
     
     let ramanShift = ["1. Excitation wavelenth (nm)", "2. Signal wavelength (nm)", "3. Raman shift (cm-1)", "4. Raman shift (GHz)", "5. Raman shift (meV)"]
     
@@ -61,23 +61,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             // we're in the raman signal section
             switch indexPath.row {
             case 0 :
-                cell.textLabel!.text = "\(appDelegate.spectro.pump)"
+                cell.textLabel!.text = "\(modelData.spectro.pump)"
                 cell.detailTextLabel?.text = ramanShift[indexPath.row]
                 cell.imageView?.image = cellImage[indexPath.row]
             case 1 :
-                cell.textLabel!.text = "\(appDelegate.spectro.signal)"
+                cell.textLabel!.text = "\(modelData.spectro.signal)"
                 cell.detailTextLabel?.text = ramanShift[indexPath.row]
                 cell.imageView?.image = cellImage[indexPath.row]
             case 2 :
-                cell.textLabel!.text = "\(appDelegate.spectro.shiftInCm)"
+                cell.textLabel!.text = "\(modelData.spectro.shiftInCm)"
                 cell.detailTextLabel?.text = ramanShift[indexPath.row]
                 cell.imageView?.image = cellImage[indexPath.row]
             case 3 :
-                cell.textLabel!.text = "\(appDelegate.spectro.shiftInGhz)"
+                cell.textLabel!.text = "\(modelData.spectro.shiftInGhz)"
                 cell.detailTextLabel?.text = ramanShift[indexPath.row]
                 cell.imageView?.image = cellImage[indexPath.row]
             case 4 :
-                cell.textLabel!.text = "\(appDelegate.spectro.shiftInMev)"
+                cell.textLabel!.text = "\(modelData.spectro.shiftInMev)"
                 cell.detailTextLabel?.text = ramanShift[indexPath.row]
                 cell.imageView?.image = cellImage[indexPath.row]
             default :
@@ -87,19 +87,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             // we're in the raman bandwith section
             switch indexPath.row {
             case 0 :
-                cell.textLabel!.text = "\(appDelegate.spectro.bwLambda)"
+                cell.textLabel!.text = "\(modelData.spectro.bwLambda)"
                 cell.detailTextLabel?.text = ramanBandwidth[indexPath.row]
                 cell.imageView?.image = cellImage[indexPath.row]
             case 1 :
-                cell.textLabel!.text = "\(appDelegate.spectro.bwInCm)"
+                cell.textLabel!.text = "\(modelData.spectro.bwInCm)"
                 cell.detailTextLabel?.text = ramanBandwidth[indexPath.row]
                 cell.imageView?.image = cellImage[indexPath.row + 4]
             case 2 :
-                cell.textLabel!.text = "\(appDelegate.spectro.bwInGhz)"
+                cell.textLabel!.text = "\(modelData.spectro.bwInGhz)"
                 cell.detailTextLabel?.text = ramanBandwidth[indexPath.row]
                 cell.imageView?.image = cellImage[indexPath.row + 4]
             case 3 :
-                cell.textLabel!.text = "\(appDelegate.spectro.bwInNm)"
+                cell.textLabel!.text = "\(modelData.spectro.bwInNm)"
                 cell.detailTextLabel?.text = ramanBandwidth[indexPath.row]
                 cell.imageView?.image = cellImage[indexPath.row + 4]
             default :
@@ -146,28 +146,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         if sectionSelected == 0 {
                             switch mySelection {
                             case 0:
-                                sencondScene.selectedValue = appDelegate.spectro.pump
+                                sencondScene.selectedValue = modelData.spectro.pump
                             case 1:
-                                sencondScene.selectedValue = appDelegate.spectro.signal
+                                sencondScene.selectedValue = modelData.spectro.signal
                             case 2:
-                                sencondScene.selectedValue = appDelegate.spectro.shiftInCm
+                                sencondScene.selectedValue = modelData.spectro.shiftInCm
                             case 3:
-                                sencondScene.selectedValue = appDelegate.spectro.shiftInGhz
+                                sencondScene.selectedValue = modelData.spectro.shiftInGhz
                             case 4:
-                                sencondScene.selectedValue = appDelegate.spectro.shiftInMev
+                                sencondScene.selectedValue = modelData.spectro.shiftInMev
                             default:
                                 break
                             }
                          } else {
                             switch mySelection {
                             case 0:
-                                sencondScene.selectedValue = appDelegate.spectro.bwLambda
+                                sencondScene.selectedValue = modelData.spectro.bwLambda
                             case 1:
-                                sencondScene.selectedValue = appDelegate.spectro.bwInCm
+                                sencondScene.selectedValue = modelData.spectro.bwInCm
                             case 2:
-                                sencondScene.selectedValue = appDelegate.spectro.bwInGhz
+                                sencondScene.selectedValue = modelData.spectro.bwInGhz
                             case 3:
-                                sencondScene.selectedValue = appDelegate.spectro.bwInNm
+                                sencondScene.selectedValue = modelData.spectro.bwInNm
                             default:
                                 break
                             }

@@ -152,5 +152,9 @@ class Raman {
         self.bwLambda = bwLambda
         self.bwInCm = bwInCm
     }
+    
+    // MARK: Singleton
+    
+    
 }
 
