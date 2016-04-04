@@ -29,12 +29,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     let modelData = Model.sharedInstance
     
-    let ramanShift = ["1. Excitation wavelenth (nm)", "2. Signal wavelength (nm)", "3. Raman shift (cm-1)", "4. Raman shift (GHz)", "5. Raman shift (meV)"]
-    
-    let ramanBandwidth = ["6. Wavelength for bw calculations (nm)", "7. Bandwidth (cm-1)", "8. Bandwidth (GHz)", "9. Bandwidth (nm)"]
-    
-    let cellImage = [UIImage(named: "excitationInNmIcon"), UIImage(named: "signalInNmIcon"), UIImage(named: "shiftInCmIcon"), UIImage(named: "shiftInGhzIcon"), UIImage(named: "shiftInMevIcon"), UIImage(named: "bwInCmIcon"), UIImage(named: "bwInGhzIcon"), UIImage(named: "bwInNmIcon")]
-   
     var valueDidChangeFromEdit = false
     var whichSectionValueChanged : Int = 0
     var whichDataValueChanged : Int = 0
@@ -46,83 +40,34 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Mark: Tableview delegates
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return ramanShift.count
-        } else {
-            return ramanBandwidth.count
-        }
-        
+        return Constants.ramanShift.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
-        // var myImage = UIImage(named: "placeHolderImage")
-        
-        if indexPath.section == 0 {
-            // we're in the raman signal section
-            switch indexPath.row {
-            case 0 :
-                cell.textLabel!.text = "\(modelData.spectro.pump)"
-                cell.detailTextLabel?.text = ramanShift[indexPath.row]
-                cell.imageView?.image = cellImage[indexPath.row]
-            case 1 :
-                cell.textLabel!.text = "\(modelData.spectro.signal)"
-                cell.detailTextLabel?.text = ramanShift[indexPath.row]
-                cell.imageView?.image = cellImage[indexPath.row]
-            case 2 :
-                cell.textLabel!.text = "\(modelData.spectro.shiftInCm)"
-                cell.detailTextLabel?.text = ramanShift[indexPath.row]
-                cell.imageView?.image = cellImage[indexPath.row]
-            case 3 :
-                cell.textLabel!.text = "\(modelData.spectro.shiftInGhz)"
-                cell.detailTextLabel?.text = ramanShift[indexPath.row]
-                cell.imageView?.image = cellImage[indexPath.row]
-            case 4 :
-                cell.textLabel!.text = "\(modelData.spectro.shiftInMev)"
-                cell.detailTextLabel?.text = ramanShift[indexPath.row]
-                cell.imageView?.image = cellImage[indexPath.row]
-            default :
-                break
-            }
-        } else {
-            // we're in the raman bandwith section
-            switch indexPath.row {
-            case 0 :
-                cell.textLabel!.text = "\(modelData.spectro.bwLambda)"
-                cell.detailTextLabel?.text = ramanBandwidth[indexPath.row]
-                cell.imageView?.image = cellImage[indexPath.row]
-            case 1 :
-                cell.textLabel!.text = "\(modelData.spectro.bwInCm)"
-                cell.detailTextLabel?.text = ramanBandwidth[indexPath.row]
-                cell.imageView?.image = cellImage[indexPath.row + 4]
-            case 2 :
-                cell.textLabel!.text = "\(modelData.spectro.bwInGhz)"
-                cell.detailTextLabel?.text = ramanBandwidth[indexPath.row]
-                cell.imageView?.image = cellImage[indexPath.row + 4]
-            case 3 :
-                cell.textLabel!.text = "\(modelData.spectro.bwInNm)"
-                cell.detailTextLabel?.text = ramanBandwidth[indexPath.row]
-                cell.imageView?.image = cellImage[indexPath.row + 4]
-            default :
-                break
-            }
+
+        switch indexPath.row {
+        case 0 :
+            cell.textLabel!.text = "\(modelData.spectro.pump)"
+        case 1 :
+            cell.textLabel!.text = "\(modelData.spectro.signal)"
+        case 2 :
+            cell.textLabel!.text = "\(modelData.spectro.shiftInCm)"
+        case 3 :
+            cell.textLabel!.text = "\(modelData.spectro.shiftInGhz)"
+        case 4 :
+            cell.textLabel!.text = "\(modelData.spectro.shiftInMev)"
+        default :
+            break
         }
+        cell.detailTextLabel?.text = Constants.ramanShift[indexPath.row]
+        cell.imageView?.image = Constants.cellImage[indexPath.row]
+
         return cell
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Raman Spectroscopy"
-        } else {
-            return "Bandwidth Conversion"
-        }
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 //        println("into prepareForSegue")
@@ -210,6 +155,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
      override func viewDidLoad() {
         super.viewDidLoad()
+        myTableView.delegate = self
+        myTableView.dataSource = self
         
 //        println("In view did load. New Value is \(newValueForChangedData)")
         

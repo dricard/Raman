@@ -14,7 +14,7 @@ struct Constants {
     
     static let ramanBandwidth = ["Wavelength for bw calculations (nm)", "Bandwidth (cm-1)", "Bandwidth (GHz)", "Bandwidth (nm)"]
     
-    static let cellImage = [UIImage(named: "excitationInNmIcon"), UIImage(named: "signalInNmIcon"), UIImage(named: "shiftInCmIcon"), UIImage(named: "shiftInGhzIcon"), UIImage(named: "shiftInMevIcon"), UIImage(named: "bwInCmIcon"), UIImage(named: "bwInGhzIcon"), UIImage(named: "bwInNmIcon")]
+    static let cellImage = [UIImage(named: "excitationInNmIcon"), UIImage(named: "signalInNmIcon"), UIImage(named: "shiftInCmIcon"), UIImage(named: "shiftInGhzIcon"), UIImage(named: "shiftInMevIcon")]
 
     static let bwCellImage = [UIImage(named: "excitationInNmIcon"), UIImage(named: "bwInCmIcon"), UIImage(named: "bwInGhzIcon"), UIImage(named: "bwInNmIcon")]
 
