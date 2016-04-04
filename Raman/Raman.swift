@@ -28,7 +28,7 @@ class Raman {
             if signal != 0 {
                 return 1.0 / (0.0000001 * pump ) - 1.0 / ( 0.0000001 * signal )
             } else {
-                println("ERROR in shiftInCm -- invalid value for variable named 'signal'")
+                print("ERROR in shiftInCm -- invalid value for variable named 'signal'")
                 return 0.0
             }
         }
@@ -43,7 +43,7 @@ class Raman {
                     alternateValue = (1.0 / (0.0000001)) - 1.0
                 }
                 signal = 1.0 / ( 1.0 / pump - ( 0.0000001 * alternateValue ))
-                println("ERROR in shiftInCm -- invalid value for variable named 'pump' or 'newValue'")
+                print("ERROR in shiftInCm -- invalid value for variable named 'pump' or 'newValue'")
             }
         }
     } // variable 'shift' in cm-1
@@ -53,7 +53,7 @@ class Raman {
             if pump != 0 {
                 return Double(cInAir) * ( signal - pump ) / pow(pump, 2.0)
             } else {
-                println("ERROR in shiftInGhz -- invalid value for variable named 'pump'")
+                print("ERROR in shiftInGhz -- invalid value for variable named 'pump'")
                 return 0.0
             }
         }
@@ -68,7 +68,7 @@ class Raman {
                     alternateValue = -1.0 * Double(cInAir)
                 }
                 signal = alternateValue * pow(pump, 2.0) / Double(cInAir) + pump
-                println("ERROR in shiftInGhz -- invalid value for variable named 'newValue' (should be greater than \(-1.0 * Double(cInAir) / pump)")
+                print("ERROR in shiftInGhz -- invalid value for variable named 'newValue' (should be greater than \(-1.0 * Double(cInAir) / pump)")
             }
         }
     }
@@ -78,7 +78,7 @@ class Raman {
             if pump != 0 && signal != 0 {
                 return ( 1240.6 / pump - 1240.6 / signal ) * 1000.0
             } else {
-                println("ERROR in shiftInMev -- invalud value for variable named 'pump' or 'signal'")
+                print("ERROR in shiftInMev -- invalud value for variable named 'pump' or 'signal'")
                 return 0.0
             }
         }
@@ -88,7 +88,7 @@ class Raman {
             } else {
                 let alternateValue = (1240600.0 / pump) - 1
                 signal = 1240600.0 / (1240600.0 / pump - alternateValue)
-                println("ERROR in shiftInMev -- invalud value for variable named 'pump' or 'newValue'")
+                print("ERROR in shiftInMev -- invalud value for variable named 'pump' or 'newValue'")
             }
         }
     }
@@ -98,7 +98,7 @@ class Raman {
             if bwLambda != 0 {
                 return Double(cInAir) * bwInNm / pow(bwLambda, 2.0)
             } else {
-                println("ERROR in bwInGhz -- invalid value for variable named 'bwLambda'")
+                print("ERROR in bwInGhz -- invalid value for variable named 'bwLambda'")
                 return 0.0
             }
         }
@@ -112,7 +112,7 @@ class Raman {
             if bwLambda != 0 {
                 return (1.0 / ( 1.0 / bwLambda - ( 0.0000001 * bwInCm ))) - bwLambda
             } else {
-                println("ERROR in bwInNm -- invalid value for variable named 'bwLambda'")
+                print("ERROR in bwInNm -- invalid value for variable named 'bwLambda'")
                 return 0.0
             }
         }
@@ -121,7 +121,7 @@ class Raman {
                 bwInCm = ( 1.0 / bwLambda - (1.0 / (newValue + bwLambda))) / 0.0000001
             } else {
                 // do nothing, the value will not change and stay as it was before
-                println("ERROR in bwInNm -- invalid value for variable named 'bwLambda'")
+                print("ERROR in bwInNm -- invalid value for variable named 'bwLambda'")
             }
         }
     }
@@ -132,7 +132,7 @@ class Raman {
         if lambda != 0 {
             return 1.0 / ( 1.0 / lambda - ( 0.0000001 * bandwidth ))
         } else {
-            println("ERROR in lambdaS function -- invalid value for variable named 'lambda'")
+            print("ERROR in lambdaS function -- invalid value for variable named 'lambda'")
             return 0.0
         }
     }

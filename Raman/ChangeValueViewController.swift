@@ -66,7 +66,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
                 case 4:
                     appDelegate.spectro.shiftInMev = selectedValue!
                 default:
-                    println("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
+                    print("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
                     break
                 }
             } else {
@@ -80,7 +80,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
                 case 3:
                     appDelegate.spectro.bwInNm = selectedValue!
                 default:
-                    println("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
+                    print("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
                 }
             }
         }
@@ -88,13 +88,13 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
        self.newValue.resignFirstResponder()
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     func checkForValidValue(toTest: Double) -> Bool {
         if toTest == 0 {
-            var alert = UIAlertController(title: "Invalid entry", message: "Value entered is not a valid number", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Invalid entry", message: "Value entered is not a valid number", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
             return false
@@ -105,7 +105,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
                     if toTest > 0 && toTest < 10000 {
                         return true
                     } else {
-                        var alert = UIAlertController(title: "Invalid entry", message: "Please enter a wavelength between 1nm and 10000nm", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a wavelength between 1nm and 10000nm", preferredStyle: UIAlertControllerStyle.Alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                         self.presentViewController(alert, animated: true, completion: nil)
                     }
@@ -113,7 +113,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
                     if toTest > 0 && toTest < 10000 {
                         return true
                     } else {
-                        var alert = UIAlertController(title: "Invalid entry", message: "Please enter a wavelength between 1nm and 10000nm", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a wavelength between 1nm and 10000nm", preferredStyle: UIAlertControllerStyle.Alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                         self.presentViewController(alert, animated: true, completion: nil)
                     }
@@ -121,7 +121,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
                     if toTest > -100000 && toTest < 100000 {
                         return true
                     } else {
-                        var alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 100000cm-1", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 100000cm-1", preferredStyle: UIAlertControllerStyle.Alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                         self.presentViewController(alert, animated: true, completion: nil)
                     }
@@ -129,7 +129,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
                     if toTest > -90000000 && toTest < 90000000 {
                         return true
                     } else {
-                        var alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 90000000GHz", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 90000000GHz", preferredStyle: UIAlertControllerStyle.Alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                         self.presentViewController(alert, animated: true, completion: nil)
                     }
@@ -137,12 +137,12 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
                     if toTest > -10000 && toTest < 10000 {
                         return true
                     } else {
-                        var alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 10000meV", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 10000meV", preferredStyle: UIAlertControllerStyle.Alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                         self.presentViewController(alert, animated: true, completion: nil)
                     }
                 default:
-                    println("ERROR in checkForValidValue of selectedDataSource - bad return value")
+                    print("ERROR in checkForValidValue of selectedDataSource - bad return value")
                     break
                 }
             } else {
@@ -151,7 +151,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
                     if toTest > 0 && toTest < 10000 {
                         return true
                     } else {
-                        var alert = UIAlertController(title: "Invalid entry", message: "Please enter a wavelength between 1nm and 10000nm", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a wavelength between 1nm and 10000nm", preferredStyle: UIAlertControllerStyle.Alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                         self.presentViewController(alert, animated: true, completion: nil)
                     }
@@ -159,7 +159,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
                     if toTest > -10000 && toTest < 10000 {
                         return true
                     } else {
-                        var alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 10000cm-1", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 10000cm-1", preferredStyle: UIAlertControllerStyle.Alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                         self.presentViewController(alert, animated: true, completion: nil)
                     }
@@ -167,7 +167,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
                     if toTest > -90000000 && toTest < 90000000 {
                         return true
                     } else {
-                        var alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 90000000GHz", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 90000000GHz", preferredStyle: UIAlertControllerStyle.Alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                         self.presentViewController(alert, animated: true, completion: nil)
                     }
@@ -175,12 +175,12 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
                     if toTest > -10000 && toTest < 10000 {
                         return true
                     } else {
-                        var alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 10000meV", preferredStyle: UIAlertControllerStyle.Alert)
+                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 10000meV", preferredStyle: UIAlertControllerStyle.Alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                         self.presentViewController(alert, animated: true, completion: nil)
                     }
                 default:
-                    println("ERROR in checkForValidValue of ChangeValueViewController - bad selectedDataSource value")
+                    print("ERROR in checkForValidValue of ChangeValueViewController - bad selectedDataSource value")
                 }
             }
             return true
@@ -191,16 +191,21 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
 //        println(newValue.text)
 //        println("test: spectro variable is accessible if this gives a value: \(appDelegate.spectro.pump)")
-        theReturnValue = (newValue.text as NSString).doubleValue
-        if checkForValidValue(theReturnValue) {
-//            println("return value (\(theReturnValue)) is valid")
-            newValue.text = "\(theReturnValue)"
-            valueChanged = true
+//        theReturnValue = newValue.text as! doubleValue
+        if let theReturnValue = Double(textField.text!) {
+            if checkForValidValue(theReturnValue) {
+    //            println("return value (\(theReturnValue)) is valid")
+                newValue.text = "\(theReturnValue)"
+                valueChanged = true
+            } else {
+                newValue.text = "\(selectedValue!)"
+    //            println("return value is NOT valid")
+                valueChanged = false
+            }
         } else {
-            newValue.text = "\(selectedValue!)"
-//            println("return value is NOT valid")
-            valueChanged = false
+            print("ERR: return value from UITextField not valid in ChangeValueViewController / textFieldShouldReturn")
         }
+        
         if valueChanged {
             // do the switch statement
             if selectedSection! == 0 {
@@ -216,7 +221,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
                 case 4:
                     appDelegate.spectro.shiftInMev = theReturnValue
                 default:
-                    println("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
+                    print("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
                     break
                 }
             } else {
@@ -230,7 +235,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
                 case 3:
                     appDelegate.spectro.bwInNm = theReturnValue
                 default:
-                    println("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
+                    print("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
                 }
             }
         }

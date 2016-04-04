@@ -54,7 +54,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
         // var myImage = UIImage(named: "placeHolderImage")
         
         if indexPath.section == 0 {
@@ -123,13 +123,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             // println("Segue identifier is \(segue.identifier)")
             if segue.identifier! == "changeData" {
                 // println("-- we're in the loop!! --")
-                var sencondScene = segue.destinationViewController as! ChangeValueViewController
+                let sencondScene = segue.destinationViewController as! ChangeValueViewController
                 let cell = sender as! UITableViewCell
                 if let myData = cell.detailTextLabel!.text {
                     // println(myData)
                     // println(myData[myData.startIndex])
                     let temp : String = String(myData[myData.startIndex])
-                    if let cellSelected = temp.toInt() {
+                    if let cellSelected = Int(temp) {
                         var mySelection = cellSelected
                         var sectionSelected : Int
                         if cellSelected > 5 {
@@ -174,7 +174,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         }
                     }
                 } else {
-                    println("ERROR: could not find a textvalue for cell's detailed label!")
+                    print("ERROR: could not find a textvalue for cell's detailed label!")
                 }
                 
             }
