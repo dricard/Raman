@@ -74,6 +74,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		215A7AFA1CF8BF9B003B9F9B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				92011B101B0D1B9300611519 /* Raman.swift */,
+				214414A71CB2AA6100A1958D /* Model.swift */,
+				214414AB1CB2C0B700A1958D /* Constants.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		92011ADA1B0D197200611519 = {
 			isa = PBXGroup;
 			children = (
@@ -95,8 +105,8 @@
 		92011AE51B0D197200611519 /* Raman */ = {
 			isa = PBXGroup;
 			children = (
+				215A7AFA1CF8BF9B003B9F9B /* Model */,
 				92011AE81B0D197300611519 /* AppDelegate.swift */,
-				92011B101B0D1B9300611519 /* Raman.swift */,
 				92011AEF1B0D197300611519 /* Images.xcassets */,
 				92011AF11B0D197300611519 /* LaunchScreen.xib */,
 				92011B0E1B0D1A5500611519 /* Main.storyboard */,
@@ -105,8 +115,6 @@
 				92011B0A1B0D1A3100611519 /* DisplayInfoViewController.swift */,
 				92011B081B0D1A1600611519 /* ChangeValueViewController.swift */,
 				92011AE61B0D197200611519 /* Supporting Files */,
-				214414A71CB2AA6100A1958D /* Model.swift */,
-				214414AB1CB2C0B700A1958D /* Constants.swift */,
 				215A7AF51CF8949F003B9F9B /* Fabric.framework */,
 				215A7AF61CF8949F003B9F9B /* Crashlytics.framework */,
 			);

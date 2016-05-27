@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rcr-VY-9iD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rcr-VY-9iD">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -368,7 +368,7 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zy-dp-xcR">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zy-dp-xcR">
                                 <rect key="frame" x="247" y="574" width="106" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="QpM-PP-ErK"/>
@@ -534,7 +534,7 @@
                                     <action selector="helpPressed:" destination="bJE-JC-EHF" eventType="touchUpInside" id="l21-Nk-FGC"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LF2-0y-O7q">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LF2-0y-O7q">
                                 <rect key="frame" x="212" y="575" width="27" height="17"/>
                                 <attributedString key="attributedText">
                                     <fragment content="v 1.1">
@@ -645,7 +645,7 @@
             </objects>
             <point key="canvasLocation" x="340" y="1217"/>
         </scene>
-        <!--Bandwidth View Controller-->
+        <!--Bandwidth-->
         <scene sceneID="CGJ-4C-4Ne">
             <objects>
                 <viewController id="YMa-Qy-cB0" customClass="BandwidthViewController" customModule="Raman" customModuleProvider="target" sceneMemberID="viewController">
@@ -696,7 +696,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="FjL-nm-qwl" secondAttribute="trailing" constant="-20" id="ldm-nF-Vhf"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="07s-M6-dzt"/>
+                    <navigationItem key="navigationItem" title="Bandwidth" id="07s-M6-dzt"/>
                     <connections>
                         <outlet property="tableView" destination="FjL-nm-qwl" id="Pgq-1j-zfw"/>
                         <segue destination="R2M-Me-Mgo" kind="show" id="j1i-o8-XGG"/>

@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        Fabric.sharedSDK().debug = true
+        Fabric.sharedSDK().debug = false
         Fabric.with([Crashlytics.self])
         return true
     }

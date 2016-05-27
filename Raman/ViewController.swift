@@ -48,20 +48,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
 
-        switch indexPath.row {
-        case 0 :
-            cell.textLabel!.text = "\(modelData.spectro.pump)"
-        case 1 :
-            cell.textLabel!.text = "\(modelData.spectro.signal)"
-        case 2 :
-            cell.textLabel!.text = "\(modelData.spectro.shiftInCm)"
-        case 3 :
-            cell.textLabel!.text = "\(modelData.spectro.shiftInGhz)"
-        case 4 :
-            cell.textLabel!.text = "\(modelData.spectro.shiftInMev)"
-        default :
-            break
-        }
+        cell.textLabel!.text = "\(modelData.spectro.specData(indexPath.row))"
+        
+
+//        switch indexPath.row {
+//        case 0 :
+//            cell.textLabel!.text = "\(modelData.spectro.pump)"
+//        case 1 :
+//            cell.textLabel!.text = "\(modelData.spectro.signal)"
+//        case 2 :
+//            cell.textLabel!.text = "\(modelData.spectro.shiftInCm)"
+//        case 3 :
+//            cell.textLabel!.text = "\(modelData.spectro.shiftInGhz)"
+//        case 4 :
+//            cell.textLabel!.text = "\(modelData.spectro.shiftInMev)"
+//        default :
+//            break
+//        }
         cell.detailTextLabel?.text = Constants.ramanShift[indexPath.row]
         cell.imageView?.image = Constants.cellImage[indexPath.row]
 
