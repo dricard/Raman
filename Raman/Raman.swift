@@ -23,6 +23,10 @@ class Raman {
     var bwInCm : Double
     var bwLambda : Double
     
+    enum DataSourceType {
+        case Spectroscopy
+        case Bandwidth
+    }
     
     // MARK: Computed properties
     
@@ -167,7 +171,115 @@ class Raman {
         }
     }
     
+    func checkForValidData(value: Double, forDataSource: Int, inWhichTab: DataSourceType) -> (valid: Bool, errorMessage: String?) {
 
+        if value == 0.0 {
+            return (false, "Value cannot be zero")
+        }
+        if inWhichTab == .Spectroscopy {
+            switch forDataSource {
+            case Constants.excitationIndex:
+                if value > 0 && value < 10000 {
+                    return (true, nil)
+                } else {
+                    return (false, "Please enter a wavelength between 1nm and 10000nm")
+                }
+            case Constants.signalIndex:
+                if value > 0 && value < 10000 {
+                    return (true, nil)
+                } else {
+                    return (false, "Please enter a wavelength between 1nm and 10000nm")
+                 }
+            case Constants.shiftCmIndex:
+                if value > -100000 && value < 100000 {
+                    return (true, nil)
+                } else {
+                    return (false, "Please enter a shift in the range +/- 100000cm-1")
+                }
+            case Constants.shiftGhzIndex:
+                if value > -90000000 && value < 90000000 {
+                    return (true, nil)
+                } else {
+                    return (false, "Please enter a shift in the range +/- 90000000GHz")
+                }
+            case Constants.shiftmeVIndex:
+                if value > -10000 && value < 10000 {
+                    return (true, nil)
+                } else {
+                    return (false, "Please enter a shift in the range +/- 10000meV")
+                }
+            default:
+                print("ERROR in checkForValidValue of Spectroscopy - \(value) for \(forDataSource)")
+                return(true, nil)
+            }
+        } else {
+            switch forDataSource {
+            case Constants.bwExcitationIndex:
+                if value > 0 && value < 10000 {
+                    return (true, nil)
+                } else {
+                    return (false, "Please enter a wavelength between 1nm and 10000nm")
+                }
+            case Constants.bwCmIndex:
+                if value > -10000 && value < 10000 {
+                    return (true, nil)
+                } else {
+                    return (false, "Please enter a shift in the range +/- 10000cm-1")
+                }
+            case Constants.bwGhzIndex:
+                if value > -90000000 && value < 90000000 {
+                    return (true, nil)
+                } else {
+                    return (false, "Please enter a shift in the range +/- 90000000GHz")
+                }
+            case Constants.bwNmIndex:
+                if value > -10000 && value < 10000 {
+                    return (true, nil)
+                } else {
+                    return (false, "Please enter a shift in the range +/- 10000meV")
+                }
+            default:
+                print("ERROR in checkForValidValue of Bandwidth data - \(value) for \(forDataSource)")
+                return(true, nil)
+            }
+        }
+
+    }
+
+    func updateParameter(value: Double, forDataSource: Int, inWhichTab: DataSourceType) {
+        if inWhichTab == .Spectroscopy {
+            switch forDataSource {
+            case Constants.excitationIndex:
+                pump = value
+            case Constants.signalIndex:
+                signal = value
+            case Constants.shiftCmIndex:
+                shiftInCm = value
+            case Constants.shiftGhzIndex:
+                shiftInGhz = value
+            case Constants.shiftmeVIndex:
+                shiftInMev = value
+            default:
+                print("ERROR in updateParameter - default case for Spectroscopy should not happen")
+                break
+            }
+        } else {
+            switch forDataSource {
+            case Constants.bwExcitationIndex:
+                bwLambda = value
+            case Constants.bwCmIndex:
+                bwInCm = value
+            case Constants.bwGhzIndex:
+                bwInGhz = value
+            case Constants.bwNmIndex:
+                bwInNm = value
+            default:
+                print("ERROR in updateParameter - default case for Bandwidth should not happen")
+            }
+        }
+
+    }
+    
     // MARK: Initialization
     init() {
         signal = 534.0

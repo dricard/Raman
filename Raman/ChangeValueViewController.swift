@@ -19,7 +19,8 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     var myUnits : String?
     var toolTipString : String?
     var selectedValue : Double?
-    var selectedDataSource : Int?
+    var selectedDataSource : Int?   // which value in the list we're changing
+    var whichTab: Raman.DataSourceType?
     
 //    var selectedSection : Int?
     
@@ -124,99 +125,22 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     }
     
     func checkForValidValue(toTest: Double) -> Bool {
-//        if toTest == 0 {
-//            let alert = UIAlertController(title: "Invalid entry", message: "Value entered is not a valid number", preferredStyle: UIAlertControllerStyle.Alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-//            self.presentViewController(alert, animated: true, completion: nil)
-//            return false
-//        } else {
-//            if selectedSection! == 0 {
-//                switch selectedDataSource! {
-//                case 0:
-//                    if toTest > 0 && toTest < 10000 {
-//                        return true
-//                    } else {
-//                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a wavelength between 1nm and 10000nm", preferredStyle: UIAlertControllerStyle.Alert)
-//                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-//                        self.presentViewController(alert, animated: true, completion: nil)
-//                    }
-//                case 1:
-//                    if toTest > 0 && toTest < 10000 {
-//                        return true
-//                    } else {
-//                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a wavelength between 1nm and 10000nm", preferredStyle: UIAlertControllerStyle.Alert)
-//                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-//                        self.presentViewController(alert, animated: true, completion: nil)
-//                    }
-//                case 2:
-//                    if toTest > -100000 && toTest < 100000 {
-//                        return true
-//                    } else {
-//                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 100000cm-1", preferredStyle: UIAlertControllerStyle.Alert)
-//                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-//                        self.presentViewController(alert, animated: true, completion: nil)
-//                    }
-//                case 3:
-//                    if toTest > -90000000 && toTest < 90000000 {
-//                        return true
-//                    } else {
-//                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 90000000GHz", preferredStyle: UIAlertControllerStyle.Alert)
-//                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-//                        self.presentViewController(alert, animated: true, completion: nil)
-//                    }
-//                case 4:
-//                    if toTest > -10000 && toTest < 10000 {
-//                        return true
-//                    } else {
-//                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 10000meV", preferredStyle: UIAlertControllerStyle.Alert)
-//                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-//                        self.presentViewController(alert, animated: true, completion: nil)
-//                    }
-//                default:
-//                    print("ERROR in checkForValidValue of selectedDataSource - bad return value")
-//                    break
-//                }
-//            } else {
-//                switch selectedDataSource! {
-//                case 0:
-//                    if toTest > 0 && toTest < 10000 {
-//                        return true
-//                    } else {
-//                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a wavelength between 1nm and 10000nm", preferredStyle: UIAlertControllerStyle.Alert)
-//                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-//                        self.presentViewController(alert, animated: true, completion: nil)
-//                    }
-//                case 1:
-//                    if toTest > -10000 && toTest < 10000 {
-//                        return true
-//                    } else {
-//                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 10000cm-1", preferredStyle: UIAlertControllerStyle.Alert)
-//                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-//                        self.presentViewController(alert, animated: true, completion: nil)
-//                    }
-//                case 2:
-//                    if toTest > -90000000 && toTest < 90000000 {
-//                        return true
-//                    } else {
-//                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 90000000GHz", preferredStyle: UIAlertControllerStyle.Alert)
-//                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-//                        self.presentViewController(alert, animated: true, completion: nil)
-//                    }
-//                case 3:
-//                    if toTest > -10000 && toTest < 10000 {
-//                        return true
-//                    } else {
-//                        let alert = UIAlertController(title: "Invalid entry", message: "Please enter a shift in the range +/- 10000meV", preferredStyle: UIAlertControllerStyle.Alert)
-//                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-//                        self.presentViewController(alert, animated: true, completion: nil)
-//                    }
-//                default:
-//                    print("ERROR in checkForValidValue of ChangeValueViewController - bad selectedDataSource value")
-//                }
-//            }
+        
+        let error = ramanData.spectro.checkForValidData(toTest, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+        if error.valid {
             return true
-
-//        }
+        } else {
+            if let message = error.errorMessage {
+                let alert = UIAlertController(title: "Invalid entry", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            } else {
+                let alert = UIAlertController(title: "Invalid entry", message: "Value entered is not a valid number", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            return false
+        }
     }
     
     // MARK: - Textfield delegates
@@ -226,12 +150,15 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
 //        println("test: spectro variable is accessible if this gives a value: \(ramanData.spectro.pump)")
 //        theReturnValue = newValue.text as! doubleValue
         
+        // check that we can typecast into a Double
         if let theReturnValue = Double(textField.text!) {
+            // then check that the value entered is valid for that variable
             if checkForValidValue(theReturnValue) {
     //            println("return value (\(theReturnValue)) is valid")
                 newValue.text = "\(theReturnValue)"
                 valueChanged = true
-            } else {
+                ramanData.spectro.updateParameter(theReturnValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+           } else {
                 newValue.text = "\(selectedValue!)"
     //            println("return value is NOT valid")
                 valueChanged = false
@@ -240,43 +167,12 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
             print("ERR: return value from UITextField not valid in ChangeValueViewController / textFieldShouldReturn")
         }
         
-//        if valueChanged {
-            // do the switch statement
-//            if selectedSection! == 0 {
-//                switch selectedDataSource! {
-//                case 0:
-//                    ramanData.spectro.pump = theReturnValue
-//                case 1:
-//                    ramanData.spectro.signal = theReturnValue
-//                case 2:
-//                    ramanData.spectro.shiftInCm = theReturnValue
-//                case 3:
-//                    ramanData.spectro.shiftInGhz = theReturnValue
-//                case 4:
-//                    ramanData.spectro.shiftInMev = theReturnValue
-//                default:
-//                    print("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
-//                    break
-//                }
-//            } else {
-//                switch selectedDataSource! {
-//                case 0:
-//                    ramanData.spectro.bwLambda = theReturnValue
-//                case 1:
-//                    ramanData.spectro.bwInCm = theReturnValue
-//                case 2:
-//                    ramanData.spectro.bwInGhz = theReturnValue
-//                case 3:
-//                    ramanData.spectro.bwInNm = theReturnValue
-//                default:
-//                    print("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
-//                }
-//            }
-//        }
-        
         textField.resignFirstResponder()
-        return false
+        return true
     }
     
+    func textFieldDidEndEditing(textField: UITextField) {
+        self.navigationController!.popViewControllerAnimated(true)
+    }
 
 }

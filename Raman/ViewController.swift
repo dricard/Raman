@@ -69,7 +69,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         controller.selectedValue = modelData.spectro.specData(indexPath.row)
         controller.myUnits = Constants.specUnits[indexPath.row]
         controller.toolTipString = Constants.specToolTip[indexPath.row]
-
+        controller.whichTab = Raman.DataSourceType.Spectroscopy
+        
         navigationController!.pushViewController(controller, animated: true)
     }
 
