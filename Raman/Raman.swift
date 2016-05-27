@@ -153,7 +153,21 @@ class Raman {
             return 1.0
         }
     }
+ 
+    func bwData(index: Int) -> Double {
+        
+        switch index {
+        case Constants.bwExcitationIndex: return bwLambda
+        case Constants.bwCmIndex: return bwInCm
+        case Constants.bwGhzIndex: return bwInGhz
+        case Constants.bwNmIndex: return bwInNm
+        default:
+            print("ERROR in Raman.swift - wrong argument for bwData: \(index)")
+            return 1.0
+        }
+    }
     
+
     // MARK: Initialization
     init() {
         signal = 534.0

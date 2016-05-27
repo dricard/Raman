@@ -35,18 +35,20 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cellBW", forIndexPath: indexPath)
         
-        switch indexPath.row {
-        case 0 :
-            cell.textLabel!.text = "\(modelData.spectro.bwLambda)"
-        case 1 :
-            cell.textLabel!.text = "\(modelData.spectro.bwInCm)"
-        case 2 :
-            cell.textLabel!.text = "\(modelData.spectro.bwInGhz)"
-        case 3 :
-            cell.textLabel!.text = "\(modelData.spectro.bwInNm)"
-        default :
-            break
-        }
+        cell.textLabel!.text = "\(modelData.spectro.bwData(indexPath.row))"
+        
+//        switch indexPath.row {
+//        case 0 :
+//            cell.textLabel!.text = "\(modelData.spectro.bwLambda)"
+//        case 1 :
+//            cell.textLabel!.text = "\(modelData.spectro.bwInCm)"
+//        case 2 :
+//            cell.textLabel!.text = "\(modelData.spectro.bwInGhz)"
+//        case 3 :
+//            cell.textLabel!.text = "\(modelData.spectro.bwInNm)"
+//        default :
+//            break
+//        }
         cell.detailTextLabel?.text = Constants.ramanBandwidth[indexPath.row]
         cell.imageView?.image = Constants.bwCellImage[indexPath.row]
 
