@@ -26,6 +26,11 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.dataSource = self
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
 // MARK: Table delegates
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
