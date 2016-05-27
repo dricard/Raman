@@ -83,7 +83,7 @@
         <!--Change Value View Controller-->
         <scene sceneID="FLZ-QL-GmC">
             <objects>
-                <viewController id="R2M-Me-Mgo" customClass="ChangeValueViewController" customModule="Raman" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChangeValueViewController" id="R2M-Me-Mgo" customClass="ChangeValueViewController" customModule="Raman" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1NH-HB-GXc"/>
                         <viewControllerLayoutGuide type="bottom" id="BzF-Vs-KnH"/>
@@ -272,7 +272,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XLa-uC-ck4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1931" y="632"/>
+            <point key="canvasLocation" x="2133" y="831"/>
         </scene>
         <!--Display Info View Controller-->
         <scene sceneID="and-ks-IMd">
@@ -699,11 +699,12 @@
                     <navigationItem key="navigationItem" id="07s-M6-dzt"/>
                     <connections>
                         <outlet property="tableView" destination="FjL-nm-qwl" id="Pgq-1j-zfw"/>
+                        <segue destination="R2M-Me-Mgo" kind="show" id="j1i-o8-XGG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YJc-ZN-wIE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1058" y="1215"/>
+            <point key="canvasLocation" x="1113" y="1217"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="8la-mt-I6m">
@@ -729,4 +730,7 @@
         <image name="rima" width="535" height="494"/>
         <image name="shiftInCmIcon" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="j1i-o8-XGG"/>
+    </inferredMetricsTieBreakers>
 </document>

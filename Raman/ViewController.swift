@@ -68,69 +68,82 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("TRACE: IN :didSelectRowAtIndexPath:")
+        /* Push the movie detail view */
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("ChangeValueViewController") as! ChangeValueViewController
+
+        controller.selectedDataSource = indexPath.row
+        controller.selectedValue = modelData.spectro.specData(indexPath.row)
+        controller.myUnits = Constants.specUnits[indexPath.row]
+        controller.toolTipString = Constants.specToolTip[indexPath.row]
+        print(Constants.specToolTip[indexPath.row])
+        navigationController!.pushViewController(controller, animated: true)
+    }
+
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 //        println("into prepareForSegue")
-        if segue.identifier != nil {
-            // println("Segue identifier is \(segue.identifier)")
-            if segue.identifier! == "changeData" {
-                // println("-- we're in the loop!! --")
-                let sencondScene = segue.destinationViewController as! ChangeValueViewController
-                let cell = sender as! UITableViewCell
-                if let myData = cell.detailTextLabel!.text {
-                    // println(myData)
-                    // println(myData[myData.startIndex])
-                    let temp : String = String(myData[myData.startIndex])
-                    if let cellSelected = Int(temp) {
-                        var mySelection = cellSelected
-                        var sectionSelected : Int
-                        if cellSelected > 5 {
-                            mySelection = cellSelected - 6
-                            sectionSelected = 1
-                        } else {
-                            mySelection = cellSelected - 1
-                            sectionSelected = 0
-                        }
-                        sencondScene.selectedDataSource = mySelection  // represents the index of the value in the values array
-                        
-                        sencondScene.selectedSection = sectionSelected // which data set are we working on here? either raman or
-                        
-                        if sectionSelected == 0 {
-                            switch mySelection {
-                            case 0:
-                                sencondScene.selectedValue = modelData.spectro.pump
-                            case 1:
-                                sencondScene.selectedValue = modelData.spectro.signal
-                            case 2:
-                                sencondScene.selectedValue = modelData.spectro.shiftInCm
-                            case 3:
-                                sencondScene.selectedValue = modelData.spectro.shiftInGhz
-                            case 4:
-                                sencondScene.selectedValue = modelData.spectro.shiftInMev
-                            default:
-                                break
-                            }
-                         } else {
-                            switch mySelection {
-                            case 0:
-                                sencondScene.selectedValue = modelData.spectro.bwLambda
-                            case 1:
-                                sencondScene.selectedValue = modelData.spectro.bwInCm
-                            case 2:
-                                sencondScene.selectedValue = modelData.spectro.bwInGhz
-                            case 3:
-                                sencondScene.selectedValue = modelData.spectro.bwInNm
-                            default:
-                                break
-                            }
-                        }
-                    }
-                } else {
-                    print("ERROR: could not find a textvalue for cell's detailed label!")
-                }
-                
-            }
-        }
+//        if segue.identifier != nil {
+//            // println("Segue identifier is \(segue.identifier)")
+//            if segue.identifier! == "changeData" {
+//                // println("-- we're in the loop!! --")
+//                let sencondScene = segue.destinationViewController as! ChangeValueViewController
+//                let cell = sender as! UITableViewCell
+//                if let myData = cell.detailTextLabel!.text {
+//                    // println(myData)
+//                    // println(myData[myData.startIndex])
+//                    let temp : String = String(myData[myData.startIndex])
+//                    if let cellSelected = Int(temp) {
+//                        var mySelection = cellSelected
+//                        var sectionSelected : Int
+//                        if cellSelected > 5 {
+//                            mySelection = cellSelected - 6
+//                            sectionSelected = 1
+//                        } else {
+//                            mySelection = cellSelected - 1
+//                            sectionSelected = 0
+//                        }
+//                        sencondScene.selectedDataSource = mySelection  // represents the index of the value in the values array
+//                        
+//                        sencondScene.selectedSection = sectionSelected // which data set are we working on here? either raman or
+//                        
+//                        if sectionSelected == 0 {
+//                            switch mySelection {
+//                            case 0:
+//                                sencondScene.selectedValue = modelData.spectro.pump
+//                            case 1:
+//                                sencondScene.selectedValue = modelData.spectro.signal
+//                            case 2:
+//                                sencondScene.selectedValue = modelData.spectro.shiftInCm
+//                            case 3:
+//                                sencondScene.selectedValue = modelData.spectro.shiftInGhz
+//                            case 4:
+//                                sencondScene.selectedValue = modelData.spectro.shiftInMev
+//                            default:
+//                                break
+//                            }
+//                         } else {
+//                            switch mySelection {
+//                            case 0:
+//                                sencondScene.selectedValue = modelData.spectro.bwLambda
+//                            case 1:
+//                                sencondScene.selectedValue = modelData.spectro.bwInCm
+//                            case 2:
+//                                sencondScene.selectedValue = modelData.spectro.bwInGhz
+//                            case 3:
+//                                sencondScene.selectedValue = modelData.spectro.bwInNm
+//                            default:
+//                                break
+//                            }
+//                        }
+//                    }
+//                } else {
+//                    print("ERROR: could not find a textvalue for cell's detailed label!")
+//                }
+//                
+//            }
+//        }
 
 //        var sencondScene = segue.destinationViewController as! ChangeValueViewController
 //        
@@ -147,8 +160,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //                sencondScene.selectedValue = bwData[indexPath!.row]  // we're passing bandwidth data value
 //            }
 //        }
-    }
-        
+//    }
+    
     override func viewWillAppear(animated: Bool) {
         myTableView.reloadData()
     }

@@ -8,22 +8,24 @@
 
 import UIKit
 
-//var spectros : Raman()
-
 class Raman {
 
-    // constants
+    // MARK: Constants
+    
     let cInAir = 299709000
     let cInVacuum = 299792458
     
 
-    // properties
+    // MARK: Properties
+    
     var signal : Double
     var pump : Double
     var bwInCm : Double
     var bwLambda : Double
     
-    // computed properties
+    
+    // MARK: Computed properties
+    
     var shiftInCm : Double {
         get {
             if signal != 0 {
@@ -127,7 +129,7 @@ class Raman {
         }
     }
     
-    // Methods
+    // MARK: Methods
     
     func lamdaS(lambda: Double, bandwidth: Double) -> Double {
         if lambda != 0 {
@@ -138,7 +140,21 @@ class Raman {
         }
     }
     
-    // Initialization
+    func specData(index: Int) -> Double {
+        
+        switch index {
+        case Constants.excitationIndex: return pump
+        case Constants.signalIndex: return signal
+        case Constants.shiftCmIndex: return shiftInCm
+        case Constants.shiftGhzIndex: return shiftInGhz
+        case Constants.shiftmeVIndex: return shiftInMev
+        default:
+            print("ERROR in Raman.swift - wrong argument for specData: \(index)")
+            return 1.0
+        }
+    }
+    
+    // MARK: Initialization
     init() {
         signal = 534.0
         pump = 532.0
@@ -154,7 +170,6 @@ class Raman {
         self.bwInCm = bwInCm
     }
     
-    // MARK: Singleton
     
     
 }
