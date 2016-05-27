@@ -10,42 +10,23 @@ import UIKit
 
 class ChangeValueViewController: UIViewController, UITextFieldDelegate {
 
-    // MARK: Properties
+    // MARK: - Properties
     
-    let excitation = 0
-    let signal = 1
-    let shiftNm = 2
-    let shiftGhz = 3
-    let shiftMev = 4
-    
-    let laser = 0
-    let bwNm = 1
-    let bwGhz = 2
-    let bwMev = 3
-    
+    // local reference to model data
     let ramanData = Model.sharedInstance
-//    
-//    let ramanShift = ["Excitation wavelenth", "Signal wavelength", "Raman shift", "Raman shift", "Raman shift"]
-//    
-//    let ramanBandwidth = ["Wavelength", "Bandwidth", "Bandwidth", "Bandwidth"]
-//
-//    let myUnits = ["nm", "nm", "cm-1", "GHz", "MeV", "nm", "cm-1", "GHz", "nm"]
     
+    // These parameters are passed to this viewController
     var myUnits : String?
-    
     var toolTipString : String?
-    
     var selectedValue : Double?
-    
     var selectedDataSource : Int?
     
 //    var selectedSection : Int?
     
     var valueChanged : Bool = false
-    
     var theReturnValue : Double = 0.0
         
-    // MARK: Outlets
+    // MARK: - Outlets
     
     @IBOutlet var dataSourceLabel: UILabel!
     
@@ -57,7 +38,44 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var newValue: UITextField!
     
-    // MARK: User Actions
+    // MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        valueChanged = false
+        
+        self.title = "Edit value"
+        
+        // set the labels with the passed properties
+        if let value = selectedValue {
+            previousValueLabel.text = "\(value)"
+        } else {
+            print("ERROR in ChangeValueViewController viewDidLoad: trying to unwrap nil value in viewDidLoad of ChangeValueVC: selectedValue")
+        }
+        
+        if let index = selectedDataSource {
+            dataSourceLabel.text = Constants.ramanShift[index]
+        } else {
+            print("ERROR in ChangeValueViewController viewDidLoad: trying to unwrap nil value in viewDidLoad of ChangeValueVC: selectedDataSource")
+        }
+        
+        if let units = myUnits {
+            unitsLabel.text = units
+        } else {
+            print("ERROR in ChangeValueViewController viewDidLoad: trying to unwrap nil value in viewDidLoad of ChangeValueVC: myUnits")
+        }
+        
+        if let toolTip = toolTipString {
+            toolTipLabel.text = toolTip
+        } else {
+            print("ERROR in ChangeValueViewController viewDidLoad: trying to unwrap nil value in viewDidLoad of ChangeValueVC: toolTipString")
+        }
+        
+    }
+
+    
+    // MARK: - User Actions
     
     @IBAction func cancelChangeValue(sender: AnyObject) {
 //        newValue.text = ""
@@ -98,8 +116,9 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
        self.newValue.resignFirstResponder()
     }
     
-    // MARK: Utilities functions
+    // MARK: - Utilities functions
     
+    // Enable touch outside textField to end editing
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -200,7 +219,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
 //        }
     }
     
-    // MARK Textfield delegates
+    // MARK: - Textfield delegates
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
 //        println(newValue.text)
@@ -259,38 +278,5 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
         return false
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        valueChanged = false
-        
-        self.title = "Edit value"
-        
-        if let value = selectedValue {
-            previousValueLabel.text = "\(value)"
-        } else {
-            print("ERROR: trying to unwrap nil value in viewDidLoad of ChangeValueVC: selectedValue")
-        }
-        
-        if let index = selectedDataSource {
-            dataSourceLabel.text = Constants.ramanShift[index]
-        } else {
-            print("ERROR: trying to unwrap nil value in viewDidLoad of ChangeValueVC: selectedDataSource")
-        }
-
-        
-        if let units = myUnits {
-            unitsLabel.text = units
-        } else {
-            print("ERROR: trying to unwrap nil value in viewDidLoad of ChangeValueVC: myUnits")
-        }
-
-        if let toolTip = toolTipString {
-            toolTipLabel.text = toolTip
-        } else {
-            print("ERROR: trying to unwrap nil value in viewDidLoad of ChangeValueVC: toolTipString")
-        }
-        
-    }
 
 }

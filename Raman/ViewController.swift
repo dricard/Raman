@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     
-    // MARK: Properties
+    // MARK: - Properties
     
     var ramanData = [0.0, 0.0, 0.0, 0.0, 0.0]
     var bwData = [0.0, 0.0, 0.0, 0.0]
@@ -34,11 +34,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var whichDataValueChanged : Int = 0
     var newValueForChangedData : Double = 0.0
     
-    // MARK: Outlets
+    // MARK: - Outlets
     
     @IBOutlet var myTableView: UITableView!
     
-    // Mark: Tableview delegates
+    // MARK: - Life cycle
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // set tableView delegates
+        myTableView.delegate = self
+        myTableView.dataSource = self
+
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        // udate all data
+        myTableView.reloadData()
+    }
+    
+    
+    // MARK: - Tableview delegates
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.ramanShift.count
@@ -49,22 +68,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
 
         cell.textLabel!.text = "\(modelData.spectro.specData(indexPath.row))"
-        
-
-//        switch indexPath.row {
-//        case 0 :
-//            cell.textLabel!.text = "\(modelData.spectro.pump)"
-//        case 1 :
-//            cell.textLabel!.text = "\(modelData.spectro.signal)"
-//        case 2 :
-//            cell.textLabel!.text = "\(modelData.spectro.shiftInCm)"
-//        case 3 :
-//            cell.textLabel!.text = "\(modelData.spectro.shiftInGhz)"
-//        case 4 :
-//            cell.textLabel!.text = "\(modelData.spectro.shiftInMev)"
-//        default :
-//            break
-//        }
         cell.detailTextLabel?.text = Constants.ramanShift[indexPath.row]
         cell.imageView?.image = Constants.cellImage[indexPath.row]
 
@@ -164,20 +167,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //            }
 //        }
 //    }
-    
-    override func viewWillAppear(animated: Bool) {
-        myTableView.reloadData()
-    }
-    
-     override func viewDidLoad() {
-        super.viewDidLoad()
-        myTableView.delegate = self
-        myTableView.dataSource = self
-        
-//        println("In view did load. New Value is \(newValueForChangedData)")
-        
-        // Do any additional setup after loading the view, typically from a nib.
-    }
  
 }
 
