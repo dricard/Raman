@@ -75,15 +75,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("TRACE: IN :didSelectRowAtIndexPath:")
-        /* Push the movie detail view */
+
+        /* Push the ChangeValueViewController */
         let controller = storyboard!.instantiateViewControllerWithIdentifier("ChangeValueViewController") as! ChangeValueViewController
 
         controller.selectedDataSource = indexPath.row
         controller.selectedValue = modelData.spectro.specData(indexPath.row)
         controller.myUnits = Constants.specUnits[indexPath.row]
         controller.toolTipString = Constants.specToolTip[indexPath.row]
-        print(Constants.specToolTip[indexPath.row])
+
         navigationController!.pushViewController(controller, animated: true)
     }
 

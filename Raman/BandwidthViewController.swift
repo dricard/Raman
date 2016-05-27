@@ -47,4 +47,18 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+        /* Push the changeValueViewController */
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("ChangeValueViewController") as! ChangeValueViewController
+        
+        controller.selectedDataSource = indexPath.row
+        controller.selectedValue = modelData.spectro.bwData(indexPath.row)
+        controller.myUnits = Constants.bwUnits[indexPath.row]
+        controller.toolTipString = Constants.bwToolTip[indexPath.row]
+
+        navigationController!.pushViewController(controller, animated: true)
+    }
+    
+
 }
