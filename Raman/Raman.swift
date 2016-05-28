@@ -110,7 +110,13 @@ class Raman {
             }
         }
         set {
-            bwInCm = newValue * pow(bwLambda, 2.0) / Double(cInAir)
+            if bwLambda != 0 {
+                let temp = newValue * pow(bwLambda, 2.0) / Double(cInAir)
+                bwInCm = (1/bwLambda - (1 / (temp + bwLambda)))/0.0000001
+            } else {
+                // do nothing, the value will not change and stay as it was before
+                print("ERROR in bwInGhz -- invalid value for variable named 'bwLambda'")
+            }
         }
     }
     
