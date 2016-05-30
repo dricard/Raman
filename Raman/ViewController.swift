@@ -30,6 +30,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // set the tableview background color (behind the cells)
+        myTableView.backgroundColor = Theme.Colors.BackgroundColor.color
+        
+        // This prevents the space below the cells to have spacers
+        myTableView.tableFooterView = UIView()
+        
+        // set the separator color to the same as the background
+        myTableView.separatorColor = Theme.Colors.BackgroundColor.color
+        
         // set tableView delegates
         myTableView.delegate = self
         myTableView.dataSource = self
@@ -45,13 +54,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - Tableview delegates
     
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.ramanShift.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCellWithIdentifier(DataCell.reuseIdentifier) as! DataCell
 
         cell.textLabel!.text = "\(modelData.spectro.specData(indexPath.row))"
         cell.detailTextLabel?.text = Constants.ramanShift[indexPath.row]
@@ -74,7 +87,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationController!.pushViewController(controller, animated: true)
     }
 
-    
  
 }
 

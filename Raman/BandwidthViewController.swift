@@ -22,6 +22,17 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // set the tableview background color (behind the cells)
+        tableView.backgroundColor = Theme.Colors.BackgroundColor.color
+        
+        // This prevents the space below the cells to have spacers
+        tableView.tableFooterView = UIView()
+        
+        // set the separator color to the same as the background
+        tableView.separatorColor = Theme.Colors.BackgroundColor.color
+        
+
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -37,11 +48,15 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
         return Constants.ramanBandwidth.count
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return CGFloat(66)
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cellBW", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("cellBW", forIndexPath: indexPath) as! BWCell
         
-        cell.textLabel!.text = "\(modelData.spectro.bwData(indexPath.row))"
-        cell.detailTextLabel?.text = Constants.ramanBandwidth[indexPath.row]
+        cell.valueLabel!.text = "\(modelData.spectro.bwData(indexPath.row))"
+        cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
         cell.imageView?.image = Constants.bwCellImage[indexPath.row]
 
         return cell

@@ -16,6 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        window?.tintColor = Theme.Colors.TintColor.color
+        let navBarAppearance = UINavigationBar.appearance()
+        navBarAppearance.titleTextAttributes = [
+            NSFontAttributeName: Theme.Fonts.NavTitleFont.font,
+            NSForegroundColorAttributeName: Theme.Colors.TintColor.color
+        ]
+        navBarAppearance.barStyle = UIBarStyle.Black
+        navBarAppearance.barTintColor = Theme.Colors.Foreground.color
+        
         Fabric.sharedSDK().debug = false
         Fabric.with([Crashlytics.self])
         return true
