@@ -45,7 +45,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             NSUserDefaults.standardUserDefaults().setDouble(modelData.spectro.pump, forKey: "pump")
         }
-        
+        if let bwLambda = NSUserDefaults.standardUserDefaults().valueForKey("bwLambda") {
+            modelData.spectro.bwLambda = Double(bwLambda as! NSNumber)
+        } else {
+            NSUserDefaults.standardUserDefaults().setDouble(modelData.spectro.bwLambda, forKey: "bwLambda")
+        }
+       
         
         // set the tableview background color (behind the cells)
         myTableView.backgroundColor = Theme.Colors.BackgroundColor.color

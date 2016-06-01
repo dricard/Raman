@@ -281,6 +281,7 @@ class Raman {
             switch forDataSource {
             case Constants.bwExcitationIndex:
                 bwLambda = value
+                NSUserDefaults.standardUserDefaults().setDouble(bwLambda, forKey: "bwLambda")
             case Constants.bwCmIndex:
                 bwInCm = value
             case Constants.bwGhzIndex:
