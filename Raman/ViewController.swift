@@ -40,6 +40,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             NSUserDefaults.standardUserDefaults().setDouble(modelData.spectro.signal, forKey: "signal")
         }
+        if let pump = NSUserDefaults.standardUserDefaults().valueForKey("pump") {
+            modelData.spectro.pump = Double(pump as! NSNumber)
+        } else {
+            NSUserDefaults.standardUserDefaults().setDouble(modelData.spectro.pump, forKey: "pump")
+        }
         
         
         // set the tableview background color (behind the cells)

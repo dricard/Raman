@@ -263,6 +263,7 @@ class Raman {
             switch forDataSource {
             case Constants.excitationIndex:
                 pump = value
+                NSUserDefaults.standardUserDefaults().setDouble(pump, forKey: "pump")
             case Constants.signalIndex:
                 signal = value
                 NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
