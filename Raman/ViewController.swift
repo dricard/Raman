@@ -90,7 +90,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let cell = tableView.dequeueReusableCellWithIdentifier(DataCell.reuseIdentifier) as! DataCell
 
-        cell.textLabel!.text = "\(modelData.spectro.specData(indexPath.row))"
+        cell.textLabel!.text = modelData.spectro.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
         cell.detailTextLabel?.text = Constants.ramanShift[indexPath.row]
         cell.imageView?.image = Constants.cellImage[indexPath.row]
 
@@ -113,5 +113,3 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
  
 }
-
-

@@ -55,7 +55,7 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cellBW", forIndexPath: indexPath) as! BWCell
         
-        cell.valueLabel!.text = "\(modelData.spectro.bwData(indexPath.row))"
+        cell.valueLabel!.text = modelData.spectro.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
         cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
         cell.imageView?.image = Constants.bwCellImage[indexPath.row]
 
