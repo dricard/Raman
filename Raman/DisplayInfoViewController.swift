@@ -9,15 +9,37 @@
 import UIKit
 
 class DisplayInfoViewController: UIViewController {
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var copyrightLabel: UILabel!
+    @IBOutlet weak var versionNumberLabel: UILabel!
+    
+    // MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "Info"
+        if let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
+            versionNumberLabel.text = "v. " + version
+        }
+        let today = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy"
+        let year = Int(formatter.stringFromDate(today))!
+        copyrightLabel.text = "© \(year) Hexaedre"
+    }
+    
+    // MARK: - User actions
 
     @IBAction func namePressed(sender: AnyObject) {
-        let url = NSURL(string: "https://about.me/dricard")
+        let url = NSURL(string: "http://hexaedre.com/blog/")
 //        let request = NSURLRequest(URL: url!)
         UIApplication.sharedApplication().openURL(url!)
     }
     
-    @IBAction func photonPressed(sender: AnyObject) {
-        let url = NSURL(string: "http://www.photonetc.com/raman-imaging")
+    @IBAction func logoPressed(sender: AnyObject) {
+        let url = NSURL(string: "http://hexaedre.com")
         UIApplication.sharedApplication().openURL(url!)
     }
     
@@ -32,26 +54,4 @@ class DisplayInfoViewController: UIViewController {
         UIApplication.sharedApplication().openURL(url!)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "Info"
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
