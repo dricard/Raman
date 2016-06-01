@@ -31,10 +31,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         
         // Load user's data
-//        var signal : Double
-//        var pump : Double
-//        var bwInCm : Double
-//        var bwLambda : Double
+
         if let signal = NSUserDefaults.standardUserDefaults().valueForKey("signal") {
             modelData.spectro.signal = Double(signal as! NSNumber)
         } else {

@@ -56,7 +56,13 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
         }
         
         if let index = selectedDataSource {
-            dataSourceLabel.text = Constants.ramanShift[index]
+            switch whichTab! {
+            case Raman.DataSourceType.Spectroscopy:
+                dataSourceLabel.text = Constants.ramanShift[index]
+            case Raman.DataSourceType.Bandwidth:
+                dataSourceLabel.text = Constants.ramanBandwidth[index]
+            }
+            
         } else {
             print("ERROR in ChangeValueViewController viewDidLoad: trying to unwrap nil value in viewDidLoad of ChangeValueVC: selectedDataSource")
         }
