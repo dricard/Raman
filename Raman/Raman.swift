@@ -119,6 +119,7 @@ class Raman {
             if bwLambda != 0 {
                 let temp = newValue * pow(bwLambda, 2.0) / Double(cInAir)
                 bwInCm = (1/bwLambda - (1 / (temp + bwLambda)))/0.0000001
+                NSUserDefaults.standardUserDefaults().setDouble(bwInCm, forKey: "bwInCm")
             } else {
                 // do nothing, the value will not change and stay as it was before
                 print("ERROR in bwInGhz -- invalid value for variable named 'bwLambda'")
@@ -138,6 +139,7 @@ class Raman {
         set {
             if bwLambda != 0 {
                 bwInCm = ( 1.0 / bwLambda - (1.0 / (newValue + bwLambda))) / 0.0000001
+                NSUserDefaults.standardUserDefaults().setDouble(bwInCm, forKey: "bwInCm")
             } else {
                 // do nothing, the value will not change and stay as it was before
                 print("ERROR in bwInNm -- invalid value for variable named 'bwLambda'")
@@ -284,6 +286,7 @@ class Raman {
                 NSUserDefaults.standardUserDefaults().setDouble(bwLambda, forKey: "bwLambda")
             case Constants.bwCmIndex:
                 bwInCm = value
+                NSUserDefaults.standardUserDefaults().setDouble(bwInCm, forKey: "bwInCm")
             case Constants.bwGhzIndex:
                 bwInGhz = value
             case Constants.bwNmIndex:
