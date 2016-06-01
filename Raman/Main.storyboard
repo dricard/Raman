@@ -489,7 +489,7 @@
         <scene sceneID="kvS-8t-5yc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UWJ-Hg-jqd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Spectro" image="shiftInCmIcon" id="aJt-mM-klg"/>
+                    <tabBarItem key="tabBarItem" title="Spectro" image="tab_bar_spectro" selectedImage="tab_bar_spectro" id="aJt-mM-klg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Thk-Hx-rIy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -508,7 +508,7 @@
         <scene sceneID="wow-Hc-Owf">
             <objects>
                 <navigationController id="Qp8-np-dYa" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Bandwidth" image="shiftInCmIcon" id="IFr-tf-drj"/>
+                    <tabBarItem key="tabBarItem" title="Bandwidth" image="tab_bar_bw" selectedImage="tab_bar_bw" id="IFr-tf-drj"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="v7p-fU-b4v">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -614,6 +614,7 @@
     <resources>
         <image name="launchscreen" width="2208" height="2208"/>
         <image name="logo_270" width="226" height="256"/>
-        <image name="shiftInCmIcon" width="30" height="30"/>
+        <image name="tab_bar_bw" width="25" height="25"/>
+        <image name="tab_bar_spectro" width="25" height="25"/>
     </resources>
 </document>
