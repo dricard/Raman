@@ -30,6 +30,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Load user's data
+//        var signal : Double
+//        var pump : Double
+//        var bwInCm : Double
+//        var bwLambda : Double
+        if let signal = NSUserDefaults.standardUserDefaults().valueForKey("signal") {
+            modelData.spectro.signal = Double(signal as! NSNumber)
+        } else {
+            NSUserDefaults.standardUserDefaults().setDouble(modelData.spectro.signal, forKey: "signal")
+        }
+        
+        
         // set the tableview background color (behind the cells)
         myTableView.backgroundColor = Theme.Colors.BackgroundColor.color
         

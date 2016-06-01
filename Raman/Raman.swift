@@ -42,6 +42,7 @@ class Raman {
         set {
             if pump != 0 && ( newValue < (1.0 / (0.0000001 * pump)) - 1.0 ) {
                 signal = 1.0 / ( 1.0 / pump - ( 0.0000001 * newValue ))
+                NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
             } else {
                 let alternateValue : Double
                 if pump != 0 {
@@ -50,6 +51,7 @@ class Raman {
                     alternateValue = (1.0 / (0.0000001)) - 1.0
                 }
                 signal = 1.0 / ( 1.0 / pump - ( 0.0000001 * alternateValue ))
+                NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
                 print("ERROR in shiftInCm -- invalid value for variable named 'pump' or 'newValue'")
             }
         }
@@ -67,6 +69,7 @@ class Raman {
         set {
             if pump != 0 && newValue > -1.0 * Double(cInAir) / pump {
                 signal = newValue * pow(pump, 2.0) / Double(cInAir) + pump
+                NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
             } else {
                 let alternateValue : Double
                 if pump != 0 {
@@ -75,6 +78,7 @@ class Raman {
                     alternateValue = -1.0 * Double(cInAir)
                 }
                 signal = alternateValue * pow(pump, 2.0) / Double(cInAir) + pump
+                NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
                 print("ERROR in shiftInGhz -- invalid value for variable named 'newValue' (should be greater than \(-1.0 * Double(cInAir) / pump)")
             }
         }
@@ -92,9 +96,11 @@ class Raman {
         set {
             if pump != 0 && newValue != 0 && newValue < (1240600.0 / pump) {
                 signal = 1240600.0 / (1240600.0 / pump - newValue)
+                NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
             } else {
                 let alternateValue = (1240600.0 / pump) - 1
                 signal = 1240600.0 / (1240600.0 / pump - alternateValue)
+                NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
                 print("ERROR in shiftInMev -- invalud value for variable named 'pump' or 'newValue'")
             }
         }
@@ -259,6 +265,7 @@ class Raman {
                 pump = value
             case Constants.signalIndex:
                 signal = value
+                NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
             case Constants.shiftCmIndex:
                 shiftInCm = value
             case Constants.shiftGhzIndex:
