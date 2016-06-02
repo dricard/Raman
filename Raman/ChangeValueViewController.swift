@@ -146,7 +146,10 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        self.navigationController!.popViewControllerAnimated(true)
+
+        if textField.isFirstResponder() {
+            self.navigationController!.popViewControllerAnimated(true)
+        }
     }
 
 }
