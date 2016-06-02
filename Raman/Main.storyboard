@@ -6,6 +6,22 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="ZRF-mv-Mp8">
+            <objects>
+                <navigationController id="LBY-a0-3HX" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kGa-bP-NDb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bJE-JC-EHF" kind="relationship" relationship="rootViewController" id="j1Z-QY-crx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EaG-nr-w7k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1824" y="77"/>
+        </scene>
         <!--Raman-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -67,9 +83,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Raman" id="PFG-Qa-reW">
-                        <barButtonItem key="rightBarButtonItem" title="Info" id="Lut-yW-VsL">
+                        <barButtonItem key="rightBarButtonItem" title="About" id="Lut-yW-VsL">
                             <connections>
-                                <segue destination="bJE-JC-EHF" kind="show" identifier="infoPane" id="f13-vZ-8iO"/>
+                                <segue destination="LBY-a0-3HX" kind="popoverPresentation" popoverAnchorBarButtonItem="Lut-yW-VsL" id="csL-tJ-eTk">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -360,7 +378,7 @@
                                     <action selector="namePressed:" destination="bJE-JC-EHF" eventType="touchUpInside" id="JhI-hx-efA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EsQ-Gp-rxA">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EsQ-Gp-rxA">
                                 <rect key="frame" x="528" y="521" width="56" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="56" id="Wki-o4-dFi"/>
@@ -375,7 +393,7 @@
                                     <action selector="supportPressed:" destination="bJE-JC-EHF" eventType="touchUpInside" id="yNt-zG-Nyl"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wb-Iw-9SU">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wb-Iw-9SU">
                                 <rect key="frame" x="16" y="521" width="32" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="DiE-vD-37w"/>
@@ -390,7 +408,7 @@
                                     <action selector="helpPressed:" destination="bJE-JC-EHF" eventType="touchUpInside" id="l21-Nk-FGC"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LF2-0y-O7q">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LF2-0y-O7q">
                                 <rect key="frame" x="200" y="529" width="40" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="2zq-wH-OqP"/>
@@ -407,7 +425,7 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zy-dp-xcR">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zy-dp-xcR">
                                 <rect key="frame" x="240" y="528" width="120" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="QpM-PP-ErK"/>
@@ -461,6 +479,13 @@
                             <constraint firstItem="YJl-IH-a9n" firstAttribute="top" secondItem="CEc-rB-OPQ" secondAttribute="bottom" constant="5" id="zHM-ig-hqZ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="KYe-sB-9v5">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="AXl-DV-TsA">
+                            <connections>
+                                <action selector="userPressedDone:" destination="bJE-JC-EHF" id="ISk-jd-nFI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="copyrightLabel" destination="4Zy-dp-xcR" id="55q-zV-2NM"/>
                         <outlet property="versionNumberLabel" destination="LF2-0y-O7q" id="Vba-A1-i1G"/>
@@ -468,7 +493,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VYd-Kw-8cg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1920" y="-202"/>
+            <point key="canvasLocation" x="2496" y="-283"/>
         </scene>
         <!--Spectro-->
         <scene sceneID="kvS-8t-5yc">
@@ -561,7 +586,15 @@
                             <constraint firstAttribute="trailingMargin" secondItem="FjL-nm-qwl" secondAttribute="trailing" constant="-20" id="ldm-nF-Vhf"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Bandwidth" id="07s-M6-dzt"/>
+                    <navigationItem key="navigationItem" title="Bandwidth" id="07s-M6-dzt">
+                        <barButtonItem key="rightBarButtonItem" title="About" id="tYT-8f-4yy">
+                            <connections>
+                                <segue destination="LBY-a0-3HX" kind="popoverPresentation" popoverAnchorBarButtonItem="tYT-8f-4yy" id="qoi-Z8-8vd">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="FjL-nm-qwl" id="Pgq-1j-zfw"/>
                     </connections>
@@ -595,4 +628,7 @@
         <image name="tab_bar_bw" width="25" height="25"/>
         <image name="tab_bar_spectro" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="csL-tJ-eTk"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -19,7 +19,7 @@ class DisplayInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Info"
+        self.title = "About Raman"
         if let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
             versionNumberLabel.text = "v. " + version
         }
@@ -54,4 +54,7 @@ class DisplayInfoViewController: UIViewController {
         UIApplication.sharedApplication().openURL(url!)
     }
     
+    @IBAction func userPressedDone(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }
