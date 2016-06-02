@@ -94,7 +94,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launchscreen" translatesAutoresizingMaskIntoConstraints="NO" id="B1j-Sk-RfD">
-                                <rect key="frame" x="-5" y="0.0" width="605" height="605"/>
+                                <rect key="frame" x="0.0" y="0.0" width="2208" height="2208"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="YNa-Wr-Jer">
                                 <rect key="frame" x="190" y="90" width="220" height="30"/>
@@ -177,10 +177,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJq-Kr-vzx">
-                                <rect key="frame" x="161" y="186" width="278" height="117"/>
+                                <rect key="frame" x="161" y="174" width="278" height="105"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="278" id="fgt-1F-eUX"/>
-                                    <constraint firstAttribute="height" constant="117" id="zMu-1c-Hss"/>
+                                    <constraint firstAttribute="height" constant="105" id="zMu-1c-Hss"/>
                                 </constraints>
                                 <string key="text">Changing the current Raman bandwidth value will modify the other two units values (using the current selected excitation wavelength).</string>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
@@ -227,7 +227,7 @@
                             <constraint firstItem="zQ2-5b-qwo" firstAttribute="centerX" secondItem="O1b-kA-NTa" secondAttribute="centerX" id="4Zh-ne-fCG"/>
                             <constraint firstItem="YNa-Wr-Jer" firstAttribute="centerX" secondItem="O1b-kA-NTa" secondAttribute="centerX" id="69Y-5B-oEj"/>
                             <constraint firstItem="0O0-Uo-fm9" firstAttribute="top" secondItem="2aN-BP-tgy" secondAttribute="bottom" constant="23" id="7ud-y4-JaT"/>
-                            <constraint firstItem="WJq-Kr-vzx" firstAttribute="top" secondItem="zQ2-5b-qwo" secondAttribute="bottom" constant="12" id="Cwb-Ic-3Se"/>
+                            <constraint firstItem="WJq-Kr-vzx" firstAttribute="top" secondItem="zQ2-5b-qwo" secondAttribute="bottom" id="Cwb-Ic-3Se"/>
                             <constraint firstItem="7U8-vK-qaR" firstAttribute="top" secondItem="TJC-A4-tFh" secondAttribute="bottom" constant="8" id="JaA-0V-bYo"/>
                             <constraint firstItem="TJC-A4-tFh" firstAttribute="top" secondItem="1NH-HB-GXc" secondAttribute="bottom" constant="8" id="Kcj-d7-Vz5"/>
                             <constraint firstItem="YNa-Wr-Jer" firstAttribute="top" secondItem="7U8-vK-qaR" secondAttribute="bottom" constant="8" id="OwN-Tt-QRr"/>

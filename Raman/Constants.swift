@@ -36,8 +36,8 @@ struct Constants {
     static let specRounding = [".2", ".2", ".4", ".2", ".5" ]
     static let bwRounding = [".2", ".4", ".2", ".2" ]
     
-    static let changeExcitationText = "Changing the excitation value will modify the signal based on the current Raman shift."
-    static let changeSignalText = "Changing the signal value will modify the Raman shift based on the current excitation."
+    static let changeExcitationText = "Changing the excitation wavelength will modify the signal based on the current Raman shift."
+    static let changeSignalText = "Changing the signal wavelength will modify the Raman shift based on the current excitation."
     static let changeShiftText = "Changing the Raman shift value will modify the signal based on the current excitation."
     
     static let specToolTip = [ changeExcitationText, changeSignalText, changeShiftText, changeShiftText, changeShiftText ]
