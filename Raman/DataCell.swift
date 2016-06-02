@@ -14,9 +14,6 @@ class DataCell: UITableViewCell {
     
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var dataLabel: UILabel!
-//    @IBOutlet weak var dataImage: UIImage!
-//    @IBOutlet weak var dataUnitsLabel: UILabel!
-//    @IBOutlet weak var dataUnitsExponent: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,8 +25,6 @@ class DataCell: UITableViewCell {
         dataLabel.font = Theme.Fonts.DetailTextFont.font
         
         dataLabel.textColor = Theme.Colors.LightTextColor.color
-//        dataUnitsLabel.textColor = Theme.Colors.LightTextColor.color
-//        dataUnitsExponent.textColor = Theme.Colors.LightTextColor.color
 
         // make the separator go all the way to the left edge
         separatorInset = UIEdgeInsetsZero

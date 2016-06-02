@@ -57,7 +57,6 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
         
         cell.valueLabel!.text = modelData.spectro.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
         cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
-//        cell.imageView?.image = Constants.bwCellImage[indexPath.row]
 
         cell.imageView?.image = UIImage(named: "bw\(indexPath.row)")
         

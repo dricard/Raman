@@ -92,7 +92,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         cell.textLabel!.text = modelData.spectro.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
         cell.detailTextLabel?.text = Constants.ramanShift[indexPath.row]
-//        cell.imageView?.image = Constants.cellImage[indexPath.row]
 
         cell.imageView?.image = UIImage(named: "spectro\(indexPath.row)")
         

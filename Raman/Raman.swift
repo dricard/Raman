@@ -147,6 +147,23 @@ class Raman {
         }
     }
     
+    // MARK: - Initialization
+    
+    init() {
+        signal = 534.0
+        pump = 532.0
+        bwLambda = 532.0
+        bwInCm = 70.4007209033807
+        
+    }
+    
+    init(signal : Double, pump : Double, bwLambda : Double, bwInCm : Double) {
+        self.signal = signal
+        self.pump = pump
+        self.bwLambda = bwLambda
+        self.bwInCm = bwInCm
+    }
+    
     // MARK: Methods
     
     func lamdaS(lambda: Double, bandwidth: Double) -> Double {
@@ -296,22 +313,6 @@ class Raman {
             }
         }
 
-    }
-    
-    // MARK: Initialization
-    init() {
-        signal = 534.0
-        pump = 532.0
-        bwLambda = 532.0
-        bwInCm = 70.4007209033807
-        
-    }
-    
-    init(signal : Double, pump : Double, bwLambda : Double, bwInCm : Double) {
-        self.signal = signal
-        self.pump = pump
-        self.bwLambda = bwLambda
-        self.bwInCm = bwInCm
     }
     
     

@@ -26,6 +26,8 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     
     var valueChanged : Bool = false
     var theReturnValue : Double = 0.0
+    
+    var shouldPopVC = true
         
     // MARK: - Outlets
     
@@ -50,9 +52,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
         
         // set the labels with the passed properties
         if let value = selectedValue {
-//            previousValueLabel.text = "\(value)"
             previousValueLabel.text = value.format(".4")
-
         } else {
             print("ERROR in ChangeValueViewController viewDidLoad: trying to unwrap nil value in viewDidLoad of ChangeValueVC: selectedValue")
         }
@@ -83,6 +83,10 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
         
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        shouldPopVC = false
+
+    }
     
     // MARK: - User Actions
     
@@ -120,21 +124,16 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Textfield delegates
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-//        println(newValue.text)
-//        println("test: spectro variable is accessible if this gives a value: \(ramanData.spectro.pump)")
-//        theReturnValue = newValue.text as! doubleValue
         
         // check that we can typecast into a Double
         if let theReturnValue = Double(textField.text!) {
             // then check that the value entered is valid for that variable
             if checkForValidValue(theReturnValue) {
-    //            println("return value (\(theReturnValue)) is valid")
                 newValue.text = "\(theReturnValue)"
                 valueChanged = true
                 ramanData.spectro.updateParameter(theReturnValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
            } else {
                 newValue.text = "\(selectedValue!)"
-    //            println("return value is NOT valid")
                 valueChanged = false
             }
         } else {
@@ -148,6 +147,9 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(textField: UITextField) {
 
         if textField.isFirstResponder() {
+            textField.resignFirstResponder()
+        }
+        if shouldPopVC {
             self.navigationController!.popViewControllerAnimated(true)
         }
     }
