@@ -27,7 +27,7 @@ struct Theme {
             // Foreground is used for Nav bar
             case .Foreground: return UIColor(red:0.36, green:0.79, blue:0.96, alpha:1.00)       // cell background and Navbar background color
             case .LightTextColor: return UIColor(red:0.21, green:0.52, blue:0.70, alpha:1.00)   // Cell text Color
-            case .DarkBackgroundColor: return UIColor(red:0.296,  green:0.589,  blue:0.784, alpha:1)
+            case .DarkBackgroundColor: return UIColor(red:0.21, green:0.52, blue:0.70, alpha:1.00)
             }
         }
     }
@@ -42,7 +42,8 @@ struct Theme {
             switch self {
             case .TitleFont: return UIFont(name: "Hack-Bold", size: 32)!
             case .ExponentFont: return UIFont(name: "Hack", size: 9)!
-            case .DetailTextFont: return UIFont(name: "Hack", size: 14)!
+//            case .DetailTextFont: return UIFont(name: "Hack", size: 14)!
+            case .DetailTextFont: return UIFont.systemFontOfSize(CGFloat(18))
             case .NavTitleFont: return UIFont(name: "Hack-Bold", size: 18)!
             }
         }

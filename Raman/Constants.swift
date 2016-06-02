@@ -28,12 +28,8 @@ struct Constants {
     
     static let ramanShift = ["Excitation wavelenth (nm)", "Signal wavelength (nm)", "Raman shift (cm-1)", "Raman shift (GHz)", "Raman shift (meV)"]
     
-    static let ramanBandwidth = ["Wavelength for bw calculations (nm)", "Bandwidth (cm-1)", "Bandwidth (GHz)", "Bandwidth (nm)"]
+    static let ramanBandwidth = ["Wavelength (nm)", "Bandwidth (cm-1)", "Bandwidth (GHz)", "Bandwidth (nm)"]
     
-    static let cellImage = [UIImage(named: "excitationInNmIcon"), UIImage(named: "signalInNmIcon"), UIImage(named: "shiftInCmIcon"), UIImage(named: "shiftInGhzIcon"), UIImage(named: "shiftInMevIcon")]
-
-    static let bwCellImage = [UIImage(named: "excitationInNmIcon"), UIImage(named: "bwInCmIcon"), UIImage(named: "bwInGhzIcon"), UIImage(named: "bwInNmIcon")]
-
     static let specUnits = ["nm", "nm", "cm-1", "GHz", "MeV"]
     static let bwUnits = ["nm", "cm-1", "GHz", "nm"]
 

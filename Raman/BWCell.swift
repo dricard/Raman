@@ -15,7 +15,7 @@ class BWCell: UITableViewCell {
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var dataLabel: UILabel!
 //    @IBOutlet weak var dataImage: UIImage!
-    @IBOutlet weak var dataUnitsLabel: UILabel!
+//    @IBOutlet weak var dataUnitsLabel: UILabel!
 //    @IBOutlet weak var dataUnitsExponent: UILabel!
     
     override func awakeFromNib() {

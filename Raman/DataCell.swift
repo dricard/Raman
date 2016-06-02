@@ -26,6 +26,7 @@ class DataCell: UITableViewCell {
         valueLabel.font = Theme.Fonts.TitleFont.font
         valueLabel.textColor = Theme.Colors.LightTextColor.color
         dataLabel.font = Theme.Fonts.DetailTextFont.font
+        
         dataLabel.textColor = Theme.Colors.LightTextColor.color
 //        dataUnitsLabel.textColor = Theme.Colors.LightTextColor.color
 //        dataUnitsExponent.textColor = Theme.Colors.LightTextColor.color
