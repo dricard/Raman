@@ -25,7 +25,8 @@ struct Theme {
             // SectionHeader is just that, seaction headers in tables
             case .SectionHeader: return UIColor(red:0.36, green:0.79, blue:0.96, alpha:1.00)
             // Foreground is used for Nav bar
-            case .Foreground: return UIColor(red:0.36, green:0.79, blue:0.96, alpha:1.00)       // cell background and Navbar background color
+//            case .Foreground: return UIColor(red:0.36, green:0.79, blue:0.96, alpha:1.00)       // cell background and Navbar background color
+            case .Foreground: return UIColor(red:0.62, green:0.82, blue:0.90, alpha:1.00)       // cell background and Navbar background color
             case .LightTextColor: return UIColor(red:0.21, green:0.52, blue:0.70, alpha:1.00)   // Cell text Color
             case .DarkBackgroundColor: return UIColor(red:0.21, green:0.52, blue:0.70, alpha:1.00)
             }
