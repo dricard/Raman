@@ -87,42 +87,8 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     // MARK: - User Actions
     
     @IBAction func cancelChangeValue(sender: AnyObject) {
-//        newValue.text = ""
-//        if valueChanged {
-//            // do the switch statement
-//            if selectedSection! == 0 {
-//                switch selectedDataSource! {
-//                case 0:
-//                    ramanData.spectro.pump = selectedValue!
-//                case 1:
-//                    ramanData.spectro.signal = selectedValue!
-//                case 2:
-//                    ramanData.spectro.shiftInCm = selectedValue!
-//                case 3:
-//                    ramanData.spectro.shiftInGhz = selectedValue!
-//                case 4:
-//                    ramanData.spectro.shiftInMev = selectedValue!
-//                default:
-//                    print("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
-//                    break
-//                }
-//            } else {
-//                switch selectedDataSource! {
-//                case 0:
-//                    ramanData.spectro.bwLambda = selectedValue!
-//                case 1:
-//                    ramanData.spectro.bwInCm = selectedValue!
-//                case 2:
-//                    ramanData.spectro.bwInGhz = selectedValue!
-//                case 3:
-//                    ramanData.spectro.bwInNm = selectedValue!
-//                default:
-//                    print("ERROR in textFieldShouldReturn of ChangeValueViewController - bad return value")
-//                }
-//            }
-//        }
-        
-       self.newValue.resignFirstResponder()
+        self.newValue.resignFirstResponder()
+        self.navigationController!.popViewControllerAnimated(true)
     }
     
     // MARK: - Utilities functions
