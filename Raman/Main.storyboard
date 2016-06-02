@@ -368,7 +368,7 @@
                                     <attributedString key="attributedTitle">
                                         <fragment content="Denis Ricard">
                                             <attributes>
-                                                <color key="NSColor" red="0.1042444929" green="0.36417457460000002" blue="0.5207685232" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="NSColor" red="0.28627450980392155" green="0.3843137254901961" blue="0.42352941176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <font key="NSFont" size="24" name="AvenirNext-Bold"/>
                                             </attributes>
                                         </fragment>
