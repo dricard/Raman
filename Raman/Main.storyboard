@@ -444,12 +444,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJl-IH-a9n">
-                                <rect key="frame" x="190" y="216" width="220" height="240"/>
+                                <rect key="frame" x="195" y="216" width="210" height="210"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="PTM-j5-7UK"/>
-                                    <constraint firstAttribute="width" constant="220" id="qvf-FA-MNl"/>
+                                    <constraint firstAttribute="height" constant="210" id="PTM-j5-7UK"/>
+                                    <constraint firstAttribute="width" constant="210" id="qvf-FA-MNl"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="logo_270"/>
+                                <state key="normal" title="Button" image="logo_210"/>
                                 <connections>
                                     <action selector="logoPressed:" destination="bJE-JC-EHF" eventType="touchUpInside" id="6nv-FI-Tsa"/>
                                 </connections>
@@ -624,7 +624,7 @@
     </scenes>
     <resources>
         <image name="launchscreen" width="2208" height="2208"/>
-        <image name="logo_270" width="226" height="256"/>
+        <image name="logo_210" width="210" height="210"/>
         <image name="tab_bar_bw" width="25" height="25"/>
         <image name="tab_bar_spectro" width="25" height="25"/>
     </resources>
