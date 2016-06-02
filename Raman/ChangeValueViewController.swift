@@ -50,7 +50,9 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
         
         // set the labels with the passed properties
         if let value = selectedValue {
-            previousValueLabel.text = "\(value)"
+//            previousValueLabel.text = "\(value)"
+            previousValueLabel.text = value.format(".4")
+
         } else {
             print("ERROR in ChangeValueViewController viewDidLoad: trying to unwrap nil value in viewDidLoad of ChangeValueVC: selectedValue")
         }
