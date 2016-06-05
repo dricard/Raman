@@ -25,8 +25,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var myTableView: UITableView!
     
     // MARK: - Life cycle
-    
-    
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews();
+
+        NSLog("[DEBUG] table frame: %@", NSStringFromCGRect(myTableView.frame));
+    }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -68,6 +74,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //        myTableView.delegate = self
 //        myTableView.dataSource = self
 
+        myTableView.backgroundColor = UIColor.magentaColor();                   //* TEO DEBUG
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -80,21 +87,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: - Tableview delegates
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
+        return 0 //* TEO was: 44
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Constants.ramanShift.count
+        return Constants.ramanShift.count * 2                                   //* TEO Debug: double the rows, so we can see how table scrolls
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(DataCell.reuseIdentifier) as! DataCell
 
-        cell.textLabel!.text = modelData.spectro.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
-        cell.detailTextLabel?.text = Constants.ramanShift[indexPath.row]
+        let row = indexPath.row % Constants.ramanShift.count
+        cell.textLabel!.text = modelData.spectro.specData(row).format(Constants.specRounding[row])
+        cell.detailTextLabel?.text = Constants.ramanShift[row]
 
-        cell.imageView?.image = UIImage(named: "spectro\(indexPath.row)")
+        cell.imageView?.image = UIImage(named: "spectro\(row)")
         
         return cell
     }
