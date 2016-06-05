@@ -112,10 +112,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         /* Push the ChangeValueViewController */
         let controller = storyboard!.instantiateViewControllerWithIdentifier("ChangeValueViewController") as! ChangeValueViewController
 
-        controller.selectedDataSource = indexPath.row
-        controller.selectedValue = modelData.spectro.specData(indexPath.row)
-        controller.myUnits = Constants.specUnits[indexPath.row]
-        controller.toolTipString = Constants.specToolTip[indexPath.row]
+        let row = indexPath.row % Constants.ramanShift.count
+        controller.selectedDataSource = row
+        controller.selectedValue = modelData.spectro.specData(row)
+        controller.myUnits = Constants.specUnits[row]
+        controller.toolTipString = Constants.specToolTip[row]
         controller.whichTab = Raman.DataSourceType.Spectroscopy
         
         navigationController!.pushViewController(controller, animated: true)
