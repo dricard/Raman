@@ -29,7 +29,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Load user's data
 
         if let signal = NSUserDefaults.standardUserDefaults().valueForKey("signal") {
@@ -62,10 +62,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // set the separator color to the same as the background
         myTableView.separatorColor = Theme.Colors.BackgroundColor.color
-        
-        // set tableView delegates
-        myTableView.delegate = self
-        myTableView.dataSource = self
+
+//* Unneeded; done in storyboard.  TEO
+//        // set tableView delegates
+//        myTableView.delegate = self
+//        myTableView.dataSource = self
 
     }
 
