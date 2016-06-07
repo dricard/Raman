@@ -34,14 +34,12 @@ struct Theme {
     
     enum Fonts {
         case TitleFont
-        case ExponentFont
         case DetailTextFont
         case NavTitleFont
         
         var font: UIFont {
             switch self {
             case .TitleFont: return UIFont(name: "Hack-Bold", size: 32)!
-            case .ExponentFont: return UIFont(name: "Hack", size: 9)!
             case .DetailTextFont: return UIFont.systemFontOfSize(CGFloat(18))
             case .NavTitleFont: return UIFont(name: "Hack-Bold", size: 18)!
             }
