@@ -20,12 +20,6 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: Lyfe Cycle
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews();
-        
-        NSLog("[DEBUG] table frame bw: %@", NSStringFromCGRect(tableView.frame));
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,10 +32,7 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
         // set the separator color to the same as the background
         tableView.separatorColor = Theme.Colors.BackgroundColor.color
         
-
-//        tableView.delegate = self
-//        tableView.dataSource = self
-        
+        // fix space on top of tableview
         tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
 
     }

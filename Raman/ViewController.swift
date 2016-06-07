@@ -26,13 +26,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - Life cycle
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews();
-
-        NSLog("[DEBUG] table frame: %@", NSStringFromCGRect(myTableView.frame));
-    }
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -69,11 +62,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // set the separator color to the same as the background
         myTableView.separatorColor = Theme.Colors.BackgroundColor.color
 
-//* Unneeded; done in storyboard.  TEO
-//        // set tableView delegates
-//        myTableView.delegate = self
-//        myTableView.dataSource = self
-
+        // Remove space at top of tableview
         myTableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
     }
 
@@ -86,10 +75,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - Tableview delegates
     
-//    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 0 //* TEO was: 44
-//    }
-
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return CGFloat(66)
     }
