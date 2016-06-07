@@ -74,7 +74,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //        myTableView.delegate = self
 //        myTableView.dataSource = self
 
-        myTableView.backgroundColor = UIColor.magentaColor();                   //* TEO DEBUG
+        myTableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -86,23 +86,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - Tableview delegates
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0 //* TEO was: 44
+//    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 0 //* TEO was: 44
+//    }
+
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return CGFloat(66)
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Constants.ramanShift.count * 2                                   //* TEO Debug: double the rows, so we can see how table scrolls
+        return Constants.ramanShift.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(DataCell.reuseIdentifier) as! DataCell
 
-        let row = indexPath.row % Constants.ramanShift.count
-        cell.textLabel!.text = modelData.spectro.specData(row).format(Constants.specRounding[row])
-        cell.detailTextLabel?.text = Constants.ramanShift[row]
+        cell.textLabel!.text = modelData.spectro.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
+        cell.detailTextLabel?.text = Constants.ramanShift[indexPath.row]
 
-        cell.imageView?.image = UIImage(named: "spectro\(row)")
+        cell.imageView?.image = UIImage(named: "spectro\(indexPath.row)")
         
         return cell
     }
@@ -112,11 +115,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         /* Push the ChangeValueViewController */
         let controller = storyboard!.instantiateViewControllerWithIdentifier("ChangeValueViewController") as! ChangeValueViewController
 
-        let row = indexPath.row % Constants.ramanShift.count
-        controller.selectedDataSource = row
-        controller.selectedValue = modelData.spectro.specData(row)
-        controller.myUnits = Constants.specUnits[row]
-        controller.toolTipString = Constants.specToolTip[row]
+
+        controller.selectedDataSource = indexPath.row
+        controller.selectedValue = modelData.spectro.specData(indexPath.row)
+        controller.myUnits = Constants.specUnits[indexPath.row]
+        controller.toolTipString = Constants.specToolTip[indexPath.row]
         controller.whichTab = Raman.DataSourceType.Spectroscopy
         
         navigationController!.pushViewController(controller, animated: true)
