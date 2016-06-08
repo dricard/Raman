@@ -10,18 +10,18 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_210" translatesAutoresizingMaskIntoConstraints="NO" id="WZr-l8-S1w">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_210" translatesAutoresizingMaskIntoConstraints="NO" id="4F8-ah-Wd6">
                     <rect key="frame" x="195" y="195" width="210" height="210"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="210" id="d7L-9k-gqs"/>
-                        <constraint firstAttribute="height" constant="210" id="mSL-2z-P3A"/>
+                        <constraint firstAttribute="width" constant="210" id="6Tg-WN-3xz"/>
+                        <constraint firstAttribute="height" constant="210" id="Sfx-9R-Tdf"/>
                     </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.2901960784" green="0.61960784310000006" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="WZr-l8-S1w" firstAttribute="centerX" secondItem="CsG-eS-ObE" secondAttribute="centerX" id="09u-1G-udD"/>
-                <constraint firstItem="WZr-l8-S1w" firstAttribute="centerY" secondItem="CsG-eS-ObE" secondAttribute="centerY" id="97A-aj-fsh"/>
+                <constraint firstItem="4F8-ah-Wd6" firstAttribute="centerX" secondItem="CsG-eS-ObE" secondAttribute="centerX" id="6yP-JV-usw"/>
+                <constraint firstItem="4F8-ah-Wd6" firstAttribute="centerY" secondItem="CsG-eS-ObE" secondAttribute="centerY" id="tu4-WV-eVA"/>
             </constraints>
             <point key="canvasLocation" x="559" y="497"/>
         </view>
