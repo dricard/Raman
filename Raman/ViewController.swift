@@ -31,42 +31,42 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         // Load user's data
 
-        if let signal = NSUserDefaults.standardUserDefaults().valueForKey("signal") {
+        if let signal = UserDefaults.standard.value(forKey: "signal") {
             modelData.spectro.signal = Double(signal as! NSNumber)
         } else {
-            NSUserDefaults.standardUserDefaults().setDouble(modelData.spectro.signal, forKey: "signal")
+            UserDefaults.standard.set(modelData.spectro.signal, forKey: "signal")
         }
-        if let pump = NSUserDefaults.standardUserDefaults().valueForKey("pump") {
+        if let pump = UserDefaults.standard.value(forKey: "pump") {
             modelData.spectro.pump = Double(pump as! NSNumber)
         } else {
-            NSUserDefaults.standardUserDefaults().setDouble(modelData.spectro.pump, forKey: "pump")
+            UserDefaults.standard.set(modelData.spectro.pump, forKey: "pump")
         }
-        if let bwLambda = NSUserDefaults.standardUserDefaults().valueForKey("bwLambda") {
+        if let bwLambda = UserDefaults.standard.value(forKey: "bwLambda") {
             modelData.spectro.bwLambda = Double(bwLambda as! NSNumber)
         } else {
-            NSUserDefaults.standardUserDefaults().setDouble(modelData.spectro.bwLambda, forKey: "bwLambda")
+            UserDefaults.standard.set(modelData.spectro.bwLambda, forKey: "bwLambda")
         }
-        if let bwInCm = NSUserDefaults.standardUserDefaults().valueForKey("bwInCm") {
+        if let bwInCm = UserDefaults.standard.value(forKey: "bwInCm") {
             modelData.spectro.bwInCm = Double(bwInCm as! NSNumber)
         } else {
-            NSUserDefaults.standardUserDefaults().setDouble(modelData.spectro.bwInCm, forKey: "bwInCm")
+            UserDefaults.standard.set(modelData.spectro.bwInCm, forKey: "bwInCm")
         }
        
         
         // set the tableview background color (behind the cells)
-        myTableView.backgroundColor = Theme.Colors.BackgroundColor.color
+        myTableView.backgroundColor = Theme.Colors.backgroundColor.color
         
         // This prevents the space below the cells to have spacers
         myTableView.tableFooterView = UIView()
         
         // set the separator color to the same as the background
-        myTableView.separatorColor = Theme.Colors.BackgroundColor.color
+        myTableView.separatorColor = Theme.Colors.backgroundColor.color
 
         // Remove space at top of tableview
         myTableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // udate all data
         myTableView.reloadData()
@@ -75,17 +75,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - Tableview delegates
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(66)
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.ramanShift.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(DataCell.reuseIdentifier) as! DataCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: DataCell.reuseIdentifier) as! DataCell
 
         cell.textLabel!.text = modelData.spectro.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
         cell.detailTextLabel?.text = Constants.ramanShift[indexPath.row]
@@ -95,17 +95,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         /* Push the ChangeValueViewController */
-        let controller = storyboard!.instantiateViewControllerWithIdentifier("ChangeValueViewController") as! ChangeValueViewController
+        let controller = storyboard!.instantiateViewController(withIdentifier: "ChangeValueViewController") as! ChangeValueViewController
 
 
         controller.selectedDataSource = indexPath.row
         controller.selectedValue = modelData.spectro.specData(indexPath.row)
         controller.myUnits = Constants.specUnits[indexPath.row]
         controller.toolTipString = Constants.specToolTip[indexPath.row]
-        controller.whichTab = Raman.DataSourceType.Spectroscopy
+        controller.whichTab = Raman.DataSourceType.spectroscopy
         
         navigationController!.pushViewController(controller, animated: true)
     }

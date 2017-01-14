@@ -24,8 +24,8 @@ class Raman {
     var bwLambda : Double
     
     enum DataSourceType {
-        case Spectroscopy
-        case Bandwidth
+        case spectroscopy
+        case bandwidth
     }
     
     // MARK: Computed properties
@@ -42,7 +42,7 @@ class Raman {
         set {
             if pump != 0 && ( newValue < (1.0 / (0.0000001 * pump)) - 1.0 ) {
                 signal = 1.0 / ( 1.0 / pump - ( 0.0000001 * newValue ))
-                NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
+                UserDefaults.standard.set(signal, forKey: "signal")
             } else {
                 let alternateValue : Double
                 if pump != 0 {
@@ -51,7 +51,7 @@ class Raman {
                     alternateValue = (1.0 / (0.0000001)) - 1.0
                 }
                 signal = 1.0 / ( 1.0 / pump - ( 0.0000001 * alternateValue ))
-                NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
+                UserDefaults.standard.set(signal, forKey: "signal")
                 print("ERROR in shiftInCm -- invalid value for variable named 'pump' or 'newValue'")
             }
         }
@@ -69,7 +69,7 @@ class Raman {
         set {
             if pump != 0 && newValue > -1.0 * Double(cInAir) / pump {
                 signal = newValue * pow(pump, 2.0) / Double(cInAir) + pump
-                NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
+                UserDefaults.standard.set(signal, forKey: "signal")
             } else {
                 let alternateValue : Double
                 if pump != 0 {
@@ -78,7 +78,7 @@ class Raman {
                     alternateValue = -1.0 * Double(cInAir)
                 }
                 signal = alternateValue * pow(pump, 2.0) / Double(cInAir) + pump
-                NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
+                UserDefaults.standard.set(signal, forKey: "signal")
                 print("ERROR in shiftInGhz -- invalid value for variable named 'newValue' (should be greater than \(-1.0 * Double(cInAir) / pump)")
             }
         }
@@ -96,11 +96,11 @@ class Raman {
         set {
             if pump != 0 && newValue != 0 && newValue < (1240600.0 / pump) {
                 signal = 1240600.0 / (1240600.0 / pump - newValue)
-                NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
+                UserDefaults.standard.set(signal, forKey: "signal")
             } else {
                 let alternateValue = (1240600.0 / pump) - 1
                 signal = 1240600.0 / (1240600.0 / pump - alternateValue)
-                NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
+                UserDefaults.standard.set(signal, forKey: "signal")
                 print("ERROR in shiftInMev -- invalud value for variable named 'pump' or 'newValue'")
             }
         }
@@ -119,7 +119,7 @@ class Raman {
             if bwLambda != 0 {
                 let temp = newValue * pow(bwLambda, 2.0) / Double(cInAir)
                 bwInCm = (1/bwLambda - (1 / (temp + bwLambda)))/0.0000001
-                NSUserDefaults.standardUserDefaults().setDouble(bwInCm, forKey: "bwInCm")
+                UserDefaults.standard.set(bwInCm, forKey: "bwInCm")
             } else {
                 // do nothing, the value will not change and stay as it was before
                 print("ERROR in bwInGhz -- invalid value for variable named 'bwLambda'")
@@ -139,7 +139,7 @@ class Raman {
         set {
             if bwLambda != 0 {
                 bwInCm = ( 1.0 / bwLambda - (1.0 / (newValue + bwLambda))) / 0.0000001
-                NSUserDefaults.standardUserDefaults().setDouble(bwInCm, forKey: "bwInCm")
+                UserDefaults.standard.set(bwInCm, forKey: "bwInCm")
             } else {
                 // do nothing, the value will not change and stay as it was before
                 print("ERROR in bwInNm -- invalid value for variable named 'bwLambda'")
@@ -166,7 +166,7 @@ class Raman {
     
     // MARK: Methods
     
-    func lamdaS(lambda: Double, bandwidth: Double) -> Double {
+    func lamdaS(_ lambda: Double, bandwidth: Double) -> Double {
         if lambda != 0 {
             return 1.0 / ( 1.0 / lambda - ( 0.0000001 * bandwidth ))
         } else {
@@ -175,7 +175,7 @@ class Raman {
         }
     }
     
-    func specData(index: Int) -> Double {
+    func specData(_ index: Int) -> Double {
         
         switch index {
         case Constants.excitationIndex: return pump
@@ -189,7 +189,7 @@ class Raman {
         }
     }
  
-    func bwData(index: Int) -> Double {
+    func bwData(_ index: Int) -> Double {
         
         switch index {
         case Constants.bwExcitationIndex: return bwLambda
@@ -202,12 +202,12 @@ class Raman {
         }
     }
     
-    func checkForValidData(value: Double, forDataSource: Int, inWhichTab: DataSourceType) -> (valid: Bool, errorMessage: String?) {
+    func checkForValidData(_ value: Double, forDataSource: Int, inWhichTab: DataSourceType) -> (valid: Bool, errorMessage: String?) {
 
         if value == 0.0 {
             return (false, "Value cannot be zero")
         }
-        if inWhichTab == .Spectroscopy {
+        if inWhichTab == .spectroscopy {
             switch forDataSource {
             case Constants.excitationIndex:
                 if value > 0 && value < 10000 {
@@ -277,15 +277,15 @@ class Raman {
 
     }
 
-    func updateParameter(value: Double, forDataSource: Int, inWhichTab: DataSourceType) {
-        if inWhichTab == .Spectroscopy {
+    func updateParameter(_ value: Double, forDataSource: Int, inWhichTab: DataSourceType) {
+        if inWhichTab == .spectroscopy {
             switch forDataSource {
             case Constants.excitationIndex:
                 pump = value
-                NSUserDefaults.standardUserDefaults().setDouble(pump, forKey: "pump")
+                UserDefaults.standard.set(pump, forKey: "pump")
             case Constants.signalIndex:
                 signal = value
-                NSUserDefaults.standardUserDefaults().setDouble(signal, forKey: "signal")
+                UserDefaults.standard.set(signal, forKey: "signal")
             case Constants.shiftCmIndex:
                 shiftInCm = value
             case Constants.shiftGhzIndex:
@@ -300,10 +300,10 @@ class Raman {
             switch forDataSource {
             case Constants.bwExcitationIndex:
                 bwLambda = value
-                NSUserDefaults.standardUserDefaults().setDouble(bwLambda, forKey: "bwLambda")
+                UserDefaults.standard.set(bwLambda, forKey: "bwLambda")
             case Constants.bwCmIndex:
                 bwInCm = value
-                NSUserDefaults.standardUserDefaults().setDouble(bwInCm, forKey: "bwInCm")
+                UserDefaults.standard.set(bwInCm, forKey: "bwInCm")
             case Constants.bwGhzIndex:
                 bwInGhz = value
             case Constants.bwNmIndex:
@@ -320,7 +320,7 @@ class Raman {
 }
 
 extension Double {
-    func format(f: String) -> String {
-        return NSString(format: "%\(f)f", self) as String
+    func format(_ f: String) -> String {
+        return NSString(format: "%\(f)f" as NSString, self) as String
     }
 }

@@ -236,9 +236,11 @@
 					92011AE21B0D197200611519 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = 7B656Y9UYB;
+						LastSwiftMigration = 0820;
 					};
 					92011AF71B0D197300611519 = {
 						CreatedOnToolsVersion = 6.3.2;
+						LastSwiftMigration = 0820;
 						TestTargetID = 92011AE21B0D197200611519;
 					};
 				};
@@ -461,6 +463,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hexaedre.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "dc4b37c6-6120-4977-99b3-a33185b2292a";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -480,6 +483,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hexaedre.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "dc4b37c6-6120-4977-99b3-a33185b2292a";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -500,6 +504,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hexaedre.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Raman.app/Raman";
 			};
 			name = Debug;
@@ -517,6 +522,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hexaedre.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Raman.app/Raman";
 			};
 			name = Release;

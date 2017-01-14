@@ -24,36 +24,36 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
 
         // set the tableview background color (behind the cells)
-        tableView.backgroundColor = Theme.Colors.BackgroundColor.color
+        tableView.backgroundColor = Theme.Colors.backgroundColor.color
         
         // This prevents the space below the cells to have spacers
         tableView.tableFooterView = UIView()
         
         // set the separator color to the same as the background
-        tableView.separatorColor = Theme.Colors.BackgroundColor.color
+        tableView.separatorColor = Theme.Colors.backgroundColor.color
         
         // fix space on top of tableview
         tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
     
 // MARK: Table delegates
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.ramanBandwidth.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(66)
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cellBW", forIndexPath: indexPath) as! BWCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellBW", for: indexPath) as! BWCell
         
         cell.valueLabel!.text = modelData.spectro.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
         cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
@@ -63,16 +63,16 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         /* Push the changeValueViewController */
-        let controller = storyboard!.instantiateViewControllerWithIdentifier("ChangeValueViewController") as! ChangeValueViewController
+        let controller = storyboard!.instantiateViewController(withIdentifier: "ChangeValueViewController") as! ChangeValueViewController
         
         controller.selectedDataSource = indexPath.row
         controller.selectedValue = modelData.spectro.bwData(indexPath.row)
         controller.myUnits = Constants.bwUnits[indexPath.row]
         controller.toolTipString = Constants.bwToolTip[indexPath.row]
-        controller.whichTab = Raman.DataSourceType.Bandwidth
+        controller.whichTab = Raman.DataSourceType.bandwidth
 
         navigationController!.pushViewController(controller, animated: true)
     }

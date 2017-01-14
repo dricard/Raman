@@ -59,9 +59,9 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
         
         if let index = selectedDataSource {
             switch whichTab! {
-            case Raman.DataSourceType.Spectroscopy:
+            case Raman.DataSourceType.spectroscopy:
                 dataSourceLabel.text = Constants.ramanShift[index]
-            case Raman.DataSourceType.Bandwidth:
+            case Raman.DataSourceType.bandwidth:
                 dataSourceLabel.text = Constants.ramanBandwidth[index]
             }
             
@@ -83,39 +83,39 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
         
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         shouldPopVC = false
 
     }
     
     // MARK: - User Actions
     
-    @IBAction func cancelChangeValue(sender: AnyObject) {
+    @IBAction func cancelChangeValue(_ sender: AnyObject) {
         self.newValue.resignFirstResponder()
-        self.navigationController!.popViewControllerAnimated(true)
+        self.navigationController!.popViewController(animated: true)
     }
     
     // MARK: - Utilities functions
     
     // Enable touch outside textField to end editing
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
-    func checkForValidValue(toTest: Double) -> Bool {
+    func checkForValidValue(_ toTest: Double) -> Bool {
         
         let error = ramanData.spectro.checkForValidData(toTest, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
         if error.valid {
             return true
         } else {
             if let message = error.errorMessage {
-                let alert = UIAlertController(title: "Invalid entry", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                let alert = UIAlertController(title: "Invalid entry", message: message, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             } else {
-                let alert = UIAlertController(title: "Invalid entry", message: "Value entered is not a valid number", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                let alert = UIAlertController(title: "Invalid entry", message: "Value entered is not a valid number", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
             return false
         }
@@ -123,7 +123,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Textfield delegates
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         // check that we can typecast into a Double
         if let theReturnValue = Double(textField.text!) {
@@ -144,13 +144,13 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
 
-        if textField.isFirstResponder() {
+        if textField.isFirstResponder {
             textField.resignFirstResponder()
         }
         if shouldPopVC {
-            self.navigationController!.popViewControllerAnimated(true)
+            self.navigationController!.popViewController(animated: true)
         }
     }
 

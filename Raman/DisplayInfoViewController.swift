@@ -20,41 +20,41 @@ class DisplayInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "About Raman"
-        if let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             versionNumberLabel.text = "v. " + version
         }
-        let today = NSDate()
-        let formatter = NSDateFormatter()
+        let today = Date()
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy"
-        let year = Int(formatter.stringFromDate(today))!
+        let year = Int(formatter.string(from: today))!
         copyrightLabel.text = "© \(year) Hexaedre"
     }
     
     // MARK: - User actions
 
-    @IBAction func namePressed(sender: AnyObject) {
-        let url = NSURL(string: "http://hexaedre.com/blog/")
+    @IBAction func namePressed(_ sender: AnyObject) {
+        let url = URL(string: "http://hexaedre.com/blog/")
 //        let request = NSURLRequest(URL: url!)
-        UIApplication.sharedApplication().openURL(url!)
+        UIApplication.shared.openURL(url!)
     }
     
-    @IBAction func logoPressed(sender: AnyObject) {
-        let url = NSURL(string: "http://hexaedre.com")
-        UIApplication.sharedApplication().openURL(url!)
+    @IBAction func logoPressed(_ sender: AnyObject) {
+        let url = URL(string: "http://hexaedre.com")
+        UIApplication.shared.openURL(url!)
     }
     
-    @IBAction func helpPressed(sender: AnyObject) {
-        let url = NSURL(string: "http://hexaedre.com/Raman.html")
-        UIApplication.sharedApplication().openURL(url!)
+    @IBAction func helpPressed(_ sender: AnyObject) {
+        let url = URL(string: "http://hexaedre.com/Raman.html")
+        UIApplication.shared.openURL(url!)
     }
     
     
-    @IBAction func supportPressed(sender: AnyObject) {
-        let url = NSURL(string: "mailto:dr@hexaedre.com?subject=Raman%20App%20support%20request&body=Please%20ask%20your%20quetion%20or%20make%20your%20comment%20here.%20Thank%20you!")
-        UIApplication.sharedApplication().openURL(url!)
+    @IBAction func supportPressed(_ sender: AnyObject) {
+        let url = URL(string: "mailto:dr@hexaedre.com?subject=Raman%20App%20support%20request&body=Please%20ask%20your%20quetion%20or%20make%20your%20comment%20here.%20Thank%20you!")
+        UIApplication.shared.openURL(url!)
     }
     
-    @IBAction func userPressedDone(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func userPressedDone(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
