@@ -73,28 +73,28 @@ public class RamanStyleKit : NSObject {
         let textRect = CGRect(x: 3, y: 9, width: 38, height: 15)
         let textTextContent = "Laser"
         let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .Center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(UIFont.smallSystemFontSize()), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: textStyle]
+        textStyle.alignment = .center
+        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
 
-        let textTextHeight: CGFloat = textTextContent.boundingRectWithSize(CGSize(width: textRect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, textRect)
-        textTextContent.drawInRect(CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
-        CGContextRestoreGState(context)
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
 
 
         //// Text 2 Drawing
         let text2Rect = CGRect(x: 3, y: 24, width: 38, height: 9)
         let text2TextContent = "nm"
         let text2Style = NSMutableParagraphStyle()
-        text2Style.alignment = .Center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(UIFont.smallSystemFontSize()), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: text2Style]
+        text2Style.alignment = .center
+        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
 
-        let text2TextHeight: CGFloat = text2TextContent.boundingRectWithSize(CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, text2Rect)
-        text2TextContent.drawInRect(CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
-        CGContextRestoreGState(context)
+        let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: text2Rect)
+        text2TextContent.draw(in: CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
+        context.restoreGState()
     }
 
     public dynamic class func drawSpectro1() {
@@ -117,28 +117,28 @@ public class RamanStyleKit : NSObject {
         let textRect = CGRect(x: 3, y: 9, width: 38, height: 15)
         let textTextContent = "Signal"
         let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .Center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(UIFont.smallSystemFontSize()), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: textStyle]
+        textStyle.alignment = .center
+        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
 
-        let textTextHeight: CGFloat = textTextContent.boundingRectWithSize(CGSize(width: textRect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, textRect)
-        textTextContent.drawInRect(CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
-        CGContextRestoreGState(context)
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
 
 
         //// Text 2 Drawing
         let text2Rect = CGRect(x: 3, y: 24, width: 38, height: 9)
         let text2TextContent = "nm"
         let text2Style = NSMutableParagraphStyle()
-        text2Style.alignment = .Center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(UIFont.smallSystemFontSize()), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: text2Style]
+        text2Style.alignment = .center
+        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
 
-        let text2TextHeight: CGFloat = text2TextContent.boundingRectWithSize(CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, text2Rect)
-        text2TextContent.drawInRect(CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
-        CGContextRestoreGState(context)
+        let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: text2Rect)
+        text2TextContent.draw(in: CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
+        context.restoreGState()
     }
 
     public dynamic class func drawSpectro2() {
@@ -161,42 +161,42 @@ public class RamanStyleKit : NSObject {
         let textRect = CGRect(x: 3, y: 8, width: 38, height: 15)
         let textTextContent = "Δω"
         let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .Center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(15), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: textStyle]
+        textStyle.alignment = .center
+        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
 
-        let textTextHeight: CGFloat = textTextContent.boundingRectWithSize(CGSize(width: textRect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, textRect)
-        textTextContent.drawInRect(CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
-        CGContextRestoreGState(context)
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
 
 
         //// Text 2 Drawing
         let text2Rect = CGRect(x: 3, y: 24, width: 34, height: 9)
         let text2TextContent = "cm  "
         let text2Style = NSMutableParagraphStyle()
-        text2Style.alignment = .Center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(UIFont.smallSystemFontSize()), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: text2Style]
+        text2Style.alignment = .center
+        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
 
-        let text2TextHeight: CGFloat = text2TextContent.boundingRectWithSize(CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, text2Rect)
-        text2TextContent.drawInRect(CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
-        CGContextRestoreGState(context)
+        let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: text2Rect)
+        text2TextContent.draw(in: CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
+        context.restoreGState()
 
 
         //// Text 3 Drawing
         let text3Rect = CGRect(x: 27, y: 23, width: 10, height: 6)
         let text3TextContent = "-1"
         let text3Style = NSMutableParagraphStyle()
-        text3Style.alignment = .Center
-        let text3FontAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(8), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: text3Style]
+        text3Style.alignment = .center
+        let text3FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 8), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text3Style]
 
-        let text3TextHeight: CGFloat = text3TextContent.boundingRectWithSize(CGSize(width: text3Rect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: text3FontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, text3Rect)
-        text3TextContent.drawInRect(CGRect(x: text3Rect.minX, y: text3Rect.minY + (text3Rect.height - text3TextHeight) / 2, width: text3Rect.width, height: text3TextHeight), withAttributes: text3FontAttributes)
-        CGContextRestoreGState(context)
+        let text3TextHeight: CGFloat = text3TextContent.boundingRect(with: CGSize(width: text3Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text3FontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: text3Rect)
+        text3TextContent.draw(in: CGRect(x: text3Rect.minX, y: text3Rect.minY + (text3Rect.height - text3TextHeight) / 2, width: text3Rect.width, height: text3TextHeight), withAttributes: text3FontAttributes)
+        context.restoreGState()
     }
 
     public dynamic class func drawSpectro3() {
@@ -219,28 +219,28 @@ public class RamanStyleKit : NSObject {
         let textRect = CGRect(x: 3, y: 8, width: 38, height: 15)
         let textTextContent = "Δω"
         let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .Center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(15), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: textStyle]
+        textStyle.alignment = .center
+        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
 
-        let textTextHeight: CGFloat = textTextContent.boundingRectWithSize(CGSize(width: textRect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, textRect)
-        textTextContent.drawInRect(CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
-        CGContextRestoreGState(context)
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
 
 
         //// Text 2 Drawing
         let text2Rect = CGRect(x: 3, y: 24, width: 38, height: 11)
         let text2TextContent = "GHz"
         let text2Style = NSMutableParagraphStyle()
-        text2Style.alignment = .Center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(UIFont.smallSystemFontSize()), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: text2Style]
+        text2Style.alignment = .center
+        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
 
-        let text2TextHeight: CGFloat = text2TextContent.boundingRectWithSize(CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, text2Rect)
-        text2TextContent.drawInRect(CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
-        CGContextRestoreGState(context)
+        let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: text2Rect)
+        text2TextContent.draw(in: CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
+        context.restoreGState()
     }
 
     public dynamic class func drawSpectro4() {
@@ -263,28 +263,28 @@ public class RamanStyleKit : NSObject {
         let textRect = CGRect(x: 3, y: 8, width: 38, height: 15)
         let textTextContent = "Δω"
         let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .Center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(15), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: textStyle]
+        textStyle.alignment = .center
+        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
 
-        let textTextHeight: CGFloat = textTextContent.boundingRectWithSize(CGSize(width: textRect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, textRect)
-        textTextContent.drawInRect(CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
-        CGContextRestoreGState(context)
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
 
 
         //// Text 2 Drawing
         let text2Rect = CGRect(x: 3, y: 23, width: 38, height: 13)
         let text2TextContent = "meV"
         let text2Style = NSMutableParagraphStyle()
-        text2Style.alignment = .Center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(UIFont.smallSystemFontSize()), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: text2Style]
+        text2Style.alignment = .center
+        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
 
-        let text2TextHeight: CGFloat = text2TextContent.boundingRectWithSize(CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, text2Rect)
-        text2TextContent.drawInRect(CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
-        CGContextRestoreGState(context)
+        let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: text2Rect)
+        text2TextContent.draw(in: CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
+        context.restoreGState()
     }
 
     public dynamic class func drawBw0() {
@@ -307,28 +307,28 @@ public class RamanStyleKit : NSObject {
         let textRect = CGRect(x: 3, y: 8, width: 38, height: 21)
         let textTextContent = "λ"
         let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .Center
-        let textFontAttributes = [NSFontAttributeName: UIFont(name: "Symbol", size: 19)!, NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: textStyle]
+        textStyle.alignment = .center
+        let textFontAttributes = [NSFontAttributeName: UIFont(name: "Symbol", size: 19)!, NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
 
-        let textTextHeight: CGFloat = textTextContent.boundingRectWithSize(CGSize(width: textRect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, textRect)
-        textTextContent.drawInRect(CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
-        CGContextRestoreGState(context)
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
 
 
         //// Text 2 Drawing
         let text2Rect = CGRect(x: 3, y: 24, width: 38, height: 9)
         let text2TextContent = "nm"
         let text2Style = NSMutableParagraphStyle()
-        text2Style.alignment = .Center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(UIFont.smallSystemFontSize()), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: text2Style]
+        text2Style.alignment = .center
+        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
 
-        let text2TextHeight: CGFloat = text2TextContent.boundingRectWithSize(CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, text2Rect)
-        text2TextContent.drawInRect(CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
-        CGContextRestoreGState(context)
+        let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: text2Rect)
+        text2TextContent.draw(in: CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
+        context.restoreGState()
     }
 
     public dynamic class func drawBw2() {
@@ -351,28 +351,28 @@ public class RamanStyleKit : NSObject {
         let textRect = CGRect(x: 3, y: 9, width: 38, height: 12)
         let textTextContent = "BW"
         let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .Center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(UIFont.smallSystemFontSize()), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: textStyle]
+        textStyle.alignment = .center
+        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
 
-        let textTextHeight: CGFloat = textTextContent.boundingRectWithSize(CGSize(width: textRect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, textRect)
-        textTextContent.drawInRect(CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
-        CGContextRestoreGState(context)
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
 
 
         //// Text 2 Drawing
         let text2Rect = CGRect(x: 3, y: 23, width: 38, height: 13)
         let text2TextContent = "GHz"
         let text2Style = NSMutableParagraphStyle()
-        text2Style.alignment = .Center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(UIFont.smallSystemFontSize()), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: text2Style]
+        text2Style.alignment = .center
+        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
 
-        let text2TextHeight: CGFloat = text2TextContent.boundingRectWithSize(CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, text2Rect)
-        text2TextContent.drawInRect(CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
-        CGContextRestoreGState(context)
+        let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: text2Rect)
+        text2TextContent.draw(in: CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
+        context.restoreGState()
     }
 
     public dynamic class func drawBw1() {
@@ -395,42 +395,42 @@ public class RamanStyleKit : NSObject {
         let textRect = CGRect(x: 3, y: 9, width: 38, height: 12)
         let textTextContent = "BW"
         let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .Center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(UIFont.smallSystemFontSize()), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: textStyle]
+        textStyle.alignment = .center
+        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
 
-        let textTextHeight: CGFloat = textTextContent.boundingRectWithSize(CGSize(width: textRect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, textRect)
-        textTextContent.drawInRect(CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
-        CGContextRestoreGState(context)
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
 
 
         //// Text 2 Drawing
         let text2Rect = CGRect(x: 3, y: 24, width: 34, height: 9)
         let text2TextContent = "cm  "
         let text2Style = NSMutableParagraphStyle()
-        text2Style.alignment = .Center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(UIFont.smallSystemFontSize()), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: text2Style]
+        text2Style.alignment = .center
+        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
 
-        let text2TextHeight: CGFloat = text2TextContent.boundingRectWithSize(CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, text2Rect)
-        text2TextContent.drawInRect(CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
-        CGContextRestoreGState(context)
+        let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: text2Rect)
+        text2TextContent.draw(in: CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
+        context.restoreGState()
 
 
         //// Text 3 Drawing
         let text3Rect = CGRect(x: 27, y: 23, width: 10, height: 6)
         let text3TextContent = "-1"
         let text3Style = NSMutableParagraphStyle()
-        text3Style.alignment = .Center
-        let text3FontAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(8), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: text3Style]
+        text3Style.alignment = .center
+        let text3FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 8), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text3Style]
 
-        let text3TextHeight: CGFloat = text3TextContent.boundingRectWithSize(CGSize(width: text3Rect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: text3FontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, text3Rect)
-        text3TextContent.drawInRect(CGRect(x: text3Rect.minX, y: text3Rect.minY + (text3Rect.height - text3TextHeight) / 2, width: text3Rect.width, height: text3TextHeight), withAttributes: text3FontAttributes)
-        CGContextRestoreGState(context)
+        let text3TextHeight: CGFloat = text3TextContent.boundingRect(with: CGSize(width: text3Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text3FontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: text3Rect)
+        text3TextContent.draw(in: CGRect(x: text3Rect.minX, y: text3Rect.minY + (text3Rect.height - text3TextHeight) / 2, width: text3Rect.width, height: text3TextHeight), withAttributes: text3FontAttributes)
+        context.restoreGState()
     }
 
     public dynamic class func drawBw3() {
@@ -453,46 +453,46 @@ public class RamanStyleKit : NSObject {
         let textRect = CGRect(x: 3, y: 9, width: 38, height: 12)
         let textTextContent = "BW"
         let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .Center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(UIFont.smallSystemFontSize()), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: textStyle]
+        textStyle.alignment = .center
+        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
 
-        let textTextHeight: CGFloat = textTextContent.boundingRectWithSize(CGSize(width: textRect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, textRect)
-        textTextContent.drawInRect(CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
-        CGContextRestoreGState(context)
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
 
 
         //// Text 2 Drawing
         let text2Rect = CGRect(x: 3, y: 24, width: 38, height: 9)
         let text2TextContent = "nm"
         let text2Style = NSMutableParagraphStyle()
-        text2Style.alignment = .Center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(UIFont.smallSystemFontSize()), NSForegroundColorAttributeName: UIColor.blackColor(), NSParagraphStyleAttributeName: text2Style]
+        text2Style.alignment = .center
+        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
 
-        let text2TextHeight: CGFloat = text2TextContent.boundingRectWithSize(CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .UsesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
-        CGContextSaveGState(context)
-        CGContextClipToRect(context, text2Rect)
-        text2TextContent.drawInRect(CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
-        CGContextRestoreGState(context)
+        let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: text2Rect)
+        text2TextContent.draw(in: CGRect(x: text2Rect.minX, y: text2Rect.minY + (text2Rect.height - text2TextHeight) / 2, width: text2Rect.width, height: text2TextHeight), withAttributes: text2FontAttributes)
+        context.restoreGState()
     }
 
-    public dynamic class func drawSpectro(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .AspectFit) {
+    public dynamic class func drawSpectro(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
         //// Resize to Target Frame
-        CGContextSaveGState(context)
+        context.saveGState()
         let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 34, height: 34), target: targetFrame)
-        CGContextTranslateCTM(context, resizedFrame.minX, resizedFrame.minY)
-        CGContextScaleCTM(context, resizedFrame.width / 34, resizedFrame.height / 34)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 34, y: resizedFrame.height / 34)
 
 
         //// Color Declarations
         let main = UIColor(red: 0.212, green: 0.522, blue: 0.702, alpha: 1.000)
-        let color = main.colorWithHighlight(0.2)
+        let color = main.highlight(withLevel: 0.2)
         let signalColor = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1.000)
-        let color2 = signalColor.colorWithShadow(0.6)
+        let color2 = signalColor.shadow(withLevel: 0.6)
 
         //// Rectangle 2 Drawing
         let rectangle2Path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 34, height: 34), cornerRadius: 3)
@@ -502,17 +502,17 @@ public class RamanStyleKit : NSObject {
 
         //// Bezier Drawing
         let bezierPath = UIBezierPath()
-        bezierPath.moveToPoint(CGPoint(x: 2.5, y: 29.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 9.5, y: 25.5), controlPoint1: CGPoint(x: 2.5, y: 29.5), controlPoint2: CGPoint(x: 7.5, y: 28.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 12, y: 3.5), controlPoint1: CGPoint(x: 11.5, y: 22.5), controlPoint2: CGPoint(x: 12, y: 3.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 14.5, y: 25.5), controlPoint1: CGPoint(x: 12, y: 3.5), controlPoint2: CGPoint(x: 12.5, y: 22.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 19.5, y: 29.5), controlPoint1: CGPoint(x: 16.5, y: 28.5), controlPoint2: CGPoint(x: 17.5, y: 29.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 23.5, y: 25.5), controlPoint1: CGPoint(x: 21.5, y: 29.5), controlPoint2: CGPoint(x: 22.5, y: 28.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 25, y: 10.5), controlPoint1: CGPoint(x: 24.5, y: 22.5), controlPoint2: CGPoint(x: 25, y: 10.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 26.5, y: 25.5), controlPoint1: CGPoint(x: 25, y: 10.5), controlPoint2: CGPoint(x: 25.5, y: 23.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 30.5, y: 29.5), controlPoint1: CGPoint(x: 27.5, y: 27.5), controlPoint2: CGPoint(x: 29.5, y: 29.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 2.5, y: 29.5), controlPoint1: CGPoint(x: 31.5, y: 29.5), controlPoint2: CGPoint(x: 2.5, y: 29.5))
-        bezierPath.closePath()
+        bezierPath.move(to: CGPoint(x: 2.5, y: 29.5))
+        bezierPath.addCurve(to: CGPoint(x: 9.5, y: 25.5), controlPoint1: CGPoint(x: 2.5, y: 29.5), controlPoint2: CGPoint(x: 7.5, y: 28.5))
+        bezierPath.addCurve(to: CGPoint(x: 12, y: 3.5), controlPoint1: CGPoint(x: 11.5, y: 22.5), controlPoint2: CGPoint(x: 12, y: 3.5))
+        bezierPath.addCurve(to: CGPoint(x: 14.5, y: 25.5), controlPoint1: CGPoint(x: 12, y: 3.5), controlPoint2: CGPoint(x: 12.5, y: 22.5))
+        bezierPath.addCurve(to: CGPoint(x: 19.5, y: 29.5), controlPoint1: CGPoint(x: 16.5, y: 28.5), controlPoint2: CGPoint(x: 17.5, y: 29.5))
+        bezierPath.addCurve(to: CGPoint(x: 23.5, y: 25.5), controlPoint1: CGPoint(x: 21.5, y: 29.5), controlPoint2: CGPoint(x: 22.5, y: 28.5))
+        bezierPath.addCurve(to: CGPoint(x: 25, y: 10.5), controlPoint1: CGPoint(x: 24.5, y: 22.5), controlPoint2: CGPoint(x: 25, y: 10.5))
+        bezierPath.addCurve(to: CGPoint(x: 26.5, y: 25.5), controlPoint1: CGPoint(x: 25, y: 10.5), controlPoint2: CGPoint(x: 25.5, y: 23.5))
+        bezierPath.addCurve(to: CGPoint(x: 30.5, y: 29.5), controlPoint1: CGPoint(x: 27.5, y: 27.5), controlPoint2: CGPoint(x: 29.5, y: 29.5))
+        bezierPath.addCurve(to: CGPoint(x: 2.5, y: 29.5), controlPoint1: CGPoint(x: 31.5, y: 29.5), controlPoint2: CGPoint(x: 2.5, y: 29.5))
+        bezierPath.close()
         signalColor.setFill()
         bezierPath.fill()
         color2.setStroke()
@@ -521,43 +521,43 @@ public class RamanStyleKit : NSObject {
 
 
         //// Rectangle Drawing
-        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 29, width: 34, height: 5), byRoundingCorners: [.BottomLeft, .BottomRight], cornerRadii: CGSize(width: 2.5, height: 2.5))
-        rectanglePath.closePath()
+        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 29, width: 34, height: 5), byRoundingCorners: [.bottomLeft, .bottomRight], cornerRadii: CGSize(width: 2.5, height: 2.5))
+        rectanglePath.close()
         main.setFill()
         rectanglePath.fill()
 
 
         //// Bezier 2 Drawing
         let bezier2Path = UIBezierPath()
-        bezier2Path.moveToPoint(CGPoint(x: -0.5, y: 28.5))
-        bezier2Path.addCurveToPoint(CGPoint(x: 34.5, y: 28.5), controlPoint1: CGPoint(x: 34.5, y: 28.5), controlPoint2: CGPoint(x: 34.5, y: 28.5))
-        UIColor.grayColor().setFill()
+        bezier2Path.move(to: CGPoint(x: -0.5, y: 28.5))
+        bezier2Path.addCurve(to: CGPoint(x: 34.5, y: 28.5), controlPoint1: CGPoint(x: 34.5, y: 28.5), controlPoint2: CGPoint(x: 34.5, y: 28.5))
+        UIColor.gray.setFill()
         bezier2Path.fill()
         color.setStroke()
         bezier2Path.lineWidth = 1
         bezier2Path.stroke()
         
-        CGContextRestoreGState(context)
+        context.restoreGState()
 
     }
 
-    public dynamic class func drawSpectroSelected(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .AspectFit) {
+    public dynamic class func drawSpectroSelected(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
         //// Resize to Target Frame
-        CGContextSaveGState(context)
+        context.saveGState()
         let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 34, height: 34), target: targetFrame)
-        CGContextTranslateCTM(context, resizedFrame.minX, resizedFrame.minY)
-        CGContextScaleCTM(context, resizedFrame.width / 34, resizedFrame.height / 34)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 34, y: resizedFrame.height / 34)
 
 
         //// Color Declarations
-        let backgroundSelected = RamanStyleKit.backgroundColor.colorWithHue(0.1)
+        let backgroundSelected = RamanStyleKit.backgroundColor.withHue(0.1)
         let main = UIColor(red: 0.212, green: 0.522, blue: 0.702, alpha: 1.000)
-        let color = main.colorWithHighlight(0.2)
+        let color = main.highlight(withLevel: 0.2)
         let signalColor = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1.000)
-        let color2 = signalColor.colorWithShadow(0.6)
+        let color2 = signalColor.shadow(withLevel: 0.6)
 
         //// Rectangle 2 Drawing
         let rectangle2Path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 34, height: 34), cornerRadius: 3)
@@ -567,17 +567,17 @@ public class RamanStyleKit : NSObject {
 
         //// Bezier Drawing
         let bezierPath = UIBezierPath()
-        bezierPath.moveToPoint(CGPoint(x: 2.5, y: 29.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 9.5, y: 25.5), controlPoint1: CGPoint(x: 2.5, y: 29.5), controlPoint2: CGPoint(x: 7.5, y: 28.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 12, y: 3.5), controlPoint1: CGPoint(x: 11.5, y: 22.5), controlPoint2: CGPoint(x: 12, y: 3.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 14.5, y: 25.5), controlPoint1: CGPoint(x: 12, y: 3.5), controlPoint2: CGPoint(x: 12.5, y: 22.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 19.5, y: 29.5), controlPoint1: CGPoint(x: 16.5, y: 28.5), controlPoint2: CGPoint(x: 17.5, y: 29.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 23.5, y: 25.5), controlPoint1: CGPoint(x: 21.5, y: 29.5), controlPoint2: CGPoint(x: 22.5, y: 28.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 25, y: 10.5), controlPoint1: CGPoint(x: 24.5, y: 22.5), controlPoint2: CGPoint(x: 25, y: 10.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 26.5, y: 25.5), controlPoint1: CGPoint(x: 25, y: 10.5), controlPoint2: CGPoint(x: 25.5, y: 23.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 30.5, y: 29.5), controlPoint1: CGPoint(x: 27.5, y: 27.5), controlPoint2: CGPoint(x: 29.5, y: 29.5))
-        bezierPath.addCurveToPoint(CGPoint(x: 2.5, y: 29.5), controlPoint1: CGPoint(x: 31.5, y: 29.5), controlPoint2: CGPoint(x: 2.5, y: 29.5))
-        bezierPath.closePath()
+        bezierPath.move(to: CGPoint(x: 2.5, y: 29.5))
+        bezierPath.addCurve(to: CGPoint(x: 9.5, y: 25.5), controlPoint1: CGPoint(x: 2.5, y: 29.5), controlPoint2: CGPoint(x: 7.5, y: 28.5))
+        bezierPath.addCurve(to: CGPoint(x: 12, y: 3.5), controlPoint1: CGPoint(x: 11.5, y: 22.5), controlPoint2: CGPoint(x: 12, y: 3.5))
+        bezierPath.addCurve(to: CGPoint(x: 14.5, y: 25.5), controlPoint1: CGPoint(x: 12, y: 3.5), controlPoint2: CGPoint(x: 12.5, y: 22.5))
+        bezierPath.addCurve(to: CGPoint(x: 19.5, y: 29.5), controlPoint1: CGPoint(x: 16.5, y: 28.5), controlPoint2: CGPoint(x: 17.5, y: 29.5))
+        bezierPath.addCurve(to: CGPoint(x: 23.5, y: 25.5), controlPoint1: CGPoint(x: 21.5, y: 29.5), controlPoint2: CGPoint(x: 22.5, y: 28.5))
+        bezierPath.addCurve(to: CGPoint(x: 25, y: 10.5), controlPoint1: CGPoint(x: 24.5, y: 22.5), controlPoint2: CGPoint(x: 25, y: 10.5))
+        bezierPath.addCurve(to: CGPoint(x: 26.5, y: 25.5), controlPoint1: CGPoint(x: 25, y: 10.5), controlPoint2: CGPoint(x: 25.5, y: 23.5))
+        bezierPath.addCurve(to: CGPoint(x: 30.5, y: 29.5), controlPoint1: CGPoint(x: 27.5, y: 27.5), controlPoint2: CGPoint(x: 29.5, y: 29.5))
+        bezierPath.addCurve(to: CGPoint(x: 2.5, y: 29.5), controlPoint1: CGPoint(x: 31.5, y: 29.5), controlPoint2: CGPoint(x: 2.5, y: 29.5))
+        bezierPath.close()
         signalColor.setFill()
         bezierPath.fill()
         color2.setStroke()
@@ -586,41 +586,41 @@ public class RamanStyleKit : NSObject {
 
 
         //// Rectangle Drawing
-        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 29, width: 34, height: 5), byRoundingCorners: [.BottomLeft, .BottomRight], cornerRadii: CGSize(width: 2.5, height: 2.5))
-        rectanglePath.closePath()
+        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 29, width: 34, height: 5), byRoundingCorners: [.bottomLeft, .bottomRight], cornerRadii: CGSize(width: 2.5, height: 2.5))
+        rectanglePath.close()
         main.setFill()
         rectanglePath.fill()
 
 
         //// Bezier 2 Drawing
         let bezier2Path = UIBezierPath()
-        bezier2Path.moveToPoint(CGPoint(x: -0.5, y: 28.5))
-        bezier2Path.addCurveToPoint(CGPoint(x: 34.5, y: 28.5), controlPoint1: CGPoint(x: 34.5, y: 28.5), controlPoint2: CGPoint(x: 34.5, y: 28.5))
-        UIColor.grayColor().setFill()
+        bezier2Path.move(to: CGPoint(x: -0.5, y: 28.5))
+        bezier2Path.addCurve(to: CGPoint(x: 34.5, y: 28.5), controlPoint1: CGPoint(x: 34.5, y: 28.5), controlPoint2: CGPoint(x: 34.5, y: 28.5))
+        UIColor.gray.setFill()
         bezier2Path.fill()
         color.setStroke()
         bezier2Path.lineWidth = 1
         bezier2Path.stroke()
         
-        CGContextRestoreGState(context)
+        context.restoreGState()
 
     }
 
-    public dynamic class func drawBandwidth(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .AspectFit) {
+    public dynamic class func drawBandwidth(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
         //// Resize to Target Frame
-        CGContextSaveGState(context)
+        context.saveGState()
         let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 34, height: 34), target: targetFrame)
-        CGContextTranslateCTM(context, resizedFrame.minX, resizedFrame.minY)
-        CGContextScaleCTM(context, resizedFrame.width / 34, resizedFrame.height / 34)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 34, y: resizedFrame.height / 34)
 
 
         //// Color Declarations
         let main = UIColor(red: 0.212, green: 0.522, blue: 0.702, alpha: 1.000)
         let signalColor = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1.000)
-        let color2 = signalColor.colorWithShadow(0.6)
+        let color2 = signalColor.shadow(withLevel: 0.6)
 
         //// Rectangle 2 Drawing
         let rectangle2Path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 34, height: 34), cornerRadius: 3)
@@ -636,55 +636,55 @@ public class RamanStyleKit : NSObject {
 
         //// Bezier Drawing
         let bezierPath = UIBezierPath()
-        bezierPath.moveToPoint(CGPoint(x: 0.5, y: 16.5))
-        bezierPath.addLineToPoint(CGPoint(x: 10.5, y: 16.5))
-        bezierPath.addLineToPoint(CGPoint(x: 6.5, y: 14.5))
-        bezierPath.addLineToPoint(CGPoint(x: 6.5, y: 18.5))
-        bezierPath.addLineToPoint(CGPoint(x: 10.5, y: 16.5))
-        bezierPath.addLineToPoint(CGPoint(x: 10.5, y: 16.5))
+        bezierPath.move(to: CGPoint(x: 0.5, y: 16.5))
+        bezierPath.addLine(to: CGPoint(x: 10.5, y: 16.5))
+        bezierPath.addLine(to: CGPoint(x: 6.5, y: 14.5))
+        bezierPath.addLine(to: CGPoint(x: 6.5, y: 18.5))
+        bezierPath.addLine(to: CGPoint(x: 10.5, y: 16.5))
+        bezierPath.addLine(to: CGPoint(x: 10.5, y: 16.5))
         main.setFill()
         bezierPath.fill()
         main.setStroke()
         bezierPath.lineWidth = 1
-        bezierPath.lineJoinStyle = .Round
+        bezierPath.lineJoinStyle = .round
         bezierPath.stroke()
 
 
         //// Bezier 2 Drawing
         let bezier2Path = UIBezierPath()
-        bezier2Path.moveToPoint(CGPoint(x: 33.5, y: 16.5))
-        bezier2Path.addLineToPoint(CGPoint(x: 23.5, y: 16.5))
-        bezier2Path.addLineToPoint(CGPoint(x: 27.5, y: 14.5))
-        bezier2Path.addLineToPoint(CGPoint(x: 27.5, y: 18.5))
-        bezier2Path.addLineToPoint(CGPoint(x: 23.5, y: 16.5))
-        bezier2Path.addLineToPoint(CGPoint(x: 23.5, y: 16.5))
+        bezier2Path.move(to: CGPoint(x: 33.5, y: 16.5))
+        bezier2Path.addLine(to: CGPoint(x: 23.5, y: 16.5))
+        bezier2Path.addLine(to: CGPoint(x: 27.5, y: 14.5))
+        bezier2Path.addLine(to: CGPoint(x: 27.5, y: 18.5))
+        bezier2Path.addLine(to: CGPoint(x: 23.5, y: 16.5))
+        bezier2Path.addLine(to: CGPoint(x: 23.5, y: 16.5))
         main.setFill()
         bezier2Path.fill()
         main.setStroke()
         bezier2Path.lineWidth = 1
-        bezier2Path.lineJoinStyle = .Round
+        bezier2Path.lineJoinStyle = .round
         bezier2Path.stroke()
         
-        CGContextRestoreGState(context)
+        context.restoreGState()
 
     }
 
-    public dynamic class func drawBandwidthSelected(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .AspectFit) {
+    public dynamic class func drawBandwidthSelected(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
         //// Resize to Target Frame
-        CGContextSaveGState(context)
+        context.saveGState()
         let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 34, height: 34), target: targetFrame)
-        CGContextTranslateCTM(context, resizedFrame.minX, resizedFrame.minY)
-        CGContextScaleCTM(context, resizedFrame.width / 34, resizedFrame.height / 34)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 34, y: resizedFrame.height / 34)
 
 
         //// Color Declarations
-        let backgroundSelected = RamanStyleKit.backgroundColor.colorWithHue(0.1)
+        let backgroundSelected = RamanStyleKit.backgroundColor.withHue(0.1)
         let main = UIColor(red: 0.212, green: 0.522, blue: 0.702, alpha: 1.000)
         let signalColor = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1.000)
-        let color2 = signalColor.colorWithShadow(0.6)
+        let color2 = signalColor.shadow(withLevel: 0.6)
 
         //// Rectangle 2 Drawing
         let rectangle2Path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 34, height: 34), cornerRadius: 3)
@@ -700,36 +700,36 @@ public class RamanStyleKit : NSObject {
 
         //// Bezier Drawing
         let bezierPath = UIBezierPath()
-        bezierPath.moveToPoint(CGPoint(x: 0.5, y: 16.5))
-        bezierPath.addLineToPoint(CGPoint(x: 10.5, y: 16.5))
-        bezierPath.addLineToPoint(CGPoint(x: 6.5, y: 14.5))
-        bezierPath.addLineToPoint(CGPoint(x: 6.5, y: 18.5))
-        bezierPath.addLineToPoint(CGPoint(x: 10.5, y: 16.5))
-        bezierPath.addLineToPoint(CGPoint(x: 10.5, y: 16.5))
+        bezierPath.move(to: CGPoint(x: 0.5, y: 16.5))
+        bezierPath.addLine(to: CGPoint(x: 10.5, y: 16.5))
+        bezierPath.addLine(to: CGPoint(x: 6.5, y: 14.5))
+        bezierPath.addLine(to: CGPoint(x: 6.5, y: 18.5))
+        bezierPath.addLine(to: CGPoint(x: 10.5, y: 16.5))
+        bezierPath.addLine(to: CGPoint(x: 10.5, y: 16.5))
         main.setFill()
         bezierPath.fill()
         main.setStroke()
         bezierPath.lineWidth = 1
-        bezierPath.lineJoinStyle = .Round
+        bezierPath.lineJoinStyle = .round
         bezierPath.stroke()
 
 
         //// Bezier 2 Drawing
         let bezier2Path = UIBezierPath()
-        bezier2Path.moveToPoint(CGPoint(x: 33.5, y: 16.5))
-        bezier2Path.addLineToPoint(CGPoint(x: 23.5, y: 16.5))
-        bezier2Path.addLineToPoint(CGPoint(x: 27.5, y: 14.5))
-        bezier2Path.addLineToPoint(CGPoint(x: 27.5, y: 18.5))
-        bezier2Path.addLineToPoint(CGPoint(x: 23.5, y: 16.5))
-        bezier2Path.addLineToPoint(CGPoint(x: 23.5, y: 16.5))
+        bezier2Path.move(to: CGPoint(x: 33.5, y: 16.5))
+        bezier2Path.addLine(to: CGPoint(x: 23.5, y: 16.5))
+        bezier2Path.addLine(to: CGPoint(x: 27.5, y: 14.5))
+        bezier2Path.addLine(to: CGPoint(x: 27.5, y: 18.5))
+        bezier2Path.addLine(to: CGPoint(x: 23.5, y: 16.5))
+        bezier2Path.addLine(to: CGPoint(x: 23.5, y: 16.5))
         main.setFill()
         bezier2Path.fill()
         main.setStroke()
         bezier2Path.lineWidth = 1
-        bezier2Path.lineJoinStyle = .Round
+        bezier2Path.lineJoinStyle = .round
         bezier2Path.stroke()
         
-        CGContextRestoreGState(context)
+        context.restoreGState()
 
     }
 
@@ -743,7 +743,7 @@ public class RamanStyleKit : NSObject {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 44, height: 44), false, 0)
             RamanStyleKit.drawSpectro0()
 
-        Cache.imageOfSpectro0 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImageWithCapInsets(UIEdgeInsetsZero, resizingMode: .Tile)
+        Cache.imageOfSpectro0 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
         UIGraphicsEndImageContext()
 
         return Cache.imageOfSpectro0!
@@ -757,7 +757,7 @@ public class RamanStyleKit : NSObject {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 44, height: 44), false, 0)
             RamanStyleKit.drawSpectro1()
 
-        Cache.imageOfSpectro1 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImageWithCapInsets(UIEdgeInsetsZero, resizingMode: .Tile)
+        Cache.imageOfSpectro1 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
         UIGraphicsEndImageContext()
 
         return Cache.imageOfSpectro1!
@@ -771,7 +771,7 @@ public class RamanStyleKit : NSObject {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 44, height: 44), false, 0)
             RamanStyleKit.drawSpectro2()
 
-        Cache.imageOfSpectro2 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImageWithCapInsets(UIEdgeInsetsZero, resizingMode: .Tile)
+        Cache.imageOfSpectro2 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
         UIGraphicsEndImageContext()
 
         return Cache.imageOfSpectro2!
@@ -785,7 +785,7 @@ public class RamanStyleKit : NSObject {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 44, height: 44), false, 0)
             RamanStyleKit.drawSpectro3()
 
-        Cache.imageOfSpectro3 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImageWithCapInsets(UIEdgeInsetsZero, resizingMode: .Tile)
+        Cache.imageOfSpectro3 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
         UIGraphicsEndImageContext()
 
         return Cache.imageOfSpectro3!
@@ -799,7 +799,7 @@ public class RamanStyleKit : NSObject {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 44, height: 44), false, 0)
             RamanStyleKit.drawSpectro4()
 
-        Cache.imageOfSpectro4 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImageWithCapInsets(UIEdgeInsetsZero, resizingMode: .Tile)
+        Cache.imageOfSpectro4 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
         UIGraphicsEndImageContext()
 
         return Cache.imageOfSpectro4!
@@ -813,7 +813,7 @@ public class RamanStyleKit : NSObject {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 44, height: 44), false, 0)
             RamanStyleKit.drawBw0()
 
-        Cache.imageOfBw0 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImageWithCapInsets(UIEdgeInsetsZero, resizingMode: .Tile)
+        Cache.imageOfBw0 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
         UIGraphicsEndImageContext()
 
         return Cache.imageOfBw0!
@@ -827,7 +827,7 @@ public class RamanStyleKit : NSObject {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 44, height: 44), false, 0)
             RamanStyleKit.drawBw2()
 
-        Cache.imageOfBw2 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImageWithCapInsets(UIEdgeInsetsZero, resizingMode: .Tile)
+        Cache.imageOfBw2 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
         UIGraphicsEndImageContext()
 
         return Cache.imageOfBw2!
@@ -841,7 +841,7 @@ public class RamanStyleKit : NSObject {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 44, height: 44), false, 0)
             RamanStyleKit.drawBw1()
 
-        Cache.imageOfBw1 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImageWithCapInsets(UIEdgeInsetsZero, resizingMode: .Tile)
+        Cache.imageOfBw1 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
         UIGraphicsEndImageContext()
 
         return Cache.imageOfBw1!
@@ -855,7 +855,7 @@ public class RamanStyleKit : NSObject {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 44, height: 44), false, 0)
             RamanStyleKit.drawBw3()
 
-        Cache.imageOfBw3 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImageWithCapInsets(UIEdgeInsetsZero, resizingMode: .Tile)
+        Cache.imageOfBw3 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
         UIGraphicsEndImageContext()
 
         return Cache.imageOfBw3!
@@ -869,7 +869,7 @@ public class RamanStyleKit : NSObject {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 34, height: 34), false, 0)
             RamanStyleKit.drawSpectro()
 
-        Cache.imageOfSpectro = UIGraphicsGetImageFromCurrentImageContext()!
+        Cache.imageOfSpectro = UIGraphicsGetImageFromCurrentImageContext()!.withRenderingMode(.alwaysOriginal)
         UIGraphicsEndImageContext()
 
         return Cache.imageOfSpectro!
@@ -883,7 +883,7 @@ public class RamanStyleKit : NSObject {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 34, height: 34), false, 0)
             RamanStyleKit.drawSpectroSelected()
 
-        Cache.imageOfSpectroSelected = UIGraphicsGetImageFromCurrentImageContext()!
+        Cache.imageOfSpectroSelected = UIGraphicsGetImageFromCurrentImageContext()!.withRenderingMode(.alwaysOriginal)
         UIGraphicsEndImageContext()
 
         return Cache.imageOfSpectroSelected!
@@ -897,7 +897,7 @@ public class RamanStyleKit : NSObject {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 34, height: 34), false, 0)
             RamanStyleKit.drawBandwidth()
 
-        Cache.imageOfBandwidth = UIGraphicsGetImageFromCurrentImageContext()!
+        Cache.imageOfBandwidth = UIGraphicsGetImageFromCurrentImageContext()!.withRenderingMode(.alwaysOriginal)
         UIGraphicsEndImageContext()
 
         return Cache.imageOfBandwidth!
@@ -911,7 +911,7 @@ public class RamanStyleKit : NSObject {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 34, height: 34), false, 0)
             RamanStyleKit.drawBandwidthSelected()
 
-        Cache.imageOfBandwidthSelected = UIGraphicsGetImageFromCurrentImageContext()!
+        Cache.imageOfBandwidthSelected = UIGraphicsGetImageFromCurrentImageContext()!.withRenderingMode(.alwaysOriginal)
         UIGraphicsEndImageContext()
 
         return Cache.imageOfBandwidthSelected!
@@ -924,7 +924,7 @@ public class RamanStyleKit : NSObject {
         set {
             Cache.spectro0Targets = newValue
             for target: AnyObject in newValue {
-                target.performSelector(NSSelectorFromString("setImage:"), withObject: RamanStyleKit.imageOfSpectro0)
+                let _ = target.perform(NSSelectorFromString("setImage:"), with: RamanStyleKit.imageOfSpectro0)
             }
         }
     }
@@ -934,7 +934,7 @@ public class RamanStyleKit : NSObject {
         set {
             Cache.spectro1Targets = newValue
             for target: AnyObject in newValue {
-                target.performSelector(NSSelectorFromString("setImage:"), withObject: RamanStyleKit.imageOfSpectro1)
+                let _ = target.perform(NSSelectorFromString("setImage:"), with: RamanStyleKit.imageOfSpectro1)
             }
         }
     }
@@ -944,7 +944,7 @@ public class RamanStyleKit : NSObject {
         set {
             Cache.spectro2Targets = newValue
             for target: AnyObject in newValue {
-                target.performSelector(NSSelectorFromString("setImage:"), withObject: RamanStyleKit.imageOfSpectro2)
+                let _ = target.perform(NSSelectorFromString("setImage:"), with: RamanStyleKit.imageOfSpectro2)
             }
         }
     }
@@ -954,7 +954,7 @@ public class RamanStyleKit : NSObject {
         set {
             Cache.spectro3Targets = newValue
             for target: AnyObject in newValue {
-                target.performSelector(NSSelectorFromString("setImage:"), withObject: RamanStyleKit.imageOfSpectro3)
+                let _ = target.perform(NSSelectorFromString("setImage:"), with: RamanStyleKit.imageOfSpectro3)
             }
         }
     }
@@ -964,7 +964,7 @@ public class RamanStyleKit : NSObject {
         set {
             Cache.spectro4Targets = newValue
             for target: AnyObject in newValue {
-                target.performSelector(NSSelectorFromString("setImage:"), withObject: RamanStyleKit.imageOfSpectro4)
+                let _ = target.perform(NSSelectorFromString("setImage:"), with: RamanStyleKit.imageOfSpectro4)
             }
         }
     }
@@ -974,7 +974,7 @@ public class RamanStyleKit : NSObject {
         set {
             Cache.bw0Targets = newValue
             for target: AnyObject in newValue {
-                target.performSelector(NSSelectorFromString("setImage:"), withObject: RamanStyleKit.imageOfBw0)
+                let _ = target.perform(NSSelectorFromString("setImage:"), with: RamanStyleKit.imageOfBw0)
             }
         }
     }
@@ -984,7 +984,7 @@ public class RamanStyleKit : NSObject {
         set {
             Cache.bw2Targets = newValue
             for target: AnyObject in newValue {
-                target.performSelector(NSSelectorFromString("setImage:"), withObject: RamanStyleKit.imageOfBw2)
+                let _ = target.perform(NSSelectorFromString("setImage:"), with: RamanStyleKit.imageOfBw2)
             }
         }
     }
@@ -994,7 +994,7 @@ public class RamanStyleKit : NSObject {
         set {
             Cache.bw1Targets = newValue
             for target: AnyObject in newValue {
-                target.performSelector(NSSelectorFromString("setImage:"), withObject: RamanStyleKit.imageOfBw1)
+                let _ = target.perform(NSSelectorFromString("setImage:"), with: RamanStyleKit.imageOfBw1)
             }
         }
     }
@@ -1004,7 +1004,7 @@ public class RamanStyleKit : NSObject {
         set {
             Cache.bw3Targets = newValue
             for target: AnyObject in newValue {
-                target.performSelector(NSSelectorFromString("setImage:"), withObject: RamanStyleKit.imageOfBw3)
+                let _ = target.perform(NSSelectorFromString("setImage:"), with: RamanStyleKit.imageOfBw3)
             }
         }
     }
@@ -1014,7 +1014,7 @@ public class RamanStyleKit : NSObject {
         set {
             Cache.spectroTargets = newValue
             for target: AnyObject in newValue {
-                target.performSelector(NSSelectorFromString("setImage:"), withObject: RamanStyleKit.imageOfSpectro)
+                let _ = target.perform(NSSelectorFromString("setImage:"), with: RamanStyleKit.imageOfSpectro)
             }
         }
     }
@@ -1024,7 +1024,7 @@ public class RamanStyleKit : NSObject {
         set {
             Cache.spectroSelectedTargets = newValue
             for target: AnyObject in newValue {
-                target.performSelector(NSSelectorFromString("setSelectedImage:"), withObject: RamanStyleKit.imageOfSpectroSelected)
+                let _ = target.perform(NSSelectorFromString("setSelectedImage:"), with: RamanStyleKit.imageOfSpectroSelected)
             }
         }
     }
@@ -1034,7 +1034,7 @@ public class RamanStyleKit : NSObject {
         set {
             Cache.bandwidthTargets = newValue
             for target: AnyObject in newValue {
-                target.performSelector(NSSelectorFromString("setImage:"), withObject: RamanStyleKit.imageOfBandwidth)
+                let _ = target.perform(NSSelectorFromString("setImage:"), with: RamanStyleKit.imageOfBandwidth)
             }
         }
     }
@@ -1044,7 +1044,7 @@ public class RamanStyleKit : NSObject {
         set {
             Cache.bandwidthSelectedTargets = newValue
             for target: AnyObject in newValue {
-                target.performSelector(NSSelectorFromString("setSelectedImage:"), withObject: RamanStyleKit.imageOfBandwidthSelected)
+                let _ = target.perform(NSSelectorFromString("setSelectedImage:"), with: RamanStyleKit.imageOfBandwidthSelected)
             }
         }
     }
@@ -1053,12 +1053,12 @@ public class RamanStyleKit : NSObject {
 
 
     @objc public enum ResizingBehavior: Int {
-        case AspectFit /// The content is proportionally resized to fit into the target rectangle.
-        case AspectFill /// The content is proportionally resized to completely fill the target rectangle.
-        case Stretch /// The content is stretched to match the entire target rectangle.
-        case Center /// The content is centered in the target rectangle, but it is NOT resized.
+        case aspectFit /// The content is proportionally resized to fit into the target rectangle.
+        case aspectFill /// The content is proportionally resized to completely fill the target rectangle.
+        case stretch /// The content is stretched to match the entire target rectangle.
+        case center /// The content is centered in the target rectangle, but it is NOT resized.
 
-        public func apply(rect rect: CGRect, target: CGRect) -> CGRect {
+        public func apply(rect: CGRect, target: CGRect) -> CGRect {
             if rect == target || target == CGRect.zero {
                 return rect
             }
@@ -1068,15 +1068,15 @@ public class RamanStyleKit : NSObject {
             scales.height = abs(target.height / rect.height)
 
             switch self {
-                case .AspectFit:
+                case .aspectFit:
                     scales.width = min(scales.width, scales.height)
                     scales.height = scales.width
-                case .AspectFill:
+                case .aspectFill:
                     scales.width = max(scales.width, scales.height)
                     scales.height = scales.width
-                case .Stretch:
+                case .stretch:
                     break
-                case .Center:
+                case .center:
                     scales.width = 1
                     scales.height = 1
             }
@@ -1094,32 +1094,32 @@ public class RamanStyleKit : NSObject {
 
 
 extension UIColor {
-    func colorWithHue(newHue: CGFloat) -> UIColor {
+    func withHue(_ newHue: CGFloat) -> UIColor {
         var saturation: CGFloat = 1, brightness: CGFloat = 1, alpha: CGFloat = 1
         self.getHue(nil, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         return UIColor(hue: newHue, saturation: saturation, brightness: brightness, alpha: alpha)
     }
-    func colorWithSaturation(newSaturation: CGFloat) -> UIColor {
+    func withSaturation(_ newSaturation: CGFloat) -> UIColor {
         var hue: CGFloat = 1, brightness: CGFloat = 1, alpha: CGFloat = 1
         self.getHue(&hue, saturation: nil, brightness: &brightness, alpha: &alpha)
         return UIColor(hue: hue, saturation: newSaturation, brightness: brightness, alpha: alpha)
     }
-    func colorWithBrightness(newBrightness: CGFloat) -> UIColor {
+    func withBrightness(_ newBrightness: CGFloat) -> UIColor {
         var hue: CGFloat = 1, saturation: CGFloat = 1, alpha: CGFloat = 1
         self.getHue(&hue, saturation: &saturation, brightness: nil, alpha: &alpha)
         return UIColor(hue: hue, saturation: saturation, brightness: newBrightness, alpha: alpha)
     }
-    func colorWithAlpha(newAlpha: CGFloat) -> UIColor {
+    func withAlpha(_ newAlpha: CGFloat) -> UIColor {
         var hue: CGFloat = 1, saturation: CGFloat = 1, brightness: CGFloat = 1
         self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: nil)
         return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: newAlpha)
     }
-    func colorWithHighlight(highlight: CGFloat) -> UIColor {
+    func highlight(withLevel highlight: CGFloat) -> UIColor {
         var red: CGFloat = 1, green: CGFloat = 1, blue: CGFloat = 1, alpha: CGFloat = 1
         self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         return UIColor(red: red * (1-highlight) + highlight, green: green * (1-highlight) + highlight, blue: blue * (1-highlight) + highlight, alpha: alpha * (1-highlight) + highlight)
     }
-    func colorWithShadow(shadow: CGFloat) -> UIColor {
+    func shadow(withLevel shadow: CGFloat) -> UIColor {
         var red: CGFloat = 1, green: CGFloat = 1, blue: CGFloat = 1, alpha: CGFloat = 1
         self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         return UIColor(red: red * (1-shadow), green: green * (1-shadow), blue: blue * (1-shadow), alpha: alpha * (1-shadow) + shadow)
