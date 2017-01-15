@@ -14,6 +14,9 @@ class BWCell: UITableViewCell {
     
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var dataLabel: UILabel!
+    @IBOutlet weak var unitsLabel: UILabel!
+    @IBOutlet weak var exponentLabel: UILabel!
+    @IBOutlet weak var dataImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,6 +27,10 @@ class BWCell: UITableViewCell {
         valueLabel.textColor = Theme.Colors.lightTextColor.color
         dataLabel.font = Theme.Fonts.detailTextFont.font
         dataLabel.textColor = Theme.Colors.lightTextColor.color
+        unitsLabel.textColor = Theme.Colors.lightTextColor.color
+        unitsLabel.font = Theme.Fonts.detailTextFont.font
+        exponentLabel.textColor = Theme.Colors.lightTextColor.color
+        exponentLabel.font = Theme.Fonts.detailTextFont.font
         
         // make the separator go all the way to the left edge
         separatorInset = UIEdgeInsets.zero

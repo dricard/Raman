@@ -29,8 +29,6 @@ class DataCell: UITableViewCell {
         // make the separator go all the way to the left edge
         separatorInset = UIEdgeInsets.zero
         layoutMargins = UIEdgeInsets.zero
-        
-        
-        
+                
     }
 }

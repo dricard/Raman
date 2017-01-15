@@ -28,10 +28,11 @@ struct Constants {
     
     static let ramanShift = ["Excitation wavelenth (nm)", "Signal wavelength (nm)", "Raman shift (cm-1)", "Raman shift (GHz)", "Raman shift (meV)"]
     
-    static let ramanBandwidth = ["Wavelength (nm)", "Bandwidth (cm-1)", "Bandwidth (GHz)", "Bandwidth (nm)"]
+    static let ramanBandwidth = ["Wavelength", "Bandwidth", "Bandwidth", "Bandwidth"]
     
     static let specUnits = ["nm", "nm", "cm-1", "GHz", "MeV"]
     static let bwUnits = ["nm", "cm-1", "GHz", "nm"]
+    static let bwEpx = ["", "-1", "", ""]
 
     static let specRounding = [".2", ".2", ".4", ".2", ".5" ]
     static let bwRounding = [".2", ".4", ".2", ".2" ]

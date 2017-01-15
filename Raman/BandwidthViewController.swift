@@ -44,21 +44,45 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
     
 // MARK: Table delegates
     
+    func configureCell(cell: BWCell, indexPath: IndexPath) {
+        cell.valueLabel!.text = modelData.spectro.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
+        cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
+        switch indexPath.row {
+        case 0:
+            cell.dataImageView?.image = RamanStyleKit.imageOfBw0
+            cell.unitsLabel.text = "nm"
+            cell.exponentLabel.text = ""
+        case 1:
+            cell.dataImageView?.image = RamanStyleKit.imageOfBw1
+            cell.unitsLabel.text = "cm"
+            cell.exponentLabel.text = "-1"
+        case 2:
+            cell.dataImageView?.image = RamanStyleKit.imageOfBw2
+            cell.unitsLabel.text = "GHz"
+            cell.exponentLabel.text = ""
+        case 3:
+            cell.dataImageView?.image = RamanStyleKit.imageOfBw3
+            cell.unitsLabel.text = "nm"
+            cell.exponentLabel.text = ""
+        default:
+            cell.dataImageView?.image = RamanStyleKit.imageOfBw0
+            cell.unitsLabel.text = "nm"
+            cell.exponentLabel.text = ""
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.ramanBandwidth.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(66)
+        return CGFloat(70)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellBW", for: indexPath) as! BWCell
         
-        cell.valueLabel!.text = modelData.spectro.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
-        cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
-
-        cell.imageView?.image = UIImage(named: "bw\(indexPath.row)")
+        configureCell(cell: cell, indexPath: indexPath)
         
         return cell
     }
