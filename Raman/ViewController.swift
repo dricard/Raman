@@ -76,21 +76,49 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: - Tableview delegates
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(66)
+        return CGFloat(70)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.ramanShift.count
     }
     
+    func configureCell(cell: DataCell, indexPath: IndexPath) {
+        cell.valueLabel!.text = modelData.spectro.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
+        cell.dataLabel?.text = Constants.ramanShift[indexPath.row]
+        switch indexPath.row {
+        case 0:
+            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro0
+            cell.unitsLabel.text = "nm"
+            cell.exponentsLabel.text = ""
+        case 1:
+            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro1
+            cell.unitsLabel.text = "nm"
+            cell.exponentsLabel.text = ""
+        case 2:
+            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro2
+            cell.unitsLabel.text = "cm"
+            cell.exponentsLabel.text = "-1"
+        case 3:
+            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro3
+            cell.unitsLabel.text = "GHz"
+            cell.exponentsLabel.text = ""
+        case 4:
+            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro4
+            cell.unitsLabel.text = "meV"
+            cell.exponentsLabel.text = ""
+        default:
+            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro0
+            cell.unitsLabel.text = "nm"
+            cell.exponentsLabel.text = ""
+        }
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: DataCell.reuseIdentifier) as! DataCell
 
-        cell.textLabel!.text = modelData.spectro.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
-        cell.detailTextLabel?.text = Constants.ramanShift[indexPath.row]
-
-        cell.imageView?.image = UIImage(named: "spectro\(indexPath.row)")
+        configureCell(cell: cell, indexPath: indexPath)
         
         return cell
     }

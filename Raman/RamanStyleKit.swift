@@ -55,22 +55,22 @@ public class RamanStyleKit : NSObject {
 
     //// Drawing Methods
 
-    public dynamic class func drawSpectro0(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 44, height: 44), resizing: ResizingBehavior = .aspectFit) {
+    public dynamic class func drawSpectro0(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
         //// Resize to Target Frame
         context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 44, height: 44), target: targetFrame)
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 60, height: 60), target: targetFrame)
         context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 44, y: resizedFrame.height / 44)
+        context.scaleBy(x: resizedFrame.width / 60, y: resizedFrame.height / 60)
 
 
         //// Color Declarations
         let main = UIColor(red: 0.212, green: 0.522, blue: 0.702, alpha: 1.000)
 
         //// Rectangle Drawing
-        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 40, height: 40), cornerRadius: 6)
+        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 6)
         RamanStyleKit.backgroundColor.setFill()
         rectanglePath.fill()
         main.setStroke()
@@ -79,11 +79,11 @@ public class RamanStyleKit : NSObject {
 
 
         //// Text Drawing
-        let textRect = CGRect(x: 3, y: 9, width: 38, height: 15)
+        let textRect = CGRect(x: 5, y: 9, width: 50, height: 34)
         let textTextContent = "Laser"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -93,7 +93,7 @@ public class RamanStyleKit : NSObject {
 
 
         //// Text 2 Drawing
-        let text2Rect = CGRect(x: 3, y: 24, width: 38, height: 9)
+        let text2Rect = CGRect(x: 11, y: 43, width: 38, height: 9)
         let text2TextContent = "nm"
         let text2Style = NSMutableParagraphStyle()
         text2Style.alignment = .center
@@ -109,22 +109,22 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawSpectro1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 44, height: 44), resizing: ResizingBehavior = .aspectFit) {
+    public dynamic class func drawSpectro1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
         //// Resize to Target Frame
         context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 44, height: 44), target: targetFrame)
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 60, height: 60), target: targetFrame)
         context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 44, y: resizedFrame.height / 44)
+        context.scaleBy(x: resizedFrame.width / 60, y: resizedFrame.height / 60)
 
 
         //// Color Declarations
         let main = UIColor(red: 0.212, green: 0.522, blue: 0.702, alpha: 1.000)
 
         //// Rectangle Drawing
-        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 40, height: 40), cornerRadius: 6)
+        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 6)
         RamanStyleKit.backgroundColor.setFill()
         rectanglePath.fill()
         main.setStroke()
@@ -133,11 +133,11 @@ public class RamanStyleKit : NSObject {
 
 
         //// Text Drawing
-        let textRect = CGRect(x: 3, y: 9, width: 38, height: 15)
+        let textRect = CGRect(x: 5, y: 9, width: 50, height: 34)
         let textTextContent = "Signal"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 16), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -147,7 +147,7 @@ public class RamanStyleKit : NSObject {
 
 
         //// Text 2 Drawing
-        let text2Rect = CGRect(x: 3, y: 24, width: 38, height: 9)
+        let text2Rect = CGRect(x: 11, y: 43, width: 38, height: 9)
         let text2TextContent = "nm"
         let text2Style = NSMutableParagraphStyle()
         text2Style.alignment = .center
@@ -163,22 +163,22 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawSpectro2(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 44, height: 44), resizing: ResizingBehavior = .aspectFit) {
+    public dynamic class func drawSpectro2(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
         //// Resize to Target Frame
         context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 44, height: 44), target: targetFrame)
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 60, height: 60), target: targetFrame)
         context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 44, y: resizedFrame.height / 44)
+        context.scaleBy(x: resizedFrame.width / 60, y: resizedFrame.height / 60)
 
 
         //// Color Declarations
         let main = UIColor(red: 0.212, green: 0.522, blue: 0.702, alpha: 1.000)
 
         //// Rectangle Drawing
-        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 40, height: 40), cornerRadius: 6)
+        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 6)
         RamanStyleKit.backgroundColor.setFill()
         rectanglePath.fill()
         main.setStroke()
@@ -187,11 +187,11 @@ public class RamanStyleKit : NSObject {
 
 
         //// Text Drawing
-        let textRect = CGRect(x: 3, y: 8, width: 38, height: 15)
+        let textRect = CGRect(x: 5, y: 9, width: 50, height: 34)
         let textTextContent = "Δω"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -201,7 +201,7 @@ public class RamanStyleKit : NSObject {
 
 
         //// Text 2 Drawing
-        let text2Rect = CGRect(x: 3, y: 24, width: 34, height: 9)
+        let text2Rect = CGRect(x: 11, y: 43, width: 38, height: 9)
         let text2TextContent = "cm  "
         let text2Style = NSMutableParagraphStyle()
         text2Style.alignment = .center
@@ -215,7 +215,7 @@ public class RamanStyleKit : NSObject {
 
 
         //// Text 3 Drawing
-        let text3Rect = CGRect(x: 27, y: 23, width: 10, height: 6)
+        let text3Rect = CGRect(x: 36, y: 40, width: 10, height: 6)
         let text3TextContent = "-1"
         let text3Style = NSMutableParagraphStyle()
         text3Style.alignment = .center
@@ -231,22 +231,22 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawSpectro3(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 44, height: 44), resizing: ResizingBehavior = .aspectFit) {
+    public dynamic class func drawSpectro3(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
         //// Resize to Target Frame
         context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 44, height: 44), target: targetFrame)
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 60, height: 60), target: targetFrame)
         context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 44, y: resizedFrame.height / 44)
+        context.scaleBy(x: resizedFrame.width / 60, y: resizedFrame.height / 60)
 
 
         //// Color Declarations
         let main = UIColor(red: 0.212, green: 0.522, blue: 0.702, alpha: 1.000)
 
         //// Rectangle Drawing
-        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 40, height: 40), cornerRadius: 6)
+        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 6)
         RamanStyleKit.backgroundColor.setFill()
         rectanglePath.fill()
         main.setStroke()
@@ -255,11 +255,11 @@ public class RamanStyleKit : NSObject {
 
 
         //// Text Drawing
-        let textRect = CGRect(x: 3, y: 8, width: 38, height: 15)
+        let textRect = CGRect(x: 5, y: 9, width: 50, height: 34)
         let textTextContent = "Δω"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -269,7 +269,7 @@ public class RamanStyleKit : NSObject {
 
 
         //// Text 2 Drawing
-        let text2Rect = CGRect(x: 3, y: 24, width: 38, height: 11)
+        let text2Rect = CGRect(x: 11, y: 43, width: 38, height: 10)
         let text2TextContent = "GHz"
         let text2Style = NSMutableParagraphStyle()
         text2Style.alignment = .center
@@ -285,22 +285,22 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawSpectro4(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 44, height: 44), resizing: ResizingBehavior = .aspectFit) {
+    public dynamic class func drawSpectro4(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
         //// Resize to Target Frame
         context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 44, height: 44), target: targetFrame)
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 60, height: 60), target: targetFrame)
         context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 44, y: resizedFrame.height / 44)
+        context.scaleBy(x: resizedFrame.width / 60, y: resizedFrame.height / 60)
 
 
         //// Color Declarations
         let main = UIColor(red: 0.212, green: 0.522, blue: 0.702, alpha: 1.000)
 
         //// Rectangle Drawing
-        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 40, height: 40), cornerRadius: 6)
+        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 6)
         RamanStyleKit.backgroundColor.setFill()
         rectanglePath.fill()
         main.setStroke()
@@ -309,11 +309,11 @@ public class RamanStyleKit : NSObject {
 
 
         //// Text Drawing
-        let textRect = CGRect(x: 3, y: 8, width: 38, height: 15)
+        let textRect = CGRect(x: 5, y: 9, width: 50, height: 34)
         let textTextContent = "Δω"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -323,7 +323,7 @@ public class RamanStyleKit : NSObject {
 
 
         //// Text 2 Drawing
-        let text2Rect = CGRect(x: 3, y: 23, width: 38, height: 13)
+        let text2Rect = CGRect(x: 11, y: 43, width: 38, height: 9)
         let text2TextContent = "meV"
         let text2Style = NSMutableParagraphStyle()
         text2Style.alignment = .center
@@ -859,7 +859,7 @@ public class RamanStyleKit : NSObject {
             return Cache.imageOfSpectro0!
         }
 
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 44, height: 44), false, 0)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 60, height: 60), false, 0)
             RamanStyleKit.drawSpectro0()
 
         Cache.imageOfSpectro0 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
@@ -873,7 +873,7 @@ public class RamanStyleKit : NSObject {
             return Cache.imageOfSpectro1!
         }
 
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 44, height: 44), false, 0)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 60, height: 60), false, 0)
             RamanStyleKit.drawSpectro1()
 
         Cache.imageOfSpectro1 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
@@ -887,7 +887,7 @@ public class RamanStyleKit : NSObject {
             return Cache.imageOfSpectro2!
         }
 
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 44, height: 44), false, 0)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 60, height: 60), false, 0)
             RamanStyleKit.drawSpectro2()
 
         Cache.imageOfSpectro2 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
@@ -901,7 +901,7 @@ public class RamanStyleKit : NSObject {
             return Cache.imageOfSpectro3!
         }
 
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 44, height: 44), false, 0)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 60, height: 60), false, 0)
             RamanStyleKit.drawSpectro3()
 
         Cache.imageOfSpectro3 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)
@@ -915,7 +915,7 @@ public class RamanStyleKit : NSObject {
             return Cache.imageOfSpectro4!
         }
 
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 44, height: 44), false, 0)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 60, height: 60), false, 0)
             RamanStyleKit.drawSpectro4()
 
         Cache.imageOfSpectro4 = UIGraphicsGetImageFromCurrentImageContext()!.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .tile)

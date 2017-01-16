@@ -26,7 +26,7 @@ struct Constants {
     static let bwNmIndex = 3
     
     
-    static let ramanShift = ["Excitation wavelenth (nm)", "Signal wavelength (nm)", "Raman shift (cm-1)", "Raman shift (GHz)", "Raman shift (meV)"]
+    static let ramanShift = ["Excitation wavelenth", "Signal wavelength", "Raman shift", "Raman shift", "Raman shift"]
     
     static let ramanBandwidth = ["Wavelength", "Bandwidth", "Bandwidth", "Bandwidth"]
     
