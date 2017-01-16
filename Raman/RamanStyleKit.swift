@@ -18,7 +18,7 @@ public class RamanStyleKit : NSObject {
     //// Cache
 
     private struct Cache {
-        static let backgroundColor: UIColor = UIColor(red: 0.361, green: 0.788, blue: 0.961, alpha: 1.000)
+        static let backgroundColorSelected: UIColor = UIColor(red: 0.361, green: 0.788, blue: 0.961, alpha: 1.000)
         static var imageOfSpectro0: UIImage?
         static var spectro0Targets: [AnyObject]?
         static var imageOfSpectro1: UIImage?
@@ -51,7 +51,7 @@ public class RamanStyleKit : NSObject {
 
     //// Colors
 
-    public dynamic class var backgroundColor: UIColor { return Cache.backgroundColor }
+    public dynamic class var backgroundColorSelected: UIColor { return Cache.backgroundColorSelected }
 
     //// Drawing Methods
 
@@ -71,7 +71,7 @@ public class RamanStyleKit : NSObject {
 
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 6)
-        RamanStyleKit.backgroundColor.setFill()
+        RamanStyleKit.backgroundColorSelected.setFill()
         rectanglePath.fill()
         main.setStroke()
         rectanglePath.lineWidth = 2
@@ -125,7 +125,7 @@ public class RamanStyleKit : NSObject {
 
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 6)
-        RamanStyleKit.backgroundColor.setFill()
+        RamanStyleKit.backgroundColorSelected.setFill()
         rectanglePath.fill()
         main.setStroke()
         rectanglePath.lineWidth = 2
@@ -179,7 +179,7 @@ public class RamanStyleKit : NSObject {
 
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 6)
-        RamanStyleKit.backgroundColor.setFill()
+        RamanStyleKit.backgroundColorSelected.setFill()
         rectanglePath.fill()
         main.setStroke()
         rectanglePath.lineWidth = 2
@@ -247,7 +247,7 @@ public class RamanStyleKit : NSObject {
 
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 6)
-        RamanStyleKit.backgroundColor.setFill()
+        RamanStyleKit.backgroundColorSelected.setFill()
         rectanglePath.fill()
         main.setStroke()
         rectanglePath.lineWidth = 2
@@ -301,7 +301,7 @@ public class RamanStyleKit : NSObject {
 
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 6)
-        RamanStyleKit.backgroundColor.setFill()
+        RamanStyleKit.backgroundColorSelected.setFill()
         rectanglePath.fill()
         main.setStroke()
         rectanglePath.lineWidth = 2
@@ -355,7 +355,7 @@ public class RamanStyleKit : NSObject {
 
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 6)
-        RamanStyleKit.backgroundColor.setFill()
+        RamanStyleKit.backgroundColorSelected.setFill()
         rectanglePath.fill()
         main.setStroke()
         rectanglePath.lineWidth = 2
@@ -409,7 +409,7 @@ public class RamanStyleKit : NSObject {
 
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 6)
-        RamanStyleKit.backgroundColor.setFill()
+        RamanStyleKit.backgroundColorSelected.setFill()
         rectanglePath.fill()
         main.setStroke()
         rectanglePath.lineWidth = 2
@@ -463,7 +463,7 @@ public class RamanStyleKit : NSObject {
 
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 6)
-        RamanStyleKit.backgroundColor.setFill()
+        RamanStyleKit.backgroundColorSelected.setFill()
         rectanglePath.fill()
         main.setStroke()
         rectanglePath.lineWidth = 2
@@ -531,7 +531,7 @@ public class RamanStyleKit : NSObject {
 
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2, y: 2, width: 56, height: 56), cornerRadius: 6)
-        RamanStyleKit.backgroundColor.setFill()
+        RamanStyleKit.backgroundColorSelected.setFill()
         rectanglePath.fill()
         main.setStroke()
         rectanglePath.lineWidth = 2
@@ -581,6 +581,7 @@ public class RamanStyleKit : NSObject {
 
 
         //// Color Declarations
+        let backgroundColor = RamanStyleKit.backgroundColorSelected.withAlpha(0.1)
         let main = UIColor(red: 0.212, green: 0.522, blue: 0.702, alpha: 1.000)
         let color = main.highlight(withLevel: 0.2)
         let signalColor = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1.000)
@@ -588,7 +589,7 @@ public class RamanStyleKit : NSObject {
 
         //// Rectangle 2 Drawing
         let rectangle2Path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 34, height: 34), cornerRadius: 3)
-        RamanStyleKit.backgroundColor.setFill()
+        backgroundColor.setFill()
         rectangle2Path.fill()
 
 
@@ -628,6 +629,15 @@ public class RamanStyleKit : NSObject {
         color.setStroke()
         bezier2Path.lineWidth = 1
         bezier2Path.stroke()
+
+
+        //// Rectangle 3 Drawing
+        let rectangle3Path = UIBezierPath(roundedRect: CGRect(x: 0.5, y: 0.5, width: 33, height: 33), cornerRadius: 3)
+        backgroundColor.setFill()
+        rectangle3Path.fill()
+        color2.setStroke()
+        rectangle3Path.lineWidth = 1
+        rectangle3Path.stroke()
         
         context.restoreGState()
 
@@ -645,7 +655,6 @@ public class RamanStyleKit : NSObject {
 
 
         //// Color Declarations
-        let backgroundSelected = RamanStyleKit.backgroundColor.withHue(0.1)
         let main = UIColor(red: 0.212, green: 0.522, blue: 0.702, alpha: 1.000)
         let color = main.highlight(withLevel: 0.2)
         let signalColor = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1.000)
@@ -653,7 +662,7 @@ public class RamanStyleKit : NSObject {
 
         //// Rectangle 2 Drawing
         let rectangle2Path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 34, height: 34), cornerRadius: 3)
-        backgroundSelected.setFill()
+        RamanStyleKit.backgroundColorSelected.setFill()
         rectangle2Path.fill()
 
 
@@ -710,13 +719,14 @@ public class RamanStyleKit : NSObject {
 
 
         //// Color Declarations
+        let backgroundColor = RamanStyleKit.backgroundColorSelected.withAlpha(0.1)
         let main = UIColor(red: 0.212, green: 0.522, blue: 0.702, alpha: 1.000)
         let signalColor = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1.000)
         let color2 = signalColor.shadow(withLevel: 0.6)
 
         //// Rectangle 2 Drawing
         let rectangle2Path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 34, height: 34), cornerRadius: 3)
-        RamanStyleKit.backgroundColor.setFill()
+        backgroundColor.setFill()
         rectangle2Path.fill()
 
 
@@ -756,6 +766,15 @@ public class RamanStyleKit : NSObject {
         bezier2Path.lineWidth = 1
         bezier2Path.lineJoinStyle = .round
         bezier2Path.stroke()
+
+
+        //// Rectangle 3 Drawing
+        let rectangle3Path = UIBezierPath(roundedRect: CGRect(x: 0.5, y: 0.5, width: 33, height: 33), cornerRadius: 3)
+        backgroundColor.setFill()
+        rectangle3Path.fill()
+        color2.setStroke()
+        rectangle3Path.lineWidth = 1
+        rectangle3Path.stroke()
         
         context.restoreGState()
 
@@ -773,14 +792,13 @@ public class RamanStyleKit : NSObject {
 
 
         //// Color Declarations
-        let backgroundSelected = RamanStyleKit.backgroundColor.withHue(0.1)
         let main = UIColor(red: 0.212, green: 0.522, blue: 0.702, alpha: 1.000)
         let signalColor = UIColor(red: 1.000, green: 0.000, blue: 0.000, alpha: 1.000)
         let color2 = signalColor.shadow(withLevel: 0.6)
 
         //// Rectangle 2 Drawing
         let rectangle2Path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 34, height: 34), cornerRadius: 3)
-        backgroundSelected.setFill()
+        RamanStyleKit.backgroundColorSelected.setFill()
         rectangle2Path.fill()
 
 
