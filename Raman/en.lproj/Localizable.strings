@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  Raman
+
+  Created by Denis Ricard on 2017-01-15.
+  Copyright © 2017 Hexaedre. All rights reserved.
+*/
+
+"Excitation wavelength" = "Excitation wavelength";
+"Signal wavelength" = "Signal wavelength";
+"Raman shift" = "Raman shift";
+"About" = "About";
+"Wavelength" = "Wavelength";
+"Bandwidth" = "Bandwidth";
+"About Raman" = "About Raman";
+"is made by" = "is made by";
+"Based on an original idea by" = "Based on an original idea by";
+"Special thanks to" = "Special thanks to";
+"Help" = "Help";
+"Support" = "Support";
+"Enter a new value for" = "Enter a new value for";
+"Current value" = "Current value";
+"Cancel" = "Cancel";
+"changeExcitationText" = "Changing the excitation wavelength will modify the signal based on the current Raman shift.";
+"changeSignalText" = "Changing the signal wavelength will modify the Raman shift based on the current excitation.";
+"changeShiftText" = "Changing the Raman shift value will modify the signal based on the current excitation.";
+"changeExcitationBWText" = "Changing the excitation wavelength used for bandwidth calculations will modify the Raman bandwidth values.";
+"changeBandwidthText" = "Changing the current Raman bandwidth value will modify the other two units values (using the current selected excitation wavelength).";

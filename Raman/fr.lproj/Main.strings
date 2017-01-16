@@ -1,0 +1,66 @@
+
+/* Class = "UINavigationItem"; title = "Bandwidth"; ObjectID = "07s-M6-dzt"; */
+"07s-M6-dzt.title" = "Bandwidth";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "0O0-Uo-fm9"; */
+"0O0-Uo-fm9.normalTitle" = "Cancel";
+
+/* Class = "UIButton"; normalTitle = "Help"; ObjectID = "7wb-Iw-9SU"; */
+"7wb-Iw-9SU.normalTitle" = "Help";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "AXl-DV-TsA"; */
+"AXl-DV-TsA.title" = "Done";
+
+/* Class = "UILabel"; text = "exp"; ObjectID = "DtG-T1-Opz"; */
+"DtG-T1-Opz.text" = "exp";
+
+/* Class = "UIButton"; normalTitle = "Support"; ObjectID = "EsQ-Gp-rxA"; */
+"EsQ-Gp-rxA.normalTitle" = "Support";
+
+/* Class = "UITabBarItem"; title = "Bandwidth"; ObjectID = "IFr-tf-drj"; */
+"IFr-tf-drj.title" = "Bandwidth";
+
+/* Class = "UIBarButtonItem"; title = "About"; ObjectID = "Lut-yW-VsL"; */
+"Lut-yW-VsL.title" = "About";
+
+/* Class = "UILabel"; text = "value label"; ObjectID = "Nh6-Sa-O68"; */
+"Nh6-Sa-O68.text" = "value label";
+
+/* Class = "UINavigationItem"; title = "Raman"; ObjectID = "PFG-Qa-reW"; */
+"PFG-Qa-reW.title" = "Raman";
+
+/* Class = "UILabel"; text = "Data Label"; ObjectID = "Qmk-1a-KIB"; */
+"Qmk-1a-KIB.text" = "Data Label";
+
+/* Class = "UILabel"; text = "Raman"; ObjectID = "Rdq-QM-pcU"; */
+"Rdq-QM-pcU.text" = "Raman";
+
+/* Class = "UILabel"; text = "is made by"; ObjectID = "Rv1-Dg-N7b"; */
+"Rv1-Dg-N7b.text" = "is made by";
+
+/* Class = "UILabel"; text = "Value Label"; ObjectID = "Tap-eX-Sf5"; */
+"Tap-eX-Sf5.text" = "Value Label";
+
+/* Class = "UILabel"; text = "Changing the current Raman bandwidth value will modify the other two units values (using the current selected excitation wavelength)."; ObjectID = "WJq-Kr-vzx"; */
+"WJq-Kr-vzx.text" = "Changing the current Raman bandwidth value will modify the other two units values (using the current selected excitation wavelength).";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "YJl-IH-a9n"; */
+"YJl-IH-a9n.normalTitle" = "Button";
+
+/* Class = "UITabBarItem"; title = "Spectro"; ObjectID = "aJt-mM-klg"; */
+"aJt-mM-klg.title" = "Spectro";
+
+/* Class = "UILabel"; text = "unit"; ObjectID = "eXe-HP-kaC"; */
+"eXe-HP-kaC.text" = "unit";
+
+/* Class = "UILabel"; text = "exp"; ObjectID = "lg4-tM-a1v"; */
+"lg4-tM-a1v.text" = "exp";
+
+/* Class = "UIBarButtonItem"; title = "About"; ObjectID = "tYT-8f-4yy"; */
+"tYT-8f-4yy.title" = "About";
+
+/* Class = "UILabel"; text = "unit"; ObjectID = "wID-EY-isU"; */
+"wID-EY-isU.text" = "unit";
+
+/* Class = "UILabel"; text = "Data label"; ObjectID = "x3s-WO-d9z"; */
+"x3s-WO-d9z.text" = "Data label";

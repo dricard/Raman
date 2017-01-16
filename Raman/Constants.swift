@@ -26,9 +26,9 @@ struct Constants {
     static let bwNmIndex = 3
     
     
-    static let ramanShift = ["Excitation wavelenth", "Signal wavelength", "Raman shift", "Raman shift", "Raman shift"]
+    static let ramanShift: [String] = [ .excitationText, .signalText, .shiftText, .shiftText, .shiftText]
     
-    static let ramanBandwidth = ["Wavelength", "Bandwidth", "Bandwidth", "Bandwidth"]
+    static let ramanBandwidth: [String] = [ .wavelength, .bandwidth, .bandwidth, .bandwidth]
     
     static let specUnits = ["nm", "nm", "cm-1", "GHz", "MeV"]
     static let bwUnits = ["nm", "cm-1", "GHz", "nm"]
@@ -37,14 +37,7 @@ struct Constants {
     static let specRounding = [".2", ".2", ".4", ".2", ".5" ]
     static let bwRounding = [".2", ".4", ".2", ".2" ]
     
-    static let changeExcitationText = "Changing the excitation wavelength will modify the signal based on the current Raman shift."
-    static let changeSignalText = "Changing the signal wavelength will modify the Raman shift based on the current excitation."
-    static let changeShiftText = "Changing the Raman shift value will modify the signal based on the current excitation."
-    
-    static let specToolTip = [ changeExcitationText, changeSignalText, changeShiftText, changeShiftText, changeShiftText ]
-    
-    static let changeExcitationBWText = "Changing the excitation wavelength used for bandwidth calculations will modify the Raman bandwidth values."
-    static let changeBandwidthText = "Changing the current Raman bandwidth value will modify the other two units values (using the current selected excitation wavelength)."
+    static let specToolTip: [String] = [ .changeExcitationText, .changeSignalText, .changeShiftText, .changeShiftText, .changeShiftText ]
 
-    static let bwToolTip = [ changeExcitationBWText, changeBandwidthText, changeBandwidthText, changeBandwidthText]
+    static let bwToolTip: [String] = [ .changeExcitationBWText, .changeBandwidthText, .changeBandwidthText, .changeBandwidthText]
 }
