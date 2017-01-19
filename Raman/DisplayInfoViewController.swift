@@ -14,12 +14,25 @@ class DisplayInfoViewController: UIViewController {
     
     @IBOutlet weak var copyrightLabel: UILabel!
     @IBOutlet weak var versionNumberLabel: UILabel!
+    @IBOutlet weak var madeByLabel: UILabel!
+    @IBOutlet weak var ideaLabel: UILabel!
+    @IBOutlet weak var thanksLabel: UILabel!
+    @IBOutlet weak var helpButton: UIButton!
+    @IBOutlet weak var supportButton: UIButton!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = .aboutRaman
+        madeByLabel.text = .madeBy
+        ideaLabel.text = .ideaBy
+        thanksLabel.text = .thanksTo
+        helpButton.setTitle(.helpButton, for: .normal)
+        supportButton.setTitle(.supportButton, for: .normal)
+        doneButton.title = .doneButton
+
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             versionNumberLabel.text = "v. " + version
         }

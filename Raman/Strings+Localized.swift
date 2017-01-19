@@ -14,7 +14,16 @@ fileprivate func NSLocalizedString(_ key: String) -> String {
 
 extension String {
     static let about = NSLocalizedString("About")
+    
+    // MARK: - Info view
+    
     static let aboutRaman = NSLocalizedString("About Raman")
+    static let madeBy = NSLocalizedString("is made by")
+    static let ideaBy = NSLocalizedString("Based on an original idea by")
+    static let thanksTo = NSLocalizedString("Special thanks to")
+    static let helpButton = NSLocalizedString("Help")
+    static let supportButton = NSLocalizedString("Support")
+    static let doneButton = NSLocalizedString("Done")
     
     // MARK: - Spectro tableview
     static let excitationText = NSLocalizedString("Excitation wavelength")
