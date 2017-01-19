@@ -13,6 +13,7 @@ fileprivate func NSLocalizedString(_ key: String) -> String {
 }
 
 extension String {
+    
     static let about = NSLocalizedString("About")
     
     // MARK: - Info view
@@ -31,9 +32,16 @@ extension String {
     static let shiftText = NSLocalizedString("Raman shift")
 
     // MARK: - Bandwidth tableview
+    static let bandwidthTitle = NSLocalizedString("Bandwidth")
     static let wavelength = NSLocalizedString("Wavelength")
     static let bandwidth = NSLocalizedString("Bandwidth")
 
+    // MARK: - Edit value
+    
+    static let editValueLabel = NSLocalizedString("Edit value")
+    static let instructionLabel = NSLocalizedString("Enter a new value for")
+    static let currentValueLabel = NSLocalizedString("Current value")
+    static let cancelButton = NSLocalizedString("Cancel")
     
     static let changeExcitationText = NSLocalizedString("changeExcitationText")
     static let changeSignalText = NSLocalizedString("changeSignalText")

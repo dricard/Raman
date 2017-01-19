@@ -31,14 +31,15 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
         
     // MARK: - Outlets
     
+    @IBOutlet weak var instructionLabel: UILabel!
+    @IBOutlet weak var currentValueLabel: UILabel!
+    @IBOutlet weak var cancelButton: UIButton!
+    
+    
     @IBOutlet var dataSourceLabel: UILabel!
-    
     @IBOutlet var unitsLabel: UILabel!
-    
     @IBOutlet var previousValueLabel: UILabel!
-    
     @IBOutlet var toolTipLabel: UILabel!
-    
     @IBOutlet var newValue: UITextField!
     
     // MARK: - Life Cycle
@@ -48,7 +49,12 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
         
         valueChanged = false
         
-        self.title = "Edit value"
+        // localization
+        
+        self.title = .editValueLabel
+        instructionLabel.text = .instructionLabel
+        currentValueLabel.text = .currentValueLabel
+        cancelButton.setTitle(.cancelButton, for: .normal)
         
         // set the labels with the passed properties
         if let value = selectedValue {

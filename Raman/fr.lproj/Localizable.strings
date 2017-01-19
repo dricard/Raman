@@ -9,7 +9,7 @@
 "Excitation wavelength" = "Longueur d'onde d'excitation";
 "Signal wavelength" = "Longueur d'onde du signal";
 "Raman shift" = "Décalage Raman";
-"About" = "À propos";
+"About" = "Info";
 "Wavelength" = "Longueur d'onde";
 "Bandwidth" = "Largeur de bande";
 "About Raman" = "À propos de Raman";
@@ -19,6 +19,7 @@
 "Help" = "Aide";
 "Support" = "Support";
 "Done" = "Fermer";
+"Edit value" = "Édition";
 "Enter a new value for" = "Entrer une nouvelle valeur pour";
 "Current value" = "Valeur courante";
 "Cancel" = "Annuler";

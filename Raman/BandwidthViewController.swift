@@ -17,12 +17,17 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: Outlets
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var aboutButton: UIBarButtonItem!
     
     // MARK: Lyfe Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // localize
+        self.title = .bandwidthTitle
+        aboutButton.title = .about
+        
         // set the tableview background color (behind the cells)
         tableView.backgroundColor = Theme.Colors.backgroundColor.color
         

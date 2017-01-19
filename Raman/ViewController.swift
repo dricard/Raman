@@ -23,12 +23,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: - Outlets
     
     @IBOutlet var myTableView: UITableView!
+    @IBOutlet weak var aboutButton: UIBarButtonItem!
     
     // MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // localize
+        
+        aboutButton.title = .about
+        
         // Load user's data
 
         if let signal = UserDefaults.standard.value(forKey: "signal") {
