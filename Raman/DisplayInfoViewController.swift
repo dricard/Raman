@@ -19,7 +19,7 @@ class DisplayInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "About Raman"
+        self.title = .aboutRaman
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             versionNumberLabel.text = "v. " + version
         }
