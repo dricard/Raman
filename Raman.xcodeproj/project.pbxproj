@@ -23,22 +23,11 @@
 		92011AE91B0D197300611519 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011AE81B0D197300611519 /* AppDelegate.swift */; };
 		92011AF01B0D197300611519 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92011AEF1B0D197300611519 /* Images.xcassets */; };
 		92011AF31B0D197300611519 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92011AF11B0D197300611519 /* LaunchScreen.xib */; };
-		92011AFF1B0D197300611519 /* RamanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011AFE1B0D197300611519 /* RamanTests.swift */; };
 		92011B091B0D1A1600611519 /* ChangeValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B081B0D1A1600611519 /* ChangeValueViewController.swift */; };
 		92011B0B1B0D1A3100611519 /* DisplayInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B0A1B0D1A3100611519 /* DisplayInfoViewController.swift */; };
 		92011B0D1B0D1A4300611519 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B0C1B0D1A4300611519 /* ViewController.swift */; };
 		92011B111B0D1B9300611519 /* Raman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B101B0D1B9300611519 /* Raman.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		92011AF91B0D197300611519 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 92011ADB1B0D197200611519 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 92011AE21B0D197200611519;
-			remoteInfo = Raman;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		214414A71CB2AA6100A1958D /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -61,9 +50,6 @@
 		92011AE81B0D197300611519 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92011AEF1B0D197300611519 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		92011AF21B0D197300611519 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		92011AF81B0D197300611519 /* RamanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RamanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		92011AFD1B0D197300611519 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		92011AFE1B0D197300611519 /* RamanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RamanTests.swift; sourceTree = "<group>"; };
 		92011B081B0D1A1600611519 /* ChangeValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeValueViewController.swift; sourceTree = "<group>"; };
 		92011B0A1B0D1A3100611519 /* DisplayInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayInfoViewController.swift; sourceTree = "<group>"; };
 		92011B0C1B0D1A4300611519 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,13 +63,6 @@
 			files = (
 				215A7AF81CF8949F003B9F9B /* Crashlytics.framework in Frameworks */,
 				215A7AF71CF8949F003B9F9B /* Fabric.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		92011AF51B0D197300611519 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				92011AE51B0D197200611519 /* Raman */,
-				92011AFB1B0D197300611519 /* RamanTests */,
 				92011AE41B0D197200611519 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -147,7 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				92011AE31B0D197200611519 /* Raman.app */,
-				92011AF81B0D197300611519 /* RamanTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -176,23 +153,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		92011AFB1B0D197300611519 /* RamanTests */ = {
-			isa = PBXGroup;
-			children = (
-				92011AFE1B0D197300611519 /* RamanTests.swift */,
-				92011AFC1B0D197300611519 /* Supporting Files */,
-			);
-			path = RamanTests;
-			sourceTree = "<group>";
-		};
-		92011AFC1B0D197300611519 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				92011AFD1B0D197300611519 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -215,24 +175,6 @@
 			productReference = 92011AE31B0D197200611519 /* Raman.app */;
 			productType = "com.apple.product-type.application";
 		};
-		92011AF71B0D197300611519 /* RamanTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 92011B051B0D197300611519 /* Build configuration list for PBXNativeTarget "RamanTests" */;
-			buildPhases = (
-				92011AF41B0D197300611519 /* Sources */,
-				92011AF51B0D197300611519 /* Frameworks */,
-				92011AF61B0D197300611519 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				92011AFA1B0D197300611519 /* PBXTargetDependency */,
-			);
-			name = RamanTests;
-			productName = RamanTests;
-			productReference = 92011AF81B0D197300611519 /* RamanTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -241,7 +183,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Hexaedre;
 				TargetAttributes = {
 					92011AE21B0D197200611519 = {
@@ -249,11 +191,6 @@
 						DevelopmentTeam = 7B656Y9UYB;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
-					};
-					92011AF71B0D197300611519 = {
-						CreatedOnToolsVersion = 6.3.2;
-						LastSwiftMigration = 0820;
-						TestTargetID = 92011AE21B0D197200611519;
 					};
 				};
 			};
@@ -272,7 +209,6 @@
 			projectRoot = "";
 			targets = (
 				92011AE21B0D197200611519 /* Raman */,
-				92011AF71B0D197300611519 /* RamanTests */,
 			);
 		};
 /* End PBXProject section */
@@ -287,13 +223,6 @@
 				92011AF31B0D197300611519 /* LaunchScreen.xib in Resources */,
 				21B0F0FF1CFA898D008AF124 /* Hack-Bold.ttf in Resources */,
 				92011AF01B0D197300611519 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		92011AF61B0D197300611519 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,23 +278,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		92011AF41B0D197300611519 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				92011AFF1B0D197300611519 /* RamanTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		92011AFA1B0D197300611519 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 92011AE21B0D197200611519 /* Raman */;
-			targetProxy = 92011AF91B0D197300611519 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		21DBEA461E2C59E600C8436B /* Main.storyboard */ = {
@@ -411,8 +324,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -458,8 +373,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -478,6 +395,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -523,46 +441,6 @@
 			};
 			name = Release;
 		};
-		92011B061B0D197300611519 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					/Users/dr/swift/Raman/,
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = RamanTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hexaedre.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Raman.app/Raman";
-			};
-			name = Debug;
-		};
-		92011B071B0D197300611519 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					/Users/dr/swift/,
-				);
-				INFOPLIST_FILE = RamanTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hexaedre.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Raman.app/Raman";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -580,15 +458,6 @@
 			buildConfigurations = (
 				92011B031B0D197300611519 /* Debug */,
 				92011B041B0D197300611519 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		92011B051B0D197300611519 /* Build configuration list for PBXNativeTarget "RamanTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				92011B061B0D197300611519 /* Debug */,
-				92011B071B0D197300611519 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

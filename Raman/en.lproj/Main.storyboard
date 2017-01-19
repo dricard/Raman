@@ -214,7 +214,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJC-A4-tFh">
-                                <rect key="frame" x="1" y="28" width="375" height="25"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="xXr-E6-H5E"/>
                                 </constraints>
@@ -789,6 +789,6 @@
         <image name="logo_210" width="210" height="210"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="csL-tJ-eTk"/>
+        <segue reference="qoi-Z8-8vd"/>
     </inferredMetricsTieBreakers>
 </document>

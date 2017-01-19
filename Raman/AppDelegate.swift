@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navBarAppearance.barStyle = UIBarStyle.black
         navBarAppearance.barTintColor = Theme.Colors.foreground.color
         
-        Fabric.sharedSDK().debug = false
         Fabric.with([Crashlytics.self])
         return true
     }
