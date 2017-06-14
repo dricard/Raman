@@ -34,6 +34,12 @@ class ViewController: UIViewController {
         // localize
         
         aboutButton.title = .about
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationController?.navigationItem.largeTitleDisplayMode = .always
+        } else {
+            // Fallback on earlier versions
+        }
         
         // set the tableview background color (behind the cells)
         myTableView.backgroundColor = Theme.Colors.backgroundColor.color
@@ -82,7 +88,7 @@ extension ViewController: UITableViewDelegate {
 extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(70)
+        return CGFloat(80)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
