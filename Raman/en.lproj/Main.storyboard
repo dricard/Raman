@@ -201,10 +201,10 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hiy-1H-hnF">
-                                <rect key="frame" x="306" y="94" width="48" height="21"/>
+                                <rect key="frame" x="306" y="94" width="32" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="KYb-a7-dFd"/>
-                                    <constraint firstAttribute="width" constant="48" id="czw-tI-UCK"/>
+                                    <constraint firstAttribute="width" constant="32" id="czw-tI-UCK"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="units">
@@ -310,14 +310,31 @@
                                     <action selector="cancelChangeValue:" destination="R2M-Me-Mgo" eventType="touchUpInside" id="r3F-x0-urL"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cF-A1-cCg">
+                                <rect key="frame" x="318" y="86" width="20" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="uCB-As-z7g"/>
+                                    <constraint firstAttribute="height" constant="21" id="xvQ-Tu-bgG"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="exp">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="11" name="AvenirNext-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="7U8-vK-qaR" firstAttribute="centerX" secondItem="O1b-kA-NTa" secondAttribute="centerX" id="0aQ-Q7-2uS"/>
                             <constraint firstItem="zQ2-5b-qwo" firstAttribute="top" secondItem="2aN-BP-tgy" secondAttribute="bottom" constant="3" id="3DT-L3-GRJ"/>
+                            <constraint firstItem="7cF-A1-cCg" firstAttribute="trailing" secondItem="hiy-1H-hnF" secondAttribute="trailing" id="3e0-gC-Xmx"/>
                             <constraint firstItem="zQ2-5b-qwo" firstAttribute="centerX" secondItem="O1b-kA-NTa" secondAttribute="centerX" id="4Zh-ne-fCG"/>
                             <constraint firstItem="YNa-Wr-Jer" firstAttribute="centerX" secondItem="O1b-kA-NTa" secondAttribute="centerX" id="69Y-5B-oEj"/>
-                            <constraint firstItem="0O0-Uo-fm9" firstAttribute="top" secondItem="2aN-BP-tgy" secondAttribute="bottom" constant="23" id="7ud-y4-JaT"/>
                             <constraint firstAttribute="trailing" secondItem="0O0-Uo-fm9" secondAttribute="trailing" constant="10" id="Bla-DN-DKk"/>
                             <constraint firstItem="WJq-Kr-vzx" firstAttribute="top" secondItem="zQ2-5b-qwo" secondAttribute="bottom" id="Cwb-Ic-3Se"/>
                             <constraint firstItem="B1j-Sk-RfD" firstAttribute="leading" secondItem="O1b-kA-NTa" secondAttribute="leading" id="IRt-8h-8zI"/>
@@ -330,24 +347,19 @@
                             <constraint firstItem="hiy-1H-hnF" firstAttribute="top" secondItem="7U8-vK-qaR" secondAttribute="bottom" constant="12" id="VpN-c3-uOk"/>
                             <constraint firstItem="WJq-Kr-vzx" firstAttribute="centerX" secondItem="O1b-kA-NTa" secondAttribute="centerX" id="XfY-Bd-oAR"/>
                             <constraint firstItem="TJC-A4-tFh" firstAttribute="width" secondItem="O1b-kA-NTa" secondAttribute="width" id="fz6-Mr-E6d"/>
+                            <constraint firstItem="7cF-A1-cCg" firstAttribute="centerY" secondItem="hiy-1H-hnF" secondAttribute="centerY" constant="-8" id="i01-bj-T2u"/>
                             <constraint firstItem="2aN-BP-tgy" firstAttribute="centerX" secondItem="O1b-kA-NTa" secondAttribute="centerX" id="mVx-jY-auA"/>
                             <constraint firstAttribute="bottom" secondItem="B1j-Sk-RfD" secondAttribute="bottom" id="nWt-05-axM"/>
-                            <constraint firstItem="0O0-Uo-fm9" firstAttribute="top" secondItem="WJq-Kr-vzx" secondAttribute="bottom" constant="12" id="nzy-nw-3PP"/>
                             <constraint firstItem="hiy-1H-hnF" firstAttribute="leading" secondItem="YNa-Wr-Jer" secondAttribute="trailing" constant="8" id="olh-Fs-L8k"/>
                             <constraint firstItem="B1j-Sk-RfD" firstAttribute="top" secondItem="O1b-kA-NTa" secondAttribute="top" id="qOV-qX-vIA"/>
                             <constraint firstAttribute="trailing" secondItem="B1j-Sk-RfD" secondAttribute="trailing" id="u8M-LM-Z6x"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="7ud-y4-JaT"/>
-                                <exclude reference="nzy-nw-3PP"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="0O0-Uo-fm9" id="vw7-9f-8Iz"/>
                         <outlet property="currentValueLabel" destination="2aN-BP-tgy" id="LiM-K3-aho"/>
                         <outlet property="dataSourceLabel" destination="7U8-vK-qaR" id="gmz-SS-32t"/>
+                        <outlet property="expLabel" destination="7cF-A1-cCg" id="aOL-xK-T7m"/>
                         <outlet property="instructionLabel" destination="TJC-A4-tFh" id="W5W-Fj-2D6"/>
                         <outlet property="newValue" destination="YNa-Wr-Jer" id="JTu-VP-k6c"/>
                         <outlet property="previousValueLabel" destination="zQ2-5b-qwo" id="733-9d-cWB"/>

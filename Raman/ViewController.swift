@@ -75,6 +75,7 @@ extension ViewController: UITableViewDelegate {
         controller.selectedDataSource = indexPath.row
         controller.selectedValue = raman.specData(indexPath.row)
         controller.myUnits = Constants.specUnits[indexPath.row]
+        controller.myExp = Constants.specExp[indexPath.row]
         controller.toolTipString = Constants.specToolTip[indexPath.row]
         controller.whichTab = Raman.DataSourceType.spectroscopy
         controller.raman = raman

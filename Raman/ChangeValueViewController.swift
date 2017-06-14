@@ -16,6 +16,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     
     // These parameters are passed to this viewController
     @objc var myUnits : String?
+    @objc var myExp: String?
     @objc var toolTipString : String?
     var selectedValue : Double?
     var selectedDataSource : Int?   // which value in the list we're changing
@@ -37,6 +38,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var dataSourceLabel: UILabel!
     @IBOutlet var unitsLabel: UILabel!
+    @IBOutlet weak var expLabel: UILabel!
     @IBOutlet var previousValueLabel: UILabel!
     @IBOutlet var toolTipLabel: UILabel!
     @IBOutlet var newValue: UITextField!
@@ -74,8 +76,9 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
             print("ERROR in ChangeValueViewController viewDidLoad: trying to unwrap nil value in viewDidLoad of ChangeValueVC: selectedDataSource")
         }
         
-        if let units = myUnits {
+        if let units = myUnits, let myExp = myExp {
             unitsLabel.text = units
+            expLabel.text = myExp
         } else {
             print("ERROR in ChangeValueViewController viewDidLoad: trying to unwrap nil value in viewDidLoad of ChangeValueVC: myUnits")
         }

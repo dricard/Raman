@@ -98,6 +98,7 @@ extension BandwidthViewController: UITableViewDelegate {
         controller.selectedDataSource = indexPath.row
         controller.selectedValue = raman.bwData(indexPath.row)
         controller.myUnits = Constants.bwUnits[indexPath.row]
+        controller.myExp = Constants.bwEpx[indexPath.row]
         controller.toolTipString = Constants.bwToolTip[indexPath.row]
         controller.whichTab = Raman.DataSourceType.bandwidth
         controller.raman = raman
