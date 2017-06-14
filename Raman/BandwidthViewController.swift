@@ -12,7 +12,7 @@ class BandwidthViewController: UIViewController {
 
     // MARK: properties
     
-    @objc let modelData = Model.sharedInstance
+    var raman: Raman?
     
     // MARK: Outlets
     
@@ -53,7 +53,9 @@ class BandwidthViewController: UIViewController {
 extension BandwidthViewController: UITableViewDataSource {
     
     @objc func configureCell(cell: BWCell, indexPath: IndexPath) {
-        cell.valueLabel!.text = modelData.spectro.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
+        guard let raman = raman else { return }
+        
+        cell.valueLabel!.text = raman.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
         cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
         cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
         cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
@@ -81,16 +83,19 @@ extension BandwidthViewController: UITableViewDataSource {
 extension BandwidthViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
+        guard let raman = raman else { return }
+        
         /* Push the changeValueViewController */
         let controller = storyboard!.instantiateViewController(withIdentifier: "ChangeValueViewController") as! ChangeValueViewController
         
         controller.selectedDataSource = indexPath.row
-        controller.selectedValue = modelData.spectro.bwData(indexPath.row)
+        controller.selectedValue = raman.bwData(indexPath.row)
         controller.myUnits = Constants.bwUnits[indexPath.row]
         controller.toolTipString = Constants.bwToolTip[indexPath.row]
         controller.whichTab = Raman.DataSourceType.bandwidth
-
+        controller.raman = raman
+        
         navigationController!.pushViewController(controller, animated: true)
     }
     

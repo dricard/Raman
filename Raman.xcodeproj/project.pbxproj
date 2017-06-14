@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		214414A81CB2AA6100A1958D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214414A71CB2AA6100A1958D /* Model.swift */; };
 		214414AA1CB2B3F400A1958D /* BandwidthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214414A91CB2B3F400A1958D /* BandwidthViewController.swift */; };
 		214414AC1CB2C0B700A1958D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214414AB1CB2C0B700A1958D /* Constants.swift */; };
 		215A7AF71CF8949F003B9F9B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 215A7AF51CF8949F003B9F9B /* Fabric.framework */; };
@@ -30,7 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		214414A71CB2AA6100A1958D /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		214414A91CB2B3F400A1958D /* BandwidthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BandwidthViewController.swift; sourceTree = "<group>"; };
 		214414AB1CB2C0B700A1958D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		215A7AF51CF8949F003B9F9B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
@@ -73,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				92011B101B0D1B9300611519 /* Raman.swift */,
-				214414A71CB2AA6100A1958D /* Model.swift */,
 				214414AB1CB2C0B700A1958D /* Constants.swift */,
 			);
 			name = Model;
@@ -267,7 +264,6 @@
 				214414AA1CB2B3F400A1958D /* BandwidthViewController.swift in Sources */,
 				92011B111B0D1B9300611519 /* Raman.swift in Sources */,
 				92011B0B1B0D1A3100611519 /* DisplayInfoViewController.swift in Sources */,
-				214414A81CB2AA6100A1958D /* Model.swift in Sources */,
 				92011B0D1B0D1A4300611519 /* ViewController.swift in Sources */,
 				21BD40831E2AA7C30063E788 /* RamanStyleKit.swift in Sources */,
 				92011AE91B0D197300611519 /* AppDelegate.swift in Sources */,

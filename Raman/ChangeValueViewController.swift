@@ -12,8 +12,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: - Properties
     
-    // local reference to model data
-    @objc let ramanData = Model.sharedInstance
+    var raman: Raman?
     
     // These parameters are passed to this viewController
     @objc var myUnits : String?
@@ -109,8 +108,8 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func checkForValidValue(_ toTest: Double) -> Bool {
-        
-        let error = ramanData.spectro.checkForValidData(toTest, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+        guard let raman = raman else { return true }
+        let error = raman.checkForValidData(toTest, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
         if error.valid {
             return true
         } else {
@@ -130,14 +129,14 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Textfield delegates
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+        guard let raman = raman else { return true }
         // check that we can typecast into a Double
         if let theReturnValue = Double(textField.text!) {
             // then check that the value entered is valid for that variable
             if checkForValidValue(theReturnValue) {
                 newValue.text = "\(theReturnValue)"
                 valueChanged = true
-                ramanData.spectro.updateParameter(theReturnValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+                raman.updateParameter(theReturnValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
            } else {
                 newValue.text = "\(selectedValue!)"
                 valueChanged = false
