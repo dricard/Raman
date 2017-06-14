@@ -32,7 +32,7 @@ struct Constants {
     
     static let specUnits = ["nm", "nm", "cm", "GHz", "MeV"]
     static let specExp = ["", "", "-1", "", ""]
-   static let bwUnits = ["nm", "cm-1", "GHz", "nm"]
+    static let bwUnits = ["nm", "cm", "GHz", "nm"]
     static let bwEpx = ["", "-1", "", ""]
 
     static let specRounding = [".2", ".2", ".4", ".2", ".5" ]

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BandwidthViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BandwidthViewController: UIViewController {
 
     // MARK: properties
     
@@ -46,34 +46,18 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
-    
-// MARK: Table delegates
+}
+
+// MARK: TableView DataSource
+
+extension BandwidthViewController: UITableViewDataSource {
     
     @objc func configureCell(cell: BWCell, indexPath: IndexPath) {
         cell.valueLabel!.text = modelData.spectro.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
         cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
-        switch indexPath.row {
-        case 0:
-            cell.dataImageView?.image = RamanStyleKit.imageOfBw0
-            cell.unitsLabel.text = "nm"
-            cell.exponentLabel.text = ""
-        case 1:
-            cell.dataImageView?.image = RamanStyleKit.imageOfBw1
-            cell.unitsLabel.text = "cm"
-            cell.exponentLabel.text = "-1"
-        case 2:
-            cell.dataImageView?.image = RamanStyleKit.imageOfBw2
-            cell.unitsLabel.text = "GHz"
-            cell.exponentLabel.text = ""
-        case 3:
-            cell.dataImageView?.image = RamanStyleKit.imageOfBw3
-            cell.unitsLabel.text = "nm"
-            cell.exponentLabel.text = ""
-        default:
-            cell.dataImageView?.image = RamanStyleKit.imageOfBw0
-            cell.unitsLabel.text = "nm"
-            cell.exponentLabel.text = ""
-        }
+        cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
+        cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
+        cell.exponentLabel.text = Constants.bwEpx[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -91,6 +75,10 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
         
         return cell
     }
+    
+}
+
+extension BandwidthViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
