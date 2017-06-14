@@ -10,7 +10,7 @@ import UIKit
 
 class DataCell: UITableViewCell {
     
-    static let reuseIdentifier = "cell"
+    @objc static let reuseIdentifier = "cell"
     
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var dataLabel: UILabel!

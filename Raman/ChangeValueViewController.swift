@@ -12,22 +12,22 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: - Properties
     
-    // local reference to model data
-    let ramanData = Model.sharedInstance
+    var raman: Raman?
     
     // These parameters are passed to this viewController
-    var myUnits : String?
-    var toolTipString : String?
+    @objc var myUnits : String?
+    @objc var myExp: String?
+    @objc var toolTipString : String?
     var selectedValue : Double?
     var selectedDataSource : Int?   // which value in the list we're changing
     var whichTab: Raman.DataSourceType?
     
 //    var selectedSection : Int?
     
-    var valueChanged : Bool = false
-    var theReturnValue : Double = 0.0
+    @objc var valueChanged : Bool = false
+    @objc var theReturnValue : Double = 0.0
     
-    var shouldPopVC = true
+    @objc var shouldPopVC = true
         
     // MARK: - Outlets
     
@@ -38,6 +38,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var dataSourceLabel: UILabel!
     @IBOutlet var unitsLabel: UILabel!
+    @IBOutlet weak var expLabel: UILabel!
     @IBOutlet var previousValueLabel: UILabel!
     @IBOutlet var toolTipLabel: UILabel!
     @IBOutlet var newValue: UITextField!
@@ -75,8 +76,9 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
             print("ERROR in ChangeValueViewController viewDidLoad: trying to unwrap nil value in viewDidLoad of ChangeValueVC: selectedDataSource")
         }
         
-        if let units = myUnits {
+        if let units = myUnits, let myExp = myExp {
             unitsLabel.text = units
+            expLabel.text = myExp
         } else {
             print("ERROR in ChangeValueViewController viewDidLoad: trying to unwrap nil value in viewDidLoad of ChangeValueVC: myUnits")
         }
@@ -108,9 +110,9 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-    func checkForValidValue(_ toTest: Double) -> Bool {
-        
-        let error = ramanData.spectro.checkForValidData(toTest, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+    @objc func checkForValidValue(_ toTest: Double) -> Bool {
+        guard let raman = raman else { return true }
+        let error = raman.checkForValidData(toTest, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
         if error.valid {
             return true
         } else {
@@ -130,14 +132,14 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Textfield delegates
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+        guard let raman = raman else { return true }
         // check that we can typecast into a Double
         if let theReturnValue = Double(textField.text!) {
             // then check that the value entered is valid for that variable
             if checkForValidValue(theReturnValue) {
                 newValue.text = "\(theReturnValue)"
                 valueChanged = true
-                ramanData.spectro.updateParameter(theReturnValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+                raman.updateParameter(theReturnValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
            } else {
                 newValue.text = "\(selectedValue!)"
                 valueChanged = false

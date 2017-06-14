@@ -8,11 +8,11 @@
 
 import UIKit
 
-class BandwidthViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BandwidthViewController: UIViewController {
 
     // MARK: properties
     
-    let modelData = Model.sharedInstance
+    var raman: Raman?
     
     // MARK: Outlets
     
@@ -27,7 +27,13 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
         // localize
         self.title = .bandwidthTitle
         aboutButton.title = .about
-        
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationController?.navigationItem.largeTitleDisplayMode = .always
+        } else {
+            // Fallback on earlier versions
+        }
+
         // set the tableview background color (behind the cells)
         tableView.backgroundColor = Theme.Colors.backgroundColor.color
         
@@ -46,34 +52,20 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+}
+
+// MARK: TableView DataSource
+
+extension BandwidthViewController: UITableViewDataSource {
     
-// MARK: Table delegates
-    
-    func configureCell(cell: BWCell, indexPath: IndexPath) {
-        cell.valueLabel!.text = modelData.spectro.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
+    @objc func configureCell(cell: BWCell, indexPath: IndexPath) {
+        guard let raman = raman else { return }
+        
+        cell.valueLabel!.text = raman.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
         cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
-        switch indexPath.row {
-        case 0:
-            cell.dataImageView?.image = RamanStyleKit.imageOfBw0
-            cell.unitsLabel.text = "nm"
-            cell.exponentLabel.text = ""
-        case 1:
-            cell.dataImageView?.image = RamanStyleKit.imageOfBw1
-            cell.unitsLabel.text = "cm"
-            cell.exponentLabel.text = "-1"
-        case 2:
-            cell.dataImageView?.image = RamanStyleKit.imageOfBw2
-            cell.unitsLabel.text = "GHz"
-            cell.exponentLabel.text = ""
-        case 3:
-            cell.dataImageView?.image = RamanStyleKit.imageOfBw3
-            cell.unitsLabel.text = "nm"
-            cell.exponentLabel.text = ""
-        default:
-            cell.dataImageView?.image = RamanStyleKit.imageOfBw0
-            cell.unitsLabel.text = "nm"
-            cell.exponentLabel.text = ""
-        }
+        cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
+        cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
+        cell.exponentLabel.text = Constants.bwEpx[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -81,7 +73,7 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(70)
+        return CGFloat(80)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -92,17 +84,25 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+}
 
+extension BandwidthViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let raman = raman else { return }
+        
         /* Push the changeValueViewController */
         let controller = storyboard!.instantiateViewController(withIdentifier: "ChangeValueViewController") as! ChangeValueViewController
         
         controller.selectedDataSource = indexPath.row
-        controller.selectedValue = modelData.spectro.bwData(indexPath.row)
+        controller.selectedValue = raman.bwData(indexPath.row)
         controller.myUnits = Constants.bwUnits[indexPath.row]
+        controller.myExp = Constants.bwEpx[indexPath.row]
         controller.toolTipString = Constants.bwToolTip[indexPath.row]
         controller.whichTab = Raman.DataSourceType.bandwidth
-
+        controller.raman = raman
+        
         navigationController!.pushViewController(controller, animated: true)
     }
     

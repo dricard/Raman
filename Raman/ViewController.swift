@@ -8,17 +8,17 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+class ViewController: UIViewController {
+    
     
     // MARK: - Properties
     
-    let modelData = Model.sharedInstance
+    var raman: Raman?
     
-    var valueDidChangeFromEdit = false
-    var whichSectionValueChanged : Int = 0
-    var whichDataValueChanged : Int = 0
-    var newValueForChangedData : Double = 0.0
+    @objc var valueDidChangeFromEdit = false
+    @objc var whichSectionValueChanged : Int = 0
+    @objc var whichDataValueChanged : Int = 0
+    @objc var newValueForChangedData : Double = 0.0
     
     // MARK: - Outlets
     
@@ -26,37 +26,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var aboutButton: UIBarButtonItem!
     
     // MARK: - Life cycle
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // localize
         
         aboutButton.title = .about
-        
-        // Load user's data
-
-        if let signal = UserDefaults.standard.value(forKey: "signal") {
-            modelData.spectro.signal = Double(signal as! NSNumber)
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationController?.navigationItem.largeTitleDisplayMode = .always
         } else {
-            UserDefaults.standard.set(modelData.spectro.signal, forKey: "signal")
+            // Fallback on earlier versions
         }
-        if let pump = UserDefaults.standard.value(forKey: "pump") {
-            modelData.spectro.pump = Double(pump as! NSNumber)
-        } else {
-            UserDefaults.standard.set(modelData.spectro.pump, forKey: "pump")
-        }
-        if let bwLambda = UserDefaults.standard.value(forKey: "bwLambda") {
-            modelData.spectro.bwLambda = Double(bwLambda as! NSNumber)
-        } else {
-            UserDefaults.standard.set(modelData.spectro.bwLambda, forKey: "bwLambda")
-        }
-        if let bwInCm = UserDefaults.standard.value(forKey: "bwInCm") {
-            modelData.spectro.bwInCm = Double(bwInCm as! NSNumber)
-        } else {
-            UserDefaults.standard.set(modelData.spectro.bwInCm, forKey: "bwInCm")
-        }
-       
         
         // set the tableview background color (behind the cells)
         myTableView.backgroundColor = Theme.Colors.backgroundColor.color
@@ -66,82 +49,69 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // set the separator color to the same as the background
         myTableView.separatorColor = Theme.Colors.backgroundColor.color
-
+        
         // Remove space at top of tableview
         myTableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // udate all data
         myTableView.reloadData()
     }
     
-    
-    // MARK: - Tableview delegates
+}
+// MARK: - Tableview delegates
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let raman = raman else { return }
+        
+        /* Push the ChangeValueViewController */
+        let controller = storyboard!.instantiateViewController(withIdentifier: "ChangeValueViewController") as! ChangeValueViewController
+        
+        
+        controller.selectedDataSource = indexPath.row
+        controller.selectedValue = raman.specData(indexPath.row)
+        controller.myUnits = Constants.specUnits[indexPath.row]
+        controller.myExp = Constants.specExp[indexPath.row]
+        controller.toolTipString = Constants.specToolTip[indexPath.row]
+        controller.whichTab = Raman.DataSourceType.spectroscopy
+        controller.raman = raman
+        
+        navigationController!.pushViewController(controller, animated: true)
+    }
+}
+
+// MARK: - TableView DataSource
+
+extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(70)
+        return CGFloat(80)
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.ramanShift.count
     }
     
-    func configureCell(cell: DataCell, indexPath: IndexPath) {
-        cell.valueLabel!.text = modelData.spectro.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
+    @objc func configureCell(cell: DataCell, indexPath: IndexPath) {
+        guard let raman = raman else { return }
+        cell.valueLabel!.text = raman.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
         cell.dataLabel?.text = Constants.ramanShift[indexPath.row]
-        switch indexPath.row {
-        case 0:
-            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro0
-            cell.unitsLabel.text = "nm"
-            cell.exponentsLabel.text = ""
-        case 1:
-            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro1
-            cell.unitsLabel.text = "nm"
-            cell.exponentsLabel.text = ""
-        case 2:
-            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro2
-            cell.unitsLabel.text = "cm"
-            cell.exponentsLabel.text = "-1"
-        case 3:
-            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro3
-            cell.unitsLabel.text = "GHz"
-            cell.exponentsLabel.text = ""
-        case 4:
-            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro4
-            cell.unitsLabel.text = "meV"
-            cell.exponentsLabel.text = ""
-        default:
-            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro0
-            cell.unitsLabel.text = "nm"
-            cell.exponentsLabel.text = ""
-        }
+        cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")
+        cell.unitsLabel.text = Constants.specUnits[indexPath.row]
+        cell.exponentsLabel.text = Constants.specExp[indexPath.row]
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: DataCell.reuseIdentifier) as! DataCell
-
+        
         configureCell(cell: cell, indexPath: indexPath)
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        /* Push the ChangeValueViewController */
-        let controller = storyboard!.instantiateViewController(withIdentifier: "ChangeValueViewController") as! ChangeValueViewController
-
-
-        controller.selectedDataSource = indexPath.row
-        controller.selectedValue = modelData.spectro.specData(indexPath.row)
-        controller.myUnits = Constants.specUnits[indexPath.row]
-        controller.toolTipString = Constants.specToolTip[indexPath.row]
-        controller.whichTab = Raman.DataSourceType.spectroscopy
-        
-        navigationController!.pushViewController(controller, animated: true)
-    }
-
- 
 }
