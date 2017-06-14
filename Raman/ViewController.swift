@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController {
 
     
     // MARK: - Properties
@@ -27,6 +27,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - Life cycle
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,8 +35,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         aboutButton.title = .about
         
-        // Load user's data
+        loadUserPrefs()
+       
+        
+        // set the tableview background color (behind the cells)
+        myTableView.backgroundColor = Theme.Colors.backgroundColor.color
+        
+        // This prevents the space below the cells to have spacers
+        myTableView.tableFooterView = UIView()
+        
+        // set the separator color to the same as the background
+        myTableView.separatorColor = Theme.Colors.backgroundColor.color
 
+        // Remove space at top of tableview
+        myTableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // udate all data
+        myTableView.reloadData()
+    }
+    
+    // MARK: - Utilities
+    
+    fileprivate func loadUserPrefs() {
+        // Load user's data
+        
         let signal = UserDefaults.standard.double(forKey: "signal")
         if signal != 0 {
             modelData.spectro.signal = signal
@@ -60,29 +86,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             UserDefaults.standard.set(modelData.spectro.bwInCm, forKey: "bwInCm")
         }
-       
-        
-        // set the tableview background color (behind the cells)
-        myTableView.backgroundColor = Theme.Colors.backgroundColor.color
-        
-        // This prevents the space below the cells to have spacers
-        myTableView.tableFooterView = UIView()
-        
-        // set the separator color to the same as the background
-        myTableView.separatorColor = Theme.Colors.backgroundColor.color
-
-        // Remove space at top of tableview
-        myTableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // udate all data
-        myTableView.reloadData()
-    }
-    
-    
+}
     // MARK: - Tableview delegates
+
+extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(70)
@@ -122,7 +130,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.exponentsLabel.text = ""
         }
     }
+}
 
+extension ViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: DataCell.reuseIdentifier) as! DataCell
@@ -146,6 +157,4 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         navigationController!.pushViewController(controller, animated: true)
     }
-
- 
 }
