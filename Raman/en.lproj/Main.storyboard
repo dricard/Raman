@@ -504,7 +504,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJl-IH-a9n">
-                                <rect key="frame" x="83" y="168" width="210" height="210"/>
+                                <rect key="frame" x="83" y="228.5" width="210" height="210"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="YJl-IH-a9n" secondAttribute="height" multiplier="1:1" id="BRQ-iU-UoF"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="210" id="PTM-j5-7UK"/>
@@ -592,11 +592,10 @@
                             <constraint firstItem="4Zy-dp-xcR" firstAttribute="centerX" secondItem="ZdU-9y-YI2" secondAttribute="centerX" id="X4n-9E-71L"/>
                             <constraint firstItem="nVc-83-Roa" firstAttribute="top" secondItem="KNa-a1-2yt" secondAttribute="bottom" id="X6k-ED-Bah"/>
                             <constraint firstItem="Rdq-QM-pcU" firstAttribute="centerX" secondItem="ZdU-9y-YI2" secondAttribute="centerX" id="ajD-Uz-PwQ"/>
-                            <constraint firstItem="YJl-IH-a9n" firstAttribute="top" secondItem="IH8-QC-43W" secondAttribute="bottom" id="bfl-NW-bbf"/>
+                            <constraint firstItem="YJl-IH-a9n" firstAttribute="centerY" secondItem="ZdU-9y-YI2" secondAttribute="centerY" id="cxm-0l-kBS"/>
                             <constraint firstItem="Id5-kt-Ucq" firstAttribute="width" secondItem="ZdU-9y-YI2" secondAttribute="width" id="gaD-Zd-sbA"/>
                             <constraint firstItem="Id5-kt-Ucq" firstAttribute="centerX" secondItem="ZdU-9y-YI2" secondAttribute="centerX" id="kQ3-cS-zoo"/>
                             <constraint firstItem="Rv1-Dg-N7b" firstAttribute="top" secondItem="Rdq-QM-pcU" secondAttribute="bottom" id="lvw-3Z-UmL"/>
-                            <constraint firstItem="Id5-kt-Ucq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="YJl-IH-a9n" secondAttribute="bottom" id="mr8-pk-3TX"/>
                             <constraint firstAttribute="trailing" secondItem="EsQ-Gp-rxA" secondAttribute="trailing" constant="10" id="pdY-v3-eep"/>
                             <constraint firstItem="CEc-rB-OPQ" firstAttribute="centerX" secondItem="ZdU-9y-YI2" secondAttribute="centerX" id="w8w-8M-6eJ"/>
                         </constraints>
@@ -621,7 +620,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VYd-Kw-8cg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3287" y="253"/>
+            <point key="canvasLocation" x="3285.5999999999999" y="252.32383808095955"/>
         </scene>
         <!--Spectro-->
         <scene sceneID="kvS-8t-5yc">
