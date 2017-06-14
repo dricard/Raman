@@ -91,11 +91,30 @@ class ViewController: UIViewController {
     // MARK: - Tableview delegates
 
 extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        /* Push the ChangeValueViewController */
+        let controller = storyboard!.instantiateViewController(withIdentifier: "ChangeValueViewController") as! ChangeValueViewController
+        
+        
+        controller.selectedDataSource = indexPath.row
+        controller.selectedValue = modelData.spectro.specData(indexPath.row)
+        controller.myUnits = Constants.specUnits[indexPath.row]
+        controller.toolTipString = Constants.specToolTip[indexPath.row]
+        controller.whichTab = Raman.DataSourceType.spectroscopy
+        
+        navigationController!.pushViewController(controller, animated: true)
+    }
+}
+
+// MARK: - TableView DataSource
+
+extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(70)
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.ramanShift.count
     }
@@ -103,36 +122,10 @@ extension ViewController: UITableViewDelegate {
     @objc func configureCell(cell: DataCell, indexPath: IndexPath) {
         cell.valueLabel!.text = modelData.spectro.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
         cell.dataLabel?.text = Constants.ramanShift[indexPath.row]
-        switch indexPath.row {
-        case 0:
-            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro0
-            cell.unitsLabel.text = "nm"
-            cell.exponentsLabel.text = ""
-        case 1:
-            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro1
-            cell.unitsLabel.text = "nm"
-            cell.exponentsLabel.text = ""
-        case 2:
-            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro2
-            cell.unitsLabel.text = "cm"
-            cell.exponentsLabel.text = "-1"
-        case 3:
-            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro3
-            cell.unitsLabel.text = "GHz"
-            cell.exponentsLabel.text = ""
-        case 4:
-            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro4
-            cell.unitsLabel.text = "meV"
-            cell.exponentsLabel.text = ""
-        default:
-            cell.dataImageView?.image = RamanStyleKit.imageOfSpectro0
-            cell.unitsLabel.text = "nm"
-            cell.exponentsLabel.text = ""
-        }
+        cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")
+        cell.unitsLabel.text = Constants.specUnits[indexPath.row]
+        cell.exponentsLabel.text = Constants.specExp[indexPath.row]
     }
-}
-
-extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -143,18 +136,4 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        /* Push the ChangeValueViewController */
-        let controller = storyboard!.instantiateViewController(withIdentifier: "ChangeValueViewController") as! ChangeValueViewController
-
-
-        controller.selectedDataSource = indexPath.row
-        controller.selectedValue = modelData.spectro.specData(indexPath.row)
-        controller.myUnits = Constants.specUnits[indexPath.row]
-        controller.toolTipString = Constants.specToolTip[indexPath.row]
-        controller.whichTab = Raman.DataSourceType.spectroscopy
-        
-        navigationController!.pushViewController(controller, animated: true)
-    }
 }
