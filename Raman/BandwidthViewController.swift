@@ -27,7 +27,13 @@ class BandwidthViewController: UIViewController {
         // localize
         self.title = .bandwidthTitle
         aboutButton.title = .about
-        
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationController?.navigationItem.largeTitleDisplayMode = .always
+        } else {
+            // Fallback on earlier versions
+        }
+
         // set the tableview background color (behind the cells)
         tableView.backgroundColor = Theme.Colors.backgroundColor.color
         
