@@ -13,12 +13,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - Properties
     
-    let modelData = Model.sharedInstance
+    @objc let modelData = Model.sharedInstance
     
-    var valueDidChangeFromEdit = false
-    var whichSectionValueChanged : Int = 0
-    var whichDataValueChanged : Int = 0
-    var newValueForChangedData : Double = 0.0
+    @objc var valueDidChangeFromEdit = false
+    @objc var whichSectionValueChanged : Int = 0
+    @objc var whichDataValueChanged : Int = 0
+    @objc var newValueForChangedData : Double = 0.0
     
     // MARK: - Outlets
     
@@ -36,23 +36,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // Load user's data
 
-        if let signal = UserDefaults.standard.value(forKey: "signal") {
-            modelData.spectro.signal = Double(signal as! NSNumber)
+        let signal = UserDefaults.standard.double(forKey: "signal")
+        if signal != 0 {
+            modelData.spectro.signal = signal
         } else {
             UserDefaults.standard.set(modelData.spectro.signal, forKey: "signal")
         }
-        if let pump = UserDefaults.standard.value(forKey: "pump") {
-            modelData.spectro.pump = Double(pump as! NSNumber)
+        let pump = UserDefaults.standard.double(forKey: "pump")
+        if pump != 0 {
+            modelData.spectro.pump = pump
         } else {
             UserDefaults.standard.set(modelData.spectro.pump, forKey: "pump")
         }
-        if let bwLambda = UserDefaults.standard.value(forKey: "bwLambda") {
-            modelData.spectro.bwLambda = Double(bwLambda as! NSNumber)
+        let bwLambda = UserDefaults.standard.double(forKey: "bwLambda")
+        if bwLambda != 0 {
+            modelData.spectro.bwLambda = bwLambda
         } else {
             UserDefaults.standard.set(modelData.spectro.bwLambda, forKey: "bwLambda")
         }
-        if let bwInCm = UserDefaults.standard.value(forKey: "bwInCm") {
-            modelData.spectro.bwInCm = Double(bwInCm as! NSNumber)
+        let bwInCm = UserDefaults.standard.double(forKey: "bwInCm")
+        if bwInCm != 0 {
+            modelData.spectro.bwInCm = bwInCm
         } else {
             UserDefaults.standard.set(modelData.spectro.bwInCm, forKey: "bwInCm")
         }
@@ -88,7 +92,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return Constants.ramanShift.count
     }
     
-    func configureCell(cell: DataCell, indexPath: IndexPath) {
+    @objc func configureCell(cell: DataCell, indexPath: IndexPath) {
         cell.valueLabel!.text = modelData.spectro.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
         cell.dataLabel?.text = Constants.ramanShift[indexPath.row]
         switch indexPath.row {

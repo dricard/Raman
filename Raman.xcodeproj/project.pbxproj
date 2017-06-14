@@ -189,7 +189,7 @@
 					92011AE21B0D197200611519 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = 7B656Y9UYB;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -417,7 +417,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hexaedre.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -437,7 +437,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hexaedre.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

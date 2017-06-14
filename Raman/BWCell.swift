@@ -10,7 +10,7 @@ import UIKit
 
 class BWCell: UITableViewCell {
     
-    static let reuseIdentifier: String? = "cellBW"
+    @objc static let reuseIdentifier: String? = "cellBW"
     
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var dataLabel: UILabel!

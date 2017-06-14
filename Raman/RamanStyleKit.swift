@@ -51,11 +51,11 @@ public class RamanStyleKit : NSObject {
 
     //// Colors
 
-    public dynamic class var backgroundColorSelected: UIColor { return Cache.backgroundColorSelected }
+    @objc public dynamic class var backgroundColorSelected: UIColor { return Cache.backgroundColorSelected }
 
     //// Drawing Methods
 
-    public dynamic class func drawSpectro0(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawSpectro0(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -83,7 +83,7 @@ public class RamanStyleKit : NSObject {
         let textTextContent = "Laser"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: textStyle]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -97,7 +97,7 @@ public class RamanStyleKit : NSObject {
         let text2TextContent = "nm"
         let text2Style = NSMutableParagraphStyle()
         text2Style.alignment = .center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
+        let text2FontAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: text2Style]
 
         let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
         context.saveGState()
@@ -109,7 +109,7 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawSpectro1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawSpectro1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -137,7 +137,7 @@ public class RamanStyleKit : NSObject {
         let textTextContent = "Signal"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 16), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: textStyle]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -151,7 +151,7 @@ public class RamanStyleKit : NSObject {
         let text2TextContent = "nm"
         let text2Style = NSMutableParagraphStyle()
         text2Style.alignment = .center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
+        let text2FontAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: text2Style]
 
         let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
         context.saveGState()
@@ -163,7 +163,7 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawSpectro2(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawSpectro2(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -191,7 +191,7 @@ public class RamanStyleKit : NSObject {
         let textTextContent = "Δω"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: textStyle]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -205,7 +205,7 @@ public class RamanStyleKit : NSObject {
         let text2TextContent = "cm  "
         let text2Style = NSMutableParagraphStyle()
         text2Style.alignment = .center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
+        let text2FontAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: text2Style]
 
         let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
         context.saveGState()
@@ -219,7 +219,7 @@ public class RamanStyleKit : NSObject {
         let text3TextContent = "-1"
         let text3Style = NSMutableParagraphStyle()
         text3Style.alignment = .center
-        let text3FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 8), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text3Style]
+        let text3FontAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 8), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: text3Style]
 
         let text3TextHeight: CGFloat = text3TextContent.boundingRect(with: CGSize(width: text3Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text3FontAttributes, context: nil).height
         context.saveGState()
@@ -231,7 +231,7 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawSpectro3(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawSpectro3(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -259,7 +259,7 @@ public class RamanStyleKit : NSObject {
         let textTextContent = "Δω"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: textStyle]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -273,7 +273,7 @@ public class RamanStyleKit : NSObject {
         let text2TextContent = "GHz"
         let text2Style = NSMutableParagraphStyle()
         text2Style.alignment = .center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
+        let text2FontAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: text2Style]
 
         let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
         context.saveGState()
@@ -285,7 +285,7 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawSpectro4(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawSpectro4(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -313,7 +313,7 @@ public class RamanStyleKit : NSObject {
         let textTextContent = "Δω"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: textStyle]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -327,7 +327,7 @@ public class RamanStyleKit : NSObject {
         let text2TextContent = "meV"
         let text2Style = NSMutableParagraphStyle()
         text2Style.alignment = .center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
+        let text2FontAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: text2Style]
 
         let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
         context.saveGState()
@@ -339,7 +339,7 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawBw0(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawBw0(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -367,7 +367,7 @@ public class RamanStyleKit : NSObject {
         let textTextContent = "λ"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont(name: "Symbol", size: 32)!, NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont(name: "Symbol", size: 32)!, NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: textStyle]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -381,7 +381,7 @@ public class RamanStyleKit : NSObject {
         let text2TextContent = "nm"
         let text2Style = NSMutableParagraphStyle()
         text2Style.alignment = .center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
+        let text2FontAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: text2Style]
 
         let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
         context.saveGState()
@@ -393,7 +393,7 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawBw2(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawBw2(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -421,7 +421,7 @@ public class RamanStyleKit : NSObject {
         let textTextContent = "BW"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 26), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 26), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: textStyle]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -435,7 +435,7 @@ public class RamanStyleKit : NSObject {
         let text2TextContent = "GHz"
         let text2Style = NSMutableParagraphStyle()
         text2Style.alignment = .center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 11), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
+        let text2FontAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 11), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: text2Style]
 
         let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
         context.saveGState()
@@ -447,7 +447,7 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawBw1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawBw1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -475,7 +475,7 @@ public class RamanStyleKit : NSObject {
         let textTextContent = "BW"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 26), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 26), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: textStyle]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -489,7 +489,7 @@ public class RamanStyleKit : NSObject {
         let text2TextContent = "cm  "
         let text2Style = NSMutableParagraphStyle()
         text2Style.alignment = .center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
+        let text2FontAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: text2Style]
 
         let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
         context.saveGState()
@@ -503,7 +503,7 @@ public class RamanStyleKit : NSObject {
         let text3TextContent = "-1"
         let text3Style = NSMutableParagraphStyle()
         text3Style.alignment = .center
-        let text3FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 8), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text3Style]
+        let text3FontAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 8), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: text3Style]
 
         let text3TextHeight: CGFloat = text3TextContent.boundingRect(with: CGSize(width: text3Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text3FontAttributes, context: nil).height
         context.saveGState()
@@ -515,7 +515,7 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawBw3(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawBw3(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -543,7 +543,7 @@ public class RamanStyleKit : NSObject {
         let textTextContent = "BW"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 26), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: textStyle]
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 26), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: textStyle]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -557,7 +557,7 @@ public class RamanStyleKit : NSObject {
         let text2TextContent = "nm"
         let text2Style = NSMutableParagraphStyle()
         text2Style.alignment = .center
-        let text2FontAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSForegroundColorAttributeName: UIColor.black, NSParagraphStyleAttributeName: text2Style]
+        let text2FontAttributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.paragraphStyle: text2Style]
 
         let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
         context.saveGState()
@@ -569,7 +569,7 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawSpectro(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawSpectro(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -634,7 +634,7 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawSpectroSelected(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawSpectroSelected(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -708,7 +708,7 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawBandwidth(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawBandwidth(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -772,7 +772,7 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawBandwidthSelected(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawBandwidthSelected(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 34, height: 34), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -845,7 +845,7 @@ public class RamanStyleKit : NSObject {
 
     }
 
-    public dynamic class func drawAccesoryImage(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 30, height: 30), resizing: ResizingBehavior = .aspectFit) {
+    @objc public dynamic class func drawAccesoryImage(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 30, height: 30), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -874,7 +874,7 @@ public class RamanStyleKit : NSObject {
 
     //// Generated Images
 
-    public dynamic class var imageOfSpectro0: UIImage {
+    @objc public dynamic class var imageOfSpectro0: UIImage {
         if Cache.imageOfSpectro0 != nil {
             return Cache.imageOfSpectro0!
         }
@@ -888,7 +888,7 @@ public class RamanStyleKit : NSObject {
         return Cache.imageOfSpectro0!
     }
 
-    public dynamic class var imageOfSpectro1: UIImage {
+    @objc public dynamic class var imageOfSpectro1: UIImage {
         if Cache.imageOfSpectro1 != nil {
             return Cache.imageOfSpectro1!
         }
@@ -902,7 +902,7 @@ public class RamanStyleKit : NSObject {
         return Cache.imageOfSpectro1!
     }
 
-    public dynamic class var imageOfSpectro2: UIImage {
+    @objc public dynamic class var imageOfSpectro2: UIImage {
         if Cache.imageOfSpectro2 != nil {
             return Cache.imageOfSpectro2!
         }
@@ -916,7 +916,7 @@ public class RamanStyleKit : NSObject {
         return Cache.imageOfSpectro2!
     }
 
-    public dynamic class var imageOfSpectro3: UIImage {
+    @objc public dynamic class var imageOfSpectro3: UIImage {
         if Cache.imageOfSpectro3 != nil {
             return Cache.imageOfSpectro3!
         }
@@ -930,7 +930,7 @@ public class RamanStyleKit : NSObject {
         return Cache.imageOfSpectro3!
     }
 
-    public dynamic class var imageOfSpectro4: UIImage {
+    @objc public dynamic class var imageOfSpectro4: UIImage {
         if Cache.imageOfSpectro4 != nil {
             return Cache.imageOfSpectro4!
         }
@@ -944,7 +944,7 @@ public class RamanStyleKit : NSObject {
         return Cache.imageOfSpectro4!
     }
 
-    public dynamic class var imageOfBw0: UIImage {
+    @objc public dynamic class var imageOfBw0: UIImage {
         if Cache.imageOfBw0 != nil {
             return Cache.imageOfBw0!
         }
@@ -958,7 +958,7 @@ public class RamanStyleKit : NSObject {
         return Cache.imageOfBw0!
     }
 
-    public dynamic class var imageOfBw2: UIImage {
+    @objc public dynamic class var imageOfBw2: UIImage {
         if Cache.imageOfBw2 != nil {
             return Cache.imageOfBw2!
         }
@@ -972,7 +972,7 @@ public class RamanStyleKit : NSObject {
         return Cache.imageOfBw2!
     }
 
-    public dynamic class var imageOfBw1: UIImage {
+    @objc public dynamic class var imageOfBw1: UIImage {
         if Cache.imageOfBw1 != nil {
             return Cache.imageOfBw1!
         }
@@ -986,7 +986,7 @@ public class RamanStyleKit : NSObject {
         return Cache.imageOfBw1!
     }
 
-    public dynamic class var imageOfBw3: UIImage {
+    @objc public dynamic class var imageOfBw3: UIImage {
         if Cache.imageOfBw3 != nil {
             return Cache.imageOfBw3!
         }
@@ -1000,7 +1000,7 @@ public class RamanStyleKit : NSObject {
         return Cache.imageOfBw3!
     }
 
-    public dynamic class var imageOfSpectro: UIImage {
+    @objc public dynamic class var imageOfSpectro: UIImage {
         if Cache.imageOfSpectro != nil {
             return Cache.imageOfSpectro!
         }
@@ -1014,7 +1014,7 @@ public class RamanStyleKit : NSObject {
         return Cache.imageOfSpectro!
     }
 
-    public dynamic class var imageOfSpectroSelected: UIImage {
+    @objc public dynamic class var imageOfSpectroSelected: UIImage {
         if Cache.imageOfSpectroSelected != nil {
             return Cache.imageOfSpectroSelected!
         }
@@ -1028,7 +1028,7 @@ public class RamanStyleKit : NSObject {
         return Cache.imageOfSpectroSelected!
     }
 
-    public dynamic class var imageOfBandwidth: UIImage {
+    @objc public dynamic class var imageOfBandwidth: UIImage {
         if Cache.imageOfBandwidth != nil {
             return Cache.imageOfBandwidth!
         }
@@ -1042,7 +1042,7 @@ public class RamanStyleKit : NSObject {
         return Cache.imageOfBandwidth!
     }
 
-    public dynamic class var imageOfBandwidthSelected: UIImage {
+    @objc public dynamic class var imageOfBandwidthSelected: UIImage {
         if Cache.imageOfBandwidthSelected != nil {
             return Cache.imageOfBandwidthSelected!
         }
@@ -1056,7 +1056,7 @@ public class RamanStyleKit : NSObject {
         return Cache.imageOfBandwidthSelected!
     }
 
-    public dynamic class var imageOfAccesoryImage: UIImage {
+    @objc public dynamic class var imageOfAccesoryImage: UIImage {
         if Cache.imageOfAccesoryImage != nil {
             return Cache.imageOfAccesoryImage!
         }
@@ -1257,32 +1257,32 @@ public class RamanStyleKit : NSObject {
 
 
 extension UIColor {
-    func withHue(_ newHue: CGFloat) -> UIColor {
+    @objc func withHue(_ newHue: CGFloat) -> UIColor {
         var saturation: CGFloat = 1, brightness: CGFloat = 1, alpha: CGFloat = 1
         self.getHue(nil, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         return UIColor(hue: newHue, saturation: saturation, brightness: brightness, alpha: alpha)
     }
-    func withSaturation(_ newSaturation: CGFloat) -> UIColor {
+    @objc func withSaturation(_ newSaturation: CGFloat) -> UIColor {
         var hue: CGFloat = 1, brightness: CGFloat = 1, alpha: CGFloat = 1
         self.getHue(&hue, saturation: nil, brightness: &brightness, alpha: &alpha)
         return UIColor(hue: hue, saturation: newSaturation, brightness: brightness, alpha: alpha)
     }
-    func withBrightness(_ newBrightness: CGFloat) -> UIColor {
+    @objc func withBrightness(_ newBrightness: CGFloat) -> UIColor {
         var hue: CGFloat = 1, saturation: CGFloat = 1, alpha: CGFloat = 1
         self.getHue(&hue, saturation: &saturation, brightness: nil, alpha: &alpha)
         return UIColor(hue: hue, saturation: saturation, brightness: newBrightness, alpha: alpha)
     }
-    func withAlpha(_ newAlpha: CGFloat) -> UIColor {
+    @objc func withAlpha(_ newAlpha: CGFloat) -> UIColor {
         var hue: CGFloat = 1, saturation: CGFloat = 1, brightness: CGFloat = 1
         self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: nil)
         return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: newAlpha)
     }
-    func highlight(withLevel highlight: CGFloat) -> UIColor {
+    @objc func highlight(withLevel highlight: CGFloat) -> UIColor {
         var red: CGFloat = 1, green: CGFloat = 1, blue: CGFloat = 1, alpha: CGFloat = 1
         self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         return UIColor(red: red * (1-highlight) + highlight, green: green * (1-highlight) + highlight, blue: blue * (1-highlight) + highlight, alpha: alpha * (1-highlight) + highlight)
     }
-    func shadow(withLevel shadow: CGFloat) -> UIColor {
+    @objc func shadow(withLevel shadow: CGFloat) -> UIColor {
         var red: CGFloat = 1, green: CGFloat = 1, blue: CGFloat = 1, alpha: CGFloat = 1
         self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         return UIColor(red: red * (1-shadow), green: green * (1-shadow), blue: blue * (1-shadow), alpha: alpha * (1-shadow) + shadow)

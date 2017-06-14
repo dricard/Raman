@@ -13,21 +13,21 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Properties
     
     // local reference to model data
-    let ramanData = Model.sharedInstance
+    @objc let ramanData = Model.sharedInstance
     
     // These parameters are passed to this viewController
-    var myUnits : String?
-    var toolTipString : String?
+    @objc var myUnits : String?
+    @objc var toolTipString : String?
     var selectedValue : Double?
     var selectedDataSource : Int?   // which value in the list we're changing
     var whichTab: Raman.DataSourceType?
     
 //    var selectedSection : Int?
     
-    var valueChanged : Bool = false
-    var theReturnValue : Double = 0.0
+    @objc var valueChanged : Bool = false
+    @objc var theReturnValue : Double = 0.0
     
-    var shouldPopVC = true
+    @objc var shouldPopVC = true
         
     // MARK: - Outlets
     
@@ -108,7 +108,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-    func checkForValidValue(_ toTest: Double) -> Bool {
+    @objc func checkForValidValue(_ toTest: Double) -> Bool {
         
         let error = ramanData.spectro.checkForValidData(toTest, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
         if error.valid {

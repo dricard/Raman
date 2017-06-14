@@ -12,7 +12,7 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
 
     // MARK: properties
     
-    let modelData = Model.sharedInstance
+    @objc let modelData = Model.sharedInstance
     
     // MARK: Outlets
     
@@ -49,7 +49,7 @@ class BandwidthViewController: UIViewController, UITableViewDataSource, UITableV
     
 // MARK: Table delegates
     
-    func configureCell(cell: BWCell, indexPath: IndexPath) {
+    @objc func configureCell(cell: BWCell, indexPath: IndexPath) {
         cell.valueLabel!.text = modelData.spectro.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
         cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
         switch indexPath.row {

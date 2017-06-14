@@ -12,6 +12,6 @@ class Model: NSObject {
     
     var spectro = Raman()
     
-    static let sharedInstance = Model()
+    @objc static let sharedInstance = Model()
     fileprivate override init() {} // this prevents others from using the default init
 }
