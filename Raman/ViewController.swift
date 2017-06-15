@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     
     var raman: Raman?
     var selectedTheme: Theme.ThemeModes?
+    var themeModeButton: UIBarButtonItem!
     
     @objc var valueDidChangeFromEdit = false
     @objc var whichSectionValueChanged : Int = 0
@@ -25,6 +26,33 @@ class ViewController: UIViewController {
     
     @IBOutlet var myTableView: UITableView!
     @IBOutlet weak var aboutButton: UIBarButtonItem!
+    
+    
+    // MARK: - actions
+    
+    @objc func themeModeButtonTapped(_ sender: UIBarButtonItem) {
+        if let selectedTheme = selectedTheme {
+            switch selectedTheme {
+            case .darkMode:
+                self.selectedTheme = .lightMode
+            case .lightMode:
+                self.selectedTheme = .darkMode
+            }
+            updateThemeModeButton()
+        }
+    }
+    
+    func updateThemeModeButton() {
+        // display theme mode button for this mode
+        guard let selectedTheme = selectedTheme else { return }
+        
+        switch selectedTheme {
+        case .darkMode:
+            themeModeButton.image = UIImage(named: "lightModeIcon")
+        case .lightMode:
+            themeModeButton.image = UIImage(named: "darkModeIcon")
+        }
+    }
     
     // MARK: - Life cycle
     
@@ -52,6 +80,14 @@ class ViewController: UIViewController {
         
         // Remove space at top of tableview
         myTableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
+        
+        // add theme mode button to navigation bar
+        
+        themeModeButton = UIBarButtonItem(image: UIImage(named: "lightModeIcon"), style: .plain, target: self, action: #selector(ViewController.themeModeButtonTapped(_:)))
+        
+        navigationItem.leftBarButtonItem = themeModeButton
+        
+        updateThemeModeButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {

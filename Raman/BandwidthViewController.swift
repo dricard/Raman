@@ -14,12 +14,37 @@ class BandwidthViewController: UIViewController {
     
     var raman: Raman?
     var selectedTheme: Theme.ThemeModes?
-
+    var themeModeButton: UIBarButtonItem!
+    
     // MARK: Outlets
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var aboutButton: UIBarButtonItem!
     
+    func themeModeButtonTapped(_ sender: UIBarButtonItem) {
+        if let selectedTheme = selectedTheme {
+            switch selectedTheme {
+            case .darkMode:
+                self.selectedTheme = .lightMode
+            case .lightMode:
+                self.selectedTheme = .darkMode
+            }
+            updateThemeModeButton()
+        }
+    }
+    
+    func updateThemeModeButton() {
+        // display theme mode button for this mode
+        guard let selectedTheme = selectedTheme else { return }
+        
+        switch selectedTheme {
+        case .darkMode:
+            themeModeButton.image = UIImage(named: "lightModeIcon")
+        case .lightMode:
+            themeModeButton.image = UIImage(named: "darkModeIcon")
+        }
+    }
+
     // MARK: Lyfe Cycle
     
     override func viewDidLoad() {
@@ -46,7 +71,15 @@ class BandwidthViewController: UIViewController {
         
         // fix space on top of tableview
         tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-
+        
+        // add theme mode button to navigation bar
+        
+        themeModeButton = UIBarButtonItem(image: UIImage(named: "lightModeIcon"), style: .plain, target: self, action: #selector(ViewController.themeModeButtonTapped(_:)))
+        
+        navigationItem.leftBarButtonItem = themeModeButton
+        
+        updateThemeModeButton()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
