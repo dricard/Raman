@@ -41,6 +41,8 @@ class BandwidthViewController: UIViewController {
         // set navigation bar
         navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
         navigationController?.navigationBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: Theme.color(for: .navBarTextColor, with: selectedTheme.mode)]
+        
         
         // set tab bar
         tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
@@ -50,7 +52,7 @@ class BandwidthViewController: UIViewController {
         } else {
             // Fallback on earlier versions
         }
-
+        
         // update theme mode switch button
         switch selectedTheme.mode {
         case .darkMode:
