@@ -18,7 +18,7 @@ public class RamanStyleKit : NSObject {
     //// Cache
 
     private struct Cache {
-        static let backgroundColorSelected: UIColor = UIColor(red: 1.000, green: 0.990, blue: 0.940, alpha: 1.000)
+        static let backgroundColorSelected: UIColor = UIColor(red: 0.870, green: 0.976, blue: 1.000, alpha: 1.000)
         static var imageOfSpectro0: UIImage?
         static var spectro0Targets: [AnyObject]?
         static var imageOfSpectro1: UIImage?
