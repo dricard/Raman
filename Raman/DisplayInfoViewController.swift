@@ -45,6 +45,9 @@ class DisplayInfoViewController: UIViewController {
         formatter.dateFormat = "yyyy"
         let year = Int(formatter.string(from: today))!
         copyrightLabel.text = "© \(year) Hexaedre"
+        
+        view.backgroundColor = UIColor(red:1.00, green:0.99, blue:0.94, alpha:1.00)
+        
     }
     
     // MARK: - User actions
