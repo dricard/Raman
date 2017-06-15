@@ -35,13 +35,13 @@ class BandwidthViewController: UIViewController {
         }
 
         // set the tableview background color (behind the cells)
-        tableView.backgroundColor = Theme.Colors.backgroundColor.color
+        tableView.backgroundColor = Theme.color(for: .backgroundColor, with: .darkMode)
         
         // This prevents the space below the cells to have spacers
         tableView.tableFooterView = UIView()
         
         // set the separator color to the same as the background
-        tableView.separatorColor = Theme.Colors.backgroundColor.color
+        tableView.separatorColor = Theme.color(for: .backgroundColor, with: .darkMode)
         
         // fix space on top of tableview
         tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
@@ -66,7 +66,7 @@ extension BandwidthViewController: UITableViewDataSource {
         cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
         cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
         cell.exponentLabel.text = Constants.bwEpx[indexPath.row]
-        cell.backgroundColor = Theme.Colors.cellBackgroundColor.color
+        cell.backgroundColor = Theme.color(for: .cellBackgroundColor, with: .darkMode)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

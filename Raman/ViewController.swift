@@ -42,13 +42,13 @@ class ViewController: UIViewController {
         }
         
         // set the tableview background color (behind the cells)
-        myTableView.backgroundColor = Theme.Colors.backgroundColor.color
+        myTableView.backgroundColor = Theme.color(for: .backgroundColor, with: .darkMode)
         
         // This prevents the space below the cells to have spacers
         myTableView.tableFooterView = UIView()
         
         // set the separator color to the same as the background
-        myTableView.separatorColor = Theme.Colors.backgroundColor.color
+        myTableView.separatorColor = Theme.color(for: .backgroundColor, with: .darkMode)
         
         // Remove space at top of tableview
         myTableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
@@ -103,7 +103,7 @@ extension ViewController: UITableViewDataSource {
         cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")
         cell.unitsLabel.text = Constants.specUnits[indexPath.row]
         cell.exponentsLabel.text = Constants.specExp[indexPath.row]
-        cell.backgroundColor = Theme.Colors.cellBackgroundColor.color
+        cell.backgroundColor = Theme.color(for: .cellBackgroundColor, with: .darkMode)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

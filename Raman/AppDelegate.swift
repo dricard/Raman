@@ -47,14 +47,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        window?.tintColor = Theme.Colors.tintColor.color
+        window?.tintColor = Theme.color(for: .tintColor, with: .darkMode)
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.titleTextAttributes = [
             NSAttributedStringKey.font.rawValue: Theme.Fonts.navTitleFont.font,
-            NSAttributedStringKey.foregroundColor.rawValue: Theme.Colors.tintColor.color
+            NSAttributedStringKey.foregroundColor.rawValue: Theme.color(for: .tintColor, with: .darkMode)
         ]
         navBarAppearance.barStyle = UIBarStyle.black
-        navBarAppearance.barTintColor = Theme.Colors.foreground.color
+        navBarAppearance.barTintColor = Theme.color(for: .foreground, with: .darkMode)
         
         Fabric.with([Crashlytics.self])
         
