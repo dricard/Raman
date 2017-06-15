@@ -72,6 +72,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navBarAppearance.barStyle = UIBarStyle.blackTranslucent
         navBarAppearance.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
         
+        // set tab bar
+        let tabBarAppearance = UITabBar.appearance()
+        tabBarAppearance.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+        tabBarAppearance.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+        if #available(iOS 10.0, *) {
+            tabBarAppearance.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+        } else {
+            // Fallback on earlier versions
+        }
+        
         Fabric.with([Crashlytics.self])
         
         // Dependency injection

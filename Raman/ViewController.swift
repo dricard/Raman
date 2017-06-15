@@ -53,6 +53,12 @@ class ViewController: UIViewController {
         
         // set tab bar
         tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+        tabBarController?.tabBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+        if #available(iOS 10.0, *) {
+            tabBarController?.tabBar.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+        } else {
+            // Fallback on earlier versions
+        }
         
         // update theme mode switch button
         switch selectedTheme.mode {
