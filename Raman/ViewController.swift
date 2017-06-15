@@ -103,6 +103,7 @@ extension ViewController: UITableViewDataSource {
         cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")
         cell.unitsLabel.text = Constants.specUnits[indexPath.row]
         cell.exponentsLabel.text = Constants.specExp[indexPath.row]
+        cell.backgroundColor = Theme.Colors.cellBackgroundColor.color
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

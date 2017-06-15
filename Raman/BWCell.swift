@@ -24,12 +24,12 @@ class BWCell: UITableViewCell {
         // customize the look with theme
         backgroundColor = Theme.Colors.foreground.color
         valueLabel.font = Theme.Fonts.titleFont.font
-        valueLabel.textColor = Theme.Colors.lightTextColor.color
+        valueLabel.textColor = Theme.Colors.cellTextColor.color
         dataLabel.font = Theme.Fonts.detailTextFont.font
-        dataLabel.textColor = Theme.Colors.lightTextColor.color
-        unitsLabel.textColor = Theme.Colors.lightTextColor.color
+        dataLabel.textColor = Theme.Colors.cellTextColor.color
+        unitsLabel.textColor = Theme.Colors.cellTextColor.color
         unitsLabel.font = Theme.Fonts.detailTextFont.font
-        exponentLabel.textColor = Theme.Colors.lightTextColor.color
+        exponentLabel.textColor = Theme.Colors.cellTextColor.color
         exponentLabel.font = Theme.Fonts.detailTextFont.font
         
         // make the separator go all the way to the left edge

@@ -66,6 +66,7 @@ extension BandwidthViewController: UITableViewDataSource {
         cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
         cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
         cell.exponentLabel.text = Constants.bwEpx[indexPath.row]
+        cell.backgroundColor = Theme.Colors.cellBackgroundColor.color
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
