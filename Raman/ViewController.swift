@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     // MARK: - Properties
     
     var raman: Raman?
+    var selectedTheme: Theme.ThemeModes?
     
     @objc var valueDidChangeFromEdit = false
     @objc var whichSectionValueChanged : Int = 0
@@ -26,7 +27,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var aboutButton: UIBarButtonItem!
     
     // MARK: - Life cycle
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,13 +42,13 @@ class ViewController: UIViewController {
         }
         
         // set the tableview background color (behind the cells)
-        myTableView.backgroundColor = Theme.color(for: .backgroundColor, with: .darkMode)
+        myTableView.backgroundColor = Theme.color(for: .tableViewBackgroundColor, with: .darkMode)
         
         // This prevents the space below the cells to have spacers
         myTableView.tableFooterView = UIView()
         
         // set the separator color to the same as the background
-        myTableView.separatorColor = Theme.color(for: .backgroundColor, with: .darkMode)
+        myTableView.separatorColor = Theme.color(for: .tableViewSeparatorColor, with: .darkMode)
         
         // Remove space at top of tableview
         myTableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
@@ -60,7 +60,14 @@ class ViewController: UIViewController {
         myTableView.reloadData()
     }
     
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let navController = segue.destination as? UINavigationController, let vc = navController.topViewController as? DisplayInfoViewController else { return }
+        vc.selectedTheme = selectedTheme
+    }
 }
+
 // MARK: - Tableview delegates
 
 extension ViewController: UITableViewDelegate {
@@ -79,6 +86,7 @@ extension ViewController: UITableViewDelegate {
         controller.toolTipString = Constants.specToolTip[indexPath.row]
         controller.whichTab = Raman.DataSourceType.spectroscopy
         controller.raman = raman
+        controller.selectedTheme = selectedTheme
         
         navigationController!.pushViewController(controller, animated: true)
     }
@@ -103,7 +111,6 @@ extension ViewController: UITableViewDataSource {
         cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")
         cell.unitsLabel.text = Constants.specUnits[indexPath.row]
         cell.exponentsLabel.text = Constants.specExp[indexPath.row]
-        cell.backgroundColor = Theme.color(for: .cellBackgroundColor, with: .darkMode)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

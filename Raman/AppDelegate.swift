@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var raman = Raman()
+    var selectedTheme: Theme.ThemeModes = .lightMode
     
     fileprivate func loadUserPrefs() {
         // Load user's data
@@ -43,18 +44,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             UserDefaults.standard.set(raman.bwInCm, forKey: "bwInCm")
         }
+        
+        // theme mode selected
+        let mode = UserDefaults.standard.integer(forKey: "themeMode")
+        if mode > 0 {
+            if let theme = Theme.ThemeModes(rawValue: mode) {
+                selectedTheme = theme
+            } else {
+                selectedTheme = Theme.ThemeModes.darkMode
+            }
+        } else {
+            UserDefaults.standard.set(Theme.ThemeModes.darkMode.rawValue, forKey: "themeMode")
+        }
+        
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        window?.tintColor = Theme.color(for: .tintColor, with: .darkMode)
+        window?.tintColor = Theme.color(for: .windowTintColor, with: .darkMode)
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.titleTextAttributes = [
             NSAttributedStringKey.font.rawValue: Theme.Fonts.navTitleFont.font,
-            NSAttributedStringKey.foregroundColor.rawValue: Theme.color(for: .tintColor, with: .darkMode)
+            NSAttributedStringKey.foregroundColor.rawValue: Theme.color(for: .navBarTextColor, with: .darkMode)
         ]
         navBarAppearance.barStyle = UIBarStyle.black
-        navBarAppearance.barTintColor = Theme.color(for: .foreground, with: .darkMode)
+        navBarAppearance.barTintColor = Theme.color(for: .navBarTintColor, with: .darkMode)
         
         Fabric.with([Crashlytics.self])
         
@@ -67,8 +81,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for vc in tabController.childViewControllers {
             if let navController = vc as? UINavigationController, let viewController = navController.topViewController as? ViewController {
                 viewController.raman = raman
+                viewController.selectedTheme = selectedTheme
             } else if let navController = vc as? UINavigationController, let viewController = navController.topViewController as? BandwidthViewController {
                 viewController.raman = raman
+                viewController.selectedTheme = selectedTheme
             }
         }
         

@@ -13,7 +13,8 @@ class BandwidthViewController: UIViewController {
     // MARK: properties
     
     var raman: Raman?
-    
+    var selectedTheme: Theme.ThemeModes?
+
     // MARK: Outlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -35,13 +36,13 @@ class BandwidthViewController: UIViewController {
         }
 
         // set the tableview background color (behind the cells)
-        tableView.backgroundColor = Theme.color(for: .backgroundColor, with: .darkMode)
+        tableView.backgroundColor = Theme.color(for: .tableViewBackgroundColor, with: .darkMode)
         
         // This prevents the space below the cells to have spacers
         tableView.tableFooterView = UIView()
         
         // set the separator color to the same as the background
-        tableView.separatorColor = Theme.color(for: .backgroundColor, with: .darkMode)
+        tableView.separatorColor = Theme.color(for: .tableViewSeparatorColor, with: .darkMode)
         
         // fix space on top of tableview
         tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
@@ -52,6 +53,14 @@ class BandwidthViewController: UIViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let navController = segue.destination as? UINavigationController, let vc = navController.topViewController as? DisplayInfoViewController else { return }
+        vc.selectedTheme = selectedTheme
+    }
+    
 }
 
 // MARK: TableView DataSource
@@ -66,7 +75,6 @@ extension BandwidthViewController: UITableViewDataSource {
         cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
         cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
         cell.exponentLabel.text = Constants.bwEpx[indexPath.row]
-        cell.backgroundColor = Theme.color(for: .cellBackgroundColor, with: .darkMode)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,7 +111,8 @@ extension BandwidthViewController: UITableViewDelegate {
         controller.toolTipString = Constants.bwToolTip[indexPath.row]
         controller.whichTab = Raman.DataSourceType.bandwidth
         controller.raman = raman
-        
+        controller.selectedTheme = selectedTheme
+
         navigationController!.pushViewController(controller, animated: true)
     }
     

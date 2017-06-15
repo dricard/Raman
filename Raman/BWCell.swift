@@ -22,7 +22,7 @@ class BWCell: UITableViewCell {
         super.awakeFromNib()
         
         // customize the look with theme
-        backgroundColor = Theme.color(for: .foreground, with: .darkMode)
+        backgroundColor = Theme.color(for: .cellBackgroundColor, with: .darkMode)
         valueLabel.font = Theme.Fonts.titleFont.font
         valueLabel.textColor = Theme.color(for: .cellTextColor, with: .darkMode)
         dataLabel.font = Theme.Fonts.detailTextFont.font

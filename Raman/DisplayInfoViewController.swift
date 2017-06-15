@@ -10,6 +10,10 @@ import UIKit
 
 class DisplayInfoViewController: UIViewController {
     
+    // MARK: - Properties
+    
+    var selectedTheme: Theme.ThemeModes?
+
     // MARK: - Outlets
     
     @IBOutlet weak var copyrightLabel: UILabel!
