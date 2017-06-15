@@ -14,6 +14,7 @@
 		215A7AFF1CF8DA6E003B9F9B /* DataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A7AFE1CF8DA6E003B9F9B /* DataCell.swift */; };
 		215A7B011CF9194C003B9F9B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A7B001CF9194C003B9F9B /* Theme.swift */; };
 		215A7B031CF91D07003B9F9B /* BWCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A7B021CF91D07003B9F9B /* BWCell.swift */; };
+		215AB9E41EF3208400555AB4 /* ThemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215AB9E31EF3208400555AB4 /* ThemeMode.swift */; };
 		21B0F0FF1CFA898D008AF124 /* Hack-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21B0F0FE1CFA898D008AF124 /* Hack-Bold.ttf */; };
 		21BD40831E2AA7C30063E788 /* RamanStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BD40821E2AA7C30063E788 /* RamanStyleKit.swift */; };
 		21DBEA441E2C59E600C8436B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21DBEA461E2C59E600C8436B /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		215A7AFE1CF8DA6E003B9F9B /* DataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCell.swift; sourceTree = "<group>"; };
 		215A7B001CF9194C003B9F9B /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		215A7B021CF91D07003B9F9B /* BWCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWCell.swift; sourceTree = "<group>"; };
+		215AB9E31EF3208400555AB4 /* ThemeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeMode.swift; sourceTree = "<group>"; };
 		21B0F0FE1CFA898D008AF124 /* Hack-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hack-Bold.ttf"; sourceTree = "<group>"; };
 		21BD40821E2AA7C30063E788 /* RamanStyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RamanStyleKit.swift; sourceTree = "<group>"; };
 		21DBEA491E2C5A2E00C8436B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				215A7B021CF91D07003B9F9B /* BWCell.swift */,
 				21DBEA4A1E2C5A2E00C8436B /* Localizable.strings */,
 				21F468AD1E2C6133004C56BA /* Strings+Localized.swift */,
+				215AB9E31EF3208400555AB4 /* ThemeMode.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21F468AE1E2C6133004C56BA /* Strings+Localized.swift in Sources */,
+				215AB9E41EF3208400555AB4 /* ThemeMode.swift in Sources */,
 				92011B091B0D1A1600611519 /* ChangeValueViewController.swift in Sources */,
 				214414AA1CB2B3F400A1958D /* BandwidthViewController.swift in Sources */,
 				92011B111B0D1B9300611519 /* Raman.swift in Sources */,

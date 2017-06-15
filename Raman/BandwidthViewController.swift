@@ -13,7 +13,7 @@ class BandwidthViewController: UIViewController {
     // MARK: properties
     
     var raman: Raman?
-    var selectedTheme: Theme.ThemeModes?
+    var selectedTheme: ThemeMode?
     var themeModeButton: UIBarButtonItem!
     
     // MARK: Outlets
@@ -21,30 +21,48 @@ class BandwidthViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var aboutButton: UIBarButtonItem!
     
-    func themeModeButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func themeModeButtonTapped(_ sender: UIBarButtonItem) {
         if let selectedTheme = selectedTheme {
-            switch selectedTheme {
+            switch selectedTheme.mode {
             case .darkMode:
-                self.selectedTheme = .lightMode
+                self.selectedTheme?.mode = .lightMode
             case .lightMode:
-                self.selectedTheme = .darkMode
+                self.selectedTheme?.mode = .darkMode
             }
-            updateThemeModeButton()
+            UserDefaults.standard.set(selectedTheme.mode.rawValue, forKey: "themeMode")
+            updateInterface()
         }
     }
     
-    func updateThemeModeButton() {
+    func updateInterface() {
         // display theme mode button for this mode
         guard let selectedTheme = selectedTheme else { return }
         
-        switch selectedTheme {
+        // set navigation bar
+        navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+        navigationController?.navigationBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+        
+        // set tab bar
+        tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+        
+        // update theme mode switch button
+        switch selectedTheme.mode {
         case .darkMode:
             themeModeButton.image = UIImage(named: "lightModeIcon")
         case .lightMode:
             themeModeButton.image = UIImage(named: "darkModeIcon")
         }
+        
+        // set the tableview background color (behind the cells)
+        tableView.backgroundColor = Theme.color(for: .tableViewBackgroundColor, with: selectedTheme.mode)
+        
+        // set the separator color to the same as the background
+        tableView.separatorColor = Theme.color(for: .tableViewSeparatorColor, with: selectedTheme.mode)
+        
+        // update the display with new them
+        tableView.reloadData()
     }
-
+    
     // MARK: Lyfe Cycle
     
     override func viewDidLoad() {
@@ -60,31 +78,25 @@ class BandwidthViewController: UIViewController {
             // Fallback on earlier versions
         }
 
-        // set the tableview background color (behind the cells)
-        tableView.backgroundColor = Theme.color(for: .tableViewBackgroundColor, with: .darkMode)
-        
         // This prevents the space below the cells to have spacers
         tableView.tableFooterView = UIView()
-        
-        // set the separator color to the same as the background
-        tableView.separatorColor = Theme.color(for: .tableViewSeparatorColor, with: .darkMode)
         
         // fix space on top of tableview
         tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
         // add theme mode button to navigation bar
         
-        themeModeButton = UIBarButtonItem(image: UIImage(named: "lightModeIcon"), style: .plain, target: self, action: #selector(ViewController.themeModeButtonTapped(_:)))
+        themeModeButton = UIBarButtonItem(image: UIImage(named: "lightModeIcon"), style: .plain, target: self, action: #selector(BandwidthViewController.themeModeButtonTapped(_:)))
         
         navigationItem.leftBarButtonItem = themeModeButton
         
-        updateThemeModeButton()
+        updateInterface()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        updateInterface()
     }
     
     // MARK: - Navigation
@@ -101,13 +113,24 @@ class BandwidthViewController: UIViewController {
 extension BandwidthViewController: UITableViewDataSource {
     
     @objc func configureCell(cell: BWCell, indexPath: IndexPath) {
-        guard let raman = raman else { return }
+        guard let raman = raman, let selectedTheme = selectedTheme else { return }
         
         cell.valueLabel!.text = raman.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
         cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
         cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
         cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
         cell.exponentLabel.text = Constants.bwEpx[indexPath.row]
+        cell.backgroundColor = Theme.color(for: .cellBackgroundColor, with: selectedTheme.mode)
+        cell.valueLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+        cell.dataLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+        cell.unitsLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+        cell.exponentLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+        if selectedTheme.mode == .darkMode {
+            cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
+        } else {
+            cell.dataImageView?.image = UIImage(named: "bw_light\(indexPath.row)")
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

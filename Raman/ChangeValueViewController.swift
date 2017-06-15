@@ -13,7 +13,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Properties
     
     var raman: Raman?
-    var selectedTheme: Theme.ThemeModes?
+    var selectedTheme: ThemeMode?
 
     // These parameters are passed to this viewController
     @objc var myUnits : String?

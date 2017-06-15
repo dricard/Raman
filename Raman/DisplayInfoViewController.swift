@@ -12,7 +12,7 @@ class DisplayInfoViewController: UIViewController {
     
     // MARK: - Properties
     
-    var selectedTheme: Theme.ThemeModes?
+    var selectedTheme: ThemeMode?
 
     // MARK: - Outlets
     

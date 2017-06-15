@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var raman = Raman()
-    var selectedTheme: Theme.ThemeModes = .lightMode
+    var selectedTheme = ThemeMode()
     
     fileprivate func loadUserPrefs() {
         // Load user's data
@@ -48,31 +48,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // theme mode selected
         let mode = UserDefaults.standard.integer(forKey: "themeMode")
         if mode > 0 {
-            if let theme = Theme.ThemeModes(rawValue: mode) {
-                selectedTheme = theme
+            if let theme = ThemeModes(rawValue: mode) {
+                selectedTheme.mode = theme
             } else {
-                selectedTheme = Theme.ThemeModes.darkMode
+                selectedTheme.mode = ThemeModes.darkMode
             }
         } else {
-            UserDefaults.standard.set(Theme.ThemeModes.darkMode.rawValue, forKey: "themeMode")
+            UserDefaults.standard.set(ThemeModes.darkMode.rawValue, forKey: "themeMode")
         }
         
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        window?.tintColor = Theme.color(for: .windowTintColor, with: .darkMode)
+        loadUserPrefs()
+        
+        window?.tintColor = Theme.color(for: .windowTintColor, with: selectedTheme.mode)
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.titleTextAttributes = [
             NSAttributedStringKey.font.rawValue: Theme.Fonts.navTitleFont.font,
-            NSAttributedStringKey.foregroundColor.rawValue: Theme.color(for: .navBarTextColor, with: .darkMode)
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
         ]
-        navBarAppearance.barStyle = UIBarStyle.black
-        navBarAppearance.barTintColor = Theme.color(for: .navBarTintColor, with: .darkMode)
+        navBarAppearance.barStyle = UIBarStyle.blackTranslucent
+        navBarAppearance.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
         
         Fabric.with([Crashlytics.self])
-        
-        loadUserPrefs()
         
         // Dependency injection
         

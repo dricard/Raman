@@ -22,17 +22,12 @@ class DataCell: UITableViewCell {
         super.awakeFromNib()
         
         // customize the look with theme
-        backgroundColor = Theme.color(for: .cellBackgroundColor, with: .darkMode)
         valueLabel.font = Theme.Fonts.titleFont.font
-        valueLabel.textColor = Theme.color(for: .cellTextColor, with: .darkMode)
         dataLabel.font = Theme.Fonts.detailTextFont.font
-        unitsLabel.textColor = Theme.color(for: .cellTextColor, with: .darkMode)
         unitsLabel.font = Theme.Fonts.detailTextFont.font
-        exponentsLabel.textColor = Theme.color(for: .cellTextColor, with: .darkMode)
-        exponentsLabel.font = Theme.Fonts.detailTextFont.font
+                exponentsLabel.font = Theme.Fonts.detailTextFont.font
         
-        dataLabel.textColor = Theme.color(for: .cellTextColor, with: .darkMode)
-
+        
         // make the separator go all the way to the left edge
         separatorInset = UIEdgeInsets.zero
         layoutMargins = UIEdgeInsets.zero
