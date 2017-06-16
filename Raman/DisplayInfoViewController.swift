@@ -64,7 +64,7 @@ class DisplayInfoViewController: UIViewController {
     }
     
     @IBAction func helpPressed(_ sender: AnyObject) {
-        let url = URL(string: "http://hexaedre.com/Raman.html")
+        let url = URL(string: "http://hexaedre.com/apps/raman/")
         UIApplication.shared.openURL(url!)
     }
     
