@@ -10,6 +10,10 @@ import UIKit
 
 class DisplayInfoViewController: UIViewController {
     
+    // MARK: - Properties
+    
+    var selectedTheme: ThemeMode?
+
     // MARK: - Outlets
     
     @IBOutlet weak var copyrightLabel: UILabel!
@@ -41,6 +45,9 @@ class DisplayInfoViewController: UIViewController {
         formatter.dateFormat = "yyyy"
         let year = Int(formatter.string(from: today))!
         copyrightLabel.text = "© \(year) Hexaedre"
+        
+        view.backgroundColor = UIColor(red:1.00, green:0.99, blue:0.94, alpha:1.00)
+        
     }
     
     // MARK: - User actions
@@ -57,7 +64,7 @@ class DisplayInfoViewController: UIViewController {
     }
     
     @IBAction func helpPressed(_ sender: AnyObject) {
-        let url = URL(string: "http://hexaedre.com/Raman.html")
+        let url = URL(string: "http://hexaedre.com/apps/raman/")
         UIApplication.shared.openURL(url!)
     }
     

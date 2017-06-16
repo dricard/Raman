@@ -9,28 +9,50 @@
 import UIKit
 
 struct Theme {
-    enum Colors {
-        case tintColor
-        case backgroundColor
-        case sectionHeader
-        case foreground
-        case lightTextColor
-        case darkBackgroundColor
-        
-        var color: UIColor {
-            switch self {
-            case .tintColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)        // This is the NavBar text color
-            // Background color is used for window background
-            case .backgroundColor: return UIColor(red:0.29, green:0.62, blue:0.80, alpha:1.00)  // this is the color behind the cells
-            // SectionHeader is just that, seaction headers in tables
-            case .sectionHeader: return UIColor(red:0.36, green:0.79, blue:0.96, alpha:1.00)
-            // Foreground is used for Nav bar
-            case .foreground: return UIColor(red:0.62, green:0.82, blue:0.90, alpha:0.25)       // cell background and Navbar background color
-            case .lightTextColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
-            case .darkBackgroundColor: return UIColor(red:0.21, green:0.52, blue:0.70, alpha:1.00)
+    
+    static func color(for element: Element, with selectedTheme: ThemeModes) -> UIColor {
+        switch selectedTheme {
+        case .darkMode:
+            switch element {
+            case .windowTintColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
+            case .navBarTextColor: return UIColor(red:1.00, green:0.99, blue:0.94, alpha:1.00)
+            case .tableViewBackgroundColor: return UIColor(red:0.29, green:0.62, blue:0.80, alpha:1.00)
+            case .tableViewSeparatorColor: return UIColor(red:1.00, green:0.97, blue:0.85, alpha:1.00)
+            case .navBarTintColor: return UIColor(red:0.21, green:0.52, blue:0.70, alpha:1.00)
+            case .cellTextColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
+            case .cellBackgroundColor: return UIColor(red:0.62, green:0.82, blue:0.90, alpha:0.25)
+            }
+        case .lightMode:
+            switch element {
+            case .windowTintColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
+            case .navBarTextColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
+            case .tableViewBackgroundColor: return UIColor(red:1.00, green:0.97, blue:0.85, alpha:1.00)
+            case .tableViewSeparatorColor: return UIColor(red:0.29, green:0.62, blue:0.80, alpha:1.00)
+            case .navBarTintColor: return UIColor(red:0.62, green:0.82, blue:0.90, alpha:0.25)
+            case .cellTextColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
+            case .cellBackgroundColor: return UIColor(red:1.00, green:0.99, blue:0.94, alpha:1.00)
             }
         }
     }
+    
+    /*
+     .windowTintColor: window color
+     .navBarTextColor: text in the navigation bar
+     .tableViewBackgroundColor: this is the color behind the cells
+     .tableViewSeparatorColor: this is the color between the cells (usually same as background)
+     .cellBackgroundColor: cell background
+     .navBarTintColor: Navbar background color
+     .cellTextColor: cell text color
+    */
+    enum Element {
+        case windowTintColor
+        case navBarTextColor
+        case tableViewBackgroundColor
+        case tableViewSeparatorColor
+        case cellBackgroundColor
+        case navBarTintColor
+        case cellTextColor
+     }
     
     enum Fonts {
         case titleFont
@@ -45,6 +67,6 @@ struct Theme {
             }
         }
     }
-
+    
 }
 

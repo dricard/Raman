@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var raman = Raman()
+    var selectedTheme = ThemeMode()
     
     fileprivate func loadUserPrefs() {
         // Load user's data
@@ -43,22 +44,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             UserDefaults.standard.set(raman.bwInCm, forKey: "bwInCm")
         }
+        
+        // theme mode selected
+        let mode = UserDefaults.standard.integer(forKey: "themeMode")
+        if mode > 0 {
+            if let theme = ThemeModes(rawValue: mode) {
+                selectedTheme.mode = theme
+            } else {
+                selectedTheme.mode = ThemeModes.darkMode
+            }
+        } else {
+            UserDefaults.standard.set(ThemeModes.darkMode.rawValue, forKey: "themeMode")
+        }
+        
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        window?.tintColor = Theme.Colors.tintColor.color
+        loadUserPrefs()
+        
+        window?.tintColor = Theme.color(for: .windowTintColor, with: selectedTheme.mode)
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.titleTextAttributes = [
             NSAttributedStringKey.font.rawValue: Theme.Fonts.navTitleFont.font,
-            NSAttributedStringKey.foregroundColor.rawValue: Theme.Colors.tintColor.color
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
         ]
-        navBarAppearance.barStyle = UIBarStyle.black
-        navBarAppearance.barTintColor = Theme.Colors.foreground.color
+        navBarAppearance.barStyle = UIBarStyle.blackTranslucent
+        navBarAppearance.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+        
+        // set tab bar
+        let tabBarAppearance = UITabBar.appearance()
+        tabBarAppearance.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+        tabBarAppearance.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+        if #available(iOS 10.0, *) {
+            tabBarAppearance.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+        } else {
+            // Fallback on earlier versions
+        }
         
         Fabric.with([Crashlytics.self])
-        
-        loadUserPrefs()
         
         // Dependency injection
         
@@ -67,8 +91,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for vc in tabController.childViewControllers {
             if let navController = vc as? UINavigationController, let viewController = navController.topViewController as? ViewController {
                 viewController.raman = raman
+                viewController.selectedTheme = selectedTheme
             } else if let navController = vc as? UINavigationController, let viewController = navController.topViewController as? BandwidthViewController {
                 viewController.raman = raman
+                viewController.selectedTheme = selectedTheme
             }
         }
         

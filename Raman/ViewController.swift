@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     // MARK: - Properties
     
     var raman: Raman?
+    var selectedTheme: ThemeMode?
+    var themeModeButton: UIBarButtonItem!
     
     @objc var valueDidChangeFromEdit = false
     @objc var whichSectionValueChanged : Int = 0
@@ -25,8 +27,63 @@ class ViewController: UIViewController {
     @IBOutlet var myTableView: UITableView!
     @IBOutlet weak var aboutButton: UIBarButtonItem!
     
-    // MARK: - Life cycle
     
+    // MARK: - actions
+    
+    @objc func themeModeButtonTapped(_ sender: UIBarButtonItem) {
+        if let selectedTheme = selectedTheme {
+            switch selectedTheme.mode {
+            case .darkMode:
+                self.selectedTheme?.mode = .lightMode
+            case .lightMode:
+                self.selectedTheme?.mode = .darkMode
+            }
+            UserDefaults.standard.set(selectedTheme.mode.rawValue, forKey: "themeMode")
+            updateInterface()
+        }
+    }
+    
+    func updateInterface() {
+        // display theme mode button for this mode
+        guard let selectedTheme = selectedTheme else { return }
+        
+        UIView.transition(with: self.view, duration: 1.0, options: .beginFromCurrentState, animations: {
+            
+            // set navigation bar
+            self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+            self.navigationController?.navigationBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: Theme.color(for: .navBarTextColor, with: selectedTheme.mode)]
+            
+            // set tab bar
+            self.tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+            self.tabBarController?.tabBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+            if #available(iOS 10.0, *) {
+                self.tabBarController?.tabBar.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+            } else {
+                // Fallback on earlier versions
+            }
+            
+            // update theme mode switch button
+            switch selectedTheme.mode {
+            case .darkMode:
+                self.themeModeButton.image = UIImage(named: "lightModeIcon")
+            case .lightMode:
+                self.themeModeButton.image = UIImage(named: "darkModeIcon")
+            }
+            
+            // set the tableview background color (behind the cells)
+            self.myTableView.backgroundColor = Theme.color(for: .tableViewBackgroundColor, with: selectedTheme.mode)
+            
+            // set the separator color to the same as the background
+            self.myTableView.separatorColor = Theme.color(for: .tableViewSeparatorColor, with: selectedTheme.mode)
+            
+        }, completion: nil)
+        
+        // update the display with new them
+        myTableView.reloadData()
+    }
+    
+    // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,26 +98,35 @@ class ViewController: UIViewController {
             // Fallback on earlier versions
         }
         
-        // set the tableview background color (behind the cells)
-        myTableView.backgroundColor = Theme.Colors.backgroundColor.color
-        
         // This prevents the space below the cells to have spacers
         myTableView.tableFooterView = UIView()
         
-        // set the separator color to the same as the background
-        myTableView.separatorColor = Theme.Colors.backgroundColor.color
-        
         // Remove space at top of tableview
         myTableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
+        
+        // add theme mode button to navigation bar
+        
+        themeModeButton = UIBarButtonItem(image: UIImage(named: "lightModeIcon"), style: .plain, target: self, action: #selector(ViewController.themeModeButtonTapped(_:)))
+        
+        navigationItem.leftBarButtonItem = themeModeButton
+        
+        updateInterface()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // udate all data
-        myTableView.reloadData()
+        updateInterface()
     }
     
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let navController = segue.destination as? UINavigationController, let vc = navController.topViewController as? DisplayInfoViewController else { return }
+        vc.selectedTheme = selectedTheme
+    }
 }
+
 // MARK: - Tableview delegates
 
 extension ViewController: UITableViewDelegate {
@@ -79,6 +145,7 @@ extension ViewController: UITableViewDelegate {
         controller.toolTipString = Constants.specToolTip[indexPath.row]
         controller.whichTab = Raman.DataSourceType.spectroscopy
         controller.raman = raman
+        controller.selectedTheme = selectedTheme
         
         navigationController!.pushViewController(controller, animated: true)
     }
@@ -97,12 +164,21 @@ extension ViewController: UITableViewDataSource {
     }
     
     @objc func configureCell(cell: DataCell, indexPath: IndexPath) {
-        guard let raman = raman else { return }
+        guard let raman = raman, let selectedTheme = selectedTheme else { return }
         cell.valueLabel!.text = raman.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
+        cell.valueLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
         cell.dataLabel?.text = Constants.ramanShift[indexPath.row]
-        cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")
+        cell.dataLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
         cell.unitsLabel.text = Constants.specUnits[indexPath.row]
+        cell.unitsLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
         cell.exponentsLabel.text = Constants.specExp[indexPath.row]
+        cell.exponentsLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+        cell.backgroundColor = Theme.color(for: .cellBackgroundColor, with: selectedTheme.mode)
+        if selectedTheme.mode == .darkMode {
+            cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")
+        } else {
+            cell.dataImageView?.image = UIImage(named: "spectro_light\(indexPath.row)")
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

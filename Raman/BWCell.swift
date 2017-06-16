@@ -22,14 +22,10 @@ class BWCell: UITableViewCell {
         super.awakeFromNib()
         
         // customize the look with theme
-        backgroundColor = Theme.Colors.foreground.color
+        
         valueLabel.font = Theme.Fonts.titleFont.font
-        valueLabel.textColor = Theme.Colors.lightTextColor.color
         dataLabel.font = Theme.Fonts.detailTextFont.font
-        dataLabel.textColor = Theme.Colors.lightTextColor.color
-        unitsLabel.textColor = Theme.Colors.lightTextColor.color
         unitsLabel.font = Theme.Fonts.detailTextFont.font
-        exponentLabel.textColor = Theme.Colors.lightTextColor.color
         exponentLabel.font = Theme.Fonts.detailTextFont.font
         
         // make the separator go all the way to the left edge
