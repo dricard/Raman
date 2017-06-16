@@ -13,6 +13,8 @@ class IAPHelper: NSObject {
     
     // MARK: - Properties
     
+    static let iAPHelperPurchaseNotification = NSNotification.Name.init("iAPHelperPurchaseNotification")
+    
     typealias ProductsRequestCompletionHandler = (_ products: [SKProduct]?) -> ()
     
     private let productIdentifiers: Set<String>
@@ -22,9 +24,11 @@ class IAPHelper: NSObject {
     init(prodIds: Set<String>) {
         productIdentifiers = prodIds
         super.init()
+        SKPaymentQueue.default().add(self)
     }
 }
 
+// MARK: - API
 extension IAPHelper {
     
     func requestProducts(completionHandler: @escaping ProductsRequestCompletionHandler) {
@@ -35,9 +39,14 @@ extension IAPHelper {
         productsRequest?.delegate = self
         productsRequest?.start()
     }
-
+    
+    func buyProduct(product: SKProduct) {
+        let payment = SKPayment(product: product)
+        SKPaymentQueue.default().add(payment)
+    }
 }
 
+// MARK: - SKProductRequest delegate
 extension IAPHelper: SKProductsRequestDelegate {
     // call returned without error, process result it
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
@@ -57,5 +66,49 @@ extension IAPHelper: SKProductsRequestDelegate {
         productsRequestCompletionHandler = .none
         productsRequest = .none
         
+    }
+}
+
+extension IAPHelper: SKPaymentTransactionObserver {
+    
+    @available(iOS 3.0, *)
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case .purchasing:
+                print("not handling 'purchasing' transaction state")
+            case .purchased:
+                completeTransaction(transaction: transaction)
+            case .failed:
+                failedTransaction(transaction: transaction)
+            case .restored:
+                print("not handling 'restored' transaction state")
+            case .deferred:
+                print("not handling 'deferred' transaction state")
+            }
+        }
+    }
+    
+    private func completeTransaction(transaction: SKPaymentTransaction) {
+        deliverPurchaseNotification(identifier: transaction.payment.productIdentifier)
+        // THIS IS VERY IMPORTANT!!
+        SKPaymentQueue.default().finishTransaction(transaction)
+    }
+    
+    private func failedTransaction(transaction: SKPaymentTransaction) {
+        if let error = transaction.error as? SKErrorCode {
+            // we log all error except if user simply cancelled
+            if error != SKErrorCode.paymentCancelled {
+                // log error
+                print("Transaction error: \(error.rawValue)")
+            }
+        }
+        // THIS IS VERY IMPORTANT!!
+        SKPaymentQueue.default().finishTransaction(transaction)
+    }
+    
+    private func deliverPurchaseNotification(identifier: String?) {
+        guard let identifier = identifier else { return }
+        NotificationCenter.default.post(name: IAPHelper.iAPHelperPurchaseNotification, object: identifier)
     }
 }

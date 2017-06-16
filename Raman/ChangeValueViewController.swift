@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class ChangeValueViewController: UIViewController, UITextFieldDelegate {
 
@@ -14,7 +15,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     
     var raman: Raman?
     var selectedTheme: ThemeMode?
-
+    
     // These parameters are passed to this viewController
     @objc var myUnits : String?
     @objc var myExp: String?
@@ -22,6 +23,13 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     var selectedValue : Double?
     var selectedDataSource : Int?   // which value in the list we're changing
     var whichTab: Raman.DataSourceType?
+    
+    var iapHelper: IAPHelper? {
+        didSet {
+            updateIAPHelper()
+        }
+    }
+    private var memoriesProduct: SKProduct?
     
 //    var selectedSection : Int?
     
@@ -35,7 +43,7 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var currentValueLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
-    
+    @IBOutlet weak var memoriesView: UIView!
     
     @IBOutlet var dataSourceLabel: UILabel!
     @IBOutlet var unitsLabel: UILabel!
@@ -90,6 +98,8 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
             print("ERROR in ChangeValueViewController viewDidLoad: trying to unwrap nil value in viewDidLoad of ChangeValueVC: toolTipString")
         }
         
+        // IAP observer
+        NotificationCenter.default.addObserver(self, selector: #selector(ChangeValueViewController.handlePurchaseNotification), name: IAPHelper.iAPHelperPurchaseNotification, object: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -162,5 +172,41 @@ class ChangeValueViewController: UIViewController, UITextFieldDelegate {
             self.navigationController!.popViewController(animated: true)
         }
     }
+}
 
+// MARK: - IAP handlers
+extension ChangeValueViewController {
+    
+    @IBAction func buyMemoriesTapped(sender: AnyObject) {
+        guard let memoriesProduct = memoriesProduct else { return }
+        iapHelper?.buyProduct(product: memoriesProduct)
+    }
+    
+    @objc func handlePurchaseNotification(notification: NSNotification) {
+        if let productID = notification.object as? String, productID == RamanIAPHelper.memories.productId {
+            setMemoriesPurchased(true)
+        }
+    }
+    
+    private func setMemoriesPurchased(_ purchased: Bool, animated: Bool = true) {
+        DispatchQueue.main.async {
+            if animated {
+                UIView.animate(withDuration: 0.7) {
+                    self.memoriesView.isHidden = !purchased
+                }
+            } else {
+                self.memoriesView.isHidden = !purchased
+            }
+        }
+    }
+    
+    private func updateIAPHelper() {
+        // pass to children
+        
+        guard let iapHelper = iapHelper else { return }
+        
+        iapHelper.requestProducts { (products) in
+            self.memoriesProduct = products!.filter{ $0.productIdentifier == RamanIAPHelper.memories.productId }.first
+        }
+    }
 }
