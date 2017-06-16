@@ -47,33 +47,37 @@ class ViewController: UIViewController {
         // display theme mode button for this mode
         guard let selectedTheme = selectedTheme else { return }
         
-        // set navigation bar
-        navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
-        navigationController?.navigationBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: Theme.color(for: .navBarTextColor, with: selectedTheme.mode)]
-
-        // set tab bar
-        tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
-        tabBarController?.tabBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-        if #available(iOS 10.0, *) {
-            tabBarController?.tabBar.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-        } else {
-            // Fallback on earlier versions
-        }
-        
-        // update theme mode switch button
-        switch selectedTheme.mode {
-        case .darkMode:
-            themeModeButton.image = UIImage(named: "lightModeIcon")
-        case .lightMode:
-            themeModeButton.image = UIImage(named: "darkModeIcon")
-        }
-        
-        // set the tableview background color (behind the cells)
-        myTableView.backgroundColor = Theme.color(for: .tableViewBackgroundColor, with: selectedTheme.mode)
-        
-        // set the separator color to the same as the background
-        myTableView.separatorColor = Theme.color(for: .tableViewSeparatorColor, with: selectedTheme.mode)
+        UIView.transition(with: self.view, duration: 1.0, options: .beginFromCurrentState, animations: {
+            
+            // set navigation bar
+            self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+            self.navigationController?.navigationBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: Theme.color(for: .navBarTextColor, with: selectedTheme.mode)]
+            
+            // set tab bar
+            self.tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+            self.tabBarController?.tabBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+            if #available(iOS 10.0, *) {
+                self.tabBarController?.tabBar.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+            } else {
+                // Fallback on earlier versions
+            }
+            
+            // update theme mode switch button
+            switch selectedTheme.mode {
+            case .darkMode:
+                self.themeModeButton.image = UIImage(named: "lightModeIcon")
+            case .lightMode:
+                self.themeModeButton.image = UIImage(named: "darkModeIcon")
+            }
+            
+            // set the tableview background color (behind the cells)
+            self.myTableView.backgroundColor = Theme.color(for: .tableViewBackgroundColor, with: selectedTheme.mode)
+            
+            // set the separator color to the same as the background
+            self.myTableView.separatorColor = Theme.color(for: .tableViewSeparatorColor, with: selectedTheme.mode)
+            
+        }, completion: nil)
         
         // update the display with new them
         myTableView.reloadData()
