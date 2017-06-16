@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21368BC31EF42EC800DB6096 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21368BC21EF42EC800DB6096 /* StoreKit.framework */; };
+		21368BC61EF42F4300DB6096 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21368BC51EF42F4300DB6096 /* IAPHelper.swift */; };
 		214414AA1CB2B3F400A1958D /* BandwidthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214414A91CB2B3F400A1958D /* BandwidthViewController.swift */; };
 		214414AC1CB2C0B700A1958D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214414AB1CB2C0B700A1958D /* Constants.swift */; };
 		215A7AF71CF8949F003B9F9B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 215A7AF51CF8949F003B9F9B /* Fabric.framework */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21368BC21EF42EC800DB6096 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		21368BC51EF42F4300DB6096 /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		214414A91CB2B3F400A1958D /* BandwidthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BandwidthViewController.swift; sourceTree = "<group>"; };
 		214414AB1CB2C0B700A1958D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		215A7AF51CF8949F003B9F9B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
@@ -61,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21368BC31EF42EC800DB6096 /* StoreKit.framework in Frameworks */,
 				215A7AF81CF8949F003B9F9B /* Crashlytics.framework in Frameworks */,
 				215A7AF71CF8949F003B9F9B /* Fabric.framework in Frameworks */,
 			);
@@ -69,6 +74,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21368BC11EF42EC800DB6096 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				21368BC21EF42EC800DB6096 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		21368BC41EF42EE800DB6096 /* IAP */ = {
+			isa = PBXGroup;
+			children = (
+				21368BC51EF42F4300DB6096 /* IAPHelper.swift */,
+			);
+			path = IAP;
+			sourceTree = "<group>";
+		};
 		215A7AFA1CF8BF9B003B9F9B /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +139,7 @@
 			children = (
 				92011AE51B0D197200611519 /* Raman */,
 				92011AE41B0D197200611519 /* Products */,
+				21368BC11EF42EC800DB6096 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,6 +154,7 @@
 		92011AE51B0D197200611519 /* Raman */ = {
 			isa = PBXGroup;
 			children = (
+				21368BC41EF42EE800DB6096 /* IAP */,
 				215A7AFD1CF8D993003B9F9B /* UI */,
 				215A7AFC1CF8D94F003B9F9B /* View */,
 				215A7AFA1CF8BF9B003B9F9B /* Model */,
@@ -191,6 +214,11 @@
 						DevelopmentTeam = 7B656Y9UYB;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -274,6 +302,7 @@
 				215A7B011CF9194C003B9F9B /* Theme.swift in Sources */,
 				215A7B031CF91D07003B9F9B /* BWCell.swift in Sources */,
 				215A7AFF1CF8DA6E003B9F9B /* DataCell.swift in Sources */,
+				21368BC61EF42F4300DB6096 /* IAPHelper.swift in Sources */,
 				214414AC1CB2C0B700A1958D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
