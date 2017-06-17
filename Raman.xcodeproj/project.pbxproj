@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2115376A1EF59CF90006AC64 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211537691EF59CF90006AC64 /* CalculatorViewController.swift */; };
 		21368BC31EF42EC800DB6096 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21368BC21EF42EC800DB6096 /* StoreKit.framework */; };
 		21368BC61EF42F4300DB6096 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21368BC51EF42F4300DB6096 /* IAPHelper.swift */; };
 		21368BC81EF45B9400DB6096 /* RamanIAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21368BC71EF45B9400DB6096 /* RamanIAPHelper.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		211537691EF59CF90006AC64 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		21368BC21EF42EC800DB6096 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		21368BC51EF42F4300DB6096 /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		21368BC71EF45B9400DB6096 /* RamanIAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RamanIAPHelper.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				214414A91CB2B3F400A1958D /* BandwidthViewController.swift */,
 				92011B0A1B0D1A3100611519 /* DisplayInfoViewController.swift */,
 				92011B081B0D1A1600611519 /* ChangeValueViewController.swift */,
+				211537691EF59CF90006AC64 /* CalculatorViewController.swift */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			files = (
 				21F468AE1E2C6133004C56BA /* Strings+Localized.swift in Sources */,
 				215AB9E41EF3208400555AB4 /* ThemeMode.swift in Sources */,
+				2115376A1EF59CF90006AC64 /* CalculatorViewController.swift in Sources */,
 				92011B091B0D1A1600611519 /* ChangeValueViewController.swift in Sources */,
 				214414AA1CB2B3F400A1958D /* BandwidthViewController.swift in Sources */,
 				92011B111B0D1B9300611519 /* Raman.swift in Sources */,
