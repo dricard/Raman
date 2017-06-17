@@ -357,7 +357,7 @@
         <!--Calculator View Controller-->
         <scene sceneID="RbI-db-Lhx">
             <objects>
-                <viewController id="it3-1f-xjb" customClass="CalculatorViewController" customModule="Raman" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalculatorViewController" id="it3-1f-xjb" customClass="CalculatorViewController" customModule="Raman" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dxD-5j-HzA"/>
                         <viewControllerLayoutGuide type="bottom" id="I1e-Xo-dwK"/>
@@ -563,7 +563,7 @@
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="+"/>
                                                                 <connections>
-                                                                    <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="teD-Yw-dkB"/>
+                                                                    <action selector="operationPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="zKI-il-42B"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -600,7 +600,7 @@
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="-"/>
                                                                 <connections>
-                                                                    <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="iav-x2-K2e"/>
+                                                                    <action selector="operationPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="mEw-vr-5Se"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -635,9 +635,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79A-u8-6ZM">
                                                                 <rect key="frame" x="274" y="0.0" width="91" height="107.5"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
-                                                                <state key="normal" title="E"/>
+                                                                <state key="normal" title="="/>
                                                                 <connections>
-                                                                    <action selector="enterPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="opL-oW-W38"/>
+                                                                    <action selector="operationPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="pZM-uL-xdV"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -696,7 +696,7 @@
                         <outlet property="digitButton" destination="fPR-d2-MCn" id="QJ0-M4-qUu"/>
                         <outlet property="displayLabel" destination="7Ob-zC-OqJ" id="jBt-fL-7wL"/>
                         <outlet property="enterButton" destination="79A-u8-6ZM" id="Pyx-b9-j7T"/>
-                        <outlet property="expomentLabel" destination="vAL-iZ-ODP" id="g6R-Jw-YkP"/>
+                        <outlet property="exponentLabel" destination="vAL-iZ-ODP" id="g6R-Jw-YkP"/>
                         <outlet property="memoryButton" destination="XeB-w1-Xqu" id="4r3-ng-Jqr"/>
                         <outlet property="parameterLabel" destination="yTj-nG-fGX" id="QLi-As-18a"/>
                         <outlet property="previousValueLabel" destination="Cf1-i1-E44" id="4Ta-Ja-K2s"/>

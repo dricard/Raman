@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2115376A1EF59CF90006AC64 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211537691EF59CF90006AC64 /* CalculatorViewController.swift */; };
+		2115376C1EF5BC4F0006AC64 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115376B1EF5BC4F0006AC64 /* Calculator.swift */; };
 		21368BC31EF42EC800DB6096 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21368BC21EF42EC800DB6096 /* StoreKit.framework */; };
 		21368BC61EF42F4300DB6096 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21368BC51EF42F4300DB6096 /* IAPHelper.swift */; };
 		21368BC81EF45B9400DB6096 /* RamanIAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21368BC71EF45B9400DB6096 /* RamanIAPHelper.swift */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		211537691EF59CF90006AC64 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
+		2115376B1EF5BC4F0006AC64 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		21368BC21EF42EC800DB6096 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		21368BC51EF42F4300DB6096 /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		21368BC71EF45B9400DB6096 /* RamanIAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RamanIAPHelper.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				92011B101B0D1B9300611519 /* Raman.swift */,
 				214414AB1CB2C0B700A1958D /* Constants.swift */,
+				2115376B1EF5BC4F0006AC64 /* Calculator.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				214414AA1CB2B3F400A1958D /* BandwidthViewController.swift in Sources */,
 				92011B111B0D1B9300611519 /* Raman.swift in Sources */,
 				92011B0B1B0D1A3100611519 /* DisplayInfoViewController.swift in Sources */,
+				2115376C1EF5BC4F0006AC64 /* Calculator.swift in Sources */,
 				92011B0D1B0D1A4300611519 /* ViewController.swift in Sources */,
 				21BD40831E2AA7C30063E788 /* RamanStyleKit.swift in Sources */,
 				92011AE91B0D197300611519 /* AppDelegate.swift in Sources */,
