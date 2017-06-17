@@ -63,6 +63,15 @@ class CalculatorViewController: UIViewController {
                 singlePeriod = true
             }
         }
+        if digit == "d" {
+            let removed = displayLabel.text?.last
+            if removed == "." {
+                singlePeriod = false
+            }
+            let text = String(displayLabel.text!.dropLast())
+            displayLabel.text = text
+            return
+        }
         if enteringData {
             displayLabel.text = displayLabel.text! + digit
         } else {
