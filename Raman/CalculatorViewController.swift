@@ -61,7 +61,6 @@ class CalculatorViewController: UIViewController {
                 return
             } else {
                 singlePeriod = true
-                return
             }
         }
         if enteringData {
