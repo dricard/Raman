@@ -107,6 +107,9 @@ class CalculatorViewController: UIViewController {
     @IBAction func tooltipButtonPressed(_ sender: UIButton) {
     }
     
+    @objc func cancelEntry() {
+        self.navigationController!.popViewController(animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,6 +121,8 @@ class CalculatorViewController: UIViewController {
         self.title = .editValueLabel
         
         // TODO: - add cancel button and localize
+        let cancelButton = UIBarButtonItem(title: .cancelButton, style: .plain, target: self, action: #selector(CalculatorViewController.cancelEntry))
+        navigationItem.rightBarButtonItem = cancelButton
         
         // set the labels with the passed properties
         if let value = selectedValue {
