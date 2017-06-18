@@ -42,9 +42,27 @@ class CalculatorViewController: UIViewController {
 
     // MARK: - Outlets
     
-    @IBOutlet weak var digitButton: UIButton!
-    @IBOutlet weak var memoryButton: UIButton!
-    @IBOutlet weak var enterButton: UIButton!
+    
+    @IBOutlet weak var digitButtonBackspace: UIButton!
+    @IBOutlet weak var digitButtonPeriod: UIButton!
+    @IBOutlet weak var digitButton0: UIButton!
+    @IBOutlet weak var digitButton1: UIButton!
+    @IBOutlet weak var digitButton2: UIButton!
+    @IBOutlet weak var digitButton3: UIButton!
+    @IBOutlet weak var digitButton4: UIButton!
+    @IBOutlet weak var digitButton5: UIButton!
+    @IBOutlet weak var digitButton6: UIButton!
+    @IBOutlet weak var digitButton9: UIButton!
+    @IBOutlet weak var digitButton8: UIButton!
+    @IBOutlet weak var digitButton7: UIButton!
+    
+    @IBOutlet weak var memoryButtonShow: UIButton!
+    @IBOutlet weak var memoryButtonAdd: UIButton!
+    @IBOutlet weak var memoryButtonRecall: UIButton!
+    @IBOutlet weak var memoryButtonClear: UIButton!
+    @IBOutlet weak var operationButtonEqual: UIButton!
+    @IBOutlet weak var operationButtonMinus: UIButton!
+    @IBOutlet weak var operationButtonPlus: UIButton!
     @IBOutlet weak var tooltipButton: UIButton!
     @IBOutlet weak var displayLabel: UILabel!
     @IBOutlet weak var previousValueLabel: UILabel!
@@ -114,6 +132,8 @@ class CalculatorViewController: UIViewController {
         self.navigationController!.popViewController(animated: true)
     }
     
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -122,24 +142,8 @@ class CalculatorViewController: UIViewController {
         
         // apply theme
         // set navigation bar
-        if let selectedTheme = selectedTheme {
-            
-            self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
-            self.navigationController?.navigationBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: Theme.color(for: .navBarTextColor, with: selectedTheme.mode)]
-            
-            // set tab bar
-            self.tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
-            self.tabBarController?.tabBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-            if #available(iOS 10.0, *) {
-                self.tabBarController?.tabBar.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-            } else {
-                // Fallback on earlier versions
-            }
-            
-            // set display
-            displayView.backgroundColor = Theme.color(for: .tableViewBackgroundColor, with: selectedTheme.mode)
-        }
+        
+        updateInterface()
         
         // localization
         self.title = .editValueLabel
@@ -178,5 +182,78 @@ class CalculatorViewController: UIViewController {
         
     }
 
-
+    // MARK: - Utilities
+    
+    func updateInterface() {
+        if let selectedTheme = selectedTheme {
+            
+            self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+            self.navigationController?.navigationBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: Theme.color(for: .navBarTextColor, with: selectedTheme.mode)]
+            
+            // set tab bar
+            self.tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+            self.tabBarController?.tabBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+            if #available(iOS 10.0, *) {
+                self.tabBarController?.tabBar.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+            } else {
+                // Fallback on earlier versions
+            }
+            
+            let buttonsColors = Theme.color(for: .tableViewBackgroundColor, with: selectedTheme.mode)
+            let displayColor = Theme.color(for: .displayBackgroundColor, with: selectedTheme.mode)
+            let displayTextColor = Theme.color(for: .displayTextColor, with: selectedTheme.mode)
+            
+            // set display
+            displayView.backgroundColor = displayColor
+            parameterLabel.textColor = displayTextColor
+            previousValueLabel.textColor = displayTextColor
+            displayLabel.textColor = displayTextColor
+            unitsLabel.textColor = displayTextColor
+            exponentLabel.textColor = displayTextColor
+            
+            // set buttons
+            digitButton0.backgroundColor = buttonsColors
+            digitButton0.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton9.backgroundColor = buttonsColors
+            digitButton9.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton8.backgroundColor = buttonsColors
+            digitButton8.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton7.backgroundColor = buttonsColors
+            digitButton7.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton6.backgroundColor = buttonsColors
+            digitButton6.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton5.backgroundColor = buttonsColors
+            digitButton5.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton4.backgroundColor = buttonsColors
+            digitButton4.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton3.backgroundColor = buttonsColors
+            digitButton3.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton2.backgroundColor = buttonsColors
+            digitButton2.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton1.backgroundColor = buttonsColors
+            digitButton1.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButtonPeriod.backgroundColor = buttonsColors
+            digitButtonPeriod.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButtonBackspace.backgroundColor = buttonsColors
+            digitButtonBackspace.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            memoryButtonShow.backgroundColor = buttonsColors
+            memoryButtonShow.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            memoryButtonClear.backgroundColor = buttonsColors
+            memoryButtonClear.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            memoryButtonRecall.backgroundColor = buttonsColors
+            memoryButtonRecall.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            memoryButtonAdd.backgroundColor = buttonsColors
+            memoryButtonAdd.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            operationButtonEqual.backgroundColor = buttonsColors
+            operationButtonEqual.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            operationButtonPlus.backgroundColor = buttonsColors
+            operationButtonPlus.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            operationButtonMinus.backgroundColor = buttonsColors
+            operationButtonMinus.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            tooltipButton.backgroundColor = buttonsColors
+            tooltipButton.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+        }
+        
+    }
 }
