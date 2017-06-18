@@ -96,6 +96,12 @@ class CalculatorViewController: UIViewController {
                 currentValue = value
             }
         }
+        if sender.currentTitle == "=" {
+            guard let raman = raman else { return }
+            raman.updateParameter(currentValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+            self.navigationController!.popViewController(animated: true)
+            
+        }
     }
     
     @IBAction func tooltipButtonPressed(_ sender: UIButton) {
