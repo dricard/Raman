@@ -86,12 +86,20 @@ class CalculatorViewController: UIViewController {
         }
         if digit == "d" {
             let removed = displayLabel.text?.last
+            // reset singlePeriod if we deleted one
             if removed == "." {
                 singlePeriod = false
             }
             let text = String(displayLabel.text!.dropLast())
-            displayLabel.text = text
-            return
+            // reset state if we deleted last digit
+            if text == "" {
+                enteringData = false
+                displayLabel.text = "0"
+                return
+            } else {
+                displayLabel.text = text
+                return
+            }
         }
         if enteringData {
             displayLabel.text = displayLabel.text! + digit
