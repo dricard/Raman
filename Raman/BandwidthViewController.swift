@@ -170,8 +170,8 @@ extension BandwidthViewController: UITableViewDelegate {
         guard let raman = raman else { return }
         
         /* Push the changeValueViewController */
-        let controller = storyboard!.instantiateViewController(withIdentifier: "ChangeValueViewController") as! ChangeValueViewController
-        
+        let controller = storyboard!.instantiateViewController(withIdentifier: "CalculatorViewController") as! CalculatorViewController
+
         controller.selectedDataSource = indexPath.row
         controller.selectedValue = raman.bwData(indexPath.row)
         controller.myUnits = Constants.bwUnits[indexPath.row]
