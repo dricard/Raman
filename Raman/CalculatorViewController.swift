@@ -51,6 +51,9 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var parameterLabel: UILabel!
     @IBOutlet weak var unitsLabel: UILabel!
     @IBOutlet weak var exponentLabel: UILabel!
+    @IBOutlet weak var displayView: UIView!
+    @IBOutlet weak var memoriesView: UIView!
+    @IBOutlet weak var calculatorView: UIView!
     
     // MARK: - Actions
     
@@ -116,6 +119,27 @@ class CalculatorViewController: UIViewController {
         
         // initial state of display
         displayLabel.text = "0"
+        
+        // apply theme
+        // set navigation bar
+        if let selectedTheme = selectedTheme {
+            
+            self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+            self.navigationController?.navigationBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: Theme.color(for: .navBarTextColor, with: selectedTheme.mode)]
+            
+            // set tab bar
+            self.tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+            self.tabBarController?.tabBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+            if #available(iOS 10.0, *) {
+                self.tabBarController?.tabBar.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+            } else {
+                // Fallback on earlier versions
+            }
+            
+            // set display
+            displayView.backgroundColor = Theme.color(for: .tableViewBackgroundColor, with: selectedTheme.mode)
+        }
         
         // localization
         self.title = .editValueLabel
