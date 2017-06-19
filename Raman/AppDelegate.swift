@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var raman = Raman()
     var selectedTheme = ThemeMode()
     let iaHelper = IAPHelper(prodIds: Set(["com.hexaedre.Raman.memories"]))
+    var memory = Memory()
     
     fileprivate func loadUserPrefs() {
         // Load user's data
@@ -100,9 +101,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let navController = vc as? UINavigationController, let viewController = navController.topViewController as? ViewController {
                 viewController.raman = raman
                 viewController.selectedTheme = selectedTheme
+                viewController.memory = memory
             } else if let navController = vc as? UINavigationController, let viewController = navController.topViewController as? BandwidthViewController {
                 viewController.raman = raman
                 viewController.selectedTheme = selectedTheme
+                viewController.memory = memory
             }
         }
         

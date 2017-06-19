@@ -16,11 +16,12 @@ class ViewController: UIViewController {
     var raman: Raman?
     var selectedTheme: ThemeMode?
     var themeModeButton: UIBarButtonItem!
-    
-    @objc var valueDidChangeFromEdit = false
-    @objc var whichSectionValueChanged : Int = 0
-    @objc var whichDataValueChanged : Int = 0
-    @objc var newValueForChangedData : Double = 0.0
+    var memory : Memory?
+
+//    @objc var valueDidChangeFromEdit = false
+//    @objc var whichSectionValueChanged : Int = 0
+//    @objc var whichDataValueChanged : Int = 0
+//    @objc var newValueForChangedData : Double = 0.0
     
     // MARK: - Outlets
     
@@ -119,13 +120,7 @@ class ViewController: UIViewController {
         updateInterface()
     }
     
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let navController = segue.destination as? UINavigationController, let vc = navController.topViewController as? DisplayInfoViewController else { return }
-        vc.selectedTheme = selectedTheme
-    }
-}
+ }
 
 // MARK: - Tableview delegates
 
@@ -146,6 +141,8 @@ extension ViewController: UITableViewDelegate {
         controller.toolTipString = Constants.specToolTip[indexPath.row]
         controller.whichTab = Raman.DataSourceType.spectroscopy
         controller.raman = raman
+        controller.selectedTheme = selectedTheme
+        controller.memory = memory
         controller.selectedTheme = selectedTheme
         
         navigationController!.pushViewController(controller, animated: true)

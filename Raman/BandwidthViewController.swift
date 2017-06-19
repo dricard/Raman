@@ -15,7 +15,8 @@ class BandwidthViewController: UIViewController {
     var raman: Raman?
     var selectedTheme: ThemeMode?
     var themeModeButton: UIBarButtonItem!
-    
+    var memory : Memory?
+
     // MARK: Outlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -111,13 +112,6 @@ class BandwidthViewController: UIViewController {
         updateInterface()
     }
     
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let navController = segue.destination as? UINavigationController, let vc = navController.topViewController as? DisplayInfoViewController else { return }
-        vc.selectedTheme = selectedTheme
-    }
-    
 }
 
 // MARK: TableView DataSource
@@ -180,7 +174,8 @@ extension BandwidthViewController: UITableViewDelegate {
         controller.whichTab = Raman.DataSourceType.bandwidth
         controller.raman = raman
         controller.selectedTheme = selectedTheme
-
+        controller.memory = memory
+        
         navigationController!.pushViewController(controller, animated: true)
     }
     

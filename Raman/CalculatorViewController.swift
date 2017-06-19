@@ -14,7 +14,8 @@ class CalculatorViewController: UIViewController {
     
     var raman: Raman?
     var selectedTheme: ThemeMode?
-
+    var memory: Memory?
+    
     private var calculator = Calculator()
     private var singlePeriod = false
     private var enteringData = false
