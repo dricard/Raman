@@ -84,7 +84,7 @@ class CalculatorViewController: UIViewController {
                 singlePeriod = true
             }
         }
-        if digit == "d" {
+        if digit == "⬅︎" {
             let removed = displayLabel.text?.last
             // reset singlePeriod if we deleted one
             if removed == "." {
@@ -125,7 +125,7 @@ class CalculatorViewController: UIViewController {
                 currentValue = value
             }
         }
-        if sender.currentTitle == "=" {
+        if sender.currentTitle == "⏎" {
             guard let raman = raman else { return }
             raman.updateParameter(currentValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
             self.navigationController!.popViewController(animated: true)
@@ -270,23 +270,6 @@ class CalculatorViewController: UIViewController {
             tooltipButton.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? TooltipPopoverViewController, let controller = vc.popoverPresentationController, let tooltip = toolTipString {
-            vc.tooltipText = tooltip
-            controller.delegate = self
-            controller.permittedArrowDirections = [.down]
-            controller.barButtonItem = sender as? UIBarButtonItem
-            controller.sourceView = sender as! UIButton
-            controller.sourceRect = (sender as! UIButton).bounds
-            controller.canOverlapSourceViewRect = true
-            controller.backgroundColor = Theme.color(for: .cellTextColor, with: selectedTheme!.mode)
-            vc.view.frame = CGRect(x: 50, y: 0, width: 100, height: 50)
-            vc.preferredContentSize = CGSize(width: 100, height: 50)
-            
-        }
-    }
-    
     
 }
 

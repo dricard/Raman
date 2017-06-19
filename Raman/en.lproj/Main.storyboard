@@ -41,7 +41,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="top" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="68" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="SAu-eO-W9L">
-                                <rect key="frame" x="0.0" y="68" width="375" height="599"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="70" id="3c1-dc-hgO" customClass="DataCell" customModule="Raman" customModuleProvider="target">
@@ -529,7 +529,7 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Siu-yr-IDh">
                                                                 <rect key="frame" x="281.5" y="0.0" width="93.5" height="108"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
-                                                                <state key="normal" title="d"/>
+                                                                <state key="normal" title="⬅︎"/>
                                                                 <connections>
                                                                     <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="m97-CC-GB8"/>
                                                                 </connections>
@@ -640,7 +640,7 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79A-u8-6ZM">
                                                                 <rect key="frame" x="281.5" y="0.0" width="93.5" height="107.5"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
-                                                                <state key="normal" title="="/>
+                                                                <state key="normal" title="⏎"/>
                                                                 <connections>
                                                                     <action selector="operationPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="pZM-uL-xdV"/>
                                                                 </connections>
@@ -780,7 +780,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raman" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdq-QM-pcU">
-                                <rect key="frame" x="101" y="78" width="173" height="33"/>
+                                <rect key="frame" x="101" y="74" width="173" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="173" id="ZFU-SZ-cb5"/>
                                     <constraint firstAttribute="height" constant="33" id="cuk-sm-q6z"/>
@@ -790,7 +790,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is made by" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rv1-Dg-N7b" propertyAccessControl="none">
-                                <rect key="frame" x="129" y="111" width="117" height="20"/>
+                                <rect key="frame" x="129" y="107" width="117" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Cpj-Ax-M4A"/>
                                     <constraint firstAttribute="width" constant="117" id="awO-JT-zvS"/>
@@ -835,7 +835,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IH8-QC-43W">
-                                <rect key="frame" x="114" y="131" width="147" height="41"/>
+                                <rect key="frame" x="114" y="127" width="147" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="147" id="b3g-YJ-4lN"/>
                                     <constraint firstAttribute="height" constant="41" id="kZP-HA-QNj"/>
@@ -950,7 +950,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LF2-0y-O7q">
-                                <rect key="frame" x="10" y="78" width="40" height="17"/>
+                                <rect key="frame" x="10" y="74" width="40" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="2zq-wH-OqP"/>
                                     <constraint firstAttribute="width" constant="40" id="jG7-EP-tSW"/>
