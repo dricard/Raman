@@ -134,6 +134,13 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tooltipButtonPressed(_ sender: UIButton) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "TooltipPopoverViewController") as? TooltipPopoverViewController, let tooltip = toolTipString {
+            vc.modalPresentationStyle = .popover
+            vc.tooltipText = tooltip
+            let controller = vc.popoverPresentationController!
+            controller.delegate = self
+            present(vc, animated: true, completion: nil)
+        }
     }
     
     @objc func cancelEntry() {
@@ -262,6 +269,40 @@ class CalculatorViewController: UIViewController {
             tooltipButton.backgroundColor = buttonsColors
             tooltipButton.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? TooltipPopoverViewController, let controller = vc.popoverPresentationController, let tooltip = toolTipString {
+            vc.tooltipText = tooltip
+            controller.delegate = self
+            controller.permittedArrowDirections = [.down]
+            controller.barButtonItem = sender as? UIBarButtonItem
+            controller.sourceView = sender as! UIButton
+            controller.sourceRect = (sender as! UIButton).bounds
+            controller.canOverlapSourceViewRect = true
+            controller.backgroundColor = Theme.color(for: .cellTextColor, with: selectedTheme!.mode)
+            vc.view.frame = CGRect(x: 50, y: 0, width: 100, height: 50)
+            vc.preferredContentSize = CGSize(width: 100, height: 50)
+            
+        }
+    }
+    
+    
+}
+
+extension CalculatorViewController: UIPopoverPresentationControllerDelegate {
+    
+    func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
+        let presentationController: UIPopoverPresentationController = popoverPresentationController.presentedViewController.popoverPresentationController!
+        popoverPresentationController.presentedViewController.preferredContentSize = CGSize(width: 275, height: 125)
         
+         presentationController.permittedArrowDirections = UIPopoverArrowDirection.down
+        presentationController.sourceView = tooltipButton
+        presentationController.sourceRect = tooltipButton.bounds
+    }
+    
+    // This is required to make the popover show on iPhone
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
 }
