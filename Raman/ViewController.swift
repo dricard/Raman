@@ -135,7 +135,8 @@ extension ViewController: UITableViewDelegate {
         guard let raman = raman else { return }
         
         /* Push the ChangeValueViewController */
-        let controller = storyboard!.instantiateViewController(withIdentifier: "ChangeValueViewController") as! ChangeValueViewController
+//        let controller = storyboard!.instantiateViewController(withIdentifier: "ChangeValueViewController") as! ChangeValueViewController
+        let controller = storyboard!.instantiateViewController(withIdentifier: "CalculatorViewController") as! CalculatorViewController
         
         
         controller.selectedDataSource = indexPath.row

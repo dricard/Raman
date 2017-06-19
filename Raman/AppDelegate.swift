@@ -9,6 +9,7 @@
 import UIKit
 import Fabric
 import Crashlytics
+import StoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var raman = Raman()
     var selectedTheme = ThemeMode()
+    let iaHelper = IAPHelper(prodIds: Set(["com.hexaedre.Raman.memories"]))
     
     fileprivate func loadUserPrefs() {
         // Load user's data
@@ -84,6 +86,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Fabric.with([Crashlytics.self])
         
+        iaHelper.requestProducts { (products) in
+            guard let products = products else { return }
+            
+            // testing
+            print(products.map { $0.productIdentifier })
+        }
         // Dependency injection
         
         guard let tabController = window?.rootViewController as? UITabBarController else { return true }
