@@ -129,14 +129,15 @@ class CalculatorViewController: UIViewController {
             enterDigit(digit)
         case .memoryOperation(let operation):
             // only accept digits 0-9 for memory operations (store or recall)
-            guard "0123456789".contains(key) else { return }
+            guard "0123456789".contains(key), let memory = memory, let dataSource = whichTab, let parameter = selectedDataSource, let memorySlot = Int(key) else { return }
             switch operation {
             case .recall:
-                print("recall memory operation: selected \(key)")
-                displayLabel.text = "632.123"
-            case .store(let value):
-                print("store operation: value \(value) stored in memory \(key)")
+                let value = memory.retrieveFrom(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot)
                 displayLabel.text = "\(value)"
+            case .store(let value):
+                displayLabel.text = "\(value)"
+                memory.addTo(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot, value: value)
+                memory.saveMemoryToDisk()
             }
             mode = .dataEntry
             memoryOperationInProcess = false
@@ -148,7 +149,6 @@ class CalculatorViewController: UIViewController {
         switch key {
         case "M+":
             if !memoryOperationInProcess {
-                print("add to memory")
                 guard let value = Double(displayLabel.text!) else { return }
                 // TODO: - advise user in case no value has been entered
                 displayLabel.text = "select 0-9"
@@ -157,16 +157,15 @@ class CalculatorViewController: UIViewController {
             }
         case "Mr":
             if !memoryOperationInProcess {
-                print("recall memory")
                 displayLabel.text = "select 0-9"
                 mode = .memoryOperation(.recall)
                 memoryOperationInProcess = true
             }
         case "Ms":
             print("memory show")
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "ShowMemoryViewController") as? ShowMemoryViewController, let memory = memory {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "ShowMemoryViewController") as? ShowMemoryViewController, let memory = memory, let dataSource = whichTab, let parameter = selectedDataSource {
                 vc.modalPresentationStyle = .popover
-                vc.memoryList = memory.display()
+                vc.memoryList = memory.display(dataSource: dataSource, parameter: parameter)
                 let controller = vc.popoverPresentationController!
                 controller.delegate = self
                 present(vc, animated: true, completion: nil)
@@ -174,6 +173,8 @@ class CalculatorViewController: UIViewController {
         case "Mc":
             if !memoryOperationInProcess {
                 print("memory clear")
+                // TODO: - Implement clear memories
+                // present warning dialog. Clear all or only a single memory slot?
             }
         default:
             break

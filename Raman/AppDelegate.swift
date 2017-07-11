@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             UserDefaults.standard.set(raman.bwInCm, forKey: "bwInCm")
         }
+        memory.getMemoryFromDisk()
         
         // theme mode selected
         let mode = UserDefaults.standard.integer(forKey: "themeMode")
