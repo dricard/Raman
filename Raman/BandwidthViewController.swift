@@ -36,9 +36,9 @@ class BandwidthViewController: UIViewController {
     }
     
     func updateInterface() {
-        // display theme mode button for this mode
         guard let selectedTheme = selectedTheme else { return }
         
+        // display theme mode button for this mode
         UIView.transition(with: self.view, duration: 1.0, options: .beginFromCurrentState, animations: {
 
         // set navigation bar

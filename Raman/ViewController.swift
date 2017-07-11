@@ -18,11 +18,6 @@ class ViewController: UIViewController {
     var themeModeButton: UIBarButtonItem!
     var memory : Memory?
 
-//    @objc var valueDidChangeFromEdit = false
-//    @objc var whichSectionValueChanged : Int = 0
-//    @objc var whichDataValueChanged : Int = 0
-//    @objc var newValueForChangedData : Double = 0.0
-    
     // MARK: - Outlets
     
     @IBOutlet var myTableView: UITableView!
@@ -130,7 +125,6 @@ extension ViewController: UITableViewDelegate {
         guard let raman = raman else { return }
         
         /* Push the ChangeValueViewController */
-//        let controller = storyboard!.instantiateViewController(withIdentifier: "ChangeValueViewController") as! ChangeValueViewController
         let controller = storyboard!.instantiateViewController(withIdentifier: "CalculatorViewController") as! CalculatorViewController
         
         

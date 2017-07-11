@@ -8,17 +8,52 @@
 
 import UIKit
 
+
 class CalculatorViewController: UIViewController {
     
+    enum DigitType {
+        case period
+        case delete
+        case number(Int)
+        case error(String)
+        
+        func digitFrom(_ key: String) -> DigitType {
+            switch key {
+            case ".":
+                return .period
+            case "⬅︎":
+                return .delete
+            case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
+                return .number(Int(key)!)
+            default:
+                return .error("not a defined digit")
+            }
+        }
+    }
+    
+    enum Mode {
+        case dataEntry
+        case memoryOperation(MemoryOperation)
+    }
+    
+    typealias MemorySlotsRange = Int
+    
+    enum MemoryOperation {
+        case store(Double)
+        case recall
+    }
+
     // MARK: - Properties
     
     var raman: Raman?
     var selectedTheme: ThemeMode?
     var memory: Memory?
+    var mode: Mode = .dataEntry
     
     private var calculator = Calculator()
     private var singlePeriod = false
     private var enteringData = false
+    private var memoryOperationInProcess = false
     
     var currentValue: Double {
         get {
@@ -40,7 +75,7 @@ class CalculatorViewController: UIViewController {
     var selectedValue : Double?
     var selectedDataSource : Int?   // which value in the list we're changing
     var whichTab: Raman.DataSourceType?
-
+    
     // MARK: - Outlets
     
     
@@ -77,60 +112,94 @@ class CalculatorViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func digitPressed(_ sender: UIButton) {
-        let digit = sender.currentTitle!
-        if digit == "." {
-            if singlePeriod {
-                return
-            } else {
-                singlePeriod = true
+        guard let key = sender.currentTitle else { return }
+        switch mode {
+        case .dataEntry:
+            let digit: DigitType
+            switch key {
+            case ".":
+                digit = .period
+            case "⬅︎":
+                digit = .delete
+            case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
+                digit = .number(Int(key)!)
+            default:
+                digit = .error("not a defined digit")
             }
-        }
-        if digit == "⬅︎" {
-            let removed = displayLabel.text?.last
-            // reset singlePeriod if we deleted one
-            if removed == "." {
-                singlePeriod = false
+            enterDigit(digit)
+        case .memoryOperation(let operation):
+            // only accept digits 0-9 for memory operations (store or recall)
+            guard "0123456789".contains(key) else { return }
+            switch operation {
+            case .recall:
+                print("recall memory operation: selected \(key)")
+                displayLabel.text = "632.123"
+            case .store(let value):
+                print("store operation: value \(value) stored in memory \(key)")
+                displayLabel.text = "\(value)"
             }
-            let text = String(displayLabel.text!.dropLast())
-            // reset state if we deleted last digit
-            if text == "" {
-                enteringData = false
-                displayLabel.text = "0"
-                return
-            } else {
-                displayLabel.text = text
-                return
-            }
-        }
-        if enteringData {
-            displayLabel.text = displayLabel.text! + digit
-        } else {
-            displayLabel.text = digit
-            enteringData = true
+            mode = .dataEntry
+            memoryOperationInProcess = false
         }
     }
     
     @IBAction func memoryButtonPressed(_ sender: UIButton) {
+        guard let key = sender.currentTitle else { return }
+        switch key {
+        case "M+":
+            if !memoryOperationInProcess {
+                print("add to memory")
+                guard let value = Double(displayLabel.text!) else { return }
+                // TODO: - advise user in case no value has been entered
+                displayLabel.text = "select 0-9"
+                mode = .memoryOperation(.store(value))
+                memoryOperationInProcess = true
+            }
+        case "Mr":
+            if !memoryOperationInProcess {
+                print("recall memory")
+                displayLabel.text = "select 0-9"
+                mode = .memoryOperation(.recall)
+                memoryOperationInProcess = true
+            }
+        case "Ms":
+            print("memory show")
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "ShowMemoryViewController") as? ShowMemoryViewController, let memory = memory {
+                vc.modalPresentationStyle = .popover
+                vc.memoryList = memory.display()
+                let controller = vc.popoverPresentationController!
+                controller.delegate = self
+                present(vc, animated: true, completion: nil)
+            }
+        case "Mc":
+            if !memoryOperationInProcess {
+                print("memory clear")
+            }
+        default:
+            break
+        }
     }
     
     @IBAction func operationPressed(_ sender: UIButton) {
-        // enable entering negative numbers by pressing
-        // the '-' as the very first thing
-        if !enteringData && currentValue == 0 && sender.currentTitle == "-" {
-            displayLabel.text = "-"
-            enteringData = true
-        } else {
-            enteringData = false
-            singlePeriod = false
-            if let value = calculator.performOperation(key: sender.currentTitle!, operand: currentValue) {
-                currentValue = value
+        if !memoryOperationInProcess {
+            // enable entering negative numbers by pressing
+            // the '-' as the very first thing
+            if !enteringData && currentValue == 0 && sender.currentTitle == "-" {
+                displayLabel.text = "-"
+                enteringData = true
+            } else {
+                enteringData = false
+                singlePeriod = false
+                if let value = calculator.performOperation(key: sender.currentTitle!, operand: currentValue) {
+                    currentValue = value
+                }
             }
-        }
-        if sender.currentTitle == "⏎" {
-            guard let raman = raman else { return }
-            raman.updateParameter(currentValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
-            self.navigationController!.popViewController(animated: true)
-            
+            if sender.currentTitle == "⏎" {
+                guard let raman = raman else { return }
+                raman.updateParameter(currentValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+                self.navigationController!.popViewController(animated: true)
+                
+            }
         }
     }
     
@@ -164,7 +233,7 @@ class CalculatorViewController: UIViewController {
         // localization
         self.title = .editValueLabel
         
-        // TODO: - add cancel button and localize
+        // add cancel button and localize
         let cancelButton = UIBarButtonItem(title: .cancelButton, style: .plain, target: self, action: #selector(CalculatorViewController.cancelEntry))
         navigationItem.rightBarButtonItem = cancelButton
         
@@ -197,7 +266,52 @@ class CalculatorViewController: UIViewController {
         
         
     }
-
+    
+    // MARK: - Data entry and memory management
+    
+    func enterDigit(_ digitPressed: DigitType) {
+        switch digitPressed {
+        case .period:
+            if singlePeriod {
+                return
+            } else {
+                singlePeriod = true
+                if enteringData {
+                    displayLabel.text = displayLabel.text! + "."
+                } else {
+                    displayLabel.text = "."
+                    enteringData = true
+                }
+                return
+            }
+        case .delete:
+            let removed = displayLabel.text?.last
+            // reset singlePeriod if we deleted one
+            if removed == "." {
+                singlePeriod = false
+            }
+            let text = String(displayLabel.text!.dropLast())
+            // reset state if we deleted last digit
+            if text == "" {
+                enteringData = false
+                displayLabel.text = "0"
+                return
+            } else {
+                displayLabel.text = text
+                return
+            }
+        case .number(let digit):
+            if enteringData {
+                displayLabel.text = displayLabel.text! + String(digit)
+            } else {
+                displayLabel.text = String(digit)
+                enteringData = true
+            }
+        case .error(let error):
+            print(error)
+        }
+    }
+    
     // MARK: - Utilities
     
     func updateInterface() {
@@ -278,11 +392,19 @@ extension CalculatorViewController: UIPopoverPresentationControllerDelegate {
     
     func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
         let presentationController: UIPopoverPresentationController = popoverPresentationController.presentedViewController.popoverPresentationController!
-        popoverPresentationController.presentedViewController.preferredContentSize = CGSize(width: 275, height: 125)
-        
-         presentationController.permittedArrowDirections = UIPopoverArrowDirection.down
-        presentationController.sourceView = tooltipButton
-        presentationController.sourceRect = tooltipButton.bounds
+        if popoverPresentationController.presentedViewController.title == "Memories" {
+            popoverPresentationController.presentedViewController.preferredContentSize = CGSize(width: 150, height: 250)
+            presentationController.permittedArrowDirections = UIPopoverArrowDirection.right
+            presentationController.sourceView = memoryButtonShow
+            presentationController.sourceRect = memoryButtonShow.bounds
+
+        } else {
+            popoverPresentationController.presentedViewController.preferredContentSize = CGSize(width: 275, height: 125)
+            
+            presentationController.permittedArrowDirections = UIPopoverArrowDirection.down
+            presentationController.sourceView = tooltipButton
+            presentationController.sourceRect = tooltipButton.bounds
+        }
     }
     
     // This is required to make the popover show on iPhone

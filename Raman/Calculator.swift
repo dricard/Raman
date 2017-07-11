@@ -9,7 +9,7 @@
 import Foundation
 
 struct Calculator {
-    
+        
     private struct IntermediateState {
         let firstOperand: Double
         let operation: (Double, Double) -> Double
@@ -18,6 +18,7 @@ struct Calculator {
             return operation(firstOperand, secondOperand)
         }
     }
+    
     
     private enum Operation {
         case constant(Double)
@@ -33,7 +34,7 @@ struct Calculator {
     private let operators: [String:Operation] = [
         "+": Operation.binaryOperation(+),
         "-": Operation.binaryOperation(-),
-        "=": Operation.equalOperation
+        "⏎": Operation.equalOperation
     ]
     
     mutating func performOperation(key: String, operand: Double?) -> Double? {

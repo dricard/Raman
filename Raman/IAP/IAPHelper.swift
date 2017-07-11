@@ -96,9 +96,9 @@ extension IAPHelper: SKPaymentTransactionObserver {
     }
     
     private func failedTransaction(transaction: SKPaymentTransaction) {
-        if let error = transaction.error as? SKErrorCode {
+        if let error = transaction.error as? SKError.Code {
             // we log all error except if user simply cancelled
-            if error != SKErrorCode.paymentCancelled {
+            if error != SKError.Code.paymentCancelled {
                 // log error
                 print("Transaction error: \(error.rawValue)")
             }

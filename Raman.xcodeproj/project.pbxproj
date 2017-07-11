@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21126B2F1F151D9000CBB8B3 /* ShowMemoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21126B2E1F151D9000CBB8B3 /* ShowMemoryViewController.swift */; };
 		2115376A1EF59CF90006AC64 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211537691EF59CF90006AC64 /* CalculatorViewController.swift */; };
 		2115376C1EF5BC4F0006AC64 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115376B1EF5BC4F0006AC64 /* Calculator.swift */; };
 		21368BC31EF42EC800DB6096 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21368BC21EF42EC800DB6096 /* StoreKit.framework */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21126B2E1F151D9000CBB8B3 /* ShowMemoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMemoryViewController.swift; sourceTree = "<group>"; };
 		211537691EF59CF90006AC64 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		2115376B1EF5BC4F0006AC64 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		21368BC21EF42EC800DB6096 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -121,6 +123,7 @@
 				92011B081B0D1A1600611519 /* ChangeValueViewController.swift */,
 				211537691EF59CF90006AC64 /* CalculatorViewController.swift */,
 				21B537B91EF717AF00744E9A /* TooltipPopoverViewController.swift */,
+				21126B2E1F151D9000CBB8B3 /* ShowMemoryViewController.swift */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				21368BC81EF45B9400DB6096 /* RamanIAPHelper.swift in Sources */,
 				215A7AFF1CF8DA6E003B9F9B /* DataCell.swift in Sources */,
 				21368BC61EF42F4300DB6096 /* IAPHelper.swift in Sources */,
+				21126B2F1F151D9000CBB8B3 /* ShowMemoryViewController.swift in Sources */,
 				214414AC1CB2C0B700A1958D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
