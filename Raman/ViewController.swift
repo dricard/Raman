@@ -18,11 +18,6 @@ class ViewController: UIViewController {
     var themeModeButton: UIBarButtonItem!
     var memory : Memory?
 
-//    @objc var valueDidChangeFromEdit = false
-//    @objc var whichSectionValueChanged : Int = 0
-//    @objc var whichDataValueChanged : Int = 0
-//    @objc var newValueForChangedData : Double = 0.0
-    
     // MARK: - Outlets
     
     @IBOutlet var myTableView: UITableView!
@@ -48,7 +43,7 @@ class ViewController: UIViewController {
         // display theme mode button for this mode
         guard let selectedTheme = selectedTheme else { return }
         
-        UIView.transition(with: self.view, duration: 1.0, options: .beginFromCurrentState, animations: {
+        UIView.transition(with: self.view, duration: 0.5, options: .beginFromCurrentState, animations: {
             
             // set navigation bar
             self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
@@ -130,7 +125,6 @@ extension ViewController: UITableViewDelegate {
         guard let raman = raman else { return }
         
         /* Push the ChangeValueViewController */
-//        let controller = storyboard!.instantiateViewController(withIdentifier: "ChangeValueViewController") as! ChangeValueViewController
         let controller = storyboard!.instantiateViewController(withIdentifier: "CalculatorViewController") as! CalculatorViewController
         
         

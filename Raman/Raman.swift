@@ -23,7 +23,7 @@ class Raman {
     var bwInCm : Double
     var bwLambda : Double
     
-    enum DataSourceType {
+    enum DataSourceType: String {
         case spectroscopy
         case bandwidth
     }
