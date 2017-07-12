@@ -39,7 +39,7 @@ class BandwidthViewController: UIViewController {
         guard let selectedTheme = selectedTheme else { return }
         
         // display theme mode button for this mode
-        UIView.transition(with: self.view, duration: 1.0, options: .beginFromCurrentState, animations: {
+        UIView.transition(with: self.view, duration: 0.5, options: .beginFromCurrentState, animations: {
 
         // set navigation bar
         self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)

@@ -150,7 +150,6 @@ class CalculatorViewController: UIViewController {
         case "M+":
             if !memoryOperationInProcess {
                 guard let value = Double(displayLabel.text!) else { return }
-                // TODO: - advise user in case no value has been entered
                 displayLabel.text = "select 0-9"
                 mode = .memoryOperation(.store(value))
                 memoryOperationInProcess = true
@@ -162,7 +161,6 @@ class CalculatorViewController: UIViewController {
                 memoryOperationInProcess = true
             }
         case "Ms":
-            print("memory show")
             if let vc = storyboard?.instantiateViewController(withIdentifier: "ShowMemoryViewController") as? ShowMemoryViewController, let memory = memory, let dataSource = whichTab, let parameter = selectedDataSource {
                 vc.modalPresentationStyle = .popover
                 vc.memoryList = memory.display(dataSource: dataSource, parameter: parameter)
@@ -172,9 +170,20 @@ class CalculatorViewController: UIViewController {
             }
         case "Mc":
             if !memoryOperationInProcess {
-                print("memory clear")
-                // TODO: - Implement clear memories
-                // present warning dialog. Clear all or only a single memory slot?
+                let controller = UIAlertController()
+                controller.title = "Clear all?"
+                controller.message = "Are you sure you want to delete all stored values?\nThis will delete all values for the current parameter."
+                let clearAllAction = UIAlertAction(title: "Yes, delete all", style: .destructive) { (action) in
+                    self.dismiss(animated: true, completion: nil)
+                    guard let memory = self.memory, let dataSource = self.whichTab, let parameter = self.selectedDataSource else { return }
+                    memory.clearMemoryFor(dataSource: dataSource, parameter: parameter)
+                }
+                controller.addAction(clearAllAction)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
+                    self.dismiss(animated: true, completion: nil)
+                }
+                controller.addAction(cancelAction)
+                present(controller, animated: true, completion: nil)
             }
         default:
             break

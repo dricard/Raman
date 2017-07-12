@@ -50,6 +50,11 @@ class Memory {
         }
     }
 
+    func clearMemoryFor(dataSource: Raman.DataSourceType, parameter: Int) {
+        for memorySlot in 0...9 {
+            addTo(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot, value: 0.0)
+        }
+    }
     func display(dataSource: Raman.DataSourceType, parameter: Int) -> String {
         var memoryString = ""
         for i in 0...9 {
