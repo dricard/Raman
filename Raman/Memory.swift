@@ -10,6 +10,7 @@ import Foundation
 
 class Memory {
  
+    var isPurchased = false
     private var storageFor: [Raman.DataSourceType:[Int:[Int:Double]]]
     
     init() {

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import StoreKit
 
 class CalculatorViewController: UIViewController {
     
@@ -76,6 +76,15 @@ class CalculatorViewController: UIViewController {
     var selectedDataSource : Int?   // which value in the list we're changing
     var whichTab: Raman.DataSourceType?
     
+    // IAP properties
+    var iapHelper: IAPHelper? {
+        didSet {
+            updateIAPHelper()
+        }
+    }
+    // this will be set when iapHelper is set through the updateIAPHelper function
+    private var memoriesProduct: SKProduct?
+
     // MARK: - Outlets
     
     
@@ -107,6 +116,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var exponentLabel: UILabel!
     @IBOutlet weak var displayView: UIView!
     @IBOutlet weak var memoriesView: UIView!
+    @IBOutlet weak var buyMemoriesView: UIView!
     @IBOutlet weak var calculatorView: UIView!
     
     // MARK: - Actions
@@ -325,6 +335,11 @@ class CalculatorViewController: UIViewController {
     // MARK: - Utilities
     
     func updateInterface() {
+        if let memory = memory {
+            if memory.isPurchased {
+                setMemoriesPurchased(false)
+            }
+        }
         if let selectedTheme = selectedTheme {
             
             self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
@@ -420,5 +435,65 @@ extension CalculatorViewController: UIPopoverPresentationControllerDelegate {
     // This is required to make the popover show on iPhone
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
+    }
+}
+
+// MARK: - IAP handlers
+extension CalculatorViewController {
+    
+    @IBAction func buyMemoriesTapped(sender: AnyObject) {
+        // debug: remove following line when done
+        setMemoriesPurchased(true)
+        memory!.isPurchased = true
+        // end debug
+        guard let memoriesProduct = memoriesProduct else { return }
+        iapHelper?.buyProduct(product: memoriesProduct)
+    }
+    
+    @objc func handlePurchaseNotification(notification: NSNotification) {
+        if let productID = notification.object as? String, productID == RamanIAPHelper.memories.productId {
+            if let memory = memory {
+                memory.isPurchased = true
+            }
+            setMemoriesPurchased(true)
+        }
+    }
+    
+    private func setMemoriesPurchased(_ purchased: Bool, animated: Bool = true) {
+        DispatchQueue.main.async {
+            if animated {
+                UIView.animate(withDuration: 0.7, delay: 0.2, options: UIViewAnimationOptions.transitionCrossDissolve
+                    , animations: {
+                        self.buyMemoriesView.isHidden = purchased
+
+                }, completion: { (finish) in
+                    UIView.animate(withDuration: 0.7, delay: 0.4, options: UIViewAnimationOptions.transitionFlipFromLeft, animations: {
+                        self.memoriesView.isHidden = !purchased
+
+                    }, completion: nil)
+                })
+//                UIView.animate(withDuration: 5.0) {
+//                    self.buyMemoriesView.isHidden = purchased
+//                }
+//                DispatchQueue.main.async {
+//                    UIView.animate(withDuration: 5.0) {
+//                        self.memoriesView.isHidden = !purchased
+//                    }
+//                }
+            } else {
+                self.buyMemoriesView.isHidden = purchased
+                self.memoriesView.isHidden = !purchased
+            }
+        }
+    }
+    
+    private func updateIAPHelper() {
+        // pass to children
+        
+        guard let iapHelper = iapHelper else { return }
+        
+        iapHelper.requestProducts { (products) in
+            self.memoriesProduct = products!.filter{ $0.productIdentifier == RamanIAPHelper.memories.productId }.first
+        }
     }
 }

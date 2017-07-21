@@ -94,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // testing
             print(products.map { $0.productIdentifier })
         }
+        
         // Dependency injection
         
         guard let tabController = window?.rootViewController as? UITabBarController else { return true }

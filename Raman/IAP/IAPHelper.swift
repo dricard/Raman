@@ -48,8 +48,30 @@ extension IAPHelper {
 
 // MARK: - SKProductRequest delegate
 extension IAPHelper: SKProductsRequestDelegate {
+    
+    // utility for handling localized currency
+    
+    func localizedPriceString(product: SKProduct) -> String? {
+        let price = product.price
+        let locale = product.priceLocale
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        numberFormatter.locale = locale
+        return numberFormatter.string(from: price)
+    }
+    
     // call returned without error, process result it
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        for product in response.products {
+            print(product.localizedTitle)
+            print(product.localizedDescription)
+            if let priceString = localizedPriceString(product: product) {
+                print(priceString)
+            } else {
+                print("Could not convert price to locale version")
+            }
+        }
+
         // pass the response to completion handler
         productsRequestCompletionHandler?(response.products)
         // then reset state
@@ -84,6 +106,11 @@ extension IAPHelper: SKPaymentTransactionObserver {
             case .restored:
                 print("not handling 'restored' transaction state")
             case .deferred:
+                // This might happen when a child requests approval from a parent
+                // to make the purchase, so it's very important not to block
+                // the UI here (no modal dialog, etc.) and let the child continue
+                // with the content while waiting for their parent to approve,
+                // which might occur days later.
                 print("not handling 'deferred' transaction state")
             }
         }
@@ -98,6 +125,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
     private func failedTransaction(transaction: SKPaymentTransaction) {
         if let error = transaction.error as? SKError.Code {
             // we log all error except if user simply cancelled
+            // (and never show an error dialog for canceling, of course)
             if error != SKError.Code.paymentCancelled {
                 // log error
                 print("Transaction error: \(error.rawValue)")
