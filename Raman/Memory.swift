@@ -56,6 +56,7 @@ class Memory {
             addTo(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot, value: 0.0)
         }
     }
+    
     func display(dataSource: Raman.DataSourceType, parameter: Int) -> String {
         var memoryString = ""
         for i in 0...9 {
@@ -66,6 +67,18 @@ class Memory {
             }
         }
         return memoryString
+    }
+    
+    func memoryArray(dataSource: Raman.DataSourceType, parameter: Int) -> [Double] {
+        var mems = [Double]()
+        for i in 0...9 {
+            if let value = storageFor[dataSource]?[parameter]?[i] {
+                mems.append(value)
+            } else {
+                mems.append(0.0)
+            }
+        }
+        return mems
     }
     
     func saveMemoryToDisk() {

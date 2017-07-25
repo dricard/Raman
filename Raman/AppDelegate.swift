@@ -70,8 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.tintColor = Theme.color(for: .windowTintColor, with: selectedTheme.mode)
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.titleTextAttributes = [
-            NSAttributedStringKey.font.rawValue: Theme.Fonts.navTitleFont.font,
-            NSAttributedStringKey.foregroundColor.rawValue: UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
+            NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue): Theme.Fonts.navTitleFont.font,
+            NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
         ]
         navBarAppearance.barStyle = UIBarStyle.blackTranslucent
         navBarAppearance.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)

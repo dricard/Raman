@@ -73,8 +73,8 @@ class CalculatorViewController: UIViewController {
     @objc var myExp: String?
     @objc var toolTipString : String?
     var selectedValue : Double?
-    var selectedDataSource : Int?   // which value in the list we're changing
-    var whichTab: Raman.DataSourceType?
+    var selectedDataSource : Int?           // which value in the list we're changing
+    var whichTab: Raman.DataSourceType?     // which value set we're in (spectro or bandwidth)
     
     // IAP properties
     var iapHelper: IAPHelper? {
@@ -173,7 +173,19 @@ class CalculatorViewController: UIViewController {
         case "Ms":
             if let vc = storyboard?.instantiateViewController(withIdentifier: "ShowMemoryViewController") as? ShowMemoryViewController, let memory = memory, let dataSource = whichTab, let parameter = selectedDataSource {
                 vc.modalPresentationStyle = .popover
-                vc.memoryList = memory.display(dataSource: dataSource, parameter: parameter)
+                vc.mems = memory.memoryArray(dataSource: dataSource, parameter: parameter)
+                let stringFormat: String
+                if let whichTab = whichTab, let selectedDataSource = selectedDataSource {
+                    switch whichTab {
+                    case .spectroscopy:
+                        stringFormat = Constants.specRounding[selectedDataSource]
+                    case .bandwidth:
+                        stringFormat = Constants.bwRounding[selectedDataSource]
+                    }
+                } else {
+                   stringFormat = ".2"
+                }
+                vc.formatString = stringFormat
                 let controller = vc.popoverPresentationController!
                 controller.delegate = self
                 present(vc, animated: true, completion: nil)
@@ -344,7 +356,7 @@ class CalculatorViewController: UIViewController {
             
             self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
             self.navigationController?.navigationBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: Theme.color(for: .navBarTextColor, with: selectedTheme.mode)]
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): Theme.color(for: .navBarTextColor, with: selectedTheme.mode)]
             
             // set tab bar
             self.tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
@@ -415,10 +427,15 @@ class CalculatorViewController: UIViewController {
 
 extension CalculatorViewController: UIPopoverPresentationControllerDelegate {
     
+    fileprivate func displayMemoriesTableViewSize() -> CGSize {
+        return CGSize(width: 150, height: 300)
+    }
+    
     func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
         let presentationController: UIPopoverPresentationController = popoverPresentationController.presentedViewController.popoverPresentationController!
         if popoverPresentationController.presentedViewController.title == "Memories" {
-            popoverPresentationController.presentedViewController.preferredContentSize = CGSize(width: 150, height: 250)
+            // This is the popover that displays the memory content in a tableview
+            popoverPresentationController.presentedViewController.preferredContentSize = displayMemoriesTableViewSize()
             presentationController.permittedArrowDirections = UIPopoverArrowDirection.right
             presentationController.sourceView = memoryButtonShow
             presentationController.sourceRect = memoryButtonShow.bounds
