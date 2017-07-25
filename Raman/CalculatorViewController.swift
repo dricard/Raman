@@ -174,6 +174,7 @@ class CalculatorViewController: UIViewController {
             if let vc = storyboard?.instantiateViewController(withIdentifier: "ShowMemoryViewController") as? ShowMemoryViewController, let memory = memory, let dataSource = whichTab, let parameter = selectedDataSource {
                 vc.modalPresentationStyle = .popover
                 vc.mems = memory.memoryArray(dataSource: dataSource, parameter: parameter)
+                vc.delegate = self
                 let stringFormat: String
                 if let whichTab = whichTab, let selectedDataSource = selectedDataSource {
                     switch whichTab {
@@ -230,7 +231,6 @@ class CalculatorViewController: UIViewController {
                 guard let raman = raman else { return }
                 raman.updateParameter(currentValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
                 self.navigationController!.popViewController(animated: true)
-                
             }
         }
     }
@@ -512,5 +512,16 @@ extension CalculatorViewController {
         iapHelper.requestProducts { (products) in
             self.memoriesProduct = products!.filter{ $0.productIdentifier == RamanIAPHelper.memories.productId }.first
         }
+    }
+}
+
+extension CalculatorViewController: CallMemoryDelegate {
+    
+    func returnedValueIs(newValue: Double) {
+        
+        guard let raman = raman else { return }
+        raman.updateParameter(newValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+        self.navigationController!.popViewController(animated: true)
+
     }
 }

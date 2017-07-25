@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol CallMemoryDelegate: class {
+    func returnedValueIs(newValue: Double)
+}
+
 class ShowMemoryViewController: UIViewController {
 
     // MARK: - Properties
     
     var mems: [Double]?
     var formatString: String?
+    weak var delegate: CallMemoryDelegate?
     
     // MARK: - Outlets
     
@@ -38,9 +43,19 @@ class ShowMemoryViewController: UIViewController {
         // This *forces* a popover to be displayed on the iPhone
         return .none
     }
+    
 }
 
 extension ShowMemoryViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let mems = mems else {
+            return
+        }
+        let selectedValue = mems[indexPath.row]
+        delegate?.returnedValueIs(newValue: selectedValue)
+        dismiss(animated: true, completion: nil)
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
