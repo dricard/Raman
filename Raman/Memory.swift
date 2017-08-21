@@ -10,6 +10,8 @@ import Foundation
 
 class Memory {
  
+    let keyPurchased = "didPurchaseMemory"
+
     var isPurchased = false
     private var storageFor: [Raman.DataSourceType:[Int:[Int:Double]]]
     
@@ -82,6 +84,8 @@ class Memory {
     }
     
     func saveMemoryToDisk() {
+        // purchased
+        UserDefaults.standard.set(self.isPurchased, forKey: keyPurchased)
         // spectroscopy
         for (index, _) in Constants.ramanShift.enumerated() {
             for memorySlot in 0...9 {
@@ -101,6 +105,9 @@ class Memory {
     }
 
     func getMemoryFromDisk() {
+        // purchased
+        let purchased = UserDefaults.standard.bool(forKey: keyPurchased)
+        self.isPurchased = purchased
         // spectroscopy
         for (index, _) in Constants.ramanShift.enumerated() {
             for memorySlot in 0...9 {

@@ -296,7 +296,13 @@ class CalculatorViewController: UIViewController {
             print("ERROR in CalculatorViewController viewDidLoad: trying to unwrap nil value in viewDidLoad")
         }
         
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // display memories if purchased
+        guard let memory = memory else { return }
+        self.buyMemoriesView.isHidden = memory.isPurchased
+        self.memoriesView.isHidden = !memory.isPurchased
     }
     
     // MARK: - Data entry and memory management
@@ -347,11 +353,11 @@ class CalculatorViewController: UIViewController {
     // MARK: - Utilities
     
     func updateInterface() {
-        if let memory = memory {
-            if memory.isPurchased {
-                setMemoriesPurchased(false)
-            }
-        }
+//        if let memory = memory {
+//            if memory.isPurchased {
+//                setMemoriesPurchased(false)
+//            }
+//        }
         if let selectedTheme = selectedTheme {
             
             self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
@@ -462,6 +468,7 @@ extension CalculatorViewController {
         // debug: remove following line when done
         setMemoriesPurchased(true)
         memory!.isPurchased = true
+        memory!.saveMemoryToDisk()
         // end debug
         guard let memoriesProduct = memoriesProduct else { return }
         iapHelper?.buyProduct(product: memoriesProduct)
@@ -471,6 +478,7 @@ extension CalculatorViewController {
         if let productID = notification.object as? String, productID == RamanIAPHelper.memories.productId {
             if let memory = memory {
                 memory.isPurchased = true
+                memory.saveMemoryToDisk()   // save the purchased status to disk
             }
             setMemoriesPurchased(true)
         }
