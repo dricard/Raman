@@ -10,18 +10,20 @@ import UIKit
 
 class CalculatorButton: UIButton {
     
-//    override func draw(_ rect: CGRect) {
-//        super.draw(rect)
-//        guard let context = UIGraphicsGetCurrentContext() else {
-//            print("Could not get context for \(String(describing: self.titleLabel?.text))")
-//            return }
-//        context.saveGState()
-//        let rect = self.frame.insetBy(dx: 2, dy: 2)
-//        let roundedRect: CGPath = UIBezierPath(roundedRect: rect, cornerRadius: 8).cgPath
-//        context.addPath(roundedRect)
-//        context.setStrokeColor(UIColor.blue.cgColor)
-//        context.closePath()
-//        context.strokePath()
-//        context.restoreGState()
-//    }
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            print("Could not get context for \(String(describing: self.titleLabel?.text))")
+            return }
+        context.saveGState()
+        let rect = self.bounds.insetBy(dx: 2, dy: 2)
+        dump(rect)
+        let roundedRect: CGPath = UIBezierPath(roundedRect: rect, cornerRadius: 8).cgPath
+        context.addPath(roundedRect)
+        context.setStrokeColor(UIColor.blue.cgColor)
+        context.closePath()
+        context.strokePath()
+        context.restoreGState()
+    }
 }
+
