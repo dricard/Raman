@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CallMemoryDelegate: class {
-    func returnedValueIs(newValue: Double)
+    func returnedValueIs(newValue: Double, newIndex: Int)
 }
 
 class ShowMemoryViewController: UIViewController {
@@ -53,7 +53,7 @@ extension ShowMemoryViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         let selectedValue = mems[indexPath.row]
-        delegate?.returnedValueIs(newValue: selectedValue)
+        delegate?.returnedValueIs(newValue: selectedValue, newIndex: indexPath.row)
         dismiss(animated: true, completion: nil)
     }
     

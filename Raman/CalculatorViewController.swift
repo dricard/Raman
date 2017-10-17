@@ -525,10 +525,11 @@ extension CalculatorViewController {
 
 extension CalculatorViewController: CallMemoryDelegate {
     
-    func returnedValueIs(newValue: Double) {
+    func returnedValueIs(newValue: Double, newIndex: Int) {
         
-        guard let raman = raman else { return }
+        guard let raman = raman, let memory = memory, let dataSource = whichTab, let parameter = selectedDataSource else { return }
         raman.updateParameter(newValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+        memory.currentSelection[dataSource]![parameter]! = newIndex
         self.navigationController!.popViewController(animated: true)
 
     }
