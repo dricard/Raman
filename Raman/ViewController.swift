@@ -191,10 +191,8 @@ extension ViewController {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let previous = UIContextualAction(style: .normal, title: "previous") { (action, view, completionHandler) in
-            print("selecting previous memory")
             if let memory = self.memory, let raman = self.raman {
                 let newValue = memory.previous(dataSource: .spectroscopy, parameter: indexPath.row)
-                print(newValue)
                 if newValue != 0.0 {
                     raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
                     tableView.reloadData()
@@ -212,10 +210,8 @@ extension ViewController {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let next = UIContextualAction(style: .normal, title: "next") { (action, view, completionHandler) in
-            print("selecting next memory")
             if let memory = self.memory, let raman = self.raman {
                 let newValue = memory.next(dataSource: .spectroscopy, parameter: indexPath.row)
-                print(newValue)
                 if newValue != 0.0 {
                     raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
                     tableView.reloadData()
