@@ -434,7 +434,7 @@ class CalculatorViewController: UIViewController {
 extension CalculatorViewController: UIPopoverPresentationControllerDelegate {
     
     fileprivate func displayMemoriesTableViewSize() -> CGSize {
-        return CGSize(width: 150, height: 300)
+        return CGSize(width: 150, height: 408)
     }
     
     func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {

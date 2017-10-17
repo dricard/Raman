@@ -18,7 +18,11 @@ class MemoryDisplayTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        layer.cornerRadius = 0
+        layer.masksToBounds = true
+        layer.borderWidth = 0
+        isSelected = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

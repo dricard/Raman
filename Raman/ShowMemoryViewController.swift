@@ -66,6 +66,7 @@ extension ShowMemoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return (view.bounds.height - 8) / 10
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let mems = mems else { return 0 }
         return mems.count
@@ -78,7 +79,6 @@ extension ShowMemoryViewController: UITableViewDelegate, UITableViewDataSource {
             cell.memoryValueLabel.text = "\(mems[indexPath.row].format(formatString))"
         } else {
             cell.memoryValueLabel.text = "no value"
-
         }
         return cell
     }

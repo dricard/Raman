@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rcr-VY-9iD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rcr-VY-9iD">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -526,10 +526,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="431"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5X1-YJ-rZL">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="107.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPR-d2-MCn" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="107.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="108"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="7"/>
                                                                 <connections>
@@ -537,7 +537,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA3-BD-AAH" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="94" y="0.0" width="93.5" height="107.5"/>
+                                                                <rect key="frame" x="94" y="0.0" width="93.5" height="108"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="8"/>
                                                                 <connections>
@@ -545,7 +545,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N4P-J5-aUx" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="187.5" y="0.0" width="94" height="107.5"/>
+                                                                <rect key="frame" x="187.5" y="0.0" width="94" height="108"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="9"/>
                                                                 <connections>
@@ -553,7 +553,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Siu-yr-IDh" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="107.5"/>
+                                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="108"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="⬅︎"/>
                                                                 <connections>
@@ -563,10 +563,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2nC-DW-mhI">
-                                                        <rect key="frame" x="0.0" y="107.5" width="375" height="108"/>
+                                                        <rect key="frame" x="0.0" y="108" width="375" height="107.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lke-SV-lOy" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="108"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="107.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="4"/>
                                                                 <connections>
@@ -574,7 +574,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v3u-vF-fDw" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="94" y="0.0" width="93.5" height="108"/>
+                                                                <rect key="frame" x="94" y="0.0" width="93.5" height="107.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="5"/>
                                                                 <connections>
@@ -582,7 +582,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAR-cg-xCw" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="187.5" y="0.0" width="94" height="108"/>
+                                                                <rect key="frame" x="187.5" y="0.0" width="94" height="107.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="6"/>
                                                                 <connections>
@@ -590,7 +590,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOc-t4-blb" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="108"/>
+                                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="107.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="+"/>
                                                                 <connections>
@@ -600,10 +600,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="qjV-Qi-5Ww">
-                                                        <rect key="frame" x="0.0" y="215.5" width="375" height="107.5"/>
+                                                        <rect key="frame" x="0.0" y="215.5" width="375" height="108"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPG-ZJ-sQe" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="107.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="108"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="1"/>
                                                                 <connections>
@@ -611,7 +611,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSE-d0-LKN" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="94" y="0.0" width="93.5" height="107.5"/>
+                                                                <rect key="frame" x="94" y="0.0" width="93.5" height="108"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="2"/>
                                                                 <connections>
@@ -619,7 +619,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ins-ZF-LJ1" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="187.5" y="0.0" width="94" height="107.5"/>
+                                                                <rect key="frame" x="187.5" y="0.0" width="94" height="108"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="3"/>
                                                                 <connections>
@@ -627,7 +627,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KT6-3g-spo" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="107.5"/>
+                                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="108"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="-"/>
                                                                 <connections>
@@ -637,10 +637,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7Q3-hs-fQV">
-                                                        <rect key="frame" x="0.0" y="323" width="375" height="108"/>
+                                                        <rect key="frame" x="0.0" y="323.5" width="375" height="107.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iU-zd-Ed5" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="108"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="107.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                                                 <state key="normal" title="?"/>
                                                                 <connections>
@@ -648,7 +648,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LzD-dC-hIA" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="94" y="0.0" width="93.5" height="108"/>
+                                                                <rect key="frame" x="94" y="0.0" width="93.5" height="107.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="0"/>
                                                                 <connections>
@@ -656,7 +656,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVE-90-hws" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="187.5" y="0.0" width="94" height="108"/>
+                                                                <rect key="frame" x="187.5" y="0.0" width="94" height="107.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
                                                                 <state key="normal" title="."/>
                                                                 <connections>
@@ -664,7 +664,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79A-u8-6ZM" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
-                                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="108"/>
+                                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="107.5"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
                                                                 <state key="normal" title="⏎"/>
                                                                 <connections>
@@ -822,23 +822,23 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="M0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYa-Xm-Fk5">
-                                                    <rect key="frame" x="8" y="0.0" width="15" height="13"/>
+                                                    <rect key="frame" x="8" y="0.0" width="20" height="15"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="13" id="sjC-UD-ciH"/>
+                                                        <constraint firstAttribute="height" constant="15" id="sjC-UD-ciH"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AkQ-s0-EJ7">
-                                                    <rect key="frame" x="23" y="0.0" width="344" height="19.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <rect key="frame" x="28" y="0.0" width="339" height="19.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="AkQ-s0-EJ7" firstAttribute="leading" secondItem="DE5-ql-fDz" secondAttribute="leadingMargin" constant="15" id="7O5-Li-i2g"/>
+                                                <constraint firstItem="AkQ-s0-EJ7" firstAttribute="leading" secondItem="DE5-ql-fDz" secondAttribute="leadingMargin" constant="20" id="7O5-Li-i2g"/>
                                                 <constraint firstAttribute="bottom" secondItem="AkQ-s0-EJ7" secondAttribute="bottom" id="FKk-wi-3yY"/>
                                                 <constraint firstItem="XYa-Xm-Fk5" firstAttribute="leading" secondItem="DE5-ql-fDz" secondAttribute="leading" constant="8" id="IfA-wc-Lfp"/>
                                                 <constraint firstItem="XYa-Xm-Fk5" firstAttribute="top" secondItem="DE5-ql-fDz" secondAttribute="top" id="O0Q-DD-r2W"/>
@@ -884,7 +884,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raman" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdq-QM-pcU">
-                                <rect key="frame" x="101" y="74" width="173" height="33"/>
+                                <rect key="frame" x="101" y="78" width="173" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="173" id="ZFU-SZ-cb5"/>
                                     <constraint firstAttribute="height" constant="33" id="cuk-sm-q6z"/>
@@ -894,7 +894,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is made by" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rv1-Dg-N7b" propertyAccessControl="none">
-                                <rect key="frame" x="129" y="107" width="117" height="20"/>
+                                <rect key="frame" x="129" y="111" width="117" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Cpj-Ax-M4A"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="117" id="awO-JT-zvS"/>
@@ -939,7 +939,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IH8-QC-43W">
-                                <rect key="frame" x="114" y="127" width="147" height="41"/>
+                                <rect key="frame" x="114" y="131" width="147" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="147" id="b3g-YJ-4lN"/>
                                     <constraint firstAttribute="height" constant="41" id="kZP-HA-QNj"/>
@@ -1054,7 +1054,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LF2-0y-O7q">
-                                <rect key="frame" x="10" y="74" width="40" height="17"/>
+                                <rect key="frame" x="10" y="78" width="40" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="2zq-wH-OqP"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="jG7-EP-tSW"/>
