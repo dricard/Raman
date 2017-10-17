@@ -16,11 +16,20 @@ class CalculatorButton: UIButton {
             print("Could not get context for \(String(describing: self.titleLabel?.text))")
             return }
         context.saveGState()
+        // outer border for light theme
         let rect = self.bounds.insetBy(dx: 2, dy: 2)
-        dump(rect)
         let roundedRect: CGPath = UIBezierPath(roundedRect: rect, cornerRadius: 8).cgPath
         context.addPath(roundedRect)
-        context.setStrokeColor(UIColor.blue.cgColor)
+        context.setStrokeColor(UIColor.black.cgColor)
+        context.setLineWidth(2)
+        context.closePath()
+        context.strokePath()
+        // inner border for dark theme
+        let rect2 = self.bounds.insetBy(dx: 3, dy: 3)
+        let roundedRect2: CGPath = UIBezierPath(roundedRect: rect2, cornerRadius: 8).cgPath
+        context.addPath(roundedRect2)
+        context.setStrokeColor(UIColor.gray.cgColor)
+        context.setLineWidth(1)
         context.closePath()
         context.strokePath()
         context.restoreGState()
