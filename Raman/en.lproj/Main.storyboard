@@ -476,7 +476,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="dl6-xB-j3h">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XeB-w1-Xqu">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XeB-w1-Xqu" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="94" height="108"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                                         <state key="normal" title="Mc"/>
@@ -484,7 +484,7 @@
                                                             <action selector="memoryButtonPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="NzK-Ul-Bsh"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oH9-d1-XNB">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oH9-d1-XNB" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
                                                         <rect key="frame" x="94" y="0.0" width="93.5" height="108"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                                         <state key="normal" title="Mr"/>
@@ -492,7 +492,7 @@
                                                             <action selector="memoryButtonPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="UZP-as-NUH"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uo5-t9-afY">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uo5-t9-afY" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
                                                         <rect key="frame" x="187.5" y="0.0" width="94" height="108"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                                         <state key="normal" title="M+"/>
@@ -500,7 +500,7 @@
                                                             <action selector="memoryButtonPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="KnY-IC-HRD"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIS-Pf-0Q5">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIS-Pf-0Q5" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
                                                         <rect key="frame" x="281.5" y="0.0" width="93.5" height="108"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="38"/>
                                                         <state key="normal" title="Ms"/>
