@@ -87,6 +87,12 @@
             ReferencedContainer = "container:Raman.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "_UIConstraintBasedLayoutPlaySoundOnUnsatisfiable YES"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

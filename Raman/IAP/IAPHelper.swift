@@ -98,12 +98,14 @@ extension IAPHelper: SKPaymentTransactionObserver {
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchasing:
+                // TODO: - Handle purchasing notification
                 print("not handling 'purchasing' transaction state")
             case .purchased:
                 completeTransaction(transaction: transaction)
             case .failed:
                 failedTransaction(transaction: transaction)
             case .restored:
+                // TODO: - Handle restore notification
                 print("not handling 'restored' transaction state")
             case .deferred:
                 // This might happen when a child requests approval from a parent
@@ -111,6 +113,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
                 // the UI here (no modal dialog, etc.) and let the child continue
                 // with the content while waiting for their parent to approve,
                 // which might occur days later.
+                // TODO: - Handle deferred notification
                 print("not handling 'deferred' transaction state")
             }
         }

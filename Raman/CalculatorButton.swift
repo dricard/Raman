@@ -20,15 +20,15 @@ class CalculatorButton: UIButton {
         let rect = self.bounds.insetBy(dx: 2, dy: 2)
         let roundedRect: CGPath = UIBezierPath(roundedRect: rect, cornerRadius: 8).cgPath
         context.addPath(roundedRect)
-        context.setStrokeColor(UIColor.black.cgColor)
-        context.setLineWidth(2)
+        context.setStrokeColor(UIColor.darkGray.cgColor)
+        context.setLineWidth(1)
         context.closePath()
         context.strokePath()
         // inner border for dark theme
         let rect2 = self.bounds.insetBy(dx: 3, dy: 3)
-        let roundedRect2: CGPath = UIBezierPath(roundedRect: rect2, cornerRadius: 8).cgPath
+        let roundedRect2: CGPath = UIBezierPath(roundedRect: rect2, cornerRadius: 6).cgPath
         context.addPath(roundedRect2)
-        context.setStrokeColor(UIColor.gray.cgColor)
+        context.setStrokeColor(UIColor.lightGray.cgColor)
         context.setLineWidth(1)
         context.closePath()
         context.strokePath()

@@ -296,6 +296,9 @@ class CalculatorViewController: UIViewController {
             print("ERROR in CalculatorViewController viewDidLoad: trying to unwrap nil value in viewDidLoad")
         }
         
+        // IAP observer
+        NotificationCenter.default.addObserver(self, selector: #selector(CalculatorViewController.handlePurchaseNotification), name: IAPHelper.iAPHelperPurchaseNotification, object: nil)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -465,6 +468,7 @@ extension CalculatorViewController: UIPopoverPresentationControllerDelegate {
 extension CalculatorViewController {
     
     @IBAction func buyMemoriesTapped(sender: AnyObject) {
+        // TODO: - remove following line when done debugging animations and purchased state
         // debug: remove following line when done
         setMemoriesPurchased(true)
         memory!.isPurchased = true
