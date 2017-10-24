@@ -143,10 +143,12 @@ class CalculatorViewController: UIViewController {
             switch operation {
             case .recall:
                 let value = memory.retrieveFrom(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot)
+                memory.currentSelection[dataSource]![parameter]! = memorySlot
                 displayLabel.text = "\(value)"
             case .store(let value):
                 displayLabel.text = "\(value)"
                 memory.addTo(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot, value: value)
+                memory.currentSelection[dataSource]![parameter]! = memorySlot
                 memory.saveMemoryToDisk()
             }
             mode = .dataEntry
