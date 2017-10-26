@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import StoreKit
 
-class ViewController: UIViewController {
-    
+class ViewController: UIViewController, IAPContainer {
     
     // MARK: - Properties
     
@@ -17,7 +17,15 @@ class ViewController: UIViewController {
     var selectedTheme: ThemeMode?
     var themeModeButton: UIBarButtonItem!
     var memory : Memory?
+    var iapHelper: IAPHelper? {
+        didSet {
+            updateIAPHelper()
+        }
+    }
+    // this will be set when iapHelper is set through the updateIAPHelper function
+    private var memoriesProduct: SKProduct?
 
+    
     // MARK: - Outlets
     
     @IBOutlet var myTableView: UITableView!
@@ -105,7 +113,10 @@ class ViewController: UIViewController {
         themeModeButton = UIBarButtonItem(image: UIImage(named: "lightModeIcon"), style: .plain, target: self, action: #selector(ViewController.themeModeButtonTapped(_:)))
         
         navigationItem.leftBarButtonItem = themeModeButton
-        
+ 
+        // IAP observer
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handlePurchaseNotification), name: IAPHelper.iAPHelperPurchaseNotification, object: nil)
+
         updateInterface()
     }
     
@@ -115,6 +126,16 @@ class ViewController: UIViewController {
         updateInterface()
     }
     
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAboutSegue" {
+            if let nvc = segue.destination as? UINavigationController, let vc = nvc.topViewController as? DisplayInfoViewController {
+                vc.memory = self.memory
+                vc.iapHelper = self.iapHelper
+            }
+        }
+    }
  }
 
 // MARK: - Tableview delegates
@@ -181,6 +202,13 @@ extension ViewController: UITableViewDataSource {
         
         return cell
     }
+
+    // we enable swipe actions only when memories is purchased, to prevent
+    // the delete action to show
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        guard let memory = memory else { return false }
+        return memory.isPurchased
+    }
     
 }
 
@@ -190,40 +218,72 @@ extension ViewController: UITableViewDataSource {
 extension ViewController {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let previous = UIContextualAction(style: .normal, title: "previous") { (action, view, completionHandler) in
-            if let memory = self.memory, let raman = self.raman {
-                let newValue = memory.previous(dataSource: .spectroscopy, parameter: indexPath.row)
-                if newValue != 0.0 {
-                    raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
-                    tableView.reloadData()
+        if let memory = memory, memory.isPurchased {
+            let previous = UIContextualAction(style: .normal, title: "previous") { (action, view, completionHandler) in
+                if let memory = self.memory, let raman = self.raman {
+                    let newValue = memory.previous(dataSource: .spectroscopy, parameter: indexPath.row)
+                    if newValue != 0.0 {
+                        raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
+                        tableView.reloadData()
+                    }
                 }
+                completionHandler(true)
             }
-            completionHandler(true)
+            if let selectedTheme = selectedTheme {
+                previous.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
+            }
+            let config = UISwipeActionsConfiguration(actions: [previous])
+            config.performsFirstActionWithFullSwipe = true
+            return config
+        } else {
+            return nil
         }
-        if let selectedTheme = selectedTheme {
-            previous.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
-        }
-        let config = UISwipeActionsConfiguration(actions: [previous])
-        config.performsFirstActionWithFullSwipe = true
-        return config
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let next = UIContextualAction(style: .normal, title: "next") { (action, view, completionHandler) in
-            if let memory = self.memory, let raman = self.raman {
-                let newValue = memory.next(dataSource: .spectroscopy, parameter: indexPath.row)
-                if newValue != 0.0 {
-                    raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
-                    tableView.reloadData()
+        if let memory = memory, memory.isPurchased {
+            let next = UIContextualAction(style: .normal, title: "next") { (action, view, completionHandler) in
+                if let memory = self.memory, let raman = self.raman {
+                    let newValue = memory.next(dataSource: .spectroscopy, parameter: indexPath.row)
+                    if newValue != 0.0 {
+                        raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
+                        tableView.reloadData()
+                    }
                 }
+                completionHandler(true)
             }
-            completionHandler(true)
+            if let selectedTheme = selectedTheme {
+                next.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
+            }
+            let config = UISwipeActionsConfiguration(actions: [next])
+            config.performsFirstActionWithFullSwipe = true
+            return config
+        } else {
+            return nil
         }
-        if let selectedTheme = selectedTheme {
-            next.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
-        }
-        let config = UISwipeActionsConfiguration(actions: [next])
-        config.performsFirstActionWithFullSwipe = true
-       return config
     }
+}
+
+extension ViewController {
+    
+    @objc func handlePurchaseNotification(notification: NSNotification) {
+         if let productID = notification.object as? String, productID == RamanIAPHelper.memories.productId {
+            if let memory = memory {
+                memory.isPurchased = true
+                memory.saveMemoryToDisk()   // save the purchased status to disk
+            }
+        }
+    }
+
+    private func updateIAPHelper() {
+        passIAPHelperToChildren()
+        
+        guard let iapHelper = iapHelper else { return }
+        
+        iapHelper.requestProducts { (products) in
+            guard let products = products else { return }
+            self.memoriesProduct = products.filter{ $0.productIdentifier == RamanIAPHelper.memories.productId }.first
+        }
+    }
+
 }

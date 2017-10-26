@@ -50,7 +50,9 @@ struct MemoryContainer {
 class Memory {
  
     let keyPurchased = "didPurchaseMemory"
+    let keyNewPurchase = "didNotShowPurchaseAnimation"
     var isPurchased = false
+    var newPurchase = true
     let memoryRange = 0...9
     
     // defined types (for readability)
@@ -183,6 +185,7 @@ class Memory {
     func saveMemoryToDisk() {
         // purchased
         UserDefaults.standard.set(self.isPurchased, forKey: keyPurchased)
+        UserDefaults.standard.set(self.newPurchase, forKey: keyNewPurchase)
         // spectroscopy
         for (index, _) in Constants.ramanShift.enumerated() {
             for memorySlot in memoryRange {
@@ -208,7 +211,9 @@ class Memory {
     func getMemoryFromDisk() {
         // purchased
         let purchased = UserDefaults.standard.bool(forKey: keyPurchased)
+        let newPurchase = UserDefaults.standard.bool(forKey: keyNewPurchase)
         self.isPurchased = purchased
+        self.newPurchase = newPurchase
         // spectroscopy
         for (index, _) in Constants.ramanShift.enumerated() {
             for memorySlot in memoryRange {

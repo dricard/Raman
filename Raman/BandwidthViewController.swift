@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import StoreKit
 
-class BandwidthViewController: UIViewController {
+class BandwidthViewController: UIViewController, IAPContainer {
 
     // MARK: properties
     
@@ -16,6 +17,13 @@ class BandwidthViewController: UIViewController {
     var selectedTheme: ThemeMode?
     var themeModeButton: UIBarButtonItem!
     var memory : Memory?
+    var iapHelper: IAPHelper? {
+        didSet {
+            updateIAPHelper()
+        }
+    }
+    // this will be set when iapHelper is set through the updateIAPHelper function
+    private var memoriesProduct: SKProduct?
 
     // MARK: Outlets
     
@@ -112,6 +120,17 @@ class BandwidthViewController: UIViewController {
         updateInterface()
     }
     
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAboutSegue" {
+            if let nvc = segue.destination as? UINavigationController, let vc = nvc.topViewController as? DisplayInfoViewController {
+                vc.memory = self.memory
+                vc.iapHelper = self.iapHelper
+            }
+        }
+    }
+
 }
 
 // MARK: TableView DataSource
@@ -154,7 +173,6 @@ extension BandwidthViewController: UITableViewDataSource {
         
         return cell
     }
-    
 }
 
 extension BandwidthViewController: UITableViewDelegate {
@@ -179,7 +197,11 @@ extension BandwidthViewController: UITableViewDelegate {
         navigationController!.pushViewController(controller, animated: true)
     }
     
-
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        guard let memory = memory else { return false }
+        return memory.isPurchased
+    }
+    
 }
 
 // MARK: - Swipe actions (iOS11+)
@@ -188,40 +210,62 @@ extension BandwidthViewController: UITableViewDelegate {
 extension BandwidthViewController {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let previous = UIContextualAction(style: .normal, title: "previous") { (action, view, completionHandler) in
-            if let memory = self.memory, let raman = self.raman {
-                let newValue = memory.previous(dataSource: .bandwidth, parameter: indexPath.row)
-                if newValue != 0.0 {
-                    raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
-                    tableView.reloadData()
+        if let memory = memory, memory.isPurchased {
+            let previous = UIContextualAction(style: .normal, title: "previous") { (action, view, completionHandler) in
+                if let memory = self.memory, let raman = self.raman {
+                    let newValue = memory.previous(dataSource: .bandwidth, parameter: indexPath.row)
+                    if newValue != 0.0 {
+                        raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
+                        tableView.reloadData()
+                    }
                 }
+                completionHandler(true)
             }
-            completionHandler(true)
+            if let selectedTheme = selectedTheme {
+                previous.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
+            }
+            let config = UISwipeActionsConfiguration(actions: [previous])
+            config.performsFirstActionWithFullSwipe = true
+            return config
+        } else {
+            return nil
         }
-        if let selectedTheme = selectedTheme {
-            previous.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
-        }
-        let config = UISwipeActionsConfiguration(actions: [previous])
-        config.performsFirstActionWithFullSwipe = true
-        return config
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let next = UIContextualAction(style: .normal, title: "next") { (action, view, completionHandler) in
-            if let memory = self.memory, let raman = self.raman {
-                let newValue = memory.next(dataSource: .bandwidth, parameter: indexPath.row)
-                if newValue != 0.0 {
-                    raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
-                    tableView.reloadData()
+        if let memory = memory, memory.isPurchased {
+            let next = UIContextualAction(style: .normal, title: "next") { (action, view, completionHandler) in
+                if let memory = self.memory, let raman = self.raman {
+                    let newValue = memory.next(dataSource: .bandwidth, parameter: indexPath.row)
+                    if newValue != 0.0 {
+                        raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
+                        tableView.reloadData()
+                    }
                 }
+                completionHandler(true)
             }
-            completionHandler(true)
+            if let selectedTheme = selectedTheme {
+                next.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
+            }
+            let config = UISwipeActionsConfiguration(actions: [next])
+            config.performsFirstActionWithFullSwipe = true
+            return config
+        } else {
+            return nil
         }
-        if let selectedTheme = selectedTheme {
-            next.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
-        }
-        let config = UISwipeActionsConfiguration(actions: [next])
-        config.performsFirstActionWithFullSwipe = true
-        return config
     }
+}
+
+extension BandwidthViewController {
+    private func updateIAPHelper() {
+        passIAPHelperToChildren()
+        
+        guard let iapHelper = iapHelper else { return }
+        
+        iapHelper.requestProducts { (products) in
+            guard let products = products else { return }
+            self.memoriesProduct = products.filter{ $0.productIdentifier == RamanIAPHelper.memories.productId }.first
+        }
+    }
+
 }

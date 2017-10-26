@@ -44,6 +44,10 @@ extension IAPHelper {
         let payment = SKPayment(product: product)
         SKPaymentQueue.default().add(payment)
     }
+    
+    func restoreProduct() {
+        SKPaymentQueue.default().restoreCompletedTransactions()
+    }
 }
 
 // MARK: - SKProductRequest delegate
@@ -60,18 +64,8 @@ extension IAPHelper: SKProductsRequestDelegate {
         return numberFormatter.string(from: price)
     }
     
-    // call returned without error, process result it
+    // call returned without error, process it
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        for product in response.products {
-            print(product.localizedTitle)
-            print(product.localizedDescription)
-            if let priceString = localizedPriceString(product: product) {
-                print(priceString)
-            } else {
-                print("Could not convert price to locale version")
-            }
-        }
-
         // pass the response to completion handler
         productsRequestCompletionHandler?(response.products)
         // then reset state
@@ -87,7 +81,6 @@ extension IAPHelper: SKProductsRequestDelegate {
         // then reset state
         productsRequestCompletionHandler = .none
         productsRequest = .none
-        
     }
 }
 
@@ -105,8 +98,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
             case .failed:
                 failedTransaction(transaction: transaction)
             case .restored:
-                // TODO: - Handle restore notification
-                print("not handling 'restored' transaction state")
+                completeTransaction(transaction: transaction)
             case .deferred:
                 // This might happen when a child requests approval from a parent
                 // to make the purchase, so it's very important not to block
@@ -121,8 +113,11 @@ extension IAPHelper: SKPaymentTransactionObserver {
     
     private func completeTransaction(transaction: SKPaymentTransaction) {
         deliverPurchaseNotification(identifier: transaction.payment.productIdentifier)
+        print("Received confirmation of payment")
+        print("transaction ID is \(String(describing: transaction.payment.productIdentifier))")
         // THIS IS VERY IMPORTANT!!
         SKPaymentQueue.default().finishTransaction(transaction)
+        deliverPurchaseNotification(identifier: transaction.payment.productIdentifier)
     }
     
     private func failedTransaction(transaction: SKPaymentTransaction) {
@@ -139,7 +134,24 @@ extension IAPHelper: SKPaymentTransactionObserver {
     }
     
     private func deliverPurchaseNotification(identifier: String?) {
+        print("Sending notification")
         guard let identifier = identifier else { return }
-        NotificationCenter.default.post(name: IAPHelper.iAPHelperPurchaseNotification, object: identifier)
+        print("Object passed is \(identifier)")
+        NotificationCenter.default.post(name: IAPHelper.iAPHelperPurchaseNotification, object: RamanIAPHelper.memories.productId)
+    }
+}
+
+protocol IAPContainer {
+    var iapHelper: IAPHelper? { get set }
+    
+    func passIAPHelperToChildren()
+}
+
+extension IAPContainer where Self : UIViewController {
+    func passIAPHelperToChildren() {
+        for vc in childViewControllers {
+            var iapContainer = vc as? IAPContainer
+            iapContainer?.iapHelper = iapHelper
+        }
     }
 }

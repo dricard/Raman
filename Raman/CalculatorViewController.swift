@@ -75,15 +75,6 @@ class CalculatorViewController: UIViewController {
     var selectedValue : Double?
     var selectedDataSource : Int?           // which value in the list we're changing
     var whichTab: Raman.DataSourceType?     // which value set we're in (spectro or bandwidth)
-    
-    // IAP properties
-    var iapHelper: IAPHelper? {
-        didSet {
-            updateIAPHelper()
-        }
-    }
-    // this will be set when iapHelper is set through the updateIAPHelper function
-    private var memoriesProduct: SKProduct?
 
     // MARK: - Outlets
     
@@ -297,17 +288,20 @@ class CalculatorViewController: UIViewController {
         } else {
             print("ERROR in CalculatorViewController viewDidLoad: trying to unwrap nil value in viewDidLoad")
         }
-        
-        // IAP observer
-        NotificationCenter.default.addObserver(self, selector: #selector(CalculatorViewController.handlePurchaseNotification), name: IAPHelper.iAPHelperPurchaseNotification, object: nil)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         // display memories if purchased
         guard let memory = memory else { return }
-        self.buyMemoriesView.isHidden = memory.isPurchased
-        self.memoriesView.isHidden = !memory.isPurchased
+        if memory.newPurchase {
+            setMemoriesPurchased(memory.isPurchased, animated: true)
+            if memory.isPurchased {
+                memory.newPurchase = false
+                memory.saveMemoryToDisk()
+            }
+        } else {
+            setMemoriesPurchased(memory.isPurchased, animated: false)
+        }
     }
     
     // MARK: - Data entry and memory management
@@ -470,24 +464,7 @@ extension CalculatorViewController: UIPopoverPresentationControllerDelegate {
 extension CalculatorViewController {
     
     @IBAction func buyMemoriesTapped(sender: AnyObject) {
-        // TODO: - remove following line when done debugging animations and purchased state
-        // debug: remove following line when done
-        setMemoriesPurchased(true)
-        memory!.isPurchased = true
-        memory!.saveMemoryToDisk()
-        // end debug
-        guard let memoriesProduct = memoriesProduct else { return }
-        iapHelper?.buyProduct(product: memoriesProduct)
-    }
-    
-    @objc func handlePurchaseNotification(notification: NSNotification) {
-        if let productID = notification.object as? String, productID == RamanIAPHelper.memories.productId {
-            if let memory = memory {
-                memory.isPurchased = true
-                memory.saveMemoryToDisk()   // save the purchased status to disk
-            }
-            setMemoriesPurchased(true)
-        }
+        print("more info on memories tapped")
     }
     
     private func setMemoriesPurchased(_ purchased: Bool, animated: Bool = true) {
@@ -503,14 +480,6 @@ extension CalculatorViewController {
 
                     }, completion: nil)
                 })
-//                UIView.animate(withDuration: 5.0) {
-//                    self.buyMemoriesView.isHidden = purchased
-//                }
-//                DispatchQueue.main.async {
-//                    UIView.animate(withDuration: 5.0) {
-//                        self.memoriesView.isHidden = !purchased
-//                    }
-//                }
             } else {
                 self.buyMemoriesView.isHidden = purchased
                 self.memoriesView.isHidden = !purchased
@@ -518,15 +487,6 @@ extension CalculatorViewController {
         }
     }
     
-    private func updateIAPHelper() {
-        // pass to children
-        
-        guard let iapHelper = iapHelper else { return }
-        
-        iapHelper.requestProducts { (products) in
-            self.memoriesProduct = products!.filter{ $0.productIdentifier == RamanIAPHelper.memories.productId }.first
-        }
-    }
 }
 
 extension CalculatorViewController: CallMemoryDelegate {
