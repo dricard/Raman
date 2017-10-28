@@ -109,6 +109,10 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var memoriesView: UIView!
     @IBOutlet weak var buyMemoriesView: UIView!
     @IBOutlet weak var calculatorView: UIView!
+    @IBOutlet weak var moreInfoButton: UIButton!
+    @IBOutlet weak var memoryAdTextLabel: UILabel!
+    @IBOutlet weak var memoryAdTitleLabel: UILabel!
+    
     
     // MARK: - Actions
     
@@ -352,13 +356,22 @@ class CalculatorViewController: UIViewController {
     // MARK: - Utilities
     
     func updateInterface() {
-//        if let memory = memory {
-//            if memory.isPurchased {
-//                setMemoriesPurchased(false)
-//            }
-//        }
         if let selectedTheme = selectedTheme {
-            
+
+            if let memory = memory {
+                if !memory.isPurchased {
+                    buyMemoriesView.backgroundColor = Theme.color(for: .tableViewBackgroundColor, with: selectedTheme.mode)
+                    memoryAdTextLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+                    memoryAdTitleLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+                    moreInfoButton.layer.borderColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode).cgColor
+                    moreInfoButton.setTitleColor(Theme.color(for: .cellTextColor, with: selectedTheme.mode), for: .normal)
+                    let fontSize: CGFloat = view.frame.width < 375 ? 13 : 15
+                    moreInfoButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
+                    moreInfoButton.layer.borderWidth = 1
+                    moreInfoButton.layer.cornerRadius = 5
+                }
+            }
+
             self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
             self.navigationController?.navigationBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
             self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): Theme.color(for: .navBarTextColor, with: selectedTheme.mode)]
@@ -464,7 +477,8 @@ extension CalculatorViewController: UIPopoverPresentationControllerDelegate {
 extension CalculatorViewController {
     
     @IBAction func buyMemoriesTapped(sender: AnyObject) {
-        print("more info on memories tapped")
+        let url = URL(string: "http://hexaedre.com/apps/raman/")
+        UIApplication.shared.openURL(url!)
     }
     
     private func setMemoriesPurchased(_ purchased: Bool, animated: Bool = true) {
