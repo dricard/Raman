@@ -112,7 +112,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var moreInfoButton: UIButton!
     @IBOutlet weak var memoryAdTextLabel: UILabel!
     @IBOutlet weak var memoryAdTitleLabel: UILabel!
-    
+    @IBOutlet weak var memoryImageView: UIImageView!
     
     // MARK: - Actions
     
@@ -355,9 +355,35 @@ class CalculatorViewController: UIViewController {
     
     // MARK: - Utilities
     
+    func fontSizeClasses() -> [CGFloat] {
+        print("this device screen width is \(view.frame.width)")
+        switch view.frame.width {
+        case 0...320:
+            let fontSizes: [CGFloat] = [12, 16, 13, 25, 40]
+            return fontSizes
+        case 321...375:
+            let fontSizes: [CGFloat] = [12, 16, 22, 25, 40]
+            return fontSizes
+        case 376...414:
+            let fontSizes: [CGFloat] = [12, 16, 22, 25, 40]
+            return fontSizes
+        case 415...768:
+            let fontSizes: [CGFloat] = [25, 24, 32, 40, 72]
+            return fontSizes
+        case 1024...:
+            let fontSizes: [CGFloat] = [25, 32, 40, 50, 96]
+            return fontSizes
+        default:
+            let fontSizes: [CGFloat] = [12, 16, 19, 25, 40]
+            return fontSizes
+        }
+    }
+    
     func updateInterface() {
         if let selectedTheme = selectedTheme {
-
+            
+            let fontSizes = fontSizeClasses()
+            
             if let memory = memory {
                 if !memory.isPurchased {
                     buyMemoriesView.backgroundColor = Theme.color(for: .tableViewBackgroundColor, with: selectedTheme.mode)
@@ -365,13 +391,23 @@ class CalculatorViewController: UIViewController {
                     memoryAdTitleLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
                     moreInfoButton.layer.borderColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode).cgColor
                     moreInfoButton.setTitleColor(Theme.color(for: .cellTextColor, with: selectedTheme.mode), for: .normal)
-                    let fontSize: CGFloat = view.frame.width < 375 ? 13 : 15
-                    moreInfoButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
+                    moreInfoButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizes[2])
+                    memoryAdTitleLabel.font = UIFont.systemFont(ofSize: fontSizes[2])
+                    memoryAdTextLabel.font = UIFont.systemFont(ofSize: fontSizes[1])
+                    if fontSizes[2] >= 34 {
+                        memoryImageView.image = UIImage(named: "memories_img")
+                    }
                     moreInfoButton.layer.borderWidth = 1
                     moreInfoButton.layer.cornerRadius = 5
                 }
             }
 
+            displayLabel.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
+            previousValueLabel.font = UIFont.systemFont(ofSize: fontSizes[2])
+            parameterLabel.font = UIFont.systemFont(ofSize: fontSizes[2])
+            unitsLabel.font = UIFont.systemFont(ofSize: fontSizes[3])
+            exponentLabel.font = UIFont.systemFont(ofSize: fontSizes[0])
+            
             self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
             self.navigationController?.navigationBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
             self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): Theme.color(for: .navBarTextColor, with: selectedTheme.mode)]
@@ -400,44 +436,64 @@ class CalculatorViewController: UIViewController {
             // set buttons
             digitButton0.backgroundColor = buttonsColors
             digitButton0.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton0.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton9.backgroundColor = buttonsColors
             digitButton9.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton9.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton8.backgroundColor = buttonsColors
             digitButton8.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton8.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton7.backgroundColor = buttonsColors
             digitButton7.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton7.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton6.backgroundColor = buttonsColors
             digitButton6.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton6.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton5.backgroundColor = buttonsColors
             digitButton5.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton5.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton4.backgroundColor = buttonsColors
             digitButton4.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton4.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton3.backgroundColor = buttonsColors
             digitButton3.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton3.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton2.backgroundColor = buttonsColors
             digitButton2.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton2.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton1.backgroundColor = buttonsColors
             digitButton1.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButton1.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButtonPeriod.backgroundColor = buttonsColors
             digitButtonPeriod.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButtonPeriod.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButtonBackspace.backgroundColor = buttonsColors
             digitButtonBackspace.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            digitButtonBackspace.titleLabel?.font = UIFont.systemFont(ofSize: fontSizes[4])
             memoryButtonShow.backgroundColor = buttonsColors
             memoryButtonShow.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            memoryButtonShow.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             memoryButtonClear.backgroundColor = buttonsColors
             memoryButtonClear.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            memoryButtonClear.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             memoryButtonRecall.backgroundColor = buttonsColors
             memoryButtonRecall.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            memoryButtonRecall.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             memoryButtonAdd.backgroundColor = buttonsColors
             memoryButtonAdd.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            memoryButtonAdd.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             operationButtonEqual.backgroundColor = buttonsColors
             operationButtonEqual.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            operationButtonEqual.titleLabel?.font = UIFont.systemFont(ofSize: fontSizes[4])
             operationButtonPlus.backgroundColor = buttonsColors
             operationButtonPlus.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            operationButtonPlus.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             operationButtonMinus.backgroundColor = buttonsColors
             operationButtonMinus.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            operationButtonMinus.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             tooltipButton.backgroundColor = buttonsColors
             tooltipButton.tintColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+            tooltipButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizes[4])
         }
     }
     
