@@ -136,7 +136,8 @@ extension DisplayInfoViewController {
         guard let iapHelper = iapHelper else { return }
         
         iapHelper.requestProducts { (products) in
-            self.memoriesProduct = products!.filter{ $0.productIdentifier == RamanIAPHelper.memories.productId }.first
+            guard let products = products else { return }
+            self.memoriesProduct = products.filter{ $0.productIdentifier == RamanIAPHelper.memories.productId }.first
             if let memoriesProduct = self.memoriesProduct, let priceTag = iapHelper.localizedPriceString(product: memoriesProduct) {
                 self.buyButtonLabel.setTitle(priceTag, for: .normal)
             }
