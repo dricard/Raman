@@ -356,7 +356,6 @@ class CalculatorViewController: UIViewController {
     // MARK: - Utilities
     
     func fontSizeClasses() -> [CGFloat] {
-        print("this device screen width is \(view.frame.width)")
         switch view.frame.width {
         case 0...320:
             let fontSizes: [CGFloat] = [12, 16, 13, 25, 40]
