@@ -531,7 +531,7 @@ extension CalculatorViewController: UIPopoverPresentationControllerDelegate {
 // MARK: - IAP handlers
 extension CalculatorViewController {
     
-    @IBAction func buyMemoriesTapped(sender: AnyObject) {
+    @IBAction func moreInfoTapped(sender: UIButton) {
         let url = URL(string: "http://hexaedre.com/apps/raman/")
         UIApplication.shared.openURL(url!)
     }
