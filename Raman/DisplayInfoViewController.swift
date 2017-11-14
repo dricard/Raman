@@ -50,7 +50,9 @@ class DisplayInfoViewController: UIViewController, IAPContainer {
         helpButton.setTitle(.helpButton, for: .normal)
         supportButton.setTitle(.supportButton, for: .normal)
         doneButton.title = .doneButton
-
+        buyMemoryLabel.text = .iapBuyMemory
+        restoreLabel.setTitle(.iapRestore, for: .normal)
+        
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             versionNumberLabel.text = "v. " + version
         }
@@ -66,7 +68,7 @@ class DisplayInfoViewController: UIViewController, IAPContainer {
         if let memoriesProduct = memoriesProduct, let iapHelper = iapHelper, let priceTag = iapHelper.localizedPriceString(product: memoriesProduct) {
             buyButtonLabel.setTitle(priceTag, for: .normal)
         } else {
-            buyButtonLabel.setTitle("Buy", for: .normal)
+            buyButtonLabel.setTitle(.iapBuy, for: .normal)
         }
         buyButtonLabel.layer.borderColor = UIColor.darkGray.cgColor
         buyButtonLabel.layer.cornerRadius = 5

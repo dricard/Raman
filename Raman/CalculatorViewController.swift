@@ -261,6 +261,9 @@ class CalculatorViewController: UIViewController {
         
         // localization
         self.title = .editValueLabel
+        memoryAdTitleLabel.text = .iapTitle
+        memoryAdTextLabel.text = .iapText
+        moreInfoButton.setTitle(.iapMoreInfo, for: .normal)
         
         // add cancel button and localize
         let cancelButton = UIBarButtonItem(title: .cancelButton, style: .plain, target: self, action: #selector(CalculatorViewController.cancelEntry))

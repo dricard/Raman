@@ -257,7 +257,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="365" height="47"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In-App purchase" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="2M8-fp-Ple">
-                                                                <rect key="frame" x="0.0" y="0.0" width="257" height="47"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="230.5" height="47"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="QhN-4q-ENQ"/>
                                                                 </constraints>
@@ -266,7 +266,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5w-hm-PYQ">
-                                                                <rect key="frame" x="265" y="0.0" width="100" height="47"/>
+                                                                <rect key="frame" x="238.5" y="0.0" width="126.5" height="47"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="PK7-lh-G0S"/>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="iqD-BW-NuN"/>
@@ -283,7 +283,7 @@
                                                         <rect key="frame" x="0.0" y="47" width="365" height="50.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save often used wavelengths and wavenumbers and recall them quickly" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iNq-oC-hJj" userLabel="text">
-                                                                <rect key="frame" x="0.0" y="0.0" width="255" height="50.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="228.5" height="50.5"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="Jf3-fI-BZX"/>
                                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="aI4-dE-MFo"/>
@@ -293,7 +293,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="memories_img_100" translatesAutoresizingMaskIntoConstraints="NO" id="EFp-eA-JeZ">
-                                                                <rect key="frame" x="265" y="13" width="100" height="25"/>
+                                                                <rect key="frame" x="238.5" y="13" width="126.5" height="25"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="i2N-v3-4Ug"/>
                                                                 </constraints>
