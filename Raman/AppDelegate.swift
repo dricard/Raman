@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var raman = Raman()
     var selectedTheme = ThemeMode()
-    let iaHelper = IAPHelper(prodIds: Set(["com.hexaedre.Raman.memories"]))
+    let iapHelper = IAPHelper(prodIds: Set(["com.hexaedre.Raman.memories"]))
     var memory = Memory()
     
     fileprivate func loadUserPrefs() {
@@ -70,8 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.tintColor = Theme.color(for: .windowTintColor, with: selectedTheme.mode)
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.titleTextAttributes = [
-            NSAttributedStringKey.font.rawValue: Theme.Fonts.navTitleFont.font,
-            NSAttributedStringKey.foregroundColor.rawValue: UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
+            NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue): Theme.Fonts.navTitleFont.font,
+            NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
         ]
         navBarAppearance.barStyle = UIBarStyle.blackTranslucent
         navBarAppearance.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
@@ -88,12 +88,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Fabric.with([Crashlytics.self])
         
-        iaHelper.requestProducts { (products) in
+        iapHelper.requestProducts { (products) in
             guard let products = products else { return }
             
             // testing
             print(products.map { $0.productIdentifier })
         }
+        
         // Dependency injection
         
         guard let tabController = window?.rootViewController as? UITabBarController else { return true }
@@ -103,10 +104,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 viewController.raman = raman
                 viewController.selectedTheme = selectedTheme
                 viewController.memory = memory
+                var iapContainer = viewController as IAPContainer
+                iapContainer.iapHelper = iapHelper
             } else if let navController = vc as? UINavigationController, let viewController = navController.topViewController as? BandwidthViewController {
                 viewController.raman = raman
                 viewController.selectedTheme = selectedTheme
                 viewController.memory = memory
+                var iapContainer = viewController as IAPContainer
+                iapContainer.iapHelper = iapHelper
             }
         }
         

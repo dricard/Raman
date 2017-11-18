@@ -49,4 +49,13 @@ extension String {
     
     static let changeExcitationBWText = NSLocalizedString("changeExcitationBWText")
     static let changeBandwidthText = NSLocalizedString("changeBandwidthText")
+
+    // MARK: - In-app purchase
+    static let iapTitle = NSLocalizedString("inAppPurchase")
+    static let iapText = NSLocalizedString("inAppPurchaseText")
+    static let iapMoreInfo = NSLocalizedString("inAppPurchaseMoreInfo")
+    static let iapBuy = NSLocalizedString("buy")
+    static let iapBuyMemory = NSLocalizedString("buyMemory")
+    static let iapRestore = NSLocalizedString("restoreMemory")
+
 }

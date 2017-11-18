@@ -12,7 +12,7 @@
 "About" = "Info";
 "Wavelength" = "Longueur d'onde";
 "Bandwidth" = "Largeur de bande";
-"About Raman" = "À propos de Raman";
+"About Raman" = "Info";
 "is made by" = "par";
 "Based on an original idea by" = "D'après une idée originale de";
 "Special thanks to" = "Remerciements spéciaux à";
@@ -28,3 +28,9 @@
 "changeShiftText" = "Changer le décalage Raman modifiera la longueur d'onde du signal en fonction de l'excitation courante.";
 "changeExcitationBWText" = "Changer la longueur d'onde de référence modifiera toutes les valeurs de décalage Raman.";
 "changeBandwidthText" = "Changer ce décalage Raman modifiera les deux autres valeurs de décalage en fonction de la longueur d'onde de référence.";
+"inAppPurchase" = "Achat intégré";
+"inAppPurchaseText" = "Sauvegarder les paramètres usuels pour plus de rapidité";
+"inAppPurchaseMoreInfo" = "+ d'info";
+"buy" = "Buy";
+"buyMemory" = "Acheter mémoires";
+"restoreMemory" = "Restaurer achat";

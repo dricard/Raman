@@ -7,13 +7,24 @@
 //
 
 import UIKit
+import StoreKit
 
-class DisplayInfoViewController: UIViewController {
+class DisplayInfoViewController: UIViewController, IAPContainer {
     
     // MARK: - Properties
     
     var selectedTheme: ThemeMode?
+    var memory: Memory?
 
+    // IAP properties
+    var iapHelper: IAPHelper? {
+        didSet {
+            updateIAPHelper()
+        }
+    }
+    // this will be set when iapHelper is set through the updateIAPHelper function
+    private var memoriesProduct: SKProduct?
+    
     // MARK: - Outlets
     
     @IBOutlet weak var copyrightLabel: UILabel!
@@ -24,6 +35,9 @@ class DisplayInfoViewController: UIViewController {
     @IBOutlet weak var helpButton: UIButton!
     @IBOutlet weak var supportButton: UIButton!
     @IBOutlet weak var doneButton: UIBarButtonItem!
+    @IBOutlet weak var buyMemoryLabel: UILabel!
+    @IBOutlet weak var buyButtonLabel: UIButton!
+    @IBOutlet weak var restoreLabel: UIButton!
     
     // MARK: - Life Cycle
     
@@ -36,7 +50,9 @@ class DisplayInfoViewController: UIViewController {
         helpButton.setTitle(.helpButton, for: .normal)
         supportButton.setTitle(.supportButton, for: .normal)
         doneButton.title = .doneButton
-
+        buyMemoryLabel.text = .iapBuyMemory
+        restoreLabel.setTitle(.iapRestore, for: .normal)
+        
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             versionNumberLabel.text = "v. " + version
         }
@@ -48,6 +64,15 @@ class DisplayInfoViewController: UIViewController {
         
         view.backgroundColor = UIColor(red:1.00, green:0.99, blue:0.94, alpha:1.00)
         
+        // IAP
+        if let memoriesProduct = memoriesProduct, let iapHelper = iapHelper, let priceTag = iapHelper.localizedPriceString(product: memoriesProduct) {
+            buyButtonLabel.setTitle(priceTag, for: .normal)
+        } else {
+            buyButtonLabel.setTitle(.iapBuy, for: .normal)
+        }
+        buyButtonLabel.layer.borderColor = UIColor.darkGray.cgColor
+        buyButtonLabel.layer.cornerRadius = 5
+        buyButtonLabel.layer.borderWidth = 1
     }
     
     // MARK: - User actions
@@ -76,5 +101,48 @@ class DisplayInfoViewController: UIViewController {
     
     @IBAction func userPressedDone(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - IAP handlers
+
+extension DisplayInfoViewController {
+
+    @IBAction func buyButtomPressed(_ sender: UIButton) {
+        guard let memoriesProduct = memoriesProduct else { return }
+        iapHelper?.buyProduct(product: memoriesProduct)
+    }
+    
+    @IBAction func restoreButtonPressed(_ sender: UIButton) {
+        iapHelper?.restoreProduct()
+    }
+    
+    @objc func handlePurchaseNotification(notification: NSNotification) {
+        dump(RamanIAPHelper.memories.productId)
+        if let productID = notification.object as? String, productID == RamanIAPHelper.memories.productId {
+            dump(productID)
+            if let memory = memory {
+                memory.isPurchased = true
+                memory.saveMemoryToDisk()   // save the purchased status to disk
+            }
+            setMemoriesPurchased(true)
+        }
+    }
+    
+    private func setMemoriesPurchased(_ purchased: Bool, animated: Bool = true) {
+    }
+    
+    private func updateIAPHelper() {
+        passIAPHelperToChildren()
+
+        guard let iapHelper = iapHelper else { return }
+        
+        iapHelper.requestProducts { (products) in
+            guard let products = products else { return }
+            self.memoriesProduct = products.filter{ $0.productIdentifier == RamanIAPHelper.memories.productId }.first
+            if let memoriesProduct = self.memoriesProduct, let priceTag = iapHelper.localizedPriceString(product: memoriesProduct) {
+                self.buyButtonLabel.setTitle(priceTag, for: .normal)
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@
 "About" = "About";
 "Wavelength" = "Wavelength";
 "Bandwidth" = "Bandwidth";
-"About Raman" = "About Raman";
+"About Raman" = "About";
 "is made by" = "by";
 "Based on an original idea by" = "Based on an original idea by";
 "Special thanks to" = "Special thanks to";
@@ -28,3 +28,9 @@
 "changeShiftText" = "Changing the Raman shift value will modify the signal based on the current excitation.";
 "changeExcitationBWText" = "Changing the excitation wavelength used for bandwidth calculations will modify the Raman bandwidth values.";
 "changeBandwidthText" = "Changing the current Raman bandwidth value will modify the other two units values (using the current selected excitation wavelength).";
+"inAppPurchase" = "In-App purchase";
+"inAppPurchaseText" = "Save often used parameters and recall them quickly";
+"inAppPurchaseMoreInfo" = "More info";
+"buy" = "Buy";
+"buyMemory" = "Buy memory";
+"restoreMemory" = "Restore purchase";
