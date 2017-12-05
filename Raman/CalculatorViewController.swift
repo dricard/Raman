@@ -535,8 +535,10 @@ extension CalculatorViewController: UIPopoverPresentationControllerDelegate {
 extension CalculatorViewController {
     
     @IBAction func moreInfoTapped(sender: UIButton) {
-        let url = URL(string: "http://hexaedre.com/apps/raman/")
-        UIApplication.shared.openURL(url!)
+        if let url = URL(string: "http://hexaedre.com/apps/raman/")
+        {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     private func setMemoriesPurchased(_ purchased: Bool, animated: Bool = true) {

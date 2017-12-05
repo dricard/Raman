@@ -78,25 +78,32 @@ class DisplayInfoViewController: UIViewController, IAPContainer {
     // MARK: - User actions
 
     @IBAction func namePressed(_ sender: AnyObject) {
-        let url = URL(string: "http://hexaedre.com/blog/")
-//        let request = NSURLRequest(URL: url!)
-        UIApplication.shared.openURL(url!)
+        if let url = URL(string: "http://hexaedre.com/blog/")
+        {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     @IBAction func logoPressed(_ sender: AnyObject) {
-        let url = URL(string: "http://hexaedre.com")
-        UIApplication.shared.openURL(url!)
+        if let url = URL(string: "http://hexaedre.com")
+        {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     @IBAction func helpPressed(_ sender: AnyObject) {
-        let url = URL(string: "http://hexaedre.com/apps/raman/")
-        UIApplication.shared.openURL(url!)
+        if let url = URL(string: "http://hexaedre.com/apps/raman/")
+        {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     
     @IBAction func supportPressed(_ sender: AnyObject) {
-        let url = URL(string: "mailto:dr@hexaedre.com?subject=Raman%20App%20support%20request&body=Please%20ask%20your%20quetion%20or%20make%20your%20comment%20here.%20Thank%20you!")
-        UIApplication.shared.openURL(url!)
+        if let url = URL(string: "mailto:dr@hexaedre.com?subject=Raman%20App%20support%20request&body=Please%20ask%20your%20quetion%20or%20make%20your%20comment%20here.%20Thank%20you!")
+        {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     @IBAction func userPressedDone(_ sender: AnyObject) {
