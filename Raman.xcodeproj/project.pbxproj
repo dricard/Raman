@@ -15,8 +15,6 @@
 		21368BC81EF45B9400DB6096 /* RamanIAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21368BC71EF45B9400DB6096 /* RamanIAPHelper.swift */; };
 		214414AA1CB2B3F400A1958D /* BandwidthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214414A91CB2B3F400A1958D /* BandwidthViewController.swift */; };
 		214414AC1CB2C0B700A1958D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214414AB1CB2C0B700A1958D /* Constants.swift */; };
-		215A7AF71CF8949F003B9F9B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 215A7AF51CF8949F003B9F9B /* Fabric.framework */; };
-		215A7AF81CF8949F003B9F9B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 215A7AF61CF8949F003B9F9B /* Crashlytics.framework */; };
 		215A7AFF1CF8DA6E003B9F9B /* DataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A7AFE1CF8DA6E003B9F9B /* DataCell.swift */; };
 		215A7B011CF9194C003B9F9B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A7B001CF9194C003B9F9B /* Theme.swift */; };
 		215A7B031CF91D07003B9F9B /* BWCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A7B021CF91D07003B9F9B /* BWCell.swift */; };
@@ -48,8 +46,6 @@
 		21368BC71EF45B9400DB6096 /* RamanIAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RamanIAPHelper.swift; sourceTree = "<group>"; };
 		214414A91CB2B3F400A1958D /* BandwidthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BandwidthViewController.swift; sourceTree = "<group>"; };
 		214414AB1CB2C0B700A1958D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		215A7AF51CF8949F003B9F9B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
-		215A7AF61CF8949F003B9F9B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		215A7AFE1CF8DA6E003B9F9B /* DataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCell.swift; sourceTree = "<group>"; };
 		215A7B001CF9194C003B9F9B /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		215A7B021CF91D07003B9F9B /* BWCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWCell.swift; sourceTree = "<group>"; };
@@ -80,8 +76,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				21368BC31EF42EC800DB6096 /* StoreKit.framework in Frameworks */,
-				215A7AF81CF8949F003B9F9B /* Crashlytics.framework in Frameworks */,
-				215A7AF71CF8949F003B9F9B /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,8 +184,6 @@
 			children = (
 				92011AE81B0D197300611519 /* AppDelegate.swift */,
 				92011AEF1B0D197300611519 /* Images.xcassets */,
-				215A7AF51CF8949F003B9F9B /* Fabric.framework */,
-				215A7AF61CF8949F003B9F9B /* Crashlytics.framework */,
 				92011AE71B0D197300611519 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -207,8 +199,6 @@
 				92011ADF1B0D197200611519 /* Sources */,
 				92011AE01B0D197200611519 /* Frameworks */,
 				92011AE11B0D197200611519 /* Resources */,
-				215A7AF41CF89425003B9F9B /* ShellScript */,
-				215A7AF91CF89854003B9F9B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -276,35 +266,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		215A7AF41CF89425003B9F9B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run cdc72a39d95a25993f0d2d67ab5f9589c24bdc22 5a4fa500ad7650104123992d630407d1a6e5b5759571d5d324eb2feb7d94cc49";
-		};
-		215A7AF91CF89854003B9F9B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run cdc72a39d95a25993f0d2d67ab5f9589c24bdc22 5a4fa500ad7650104123992d630407d1a6e5b5759571d5d324eb2feb7d94cc49";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		92011ADF1B0D197200611519 /* Sources */ = {

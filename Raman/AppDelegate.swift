@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Fabric
-import Crashlytics
 import StoreKit
 
 @UIApplicationMain
@@ -85,8 +83,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             // Fallback on earlier versions
         }
-        
-        Fabric.with([Crashlytics.self])
         
         iapHelper.requestProducts { (products) in
             guard let products = products else { return }
