@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SpectroViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -101,7 +101,7 @@ class ViewController: UIViewController {
         
         // add theme mode button to navigation bar
         
-        themeModeButton = UIBarButtonItem(image: UIImage(named: "lightModeIcon"), style: .plain, target: self, action: #selector(ViewController.themeModeButtonTapped(_:)))
+        themeModeButton = UIBarButtonItem(image: UIImage(named: "lightModeIcon"), style: .plain, target: self, action: #selector(SpectroViewController.themeModeButtonTapped(_:)))
         
         navigationItem.leftBarButtonItem = themeModeButton
  
@@ -127,7 +127,7 @@ class ViewController: UIViewController {
 
 // MARK: - Tableview delegates
 
-extension ViewController: UITableViewDelegate {
+extension SpectroViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let raman = raman else { return }
@@ -153,7 +153,7 @@ extension ViewController: UITableViewDelegate {
 
 // MARK: - TableView DataSource
 
-extension ViewController: UITableViewDataSource {
+extension SpectroViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(80)
@@ -200,7 +200,7 @@ extension ViewController: UITableViewDataSource {
 // MARK: - Swipe actions (iOS11+)
 
 @available(iOS 11.0, *)
-extension ViewController {
+extension SpectroViewController {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let previous = UIContextualAction(style: .normal, title: "previous") { (action, view, completionHandler) in

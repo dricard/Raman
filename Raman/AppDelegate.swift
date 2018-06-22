@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let tabController = window?.rootViewController as? UITabBarController else { return true }
         
         for vc in tabController.childViewControllers {
-            if let navController = vc as? UINavigationController, let viewController = navController.topViewController as? ViewController {
+            if let navController = vc as? UINavigationController, let viewController = navController.topViewController as? SpectroViewController {
                 viewController.raman = raman
                 viewController.selectedTheme = selectedTheme
                 viewController.memory = memory

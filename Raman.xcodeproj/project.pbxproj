@@ -30,7 +30,7 @@
 		92011AF01B0D197300611519 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92011AEF1B0D197300611519 /* Images.xcassets */; };
 		92011AF31B0D197300611519 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92011AF11B0D197300611519 /* LaunchScreen.xib */; };
 		92011B0B1B0D1A3100611519 /* DisplayInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B0A1B0D1A3100611519 /* DisplayInfoViewController.swift */; };
-		92011B0D1B0D1A4300611519 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B0C1B0D1A4300611519 /* ViewController.swift */; };
+		92011B0D1B0D1A4300611519 /* SpectroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B0C1B0D1A4300611519 /* SpectroViewController.swift */; };
 		92011B111B0D1B9300611519 /* Raman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B101B0D1B9300611519 /* Raman.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +62,7 @@
 		92011AEF1B0D197300611519 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		92011AF21B0D197300611519 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		92011B0A1B0D1A3100611519 /* DisplayInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayInfoViewController.swift; sourceTree = "<group>"; };
-		92011B0C1B0D1A4300611519 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		92011B0C1B0D1A4300611519 /* SpectroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectroViewController.swift; sourceTree = "<group>"; };
 		92011B101B0D1B9300611519 /* Raman.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Raman.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,7 +100,7 @@
 		215A7AFB1CF8D91A003B9F9B /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				92011B0C1B0D1A4300611519 /* ViewController.swift */,
+				92011B0C1B0D1A4300611519 /* SpectroViewController.swift */,
 				214414A91CB2B3F400A1958D /* BandwidthViewController.swift */,
 				92011B0A1B0D1A3100611519 /* DisplayInfoViewController.swift */,
 				211537691EF59CF90006AC64 /* CalculatorViewController.swift */,
@@ -267,7 +267,7 @@
 				92011B0B1B0D1A3100611519 /* DisplayInfoViewController.swift in Sources */,
 				2115376C1EF5BC4F0006AC64 /* Calculator.swift in Sources */,
 				21B537BA1EF717AF00744E9A /* TooltipPopoverViewController.swift in Sources */,
-				92011B0D1B0D1A4300611519 /* ViewController.swift in Sources */,
+				92011B0D1B0D1A4300611519 /* SpectroViewController.swift in Sources */,
 				21BD40831E2AA7C30063E788 /* RamanStyleKit.swift in Sources */,
 				92011AE91B0D197300611519 /* AppDelegate.swift in Sources */,
 				215A7B011CF9194C003B9F9B /* Theme.swift in Sources */,
