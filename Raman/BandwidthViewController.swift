@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import StoreKit
 
-class BandwidthViewController: UIViewController, IAPContainer {
+class BandwidthViewController: UIViewController {
 
     // MARK: properties
     
@@ -17,13 +16,6 @@ class BandwidthViewController: UIViewController, IAPContainer {
     var selectedTheme: ThemeMode?
     var themeModeButton: UIBarButtonItem!
     var memory : Memory?
-    var iapHelper: IAPHelper? {
-        didSet {
-            updateIAPHelper()
-        }
-    }
-    // this will be set when iapHelper is set through the updateIAPHelper function
-    private var memoriesProduct: SKProduct?
 
     // MARK: Outlets
     
@@ -126,7 +118,6 @@ class BandwidthViewController: UIViewController, IAPContainer {
         if segue.identifier == "showAboutSegue" {
             if let nvc = segue.destination as? UINavigationController, let vc = nvc.topViewController as? DisplayInfoViewController {
                 vc.memory = self.memory
-                vc.iapHelper = self.iapHelper
             }
         }
     }
@@ -256,16 +247,3 @@ extension BandwidthViewController {
     }
 }
 
-extension BandwidthViewController {
-    private func updateIAPHelper() {
-        passIAPHelperToChildren()
-        
-        guard let iapHelper = iapHelper else { return }
-        
-        iapHelper.requestProducts { (products) in
-            guard let products = products else { return }
-            self.memoriesProduct = products.filter{ $0.productIdentifier == RamanIAPHelper.memories.productId }.first
-        }
-    }
-
-}

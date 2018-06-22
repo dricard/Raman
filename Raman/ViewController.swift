@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import StoreKit
 
-class ViewController: UIViewController, IAPContainer {
+class ViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -17,15 +16,7 @@ class ViewController: UIViewController, IAPContainer {
     var selectedTheme: ThemeMode?
     var themeModeButton: UIBarButtonItem!
     var memory : Memory?
-    var iapHelper: IAPHelper? {
-        didSet {
-            updateIAPHelper()
-        }
-    }
-    // this will be set when iapHelper is set through the updateIAPHelper function
-    private var memoriesProduct: SKProduct?
 
-    
     // MARK: - Outlets
     
     @IBOutlet var myTableView: UITableView!
@@ -114,9 +105,6 @@ class ViewController: UIViewController, IAPContainer {
         
         navigationItem.leftBarButtonItem = themeModeButton
  
-        // IAP observer
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handlePurchaseNotification), name: IAPHelper.iAPHelperPurchaseNotification, object: nil)
-
         updateInterface()
     }
     
@@ -132,7 +120,6 @@ class ViewController: UIViewController, IAPContainer {
         if segue.identifier == "showAboutSegue" {
             if let nvc = segue.destination as? UINavigationController, let vc = nvc.topViewController as? DisplayInfoViewController {
                 vc.memory = self.memory
-                vc.iapHelper = self.iapHelper
             }
         }
     }
@@ -264,26 +251,3 @@ extension ViewController {
     }
 }
 
-extension ViewController {
-    
-    @objc func handlePurchaseNotification(notification: NSNotification) {
-         if let productID = notification.object as? String, productID == RamanIAPHelper.memories.productId {
-            if let memory = memory {
-                memory.isPurchased = true
-                memory.saveMemoryToDisk()   // save the purchased status to disk
-            }
-        }
-    }
-
-    private func updateIAPHelper() {
-        passIAPHelperToChildren()
-        
-        guard let iapHelper = iapHelper else { return }
-        
-        iapHelper.requestProducts { (products) in
-            guard let products = products else { return }
-            self.memoriesProduct = products.filter{ $0.productIdentifier == RamanIAPHelper.memories.productId }.first
-        }
-    }
-
-}

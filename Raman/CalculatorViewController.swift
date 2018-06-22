@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import StoreKit
 
 class CalculatorViewController: UIViewController {
     
@@ -300,15 +299,7 @@ class CalculatorViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         // display memories if purchased
         guard let memory = memory else { return }
-        if memory.newPurchase {
-            setMemoriesPurchased(memory.isPurchased, animated: true)
-            if memory.isPurchased {
-                memory.newPurchase = false
-                memory.saveMemoryToDisk()
-            }
-        } else {
-            setMemoriesPurchased(memory.isPurchased, animated: false)
-        }
+        memory.isPurchased = true
     }
     
     // MARK: - Data entry and memory management
@@ -529,38 +520,6 @@ extension CalculatorViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
-}
-
-// MARK: - IAP handlers
-extension CalculatorViewController {
-    
-    @IBAction func moreInfoTapped(sender: UIButton) {
-        if let url = URL(string: "http://hexaedre.com/apps/raman/")
-        {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        }
-    }
-    
-    private func setMemoriesPurchased(_ purchased: Bool, animated: Bool = true) {
-        DispatchQueue.main.async {
-            if animated {
-                UIView.animate(withDuration: 0.7, delay: 0.2, options: UIViewAnimationOptions.transitionCrossDissolve
-                    , animations: {
-                        self.buyMemoriesView.isHidden = purchased
-
-                }, completion: { (finish) in
-                    UIView.animate(withDuration: 0.7, delay: 0.4, options: UIViewAnimationOptions.transitionFlipFromLeft, animations: {
-                        self.memoriesView.isHidden = !purchased
-
-                    }, completion: nil)
-                })
-            } else {
-                self.buyMemoriesView.isHidden = purchased
-                self.memoriesView.isHidden = !purchased
-            }
-        }
-    }
-    
 }
 
 extension CalculatorViewController: CallMemoryDelegate {

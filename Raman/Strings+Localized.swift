@@ -25,6 +25,7 @@ extension String {
     static let helpButton = NSLocalizedString("Help")
     static let supportButton = NSLocalizedString("Support")
     static let doneButton = NSLocalizedString("Done")
+    static let atLabel = NSLocalizedString("at")
     
     // MARK: - Spectro tableview
     static let excitationText = NSLocalizedString("Excitation wavelength")
