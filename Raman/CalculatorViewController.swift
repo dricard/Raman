@@ -260,10 +260,7 @@ class CalculatorViewController: UIViewController {
         
         // localization
         self.title = .editValueLabel
-        memoryAdTitleLabel.text = .iapTitle
-        memoryAdTextLabel.text = .iapText
-        moreInfoButton.setTitle(.iapMoreInfo, for: .normal)
-        
+         
         // add cancel button and localize
         let cancelButton = UIBarButtonItem(title: .cancelButton, style: .plain, target: self, action: #selector(CalculatorViewController.cancelEntry))
         navigationItem.rightBarButtonItem = cancelButton
@@ -296,11 +293,6 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        // display memories if purchased
-        guard let memory = memory else { return }
-        memory.isPurchased = true
-    }
     
     // MARK: - Data entry and memory management
     
@@ -377,24 +369,6 @@ class CalculatorViewController: UIViewController {
             
             let fontSizes = fontSizeClasses()
             
-            if let memory = memory {
-                if !memory.isPurchased {
-                    buyMemoriesView.backgroundColor = Theme.color(for: .tableViewBackgroundColor, with: selectedTheme.mode)
-                    memoryAdTextLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
-                    memoryAdTitleLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
-                    moreInfoButton.layer.borderColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode).cgColor
-                    moreInfoButton.setTitleColor(Theme.color(for: .cellTextColor, with: selectedTheme.mode), for: .normal)
-                    moreInfoButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizes[2])
-                    memoryAdTitleLabel.font = UIFont.systemFont(ofSize: fontSizes[2])
-                    memoryAdTextLabel.font = UIFont.systemFont(ofSize: fontSizes[1])
-                    if fontSizes[2] >= 34 {
-                        memoryImageView.image = UIImage(named: "memories_img")
-                    }
-                    moreInfoButton.layer.borderWidth = 1
-                    moreInfoButton.layer.cornerRadius = 5
-                }
-            }
-
             displayLabel.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             previousValueLabel.font = UIFont.systemFont(ofSize: fontSizes[2])
             parameterLabel.font = UIFont.systemFont(ofSize: fontSizes[2])

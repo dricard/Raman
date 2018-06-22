@@ -189,8 +189,7 @@ extension BandwidthViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        guard let memory = memory else { return false }
-        return memory.isPurchased
+        return true
     }
     
 }
@@ -201,49 +200,41 @@ extension BandwidthViewController: UITableViewDelegate {
 extension BandwidthViewController {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if let memory = memory, memory.isPurchased {
-            let previous = UIContextualAction(style: .normal, title: "previous") { (action, view, completionHandler) in
-                if let memory = self.memory, let raman = self.raman {
-                    let newValue = memory.previous(dataSource: .bandwidth, parameter: indexPath.row)
-                    if newValue != 0.0 {
-                        raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
-                        tableView.reloadData()
-                    }
+        let previous = UIContextualAction(style: .normal, title: "previous") { (action, view, completionHandler) in
+            if let memory = self.memory, let raman = self.raman {
+                let newValue = memory.previous(dataSource: .bandwidth, parameter: indexPath.row)
+                if newValue != 0.0 {
+                    raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
+                    tableView.reloadData()
                 }
-                completionHandler(true)
             }
-            if let selectedTheme = selectedTheme {
-                previous.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
-            }
-            let config = UISwipeActionsConfiguration(actions: [previous])
-            config.performsFirstActionWithFullSwipe = true
-            return config
-        } else {
-            return nil
+            completionHandler(true)
         }
+        if let selectedTheme = selectedTheme {
+            previous.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
+        }
+        let config = UISwipeActionsConfiguration(actions: [previous])
+        config.performsFirstActionWithFullSwipe = true
+        return config
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if let memory = memory, memory.isPurchased {
-            let next = UIContextualAction(style: .normal, title: "next") { (action, view, completionHandler) in
-                if let memory = self.memory, let raman = self.raman {
-                    let newValue = memory.next(dataSource: .bandwidth, parameter: indexPath.row)
-                    if newValue != 0.0 {
-                        raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
-                        tableView.reloadData()
-                    }
+        let next = UIContextualAction(style: .normal, title: "next") { (action, view, completionHandler) in
+            if let memory = self.memory, let raman = self.raman {
+                let newValue = memory.next(dataSource: .bandwidth, parameter: indexPath.row)
+                if newValue != 0.0 {
+                    raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
+                    tableView.reloadData()
                 }
-                completionHandler(true)
             }
-            if let selectedTheme = selectedTheme {
-                next.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
-            }
-            let config = UISwipeActionsConfiguration(actions: [next])
-            config.performsFirstActionWithFullSwipe = true
-            return config
-        } else {
-            return nil
+            completionHandler(true)
         }
+        if let selectedTheme = selectedTheme {
+            next.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
+        }
+        let config = UISwipeActionsConfiguration(actions: [next])
+        config.performsFirstActionWithFullSwipe = true
+        return config
     }
 }
 
