@@ -233,3 +233,7 @@ class Memory {
     }
 
 }
+
+extension Memory {
+    static let mock = Memory()
+}

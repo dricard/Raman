@@ -319,6 +319,11 @@ class Raman {
     
 }
 
+
+extension Raman {
+    static let mock = Raman(signal: 980.28, pump: 632.42, bwLambda: 654.32, bwInCm: 700.0)
+}
+
 extension Double {
     func format(_ f: String) -> String {
         return NSString(format: "%\(f)f" as NSString, self) as String

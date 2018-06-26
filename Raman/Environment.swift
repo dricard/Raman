@@ -19,11 +19,11 @@ struct Environment {
 
 extension Environment {
     static let mock = Environment(
-        raman: Raman(signal: 980.28, pump: 632.42, bwLambda: 654.32, bwInCm: 700.0),
-        selectedTheme: ThemeMode.init(mode: .lightMode),
-        memory: Memory(),
-        version: Version(build: "3.X", release: "omega"),
-        screen: Screen(width: "356", height: "700"),
-        device: Device(systemName: "Mock OS", systemVersion: "0.1")
+        raman: .mock,
+        selectedTheme: .mock,
+        memory: .mock,
+        version: .mock,
+        screen: .mock,
+        device: .mock
     )
 }

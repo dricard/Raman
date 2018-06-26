@@ -31,3 +31,7 @@ class ThemeMode {
         }
     }
 }
+
+extension ThemeMode {
+    static let mock = ThemeMode.init(mode: .lightMode)
+}

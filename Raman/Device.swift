@@ -12,3 +12,7 @@ struct Device {
     var systemName = UIDevice.current.systemName
     var systemVersion = UIDevice.current.systemVersion
 }
+
+extension Device {
+    static let mock = Device(systemName: "Mock OS", systemVersion: "0.1")
+}
