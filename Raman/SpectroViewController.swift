@@ -211,7 +211,7 @@ extension SpectroViewController {
             completionHandler(true)
         }
         if let selectedTheme = selectedTheme {
-            previous.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
+            previous.backgroundColor = UIColor(named: "\(selectedTheme.prefix())swipeActionColor")
         }
         let config = UISwipeActionsConfiguration(actions: [previous])
         config.performsFirstActionWithFullSwipe = true
@@ -230,7 +230,7 @@ extension SpectroViewController {
             completionHandler(true)
         }
         if let selectedTheme = selectedTheme {
-            next.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
+            next.backgroundColor = UIColor(named: "\(selectedTheme.prefix())swipeActionColor")
         }
         let config = UISwipeActionsConfiguration(actions: [next])
         config.performsFirstActionWithFullSwipe = true

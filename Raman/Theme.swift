@@ -9,25 +9,7 @@
 import UIKit
 
 struct Theme {
-    
-    static func color(for element: Element, with selectedTheme: ThemeModes) -> UIColor {
-        switch selectedTheme {
-        case .darkMode:
-            switch element {
-            case .swipeActionColor: return UIColor(red:0.67, green:0.80, blue:0.87, alpha:1.00)
-            }
-        case .lightMode:
-            switch element {
-            case .swipeActionColor: return UIColor(red:0.67, green:0.80, blue:0.87, alpha:1.00)
-            }
-        }
-    }
-    
-
-    enum Element {
-        case swipeActionColor
-     }
-    
+        
     enum Fonts {
         case titleFont
         case detailTextFont
