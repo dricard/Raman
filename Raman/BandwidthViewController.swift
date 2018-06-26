@@ -43,13 +43,13 @@ class BandwidthViewController: UIViewController {
 
         // set navigation bar
         self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
-        self.navigationController?.navigationBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): Theme.color(for: .navBarTextColor, with: selectedTheme.mode)]
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(selectedTheme.prefix())navBarTextColor")!]
         
         
         // set tab bar
-        self.tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
-        self.tabBarController?.tabBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+        self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
+        self.tabBarController?.tabBar.tintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
         self.tabBarController?.tabBar.unselectedItemTintColor = Theme.color(for: .navBarUnselectedTextColor, with: selectedTheme.mode)
          
         // update theme mode switch button

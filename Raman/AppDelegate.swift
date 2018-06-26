@@ -76,8 +76,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // set tab bar
         let tabBarAppearance = UITabBar.appearance()
         tabBarAppearance.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
-        tabBarAppearance.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-        tabBarAppearance.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+        tabBarAppearance.tintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
+        tabBarAppearance.unselectedItemTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
 
         // Dependency injection
         

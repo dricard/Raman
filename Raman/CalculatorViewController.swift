@@ -376,13 +376,13 @@ class CalculatorViewController: UIViewController {
             exponentLabel.font = UIFont.systemFont(ofSize: fontSizes[0])
             
             self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
-            self.navigationController?.navigationBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): Theme.color(for: .navBarTextColor, with: selectedTheme.mode)]
+            self.navigationController?.navigationBar.tintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(selectedTheme.prefix())navBarTextColor")!]
             
             // set tab bar
             self.tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
-            self.tabBarController?.tabBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-            self.tabBarController?.tabBar.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+            self.tabBarController?.tabBar.tintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
+            self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
             
             let buttonsColors = Theme.color(for: .tableViewBackgroundColor, with: selectedTheme.mode)
             let displayColor = Theme.color(for: .displayBackgroundColor, with: selectedTheme.mode)

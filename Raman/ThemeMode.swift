@@ -18,4 +18,12 @@ class ThemeMode {
     // MARK: - Properties
     var mode: ThemeModes = .darkMode
     
+    func prefix() -> String {
+        switch mode {
+        case .darkMode:
+            return "dark_"
+        case .lightMode:
+            return "light_"
+        }
+    }
 }

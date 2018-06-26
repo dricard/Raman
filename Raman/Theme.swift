@@ -14,7 +14,6 @@ struct Theme {
         switch selectedTheme {
         case .darkMode:
             switch element {
-            case .navBarTextColor: return UIColor(red:1.00, green:0.99, blue:0.94, alpha:1.00)
             case .navBarUnselectedTextColor: return UIColor(red:0.00, green:0.01, blue:0.06, alpha:0.40)
             case .tableViewBackgroundColor: return UIColor(red:0.29, green:0.62, blue:0.80, alpha:1.00)
             case .tableViewSeparatorColor: return UIColor(red:1.00, green:0.97, blue:0.85, alpha:1.00)
@@ -28,7 +27,6 @@ struct Theme {
         case .lightMode:
             switch element {
             case .navBarUnselectedTextColor: return UIColor(red:0.58, green:0.58, blue:0.58, alpha:1.00)
-            case .navBarTextColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
             case .tableViewBackgroundColor: return UIColor(red:1.00, green:0.97, blue:0.85, alpha:1.00)
             case .tableViewSeparatorColor: return UIColor(red:0.29, green:0.62, blue:0.80, alpha:1.00)
             case .navBarTintColor: return UIColor(red:0.62, green:0.82, blue:0.90, alpha:0.25)
@@ -42,7 +40,6 @@ struct Theme {
     }
     
     /*
-      .navBarTextColor: text in the navigation bar
      .tableViewBackgroundColor: this is the color behind the cells
      .tableViewSeparatorColor: this is the color between the cells (usually same as background)
      .cellBackgroundColor: cell background
@@ -50,7 +47,6 @@ struct Theme {
      .cellTextColor: cell text color
     */
     enum Element {
-        case navBarTextColor
         case navBarUnselectedTextColor
         case tableViewBackgroundColor
         case tableViewSeparatorColor
