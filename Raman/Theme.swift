@@ -14,12 +14,10 @@ struct Theme {
         switch selectedTheme {
         case .darkMode:
             switch element {
-            case .displayTextColor: return UIColor(red:0.21, green:0.52, blue:0.70, alpha:1.00)
             case .swipeActionColor: return UIColor(red:0.67, green:0.80, blue:0.87, alpha:1.00)
             }
         case .lightMode:
             switch element {
-            case .displayTextColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
             case .swipeActionColor: return UIColor(red:0.67, green:0.80, blue:0.87, alpha:1.00)
             }
         }
@@ -27,7 +25,6 @@ struct Theme {
     
 
     enum Element {
-        case displayTextColor
         case swipeActionColor
      }
     

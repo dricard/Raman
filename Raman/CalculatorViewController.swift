@@ -386,7 +386,7 @@ class CalculatorViewController: UIViewController {
             
             let buttonsColors = UIColor(named: "\(selectedTheme.prefix())tableViewBackgroundColor")
             let displayColor = UIColor(named: "\(selectedTheme.prefix())displayBackgroundColor")
-            let displayTextColor = Theme.color(for: .displayTextColor, with: selectedTheme.mode)
+            let displayTextColor = UIColor(named: "\(selectedTheme.prefix())displayTextColor")
             
             // set display
             displayView.backgroundColor = displayColor
