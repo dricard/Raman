@@ -13,6 +13,7 @@ struct Environment {
     var selectedTheme = ThemeMode()
     var memory = Memory()
     var version = Version()
+    var screen = Screen()
 }
 
 extension Environment {
@@ -20,6 +21,7 @@ extension Environment {
         raman: Raman(signal: 980.28, pump: 632.42, bwLambda: 654.32, bwInCm: 700.0),
         selectedTheme: ThemeMode.init(mode: .lightMode),
         memory: Memory(),
-        version: Version(build: "3.X", release: "omega")
+        version: Version(build: "3.X", release: "omega"),
+        screen: Screen(width: "356", height: "700")
     )
 }
