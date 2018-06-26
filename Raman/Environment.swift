@@ -15,6 +15,7 @@ struct Environment {
     var version = Version()
     var screen = Screen()
     var device = Device()
+    var locale = Language()
 }
 
 extension Environment {
@@ -24,6 +25,7 @@ extension Environment {
         memory: .mock,
         version: .mock,
         screen: .mock,
-        device: .mock
+        device: .mock,
+        locale: .mock
     )
 }

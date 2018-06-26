@@ -17,6 +17,7 @@
 		214A4B7A20E2C683003835FC /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214A4B7920E2C683003835FC /* Version.swift */; };
 		214A4B7C20E2CAC7003835FC /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214A4B7B20E2CAC7003835FC /* Screen.swift */; };
 		214A4B7E20E2CBBE003835FC /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214A4B7D20E2CBBE003835FC /* Device.swift */; };
+		214A4B8220E2DBA4003835FC /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214A4B8120E2DBA4003835FC /* Language.swift */; };
 		215A7AFF1CF8DA6E003B9F9B /* DataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A7AFE1CF8DA6E003B9F9B /* DataCell.swift */; };
 		215A7B011CF9194C003B9F9B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A7B001CF9194C003B9F9B /* Theme.swift */; };
 		215A7B031CF91D07003B9F9B /* BWCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A7B021CF91D07003B9F9B /* BWCell.swift */; };
@@ -48,6 +49,7 @@
 		214A4B7920E2C683003835FC /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		214A4B7B20E2CAC7003835FC /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		214A4B7D20E2CBBE003835FC /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		214A4B8120E2DBA4003835FC /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		215A7AFE1CF8DA6E003B9F9B /* DataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCell.swift; sourceTree = "<group>"; };
 		215A7B001CF9194C003B9F9B /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		215A7B021CF91D07003B9F9B /* BWCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWCell.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				214A4B7920E2C683003835FC /* Version.swift */,
 				214A4B7B20E2CAC7003835FC /* Screen.swift */,
 				214A4B7D20E2CBBE003835FC /* Device.swift */,
+				214A4B8120E2DBA4003835FC /* Language.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				214A4B7820E2AA21003835FC /* Environment.swift in Sources */,
 				215A7AFF1CF8DA6E003B9F9B /* DataCell.swift in Sources */,
 				21126B2F1F151D9000CBB8B3 /* ShowMemoryViewController.swift in Sources */,
+				214A4B8220E2DBA4003835FC /* Language.swift in Sources */,
 				214414AC1CB2C0B700A1958D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

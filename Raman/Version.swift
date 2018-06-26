@@ -14,5 +14,5 @@ struct Version {
 }
 
 extension Version {
-    static let mock = Version(build: "3.X", release: "omega")
+    static let mock = Version(build: "omega", release: "3.X")
 }
