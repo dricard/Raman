@@ -14,6 +14,7 @@ struct Environment {
     var memory = Memory()
     var version = Version()
     var screen = Screen()
+    var device = Device()
 }
 
 extension Environment {
@@ -22,6 +23,7 @@ extension Environment {
         selectedTheme: ThemeMode.init(mode: .lightMode),
         memory: Memory(),
         version: Version(build: "3.X", release: "omega"),
-        screen: Screen(width: "356", height: "700")
+        screen: Screen(width: "356", height: "700"),
+        device: Device(systemName: "Mock OS", systemVersion: "0.1")
     )
 }

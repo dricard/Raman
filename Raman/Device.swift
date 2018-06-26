@@ -6,4 +6,9 @@
 //  Copyright © 2018 Hexaedre. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+struct Device {
+    var systemName = UIDevice.current.systemName
+    var systemVersion = UIDevice.current.systemVersion
+}
