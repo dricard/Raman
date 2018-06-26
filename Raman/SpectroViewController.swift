@@ -170,7 +170,7 @@ extension SpectroViewController: UITableViewDataSource {
         cell.unitsLabel.textColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
         cell.exponentsLabel.text = Constants.specExp[indexPath.row]
         cell.exponentsLabel.textColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
-        cell.backgroundColor = Theme.color(for: .cellBackgroundColor, with: selectedTheme.mode)
+        cell.backgroundColor = UIColor(named: "\(selectedTheme.prefix())cellBackgroundColor")
         if selectedTheme.mode == .darkMode {
             cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")
         } else {
