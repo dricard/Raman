@@ -53,7 +53,7 @@ class SpectroViewController: UIViewController {
             self.tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
             self.tabBarController?.tabBar.tintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
 
-            self.tabBarController?.tabBar.unselectedItemTintColor = Theme.color(for: .navBarUnselectedTextColor, with: selectedTheme.mode)
+            self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(selectedTheme.prefix())navBarUnselectedTextColor")
             
             // update theme mode switch button
             switch selectedTheme.mode {

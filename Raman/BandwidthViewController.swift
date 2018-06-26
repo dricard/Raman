@@ -50,7 +50,7 @@ class BandwidthViewController: UIViewController {
         // set tab bar
         self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
         self.tabBarController?.tabBar.tintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
-        self.tabBarController?.tabBar.unselectedItemTintColor = Theme.color(for: .navBarUnselectedTextColor, with: selectedTheme.mode)
+        self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(selectedTheme.prefix())navBarUnselectedTextColor")
          
         // update theme mode switch button
         switch selectedTheme.mode {
