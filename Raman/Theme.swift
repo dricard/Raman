@@ -9,7 +9,7 @@
 import UIKit
 
 struct Theme {
-        
+    
     enum Fonts {
         case titleFont
         case detailTextFont
@@ -17,9 +17,9 @@ struct Theme {
         
         var font: UIFont {
             switch self {
-            case .titleFont: return UIFont(name: "Hack-Bold", size: 32)!
+            case .titleFont: return UIFont.systemFont(ofSize: 32, weight: .heavy)
             case .detailTextFont: return UIFont.systemFont(ofSize: CGFloat(18))
-            case .navTitleFont: return UIFont(name: "Hack-Bold", size: 18)!
+            case .navTitleFont: return UIFont.systemFont(ofSize: 18, weight: .bold)
             }
         }
     }
