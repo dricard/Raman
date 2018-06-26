@@ -13,3 +13,11 @@ struct Environment {
     var selectedTheme = ThemeMode()
     var memory = Memory()
 }
+
+extension Environment {
+    static let mock = Environment(
+        raman: Raman(signal: 980.28, pump: 632.42, bwLambda: 654.32, bwInCm: 700.0),
+        selectedTheme: ThemeMode.init(mode: .lightMode),
+        memory: Memory()
+    )
+}

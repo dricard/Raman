@@ -15,6 +15,10 @@ enum ThemeModes: Int {
 
 class ThemeMode {
     
+    init(mode: ThemeModes = .darkMode) {
+        self.mode = mode
+    }
+    
     // MARK: - Properties
     var mode: ThemeModes = .darkMode
     
