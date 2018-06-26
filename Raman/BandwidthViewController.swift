@@ -12,10 +12,9 @@ class BandwidthViewController: UIViewController {
 
     // MARK: properties
     
-    var raman: Raman?
-    var selectedTheme: ThemeMode?
+    var Current: Environment?
+
     var themeModeButton: UIBarButtonItem!
-    var memory : Memory?
 
     // MARK: Outlets
     
@@ -23,37 +22,37 @@ class BandwidthViewController: UIViewController {
     @IBOutlet weak var aboutButton: UIBarButtonItem!
     
     @objc func themeModeButtonTapped(_ sender: UIBarButtonItem) {
-        if let selectedTheme = selectedTheme {
-            switch selectedTheme.mode {
+        if let Current = Current {
+            switch Current.selectedTheme.mode {
             case .darkMode:
-                self.selectedTheme?.mode = .lightMode
+                Current.selectedTheme.mode = .lightMode
             case .lightMode:
-                self.selectedTheme?.mode = .darkMode
+                Current.selectedTheme.mode = .darkMode
             }
-            UserDefaults.standard.set(selectedTheme.mode.rawValue, forKey: "themeMode")
+            UserDefaults.standard.set(Current.selectedTheme.mode.rawValue, forKey: "themeMode")
             updateInterface()
         }
     }
     
     func updateInterface() {
-        guard let selectedTheme = selectedTheme else { return }
+        guard let Current = Current else { return }
         
         // display theme mode button for this mode
         UIView.transition(with: self.view, duration: 0.5, options: .beginFromCurrentState, animations: {
 
         // set navigation bar
-        self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTintColor")
-        self.navigationController?.navigationBar.tintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(selectedTheme.prefix())navBarTextColor")!]
+        self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")!]
         
         
         // set tab bar
-        self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
-        self.tabBarController?.tabBar.tintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
-        self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(selectedTheme.prefix())navBarUnselectedTextColor")
+        self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
+        self.tabBarController?.tabBar.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
+        self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarUnselectedTextColor")
          
         // update theme mode switch button
-        switch selectedTheme.mode {
+        switch Current.selectedTheme.mode {
         case .darkMode:
             self.themeModeButton.image = UIImage(named: "lightModeIcon")
         case .lightMode:
@@ -61,10 +60,10 @@ class BandwidthViewController: UIViewController {
         }
         
         // set the tableview background color (behind the cells)
-        self.tableView.backgroundColor = UIColor(named: "\(selectedTheme.prefix())tableViewBackgroundColor")
+        self.tableView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewBackgroundColor")
         
         // set the separator color to the same as the background
-        self.tableView.separatorColor = UIColor(named: "\(selectedTheme.prefix())tableViewSeparatorColor")
+        self.tableView.separatorColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewSeparatorColor")
             
         }, completion: nil)
         
@@ -112,11 +111,9 @@ class BandwidthViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showAboutSegue" {
-            if let nvc = segue.destination as? UINavigationController, let vc = nvc.topViewController as? DisplayInfoViewController {
-                vc.memory = self.memory
-            }
+             }
         }
-    }
+    
 
 }
 
@@ -125,19 +122,19 @@ class BandwidthViewController: UIViewController {
 extension BandwidthViewController: UITableViewDataSource {
     
     @objc func configureCell(cell: BWCell, indexPath: IndexPath) {
-        guard let raman = raman, let selectedTheme = selectedTheme else { return }
+        guard let Current = Current else { return }
         
-        cell.valueLabel!.text = raman.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
+        cell.valueLabel!.text = Current.raman.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
         cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
         cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
         cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
         cell.exponentLabel.text = Constants.bwEpx[indexPath.row]
-        cell.backgroundColor = UIColor(named: "\(selectedTheme.prefix())cellBackgroundColor")
-        cell.valueLabel.textColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
-        cell.dataLabel.textColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
-        cell.unitsLabel.textColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
-        cell.exponentLabel.textColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
-        if selectedTheme.mode == .darkMode {
+        cell.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellBackgroundColor")
+        cell.valueLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+        cell.dataLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+        cell.unitsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+        cell.exponentLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+        if Current.selectedTheme.mode == .darkMode {
             cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
         } else {
             cell.dataImageView?.image = UIImage(named: "bw_light\(indexPath.row)")
@@ -166,20 +163,20 @@ extension BandwidthViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let raman = raman else { return }
+        guard let Current = Current else { return }
         
         /* Push the changeValueViewController */
         let controller = storyboard!.instantiateViewController(withIdentifier: "CalculatorViewController") as! CalculatorViewController
 
         controller.selectedDataSource = indexPath.row
-        controller.selectedValue = raman.bwData(indexPath.row)
+        controller.selectedValue = Current.raman.bwData(indexPath.row)
         controller.myUnits = Constants.bwUnits[indexPath.row]
         controller.myExp = Constants.bwEpx[indexPath.row]
         controller.toolTipString = Constants.bwToolTip[indexPath.row]
         controller.whichTab = Raman.DataSourceType.bandwidth
-        controller.raman = raman
-        controller.selectedTheme = selectedTheme
-        controller.memory = memory
+        controller.raman = Current.raman
+        controller.selectedTheme = Current.selectedTheme
+        controller.memory = Current.memory
         
         navigationController!.pushViewController(controller, animated: true)
     }
@@ -192,22 +189,21 @@ extension BandwidthViewController: UITableViewDelegate {
 
 // MARK: - Swipe actions (iOS11+)
 
-@available(iOS 11.0, *)
 extension BandwidthViewController {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let previous = UIContextualAction(style: .normal, title: "previous") { (action, view, completionHandler) in
-            if let memory = self.memory, let raman = self.raman {
-                let newValue = memory.previous(dataSource: .bandwidth, parameter: indexPath.row)
+            if let Current = self.Current {
+                let newValue = Current.memory.previous(dataSource: .bandwidth, parameter: indexPath.row)
                 if newValue != 0.0 {
-                    raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
+                    Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
                     tableView.reloadData()
                 }
             }
             completionHandler(true)
         }
-        if let selectedTheme = selectedTheme {
-            previous.backgroundColor = UIColor(named: "\(selectedTheme.prefix())swipeActionColor")
+        if let Current = Current {
+            previous.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())swipeActionColor")
         }
         let config = UISwipeActionsConfiguration(actions: [previous])
         config.performsFirstActionWithFullSwipe = true
@@ -216,17 +212,17 @@ extension BandwidthViewController {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let next = UIContextualAction(style: .normal, title: "next") { (action, view, completionHandler) in
-            if let memory = self.memory, let raman = self.raman {
-                let newValue = memory.next(dataSource: .bandwidth, parameter: indexPath.row)
+            if let Current = self.Current {
+                let newValue = Current.memory.next(dataSource: .bandwidth, parameter: indexPath.row)
                 if newValue != 0.0 {
-                    raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
+                    Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
                     tableView.reloadData()
                 }
             }
             completionHandler(true)
         }
-        if let selectedTheme = selectedTheme {
-            next.backgroundColor = UIColor(named: "\(selectedTheme.prefix())swipeActionColor")
+        if let Current = Current {
+            next.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())swipeActionColor")
         }
         let config = UISwipeActionsConfiguration(actions: [next])
         config.performsFirstActionWithFullSwipe = true

@@ -13,46 +13,44 @@ import StoreKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var raman = Raman()
-    var selectedTheme = ThemeMode()
-    var memory = Memory()
-    
+    var Current = Environment()
+        
     fileprivate func loadUserPrefs() {
         // Load user's data
         
         let signal = UserDefaults.standard.double(forKey: "signal")
         if signal != 0 {
-            raman.signal = signal
+            Current.raman.signal = signal
         } else {
-            UserDefaults.standard.set(raman.signal, forKey: "signal")
+            UserDefaults.standard.set(Current.raman.signal, forKey: "signal")
         }
         let pump = UserDefaults.standard.double(forKey: "pump")
         if pump != 0 {
-            raman.pump = pump
+            Current.raman.pump = pump
         } else {
-            UserDefaults.standard.set(raman.pump, forKey: "pump")
+            UserDefaults.standard.set(Current.raman.pump, forKey: "pump")
         }
         let bwLambda = UserDefaults.standard.double(forKey: "bwLambda")
         if bwLambda != 0 {
-            raman.bwLambda = bwLambda
+            Current.raman.bwLambda = bwLambda
         } else {
-            UserDefaults.standard.set(raman.bwLambda, forKey: "bwLambda")
+            UserDefaults.standard.set(Current.raman.bwLambda, forKey: "bwLambda")
         }
         let bwInCm = UserDefaults.standard.double(forKey: "bwInCm")
         if bwInCm != 0 {
-            raman.bwInCm = bwInCm
+            Current.raman.bwInCm = bwInCm
         } else {
-            UserDefaults.standard.set(raman.bwInCm, forKey: "bwInCm")
+            UserDefaults.standard.set(Current.raman.bwInCm, forKey: "bwInCm")
         }
-        memory.getMemoryFromDisk()
+        Current.memory.getMemoryFromDisk()
         
         // theme mode selected
         let mode = UserDefaults.standard.integer(forKey: "themeMode")
         if mode > 0 {
             if let theme = ThemeModes(rawValue: mode) {
-                selectedTheme.mode = theme
+                Current.selectedTheme.mode = theme
             } else {
-                selectedTheme.mode = ThemeModes.darkMode
+                Current.selectedTheme.mode = ThemeModes.darkMode
             }
         } else {
             UserDefaults.standard.set(ThemeModes.darkMode.rawValue, forKey: "themeMode")
@@ -71,13 +69,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
         ]
         navBarAppearance.barStyle = UIBarStyle.blackTranslucent
-        navBarAppearance.barTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTintColor")
+        navBarAppearance.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
         
         // set tab bar
         let tabBarAppearance = UITabBar.appearance()
-        tabBarAppearance.barTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTintColor")
-        tabBarAppearance.tintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
-        tabBarAppearance.unselectedItemTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
+        tabBarAppearance.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
+        tabBarAppearance.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
+        tabBarAppearance.unselectedItemTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
 
         // Dependency injection
         
@@ -85,13 +83,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         for vc in tabController.childViewControllers {
             if let navController = vc as? UINavigationController, let viewController = navController.topViewController as? SpectroViewController {
-                viewController.raman = raman
-                viewController.selectedTheme = selectedTheme
-                viewController.memory = memory
+                viewController.Current = Current
             } else if let navController = vc as? UINavigationController, let viewController = navController.topViewController as? BandwidthViewController {
-                viewController.raman = raman
-                viewController.selectedTheme = selectedTheme
-                viewController.memory = memory
+                viewController.Current = Current
             }
         }
         
