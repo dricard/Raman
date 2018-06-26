@@ -82,9 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let tabController = window?.rootViewController as? UITabBarController else { return true }
         
         /* FOR TESTING */
-        Current = .mock
-        UserDefaults.standard.setValue([Current.locale.representation()], forKey: "AppleLanguages")
-        UserDefaults.standard.synchronize()
+//        Current = .mock
+//        UserDefaults.standard.setValue([Current.locale.representation()], forKey: "AppleLanguages")
+//        UserDefaults.standard.synchronize()
         /* TESTING END */
         
         for vc in tabController.childViewControllers {
