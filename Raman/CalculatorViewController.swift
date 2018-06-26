@@ -382,11 +382,7 @@ class CalculatorViewController: UIViewController {
             // set tab bar
             self.tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
             self.tabBarController?.tabBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-            if #available(iOS 10.0, *) {
-                self.tabBarController?.tabBar.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-            } else {
-                // Fallback on earlier versions
-            }
+            self.tabBarController?.tabBar.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
             
             let buttonsColors = Theme.color(for: .tableViewBackgroundColor, with: selectedTheme.mode)
             let displayColor = Theme.color(for: .displayBackgroundColor, with: selectedTheme.mode)

@@ -77,12 +77,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarAppearance = UITabBar.appearance()
         tabBarAppearance.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
         tabBarAppearance.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-        if #available(iOS 10.0, *) {
-            tabBarAppearance.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-        } else {
-            // Fallback on earlier versions
-        }
-                
+        tabBarAppearance.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
+
         // Dependency injection
         
         guard let tabController = window?.rootViewController as? UITabBarController else { return true }
