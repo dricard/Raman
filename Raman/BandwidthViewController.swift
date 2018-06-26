@@ -64,7 +64,7 @@ class BandwidthViewController: UIViewController {
         self.tableView.backgroundColor = UIColor(named: "\(selectedTheme.prefix())tableViewBackgroundColor")
         
         // set the separator color to the same as the background
-        self.tableView.separatorColor = Theme.color(for: .tableViewSeparatorColor, with: selectedTheme.mode)
+        self.tableView.separatorColor = UIColor(named: "\(selectedTheme.prefix())tableViewSeparatorColor")
             
         }, completion: nil)
         

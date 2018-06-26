@@ -67,7 +67,7 @@ class SpectroViewController: UIViewController {
             self.myTableView.backgroundColor = UIColor(named: "\(selectedTheme.prefix())tableViewBackgroundColor")
             
             // set the separator color to the same as the background
-            self.myTableView.separatorColor = Theme.color(for: .tableViewSeparatorColor, with: selectedTheme.mode)
+            self.myTableView.separatorColor = UIColor(named: "\(selectedTheme.prefix())tableViewSeparatorColor")
             
         }, completion: nil)
         
