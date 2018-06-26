@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var Current = Environment()
-        
+    
     fileprivate func loadUserPrefs() {
         // Load user's data
         

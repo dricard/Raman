@@ -82,12 +82,8 @@ class SpectroViewController: UIViewController {
         // localize
         
         aboutButton.title = .about
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            navigationController?.navigationItem.largeTitleDisplayMode = .always
-        } else {
-            // Fallback on earlier versions
-        }
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
         
         // This prevents the space below the cells to have spacers
         myTableView.tableFooterView = UIView()
