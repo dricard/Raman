@@ -14,7 +14,7 @@ struct Theme {
         switch selectedTheme {
         case .darkMode:
             switch element {
-            case .windowTintColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
+//            case .windowTintColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
             case .navBarTextColor: return UIColor(red:1.00, green:0.99, blue:0.94, alpha:1.00)
             case .navBarUnselectedTextColor: return UIColor(red:0.00, green:0.01, blue:0.06, alpha:0.40)
             case .tableViewBackgroundColor: return UIColor(red:0.29, green:0.62, blue:0.80, alpha:1.00)
@@ -28,7 +28,7 @@ struct Theme {
             }
         case .lightMode:
             switch element {
-            case .windowTintColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
+//            case .windowTintColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
             case .navBarUnselectedTextColor: return UIColor(red:0.58, green:0.58, blue:0.58, alpha:1.00)
             case .navBarTextColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
             case .tableViewBackgroundColor: return UIColor(red:1.00, green:0.97, blue:0.85, alpha:1.00)
@@ -53,7 +53,7 @@ struct Theme {
      .cellTextColor: cell text color
     */
     enum Element {
-        case windowTintColor
+//        case windowTintColor
         case navBarTextColor
         case navBarUnselectedTextColor
         case tableViewBackgroundColor

@@ -861,7 +861,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ee-Tt-xQd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="ZsK-r2-6J5" customClass="RamanStyleKit" customModule="Raman" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="340" y="391"/>
         </scene>
@@ -879,7 +878,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yMh-WP-6bA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="hf6-Cn-nhb" customClass="RamanStyleKit" customModule="Raman" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="340" y="1217"/>
         </scene>

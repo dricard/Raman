@@ -21,7 +21,6 @@
 		218660861EF825C700995D82 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218660851EF825C700995D82 /* Memory.swift */; };
 		21B0F0FF1CFA898D008AF124 /* Hack-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21B0F0FE1CFA898D008AF124 /* Hack-Bold.ttf */; };
 		21B537BA1EF717AF00744E9A /* TooltipPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B537B91EF717AF00744E9A /* TooltipPopoverViewController.swift */; };
-		21BD40831E2AA7C30063E788 /* RamanStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BD40821E2AA7C30063E788 /* RamanStyleKit.swift */; };
 		21CF58561F22545800217E04 /* MemoryDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CF58551F22545800217E04 /* MemoryDisplayTableViewCell.swift */; };
 		21DBEA441E2C59E600C8436B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21DBEA461E2C59E600C8436B /* Main.storyboard */; };
 		21DBEA481E2C5A2E00C8436B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21DBEA4A1E2C5A2E00C8436B /* Localizable.strings */; };
@@ -50,7 +49,6 @@
 		218660851EF825C700995D82 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		21B0F0FE1CFA898D008AF124 /* Hack-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hack-Bold.ttf"; sourceTree = "<group>"; };
 		21B537B91EF717AF00744E9A /* TooltipPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipPopoverViewController.swift; sourceTree = "<group>"; };
-		21BD40821E2AA7C30063E788 /* RamanStyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RamanStyleKit.swift; sourceTree = "<group>"; };
 		21CF58551F22545800217E04 /* MemoryDisplayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDisplayTableViewCell.swift; sourceTree = "<group>"; };
 		21DBEA491E2C5A2E00C8436B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		21DBEA4B1E2C5A4C00C8436B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 		215A7AFD1CF8D993003B9F9B /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				21BD40821E2AA7C30063E788 /* RamanStyleKit.swift */,
 				21B0F0FE1CFA898D008AF124 /* Hack-Bold.ttf */,
 				215A7AFE1CF8DA6E003B9F9B /* DataCell.swift */,
 				215A7B001CF9194C003B9F9B /* Theme.swift */,
@@ -268,7 +265,6 @@
 				2115376C1EF5BC4F0006AC64 /* Calculator.swift in Sources */,
 				21B537BA1EF717AF00744E9A /* TooltipPopoverViewController.swift in Sources */,
 				92011B0D1B0D1A4300611519 /* SpectroViewController.swift in Sources */,
-				21BD40831E2AA7C30063E788 /* RamanStyleKit.swift in Sources */,
 				92011AE91B0D197300611519 /* AppDelegate.swift in Sources */,
 				215A7B011CF9194C003B9F9B /* Theme.swift in Sources */,
 				218660861EF825C700995D82 /* Memory.swift in Sources */,
