@@ -375,12 +375,12 @@ class CalculatorViewController: UIViewController {
             unitsLabel.font = UIFont.systemFont(ofSize: fontSizes[3])
             exponentLabel.font = UIFont.systemFont(ofSize: fontSizes[0])
             
-            self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+            self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTintColor")
             self.navigationController?.navigationBar.tintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
             self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(selectedTheme.prefix())navBarTextColor")!]
             
             // set tab bar
-            self.tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+            self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTintColor")
             self.tabBarController?.tabBar.tintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
             self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
             
