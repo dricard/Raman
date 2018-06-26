@@ -12,8 +12,9 @@ class DisplayInfoViewController: UIViewController {
     
     // MARK: - Properties
     
-    var selectedTheme: ThemeMode?
-    var memory: Memory?
+    var Current: Environment?
+//    var selectedTheme: ThemeMode?
+//    var memory: Memory?
     
     // MARK: - Outlets
     
@@ -37,8 +38,8 @@ class DisplayInfoViewController: UIViewController {
         doneButton.title = .doneButton
         atLabel.text = .atLabel
         
-        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            versionNumberLabel.text = "v. " + version
+        if let Current = Current {
+            versionNumberLabel.text = "v. " + Current.version.release + " (" + Current.version.build + ")"
         }
         let today = Date()
         let formatter = DateFormatter()

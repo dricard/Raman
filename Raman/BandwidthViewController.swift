@@ -107,9 +107,12 @@ class BandwidthViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showAboutSegue" {
-             }
+            if let nvc = segue.destination as? UINavigationController, let vc = nvc.topViewController as? DisplayInfoViewController {
+                vc.Current = self.Current
+            }
         }
-    
+    }
+
 
 }
 
