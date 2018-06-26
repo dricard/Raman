@@ -64,7 +64,7 @@ class SpectroViewController: UIViewController {
             }
             
             // set the tableview background color (behind the cells)
-            self.myTableView.backgroundColor = Theme.color(for: .tableViewBackgroundColor, with: selectedTheme.mode)
+            self.myTableView.backgroundColor = UIColor(named: "\(selectedTheme.prefix())tableViewBackgroundColor")
             
             // set the separator color to the same as the background
             self.myTableView.separatorColor = Theme.color(for: .tableViewSeparatorColor, with: selectedTheme.mode)
