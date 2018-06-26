@@ -133,10 +133,10 @@ extension BandwidthViewController: UITableViewDataSource {
         cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
         cell.exponentLabel.text = Constants.bwEpx[indexPath.row]
         cell.backgroundColor = Theme.color(for: .cellBackgroundColor, with: selectedTheme.mode)
-        cell.valueLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
-        cell.dataLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
-        cell.unitsLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
-        cell.exponentLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+        cell.valueLabel.textColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+        cell.dataLabel.textColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+        cell.unitsLabel.textColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+        cell.exponentLabel.textColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
         if selectedTheme.mode == .darkMode {
             cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
         } else {

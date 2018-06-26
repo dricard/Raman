@@ -163,13 +163,13 @@ extension SpectroViewController: UITableViewDataSource {
     @objc func configureCell(cell: DataCell, indexPath: IndexPath) {
         guard let raman = raman, let selectedTheme = selectedTheme else { return }
         cell.valueLabel!.text = raman.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
-        cell.valueLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+        cell.valueLabel.textColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
         cell.dataLabel?.text = Constants.ramanShift[indexPath.row]
-        cell.dataLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+        cell.dataLabel.textColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
         cell.unitsLabel.text = Constants.specUnits[indexPath.row]
-        cell.unitsLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+        cell.unitsLabel.textColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
         cell.exponentsLabel.text = Constants.specExp[indexPath.row]
-        cell.exponentsLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
+        cell.exponentsLabel.textColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
         cell.backgroundColor = Theme.color(for: .cellBackgroundColor, with: selectedTheme.mode)
         if selectedTheme.mode == .darkMode {
             cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")

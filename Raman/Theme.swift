@@ -14,7 +14,6 @@ struct Theme {
         switch selectedTheme {
         case .darkMode:
             switch element {
-            case .cellTextColor: return UIColor(red:1.00, green:0.99, blue:0.94, alpha:1.00)
             case .cellBackgroundColor: return UIColor(red:0.62, green:0.82, blue:0.90, alpha:0.25)
             case .displayBackgroundColor: return UIColor(red:0.62, green:0.82, blue:0.90, alpha:1.0)
             case .displayTextColor: return UIColor(red:0.21, green:0.52, blue:0.70, alpha:1.00)
@@ -22,7 +21,6 @@ struct Theme {
             }
         case .lightMode:
             switch element {
-            case .cellTextColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
             case .cellBackgroundColor: return UIColor(red:1.00, green:0.99, blue:0.94, alpha:1.00)
             case .displayBackgroundColor: return UIColor(red:1.00, green:0.99, blue:0.94, alpha:1.00)
             case .displayTextColor: return UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
@@ -40,7 +38,6 @@ struct Theme {
     */
     enum Element {
         case cellBackgroundColor
-        case cellTextColor
         case displayBackgroundColor
         case displayTextColor
         case swipeActionColor
