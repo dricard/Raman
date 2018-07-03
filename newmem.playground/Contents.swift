@@ -18,6 +18,7 @@ struct Memory {
         }
     }
     
+    
     mutating func push(_ newValue: Double) {
         for i in (1...max).reversed() {
             if !stack[i].isPinned {
