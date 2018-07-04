@@ -231,9 +231,12 @@ class CalculatorViewController: UIViewController {
                 Current.raman.updateParameter(currentValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
                 
                 switch recentsTrack(forDataSource: selectedDataSource!, inWhichTab: whichTab!) {
-                case .wavelengths:
-                    Current.wavelengths.push(currentValue, with: .wavelength)
-                    os_log("Pushed value %.4f to wavelengths recents", log: Log.general, type: .debug, currentValue)
+                case .excitations:
+                    Current.excitations.push(currentValue, with: .wavelength)
+                    os_log("Pushed value %.4f to excitations recents", log: Log.general, type: .debug, currentValue)
+                case .signals:
+                    Current.signals.push(currentValue, with: .wavelength)
+                    os_log("Pushed value %.4f to signals recents", log: Log.general, type: .debug, currentValue)
                 case .bandwidths:
                     let type = typeForBandwidth(of: selectedDataSource!)
                     Current.bandwidths.push(currentValue, with: type)
@@ -359,7 +362,8 @@ class CalculatorViewController: UIViewController {
     // MARK: - Utilities
     
     enum Track {
-        case wavelengths
+        case excitations
+        case signals
         case bandwidths
         case shifts
     }
@@ -368,15 +372,17 @@ class CalculatorViewController: UIViewController {
         switch inWhichTab {
         case .spectroscopy:
             switch forDataSource {
-            case 0, 1:
-                return .wavelengths
+            case 0:
+                return .excitations
+            case 1:
+                return .signals
             default:
                 return .shifts
             }
         case .bandwidth:
             switch forDataSource {
             case 0:
-                return .wavelengths
+                return .signals
             default:
                 return .bandwidths
             }

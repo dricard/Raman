@@ -43,7 +43,7 @@ struct Spot {
 class Recents {
     let max = 9
     var stack = [ Spot ]()
-    var current = 0
+    private var currentIndex = 0
 
     init(for type: RecentType) {
         for _ in 0...max {
@@ -52,31 +52,65 @@ class Recents {
     }
     
     func left() -> Bool {
-        if current == current << 1 {
+        if currentIndex == currentIndex << 1 {
             os_log("End of recent data going left", log: Log.general, type: .debug)
             return false
         } else {
-            os_log("Returning status of left data for %d", log: Log.general, type: .debug, current)
-            return stack[current << 1].value != nil
+            let lefty = currentIndex << 1
+            os_log("Returning status of left data for position %d with lefty = %d", log: Log.general, type: .debug, currentIndex, lefty)
+            return stack[currentIndex << 1].value != nil
         }
     }
     
     func righ() -> Bool {
-        if current == current >> 1 {
+        if currentIndex == currentIndex >> 1 {
             return false
         } else {
-            return stack[current >> 1].value != nil
+            return stack[currentIndex >> 1].value != nil
         }
     }
     
+    func moveLeft() -> Bool {
+        // check if we're at the end of the recents list
+        if currentIndex == currentIndex << 1 {
+            return false
+        } else {
+            // check if there *is* a value to the left of the current Spot
+            if stack[ currentIndex << 1].value != nil {
+                // yes there is, so switch left to that one
+                currentIndex = currentIndex << 1
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+
+    func moveRight() -> Bool {
+        if currentIndex == currentIndex >> 1 {
+            return false
+        } else {
+            if stack[ currentIndex >> 1].value != nil {
+                currentIndex = currentIndex >> 1
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+
     func push(_ newValue: Double, with type: RecentType) {
         for i in (1...max).reversed() {
             stack[i] = stack[i - 1]
         }
         stack[0].value = newValue
         stack[0].type = type
-        current = 0
+        currentIndex = 0
 //        print(stack)
+    }
+    
+    func current() -> Spot {
+        return stack[ currentIndex ]
     }
     
 }

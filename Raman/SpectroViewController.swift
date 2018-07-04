@@ -172,14 +172,26 @@ extension SpectroViewController: UITableViewDataSource {
         }
         // set images on both sides of cell depending on available data in recents
         switch indexPath.row {
-        case 0, 1:
-            os_log("configuring cell for wavelengths with row = %d", log: Log.general, type: .debug, indexPath.row)
-            if Current.wavelengths.left() {
+        case 0:
+            os_log("configuring cell for excitations with row = %d", log: Log.general, type: .debug, indexPath.row)
+            if Current.excitations.left() {
                 cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
             } else {
                 cell.leftDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
             }
-            if Current.wavelengths.righ() {
+            if Current.excitations.righ() {
+                cell.rightDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            } else {
+                cell.rightDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            }
+        case 1:
+            os_log("configuring cell for signals with row = %d", log: Log.general, type: .debug, indexPath.row)
+            if Current.signals.left() {
+                cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            } else {
+                cell.leftDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            }
+            if Current.signals.righ() {
                 cell.rightDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
             } else {
                 cell.rightDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
@@ -222,14 +234,53 @@ extension SpectroViewController: UITableViewDataSource {
 
 extension SpectroViewController {
     
+    // this goes left
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let previous = UIContextualAction(style: .normal, title: "previous") { (action, view, completionHandler) in
             if let Current = self.Current {
-                let newValue = Current.memory.previous(dataSource: .spectroscopy, parameter: indexPath.row)
-                if newValue != 0.0 {
-                    Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
-                    tableView.reloadData()
+                
+                switch indexPath.row {
+                case 0:
+                    if Current.excitations.moveLeft() {
+                        if let newValue = Current.excitations.current().value {
+                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
+                            tableView.reloadData()
+                        }
+                    }
+                case 1:
+                    if Current.signals.moveLeft() {
+                        if let newValue = Current.signals.current().value {
+                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
+                            tableView.reloadData()
+                        }
+                    }
+                case 2, 3, 4:
+                    if Current.shifts.moveLeft() {
+                        if let newValue = Current.shifts.current().value {
+                            let type = Current.shifts.current().type
+                            
+                            switch type {
+                            case .shiftInCm:
+                                Current.raman.updateParameter(newValue, forDataSource: 2, inWhichTab: .spectroscopy)
+                            case .shiftInGhz:
+                                Current.raman.updateParameter(newValue, forDataSource: 3, inWhichTab: .spectroscopy)
+                            case .shiftInMev:
+                                Current.raman.updateParameter(newValue, forDataSource: 4, inWhichTab: .spectroscopy)
+                            default:
+                                os_log("Wrong type for shift in swipe action", log: Log.general, type: .error)
+                            }
+                            tableView.reloadData()
+                        }
+                    }
+                default:
+                    os_log("Wrong value for indexPath.row in swipe action: %d", log: Log.general, type: .error, indexPath.row)
                 }
+                
+//                let newValue = Current.memory.previous(dataSource: .spectroscopy, parameter: indexPath.row)
+//                if newValue != 0.0 {
+//                    Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
+//                    tableView.reloadData()
+//                }
             }
             completionHandler(true)
         }
@@ -241,14 +292,54 @@ extension SpectroViewController {
         return config
     }
     
+    // this goes right
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let next = UIContextualAction(style: .normal, title: "next") { (action, view, completionHandler) in
             if let Current = self.Current {
-                let newValue = Current.memory.next(dataSource: .spectroscopy, parameter: indexPath.row)
-                if newValue != 0.0 {
-                    Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
-                    tableView.reloadData()
+                
+                switch indexPath.row {
+                case 0:
+                    if Current.excitations.moveRight() {
+                        if let newValue = Current.excitations.current().value {
+                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
+                            tableView.reloadData()
+                        }
+                    }
+                case 1:
+                    if Current.signals.moveRight() {
+                        if let newValue = Current.signals.current().value {
+                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
+                            tableView.reloadData()
+                        }
+                    }
+                case 2, 3, 4:
+                    if Current.shifts.moveRight() {
+                        if let newValue = Current.shifts.current().value {
+                            let type = Current.shifts.current().type
+                            
+                            switch type {
+                            case .shiftInCm:
+                                Current.raman.updateParameter(newValue, forDataSource: 2, inWhichTab: .spectroscopy)
+                            case .shiftInGhz:
+                                Current.raman.updateParameter(newValue, forDataSource: 3, inWhichTab: .spectroscopy)
+                            case .shiftInMev:
+                                Current.raman.updateParameter(newValue, forDataSource: 4, inWhichTab: .spectroscopy)
+                            default:
+                                os_log("Wrong type for shift in swipe action", log: Log.general, type: .error)
+                            }
+                            tableView.reloadData()
+                        }
+                    }
+                default:
+                    os_log("Wrong value for indexPath.row in swipe action: %d", log: Log.general, type: .error, indexPath.row)
                 }
+                
+
+//                let newValue = Current.memory.next(dataSource: .spectroscopy, parameter: indexPath.row)
+//                if newValue != 0.0 {
+//                    Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
+//                    tableView.reloadData()
+//                }
             }
             completionHandler(true)
         }
