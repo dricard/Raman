@@ -173,9 +173,7 @@ extension BandwidthViewController: UITableViewDelegate {
         controller.myExp = Constants.bwEpx[indexPath.row]
         controller.toolTipString = Constants.bwToolTip[indexPath.row]
         controller.whichTab = Raman.DataSourceType.bandwidth
-        controller.raman = Current.raman
-        controller.selectedTheme = Current.selectedTheme
-        controller.memory = Current.memory
+        controller.Current = Current
         
         navigationController!.pushViewController(controller, animated: true)
     }

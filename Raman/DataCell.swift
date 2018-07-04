@@ -18,6 +18,9 @@ class DataCell: UITableViewCell {
     @IBOutlet weak var unitsLabel: UILabel!
     @IBOutlet weak var exponentsLabel: UILabel!
     
+    @IBOutlet weak var leftDataAvailableImageView: UIImageView!
+    @IBOutlet weak var rightDataAvailableImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

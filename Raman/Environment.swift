@@ -16,6 +16,9 @@ struct Environment {
     var screen = Screen()
     var device = Device()
     var locale = Language()
+    var wavelengths = Recents(for: .wavelength)
+    var shifts = Recents(for: .shiftInCm)
+    var bandwidths = Recents(for: .bandwidthInCm)
 }
 
 extension Environment {
@@ -26,6 +29,9 @@ extension Environment {
         version: .mock,
         screen: .mock,
         device: .mock,
-        locale: .mock
+        locale: .mock,
+        wavelengths: .mockWavelengths,
+        shifts: .mockShiftInCm,
+        bandwidths: .mockBandwidthInNm
     )
 }

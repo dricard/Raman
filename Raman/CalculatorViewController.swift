@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class CalculatorViewController: UIViewController {
     
@@ -44,9 +45,11 @@ class CalculatorViewController: UIViewController {
 
     // MARK: - Properties
     
-    var raman: Raman?
-    var selectedTheme: ThemeMode?
-    var memory: Memory?
+    var Current: Environment?
+
+//    var raman: Raman?
+//    var selectedTheme: ThemeMode?
+//    var memory: Memory?
     var mode: Mode = .dataEntry
     
     private var calculator = Calculator()
@@ -133,17 +136,17 @@ class CalculatorViewController: UIViewController {
             enterDigit(digit)
         case .memoryOperation(let operation):
             // only accept digits 0-9 for memory operations (store or recall)
-            guard "0123456789".contains(key), let memory = memory, let dataSource = whichTab, let parameter = selectedDataSource, let memorySlot = Int(key) else { return }
+            guard "0123456789".contains(key), let Current = Current, let dataSource = whichTab, let parameter = selectedDataSource, let memorySlot = Int(key) else { return }
             switch operation {
             case .recall:
-                let value = memory.retrieveFrom(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot)
-                memory.currentSelection[dataSource]![parameter]! = memorySlot
+                let value = Current.memory.retrieveFrom(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot)
+                Current.memory.currentSelection[dataSource]![parameter]! = memorySlot
                 displayLabel.text = "\(value)"
             case .store(let value):
                 displayLabel.text = "\(value)"
-                memory.addTo(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot, value: value)
-                memory.currentSelection[dataSource]![parameter]! = memorySlot
-                memory.saveMemoryToDisk()
+                Current.memory.addTo(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot, value: value)
+                Current.memory.currentSelection[dataSource]![parameter]! = memorySlot
+                Current.memory.saveMemoryToDisk()
             }
             mode = .dataEntry
             memoryOperationInProcess = false
@@ -167,9 +170,9 @@ class CalculatorViewController: UIViewController {
                 memoryOperationInProcess = true
             }
         case "Ms":
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "ShowMemoryViewController") as? ShowMemoryViewController, let memory = memory, let dataSource = whichTab, let parameter = selectedDataSource {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "ShowMemoryViewController") as? ShowMemoryViewController, let Current = Current, let dataSource = whichTab, let parameter = selectedDataSource {
                 vc.modalPresentationStyle = .popover
-                vc.mems = memory.memoryArray(dataSource: dataSource, parameter: parameter)
+                vc.mems = Current.memory.memoryArray(dataSource: dataSource, parameter: parameter)
                 vc.delegate = self
                 let stringFormat: String
                 if let whichTab = whichTab, let selectedDataSource = selectedDataSource {
@@ -194,8 +197,8 @@ class CalculatorViewController: UIViewController {
                 controller.message = "Are you sure you want to delete all stored values?\nThis will delete all values for the current parameter."
                 let clearAllAction = UIAlertAction(title: "Yes, delete all", style: .destructive) { (action) in
                     self.dismiss(animated: true, completion: nil)
-                    guard let memory = self.memory, let dataSource = self.whichTab, let parameter = self.selectedDataSource else { return }
-                    memory.clearMemoryFor(dataSource: dataSource, parameter: parameter)
+                    guard let Current = self.Current, let dataSource = self.whichTab, let parameter = self.selectedDataSource else { return }
+                    Current.memory.clearMemoryFor(dataSource: dataSource, parameter: parameter)
                 }
                 controller.addAction(clearAllAction)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
@@ -224,8 +227,22 @@ class CalculatorViewController: UIViewController {
                 }
             }
             if sender.currentTitle == "⏎" {
-                guard let raman = raman else { return }
-                raman.updateParameter(currentValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+                guard let Current = Current else { return }
+                Current.raman.updateParameter(currentValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+                
+                switch recentsTrack(forDataSource: selectedDataSource!, inWhichTab: whichTab!) {
+                case .wavelengths:
+                    Current.wavelengths.push(currentValue, with: .wavelength)
+                    os_log("Pushed value %.4f to wavelengths recents", log: Log.general, type: .debug, currentValue)
+                case .bandwidths:
+                    let type = typeForBandwidth(of: selectedDataSource!)
+                    Current.bandwidths.push(currentValue, with: type)
+                    os_log("Pushed value %.4f to bandwidths recents", log: Log.general, type: .debug, currentValue)
+                case .shifts:
+                    let type = typeForShift(of: selectedDataSource!)
+                    Current.shifts.push(currentValue, with: type)
+                    os_log("Pushed value %.4f to shifts recents", log: Log.general, type: .debug, currentValue)
+                }
                 self.navigationController!.popViewController(animated: true)
             }
         }
@@ -341,6 +358,59 @@ class CalculatorViewController: UIViewController {
     
     // MARK: - Utilities
     
+    enum Track {
+        case wavelengths
+        case bandwidths
+        case shifts
+    }
+    
+    func recentsTrack(forDataSource: Int, inWhichTab: Raman.DataSourceType) -> Track {
+        switch inWhichTab {
+        case .spectroscopy:
+            switch forDataSource {
+            case 0, 1:
+                return .wavelengths
+            default:
+                return .shifts
+            }
+        case .bandwidth:
+            switch forDataSource {
+            case 0:
+                return .wavelengths
+            default:
+                return .bandwidths
+            }
+        }
+    }
+    
+    func typeForBandwidth(of dataSource: Int) -> RecentType {
+        switch dataSource {
+        case 1:
+            return RecentType.bandwidthInCm
+        case 2:
+            return RecentType.bandwidthInGhz
+        case 3:
+            return RecentType.bandwidthInNm
+        default:
+            os_log("Wrong dataSource value (%d) in 'typeForBandwidth'", log: Log.general, type: .error, dataSource)
+            return RecentType.bandwidthInCm
+        }
+    }
+    
+    func typeForShift(of dataSource: Int) -> RecentType {
+        switch dataSource {
+        case 2:
+            return RecentType.shiftInCm
+        case 3:
+            return RecentType.shiftInGhz
+        case 4:
+            return RecentType.shiftInMev
+        default:
+            os_log("Wrong dataSource value (%d) in 'typeForShift'", log: Log.general, type: .error, dataSource)
+            return RecentType.shiftInCm
+        }
+    }
+    
     func fontSizeClasses() -> [CGFloat] {
         switch view.frame.width {
         case 0...320:
@@ -365,7 +435,7 @@ class CalculatorViewController: UIViewController {
     }
     
     func updateInterface() {
-        if let selectedTheme = selectedTheme {
+        if let Current = Current {
             
             let fontSizes = fontSizeClasses()
             
@@ -375,18 +445,18 @@ class CalculatorViewController: UIViewController {
             unitsLabel.font = UIFont.systemFont(ofSize: fontSizes[3])
             exponentLabel.font = UIFont.systemFont(ofSize: fontSizes[0])
             
-            self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTintColor")
-            self.navigationController?.navigationBar.tintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(selectedTheme.prefix())navBarTextColor")!]
+            self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
+            self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")!]
             
             // set tab bar
-            self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTintColor")
-            self.tabBarController?.tabBar.tintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
-            self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(selectedTheme.prefix())navBarTextColor")
+            self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
+            self.tabBarController?.tabBar.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
+            self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
             
-            let buttonsColors = UIColor(named: "\(selectedTheme.prefix())tableViewBackgroundColor")
-            let displayColor = UIColor(named: "\(selectedTheme.prefix())displayBackgroundColor")
-            let displayTextColor = UIColor(named: "\(selectedTheme.prefix())displayTextColor")
+            let buttonsColors = UIColor(named: "\(Current.selectedTheme.prefix())tableViewBackgroundColor")
+            let displayColor = UIColor(named: "\(Current.selectedTheme.prefix())displayBackgroundColor")
+            let displayTextColor = UIColor(named: "\(Current.selectedTheme.prefix())displayTextColor")
             
             // set display
             displayView.backgroundColor = displayColor
@@ -398,64 +468,64 @@ class CalculatorViewController: UIViewController {
             
             // set buttons
             digitButton0.backgroundColor = buttonsColors
-            digitButton0.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            digitButton0.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             digitButton0.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton9.backgroundColor = buttonsColors
-            digitButton9.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            digitButton9.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             digitButton9.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton8.backgroundColor = buttonsColors
-            digitButton8.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            digitButton8.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             digitButton8.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton7.backgroundColor = buttonsColors
-            digitButton7.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            digitButton7.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             digitButton7.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton6.backgroundColor = buttonsColors
-            digitButton6.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            digitButton6.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             digitButton6.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton5.backgroundColor = buttonsColors
-            digitButton5.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            digitButton5.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             digitButton5.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton4.backgroundColor = buttonsColors
-            digitButton4.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            digitButton4.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             digitButton4.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton3.backgroundColor = buttonsColors
-            digitButton3.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            digitButton3.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             digitButton3.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton2.backgroundColor = buttonsColors
-            digitButton2.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            digitButton2.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             digitButton2.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton1.backgroundColor = buttonsColors
-            digitButton1.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            digitButton1.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             digitButton1.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButtonPeriod.backgroundColor = buttonsColors
-            digitButtonPeriod.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            digitButtonPeriod.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             digitButtonPeriod.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButtonBackspace.backgroundColor = buttonsColors
-            digitButtonBackspace.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            digitButtonBackspace.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             digitButtonBackspace.titleLabel?.font = UIFont.systemFont(ofSize: fontSizes[4])
             memoryButtonShow.backgroundColor = buttonsColors
-            memoryButtonShow.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            memoryButtonShow.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             memoryButtonShow.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             memoryButtonClear.backgroundColor = buttonsColors
-            memoryButtonClear.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            memoryButtonClear.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             memoryButtonClear.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             memoryButtonRecall.backgroundColor = buttonsColors
-            memoryButtonRecall.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            memoryButtonRecall.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             memoryButtonRecall.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             memoryButtonAdd.backgroundColor = buttonsColors
-            memoryButtonAdd.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            memoryButtonAdd.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             memoryButtonAdd.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             operationButtonEqual.backgroundColor = buttonsColors
-            operationButtonEqual.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            operationButtonEqual.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             operationButtonEqual.titleLabel?.font = UIFont.systemFont(ofSize: fontSizes[4])
             operationButtonPlus.backgroundColor = buttonsColors
-            operationButtonPlus.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            operationButtonPlus.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             operationButtonPlus.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             operationButtonMinus.backgroundColor = buttonsColors
-            operationButtonMinus.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            operationButtonMinus.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             operationButtonMinus.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             tooltipButton.backgroundColor = buttonsColors
-            tooltipButton.tintColor = UIColor(named: "\(selectedTheme.prefix())cellTextColor")
+            tooltipButton.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             tooltipButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizes[4])
         }
     }
@@ -496,9 +566,9 @@ extension CalculatorViewController: CallMemoryDelegate {
     
     func returnedValueIs(newValue: Double, newIndex: Int) {
         
-        guard let raman = raman, let memory = memory, let dataSource = whichTab, let parameter = selectedDataSource else { return }
-        raman.updateParameter(newValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
-        memory.currentSelection[dataSource]![parameter]! = newIndex
+        guard let Current = Current, let dataSource = whichTab, let parameter = selectedDataSource else { return }
+        Current.raman.updateParameter(newValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+        Current.memory.currentSelection[dataSource]![parameter]! = newIndex
         self.navigationController!.popViewController(animated: true)
 
     }

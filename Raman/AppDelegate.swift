@@ -8,6 +8,7 @@
 
 import UIKit
 import StoreKit
+import os.log
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -56,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(ThemeModes.darkMode.rawValue, forKey: "themeMode")
         }
         
+        os_log("LoadUserPrefs was completed", log: Log.general, type: .info)
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-func <<(lhs:Int, rhs:Int) -> Int {
+fileprivate func <<(lhs:Int, rhs:Int) -> Int {
     if lhs == 0 {
         return 9
     } else {
@@ -16,7 +16,7 @@ func <<(lhs:Int, rhs:Int) -> Int {
     }
 }
 
-func >>(lhs:Int, rhs:Int) -> Int {
+fileprivate func >>(lhs:Int, rhs:Int) -> Int {
     if lhs == 9 {
         return 0
     } else {

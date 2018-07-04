@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class SpectroViewController: UIViewController {
     
@@ -135,10 +136,8 @@ extension SpectroViewController: UITableViewDelegate {
         controller.myExp = Constants.specExp[indexPath.row]
         controller.toolTipString = Constants.specToolTip[indexPath.row]
         controller.whichTab = Raman.DataSourceType.spectroscopy
-        controller.raman = Current.raman
-        controller.selectedTheme = Current.selectedTheme
-        controller.memory = Current.memory
-        
+        controller.Current = Current
+         
         navigationController!.pushViewController(controller, animated: true)
     }
 }
@@ -171,6 +170,36 @@ extension SpectroViewController: UITableViewDataSource {
         } else {
             cell.dataImageView?.image = UIImage(named: "spectro_light\(indexPath.row)")
         }
+        // set images on both sides of cell depending on available data in recents
+        switch indexPath.row {
+        case 0, 1:
+            os_log("configuring cell for wavelengths with row = %d", log: Log.general, type: .debug, indexPath.row)
+            if Current.wavelengths.left() {
+                cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            } else {
+                cell.leftDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            }
+            if Current.wavelengths.righ() {
+                cell.rightDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            } else {
+                cell.rightDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            }
+        case 2, 3, 4:
+            if Current.shifts.left() {
+                cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            } else {
+                cell.leftDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            }
+            if Current.shifts.righ() {
+                cell.rightDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            } else {
+                cell.rightDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            }
+        default:
+            cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            cell.rightDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
