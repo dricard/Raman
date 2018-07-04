@@ -244,7 +244,11 @@ class CalculatorViewController: UIViewController {
                 case .shifts:
                     let type = typeForShift(of: selectedDataSource!)
                     Current.shifts.push(currentValue, with: type)
+                    // if we changed the shift value, the signal value was also updated so we need to
+                    // also push it on the signals' stack
+                    Current.signals.push(Current.raman.signal, with: .wavelength)
                     os_log("Pushed value %.4f to shifts recents", log: Log.general, type: .debug, currentValue)
+                    os_log("Pushed value %.4f to signals recents", log: Log.general, type: .debug, Current.raman.signal)
                 }
                 self.navigationController!.popViewController(animated: true)
             }
