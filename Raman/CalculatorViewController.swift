@@ -233,20 +233,25 @@ class CalculatorViewController: UIViewController {
                 switch recentsTrack(forDataSource: selectedDataSource!, inWhichTab: whichTab!) {
                 case .excitations:
                     Current.excitations.push(currentValue, with: .wavelength)
+                    Current.excitations.save(with: "excitations")
                     os_log("Pushed value %.4f to excitations recents", log: Log.general, type: .debug, currentValue)
                 case .signals:
                     Current.signals.push(currentValue, with: .wavelength)
+                    Current.signals.save(with: "signals")
                     os_log("Pushed value %.4f to signals recents", log: Log.general, type: .debug, currentValue)
                 case .bandwidths:
                     let type = typeForBandwidth(of: selectedDataSource!)
                     Current.bandwidths.push(currentValue, with: type)
+                    Current.bandwidths.save(with: "bandwidths")
                     os_log("Pushed value %.4f to bandwidths recents", log: Log.general, type: .debug, currentValue)
                 case .shifts:
                     let type = typeForShift(of: selectedDataSource!)
                     Current.shifts.push(currentValue, with: type)
+                    Current.shifts.save(with: "shifts")
                     // if we changed the shift value, the signal value was also updated so we need to
                     // also push it on the signals' stack
                     Current.signals.push(Current.raman.signal, with: .wavelength)
+                    Current.signals.save(with: "signals")
                     os_log("Pushed value %.4f to shifts recents", log: Log.general, type: .debug, currentValue)
                     os_log("Pushed value %.4f to signals recents", log: Log.general, type: .debug, Current.raman.signal)
                 }

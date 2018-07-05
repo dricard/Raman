@@ -25,7 +25,7 @@ fileprivate func >>(lhs:Int, rhs:Int) -> Int {
     }
 }
 
-enum RecentType {
+enum RecentType: Int {
     case wavelength
     case shiftInCm
     case shiftInGhz
@@ -44,7 +44,8 @@ class Recents {
     let max = 9
     var stack = [ Spot ]()
     private var currentIndex = 0
-
+    var isEmpty = false
+    
     init(for type: RecentType) {
         for _ in 0...max {
             self.stack.append(Spot( value: nil, type: type))
@@ -113,6 +114,70 @@ class Recents {
         return stack[ currentIndex ]
     }
     
+    // saving/loading from disk
+    func save(with key: String) {
+        
+        let noValue: Double = -1.0
+        for (index, spot) in stack.enumerated() {
+            let valueKey = "\(key)_value_\(index)"
+            let typeKey = "\(key)_type_\(index)"
+            if let value = spot.value {
+                UserDefaults.standard.set(value, forKey: valueKey)
+            } else {
+                UserDefaults.standard.set(noValue, forKey: valueKey)
+            }
+            UserDefaults.standard.set(spot.type.rawValue, forKey: typeKey)
+        }
+        let currentKey = "\(key)_current"
+        UserDefaults.standard.set(currentIndex, forKey: currentKey)
+    }
+    
+    func load(with key: String) {
+        var noDataOnDisk = false
+        stack.removeAll()
+        let noValue: Double = -1.0
+        for index in 0...max {
+            let valueKey = "\(key)_value_\(index)"
+            let typeKey = "\(key)_type_\(index)"
+            let value = UserDefaults.standard.double(forKey: valueKey)
+            let typeIndex = UserDefaults.standard.integer(forKey: typeKey)
+            let type: RecentType
+            switch typeIndex {
+            case 0:
+                type = .wavelength
+            case 1:
+                type = .shiftInCm
+            case 2:
+                type = .shiftInGhz
+            case 3:
+                type = .shiftInMev
+            case 4:
+                type = .bandwidthInCm
+            case 5:
+                type = .bandwidthInGhz
+            case 6:
+                type = .bandwidthInNm
+            default:
+                os_log("Wrong typeIndex in load(): %d", log: Log.general, type: .error, typeIndex)
+                type = .wavelength
+            }
+            if value == noValue || value == 0.0 {
+                if index == 0 {
+                    noDataOnDisk = true
+                }
+                let spot = Spot(value: nil, type: type)
+                stack.append(spot)
+            } else {
+                let spot = Spot(value: value, type: type)
+                stack.append(spot)
+            }
+            let currentKey = "\(key)_current"
+            currentIndex = UserDefaults.standard.integer(forKey: currentKey)
+            if noDataOnDisk {
+                isEmpty = true
+            }
+        }
+    }
 }
 
 extension Recents {

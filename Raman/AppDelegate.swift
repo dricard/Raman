@@ -19,31 +19,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate func loadUserPrefs() {
         // Load user's data
         
-        let signal = UserDefaults.standard.double(forKey: "signal")
-        if signal != 0 {
-            Current.raman.signal = signal
-        } else {
-            UserDefaults.standard.set(Current.raman.signal, forKey: "signal")
+//        let signal = UserDefaults.standard.double(forKey: "signal")
+//        if signal != 0 {
+//            Current.raman.signal = signal
+//        } else {
+//            UserDefaults.standard.set(Current.raman.signal, forKey: "signal")
+//        }
+//        let pump = UserDefaults.standard.double(forKey: "pump")
+//        if pump != 0 {
+//            Current.raman.pump = pump
+//        } else {
+//            UserDefaults.standard.set(Current.raman.pump, forKey: "pump")
+//        }
+//        let bwLambda = UserDefaults.standard.double(forKey: "bwLambda")
+//        if bwLambda != 0 {
+//            Current.raman.bwLambda = bwLambda
+//        } else {
+//            UserDefaults.standard.set(Current.raman.bwLambda, forKey: "bwLambda")
+//        }
+//        let bwInCm = UserDefaults.standard.double(forKey: "bwInCm")
+//        if bwInCm != 0 {
+//            Current.raman.bwInCm = bwInCm
+//        } else {
+//            UserDefaults.standard.set(Current.raman.bwInCm, forKey: "bwInCm")
+//        }
+//        Current.memory.getMemoryFromDisk()
+        
+        Current.bandwidths.load(with: "bandwidths")
+        if Current.bandwidths.isEmpty {
+            Current.bandwidths.push(70.00, with: .shiftInCm)
+            Current.bandwidths.isEmpty = false
         }
-        let pump = UserDefaults.standard.double(forKey: "pump")
-        if pump != 0 {
-            Current.raman.pump = pump
-        } else {
-            UserDefaults.standard.set(Current.raman.pump, forKey: "pump")
+        if let value = Current.bandwidths.current().value {
+            Current.raman.updateParameter(value, forDataSource: Current.bandwidths.current().type.rawValue - 3, inWhichTab: .bandwidth)
         }
-        let bwLambda = UserDefaults.standard.double(forKey: "bwLambda")
-        if bwLambda != 0 {
-            Current.raman.bwLambda = bwLambda
-        } else {
-            UserDefaults.standard.set(Current.raman.bwLambda, forKey: "bwLambda")
+
+        Current.excitations.load(with: "excitations")
+        if Current.excitations.isEmpty {
+            Current.excitations.push(532.00, with: .wavelength)
+            Current.excitations.isEmpty = false
         }
-        let bwInCm = UserDefaults.standard.double(forKey: "bwInCm")
-        if bwInCm != 0 {
-            Current.raman.bwInCm = bwInCm
-        } else {
-            UserDefaults.standard.set(Current.raman.bwInCm, forKey: "bwInCm")
+        if let value = Current.excitations.current().value {
+            Current.raman.updateParameter(value, forDataSource: 0, inWhichTab: .spectroscopy)
         }
-        Current.memory.getMemoryFromDisk()
+        Current.shifts.load(with: "shifts")
+        if Current.shifts.isEmpty {
+            Current.shifts.push(70.00, with: .shiftInCm)
+            Current.shifts.isEmpty = false
+        }
+        if let value = Current.shifts.current().value {
+            Current.raman.updateParameter(value, forDataSource: Current.shifts.current().type.rawValue + 2, inWhichTab: .spectroscopy)
+        }
+        Current.signals.load(with: "signals")
+        if Current.signals.isEmpty {
+            Current.signals.push(533.99, with: .wavelength)
+            Current.signals.isEmpty = false
+            Current.raman.signal = 533.99
+        }
+        if let value = Current.signals.current().value {
+            Current.raman.updateParameter(value, forDataSource: 1, inWhichTab: .spectroscopy)
+        }
         
         // theme mode selected
         let mode = UserDefaults.standard.integer(forKey: "themeMode")
