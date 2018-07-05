@@ -18,6 +18,9 @@ class BWCell: UITableViewCell {
     @IBOutlet weak var exponentLabel: UILabel!
     @IBOutlet weak var dataImageView: UIImageView!
     
+    @IBOutlet weak var leftDataAvailableImageView: UIImageView!
+    @IBOutlet weak var rightDataAvailableImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
