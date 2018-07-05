@@ -94,10 +94,6 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var digitButton8: UIButton!
     @IBOutlet weak var digitButton7: UIButton!
     
-    @IBOutlet weak var memoryButtonShow: UIButton!
-    @IBOutlet weak var memoryButtonAdd: UIButton!
-    @IBOutlet weak var memoryButtonRecall: UIButton!
-    @IBOutlet weak var memoryButtonClear: UIButton!
     @IBOutlet weak var operationButtonEqual: UIButton!
     @IBOutlet weak var operationButtonMinus: UIButton!
     @IBOutlet weak var operationButtonPlus: UIButton!
@@ -108,20 +104,14 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var unitsLabel: UILabel!
     @IBOutlet weak var exponentLabel: UILabel!
     @IBOutlet weak var displayView: UIView!
-    @IBOutlet weak var memoriesView: UIView!
-    @IBOutlet weak var buyMemoriesView: UIView!
     @IBOutlet weak var calculatorView: UIView!
-    @IBOutlet weak var moreInfoButton: UIButton!
-    @IBOutlet weak var memoryAdTextLabel: UILabel!
-    @IBOutlet weak var memoryAdTitleLabel: UILabel!
-    @IBOutlet weak var memoryImageView: UIImageView!
     
     // MARK: - Actions
     
     @IBAction func digitPressed(_ sender: UIButton) {
         guard let key = sender.currentTitle else { return }
-        switch mode {
-        case .dataEntry:
+//        switch mode {
+//        case .dataEntry:
             let digit: DigitType
             switch key {
             case ".":
@@ -134,86 +124,86 @@ class CalculatorViewController: UIViewController {
                 digit = .error("not a defined digit")
             }
             enterDigit(digit)
-        case .memoryOperation(let operation):
-            // only accept digits 0-9 for memory operations (store or recall)
-            guard "0123456789".contains(key), let Current = Current, let dataSource = whichTab, let parameter = selectedDataSource, let memorySlot = Int(key) else { return }
-            switch operation {
-            case .recall:
-                let value = Current.memory.retrieveFrom(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot)
-                Current.memory.currentSelection[dataSource]![parameter]! = memorySlot
-                displayLabel.text = "\(value)"
-            case .store(let value):
-                displayLabel.text = "\(value)"
-                Current.memory.addTo(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot, value: value)
-                Current.memory.currentSelection[dataSource]![parameter]! = memorySlot
-                Current.memory.saveMemoryToDisk()
-            }
-            mode = .dataEntry
-            memoryOperationInProcess = false
-        }
+//        case .memoryOperation(let operation):
+//            // only accept digits 0-9 for memory operations (store or recall)
+//            guard "0123456789".contains(key), let Current = Current, let dataSource = whichTab, let parameter = selectedDataSource, let memorySlot = Int(key) else { return }
+//            switch operation {
+//            case .recall:
+//                let value = Current.memory.retrieveFrom(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot)
+//                Current.memory.currentSelection[dataSource]![parameter]! = memorySlot
+//                displayLabel.text = "\(value)"
+//            case .store(let value):
+//                displayLabel.text = "\(value)"
+//                Current.memory.addTo(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot, value: value)
+//                Current.memory.currentSelection[dataSource]![parameter]! = memorySlot
+//                Current.memory.saveMemoryToDisk()
+//            }
+//            mode = .dataEntry
+//            memoryOperationInProcess = false
+//        }
     }
     
-    @IBAction func memoryButtonPressed(_ sender: UIButton) {
-        guard let key = sender.currentTitle else { return }
-        switch key {
-        case "M+":
-            if !memoryOperationInProcess {
-                guard let value = Double(displayLabel.text!) else { return }
-                displayLabel.text = "select 0-9"
-                mode = .memoryOperation(.store(value))
-                memoryOperationInProcess = true
-            }
-        case "Mr":
-            if !memoryOperationInProcess {
-                displayLabel.text = "select 0-9"
-                mode = .memoryOperation(.recall)
-                memoryOperationInProcess = true
-            }
-        case "Ms":
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "ShowMemoryViewController") as? ShowMemoryViewController, let Current = Current, let dataSource = whichTab, let parameter = selectedDataSource {
-                vc.modalPresentationStyle = .popover
-                vc.mems = Current.memory.memoryArray(dataSource: dataSource, parameter: parameter)
-                vc.delegate = self
-                let stringFormat: String
-                if let whichTab = whichTab, let selectedDataSource = selectedDataSource {
-                    switch whichTab {
-                    case .spectroscopy:
-                        stringFormat = Constants.specRounding[selectedDataSource]
-                    case .bandwidth:
-                        stringFormat = Constants.bwRounding[selectedDataSource]
-                    }
-                } else {
-                   stringFormat = ".2"
-                }
-                vc.formatString = stringFormat
-                let controller = vc.popoverPresentationController!
-                controller.delegate = self
-                present(vc, animated: true, completion: nil)
-            }
-        case "Mc":
-            if !memoryOperationInProcess {
-                let controller = UIAlertController()
-                controller.title = "Clear all?"
-                controller.message = "Are you sure you want to delete all stored values?\nThis will delete all values for the current parameter."
-                let clearAllAction = UIAlertAction(title: "Yes, delete all", style: .destructive) { (action) in
-                    self.dismiss(animated: true, completion: nil)
-                    guard let Current = self.Current, let dataSource = self.whichTab, let parameter = self.selectedDataSource else { return }
-                    Current.memory.clearMemoryFor(dataSource: dataSource, parameter: parameter)
-                }
-                controller.addAction(clearAllAction)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
-                    self.dismiss(animated: true, completion: nil)
-                }
-                controller.addAction(cancelAction)
-                present(controller, animated: true, completion: nil)
-            }
-        default:
-            break
-        }
-    }
-    
+//    @IBAction func memoryButtonPressed(_ sender: UIButton) {
+//        guard let key = sender.currentTitle else { return }
+//        switch key {
+//        case "M+":
+//            if !memoryOperationInProcess {
+//                guard let value = Double(displayLabel.text!) else { return }
+//                displayLabel.text = "select 0-9"
+//                mode = .memoryOperation(.store(value))
+//                memoryOperationInProcess = true
+//            }
+//        case "Mr":
+//            if !memoryOperationInProcess {
+//                displayLabel.text = "select 0-9"
+//                mode = .memoryOperation(.recall)
+//                memoryOperationInProcess = true
+//            }
+//        case "Ms":
+//            if let vc = storyboard?.instantiateViewController(withIdentifier: "ShowMemoryViewController") as? ShowMemoryViewController, let Current = Current, let dataSource = whichTab, let parameter = selectedDataSource {
+//                vc.modalPresentationStyle = .popover
+//                vc.mems = Current.memory.memoryArray(dataSource: dataSource, parameter: parameter)
+//                vc.delegate = self
+//                let stringFormat: String
+//                if let whichTab = whichTab, let selectedDataSource = selectedDataSource {
+//                    switch whichTab {
+//                    case .spectroscopy:
+//                        stringFormat = Constants.specRounding[selectedDataSource]
+//                    case .bandwidth:
+//                        stringFormat = Constants.bwRounding[selectedDataSource]
+//                    }
+//                } else {
+//                   stringFormat = ".2"
+//                }
+//                vc.formatString = stringFormat
+//                let controller = vc.popoverPresentationController!
+//                controller.delegate = self
+//                present(vc, animated: true, completion: nil)
+//            }
+//        case "Mc":
+//            if !memoryOperationInProcess {
+//                let controller = UIAlertController()
+//                controller.title = "Clear all?"
+//                controller.message = "Are you sure you want to delete all stored values?\nThis will delete all values for the current parameter."
+//                let clearAllAction = UIAlertAction(title: "Yes, delete all", style: .destructive) { (action) in
+//                    self.dismiss(animated: true, completion: nil)
+//                    guard let Current = self.Current, let dataSource = self.whichTab, let parameter = self.selectedDataSource else { return }
+//                    Current.memory.clearMemoryFor(dataSource: dataSource, parameter: parameter)
+//                }
+//                controller.addAction(clearAllAction)
+//                let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
+//                    self.dismiss(animated: true, completion: nil)
+//                }
+//                controller.addAction(cancelAction)
+//                present(controller, animated: true, completion: nil)
+//            }
+//        default:
+//            break
+//        }
+//    }
+
     @IBAction func operationPressed(_ sender: UIButton) {
-        if !memoryOperationInProcess {
+//        if !memoryOperationInProcess {
             // enable entering negative numbers by pressing
             // the '-' as the very first thing
             if !enteringData && currentValue == 0 && sender.currentTitle == "-" {
@@ -257,7 +247,7 @@ class CalculatorViewController: UIViewController {
                 }
                 self.navigationController!.popViewController(animated: true)
             }
-        }
+//        }
     }
     
     @IBAction func tooltipButtonPressed(_ sender: UIButton) {
@@ -298,7 +288,7 @@ class CalculatorViewController: UIViewController {
         if let value = selectedValue {
             previousValueLabel.text = value.format(".4")
         } else {
-            print("ERROR in CalculatorViewController viewDidLoad: trying to unwrap nil value in viewDidLoad")
+            os_log("ERROR in CalculatorViewController viewDidLoad: trying to unwrap nil value in viewDidLoad", log: Log.general, type: .error)
         }
         
         // set parameter being modified
@@ -311,19 +301,19 @@ class CalculatorViewController: UIViewController {
             }
             
         } else {
-            print("ERROR in CalculatorViewController viewDidLoad: trying to unwrap nil value in viewDidLoad")
+            os_log("ERROR in CalculatorViewController viewDidLoad: trying to unwrap nil value in viewDidLoad", log: Log.general, type: .error)
         }
         
         if let units = myUnits, let myExp = myExp {
             unitsLabel.text = units
             exponentLabel.text = myExp
         } else {
-            print("ERROR in CalculatorViewController viewDidLoad: trying to unwrap nil value in viewDidLoad")
+            os_log("ERROR in CalculatorViewController viewDidLoad: trying to unwrap nil value in viewDidLoad", log: Log.general, type: .error)
         }
     }
     
     
-    // MARK: - Data entry and memory management
+    // MARK: - Data entry
     
     func enterDigit(_ digitPressed: DigitType) {
         switch digitPressed {
@@ -518,18 +508,6 @@ class CalculatorViewController: UIViewController {
             digitButtonBackspace.backgroundColor = buttonsColors
             digitButtonBackspace.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             digitButtonBackspace.titleLabel?.font = UIFont.systemFont(ofSize: fontSizes[4])
-            memoryButtonShow.backgroundColor = buttonsColors
-            memoryButtonShow.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
-            memoryButtonShow.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
-            memoryButtonClear.backgroundColor = buttonsColors
-            memoryButtonClear.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
-            memoryButtonClear.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
-            memoryButtonRecall.backgroundColor = buttonsColors
-            memoryButtonRecall.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
-            memoryButtonRecall.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
-            memoryButtonAdd.backgroundColor = buttonsColors
-            memoryButtonAdd.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
-            memoryButtonAdd.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             operationButtonEqual.backgroundColor = buttonsColors
             operationButtonEqual.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
             operationButtonEqual.titleLabel?.font = UIFont.systemFont(ofSize: fontSizes[4])
@@ -548,43 +526,43 @@ class CalculatorViewController: UIViewController {
 }
 
 extension CalculatorViewController: UIPopoverPresentationControllerDelegate {
-    
+
     fileprivate func displayMemoriesTableViewSize() -> CGSize {
         return CGSize(width: 150, height: 408)
     }
-    
+
     func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
         let presentationController: UIPopoverPresentationController = popoverPresentationController.presentedViewController.popoverPresentationController!
-        if popoverPresentationController.presentedViewController.title == "Memories" {
-            // This is the popover that displays the memory content in a tableview
-            popoverPresentationController.presentedViewController.preferredContentSize = displayMemoriesTableViewSize()
-            presentationController.permittedArrowDirections = UIPopoverArrowDirection.right
-            presentationController.sourceView = memoryButtonShow
-            presentationController.sourceRect = memoryButtonShow.bounds
-
-        } else {
+//        if popoverPresentationController.presentedViewController.title == "Memories" {
+//            // This is the popover that displays the memory content in a tableview
+//            popoverPresentationController.presentedViewController.preferredContentSize = displayMemoriesTableViewSize()
+//            presentationController.permittedArrowDirections = UIPopoverArrowDirection.right
+//            presentationController.sourceView = memoryButtonShow
+//            presentationController.sourceRect = memoryButtonShow.bounds
+//
+//        } else {
             popoverPresentationController.presentedViewController.preferredContentSize = CGSize(width: 275, height: 125)
-            
+
             presentationController.permittedArrowDirections = UIPopoverArrowDirection.down
             presentationController.sourceView = tooltipButton
             presentationController.sourceRect = tooltipButton.bounds
-        }
+//        }
     }
-    
+
     // This is required to make the popover show on iPhone
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
 }
 
-extension CalculatorViewController: CallMemoryDelegate {
-    
-    func returnedValueIs(newValue: Double, newIndex: Int) {
-        
-        guard let Current = Current, let dataSource = whichTab, let parameter = selectedDataSource else { return }
-        Current.raman.updateParameter(newValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
-        Current.memory.currentSelection[dataSource]![parameter]! = newIndex
-        self.navigationController!.popViewController(animated: true)
-
-    }
-}
+//extension CalculatorViewController: CallMemoryDelegate {
+//
+//    func returnedValueIs(newValue: Double, newIndex: Int) {
+//
+//        guard let Current = Current, let dataSource = whichTab, let parameter = selectedDataSource else { return }
+//        Current.raman.updateParameter(newValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+//        Current.memory.currentSelection[dataSource]![parameter]! = newIndex
+//        self.navigationController!.popViewController(animated: true)
+//
+//    }
+//}
