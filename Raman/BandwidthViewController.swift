@@ -78,6 +78,9 @@ class BandwidthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // 3D touch
+        registerForPreviewing(with: self, sourceView: view)
+
         // localize
         self.title = .bandwidthTitle
         aboutButton.title = .about
@@ -323,3 +326,43 @@ extension BandwidthViewController {
     }
 }
 
+extension BandwidthViewController: UIViewControllerPreviewingDelegate {
+    
+    func recentsForRow(at indexPath: IndexPath) -> Recents? {
+        guard let Current = Current else { return nil }
+        switch indexPath.row {
+        case 1:
+            return Current.signals
+        default:
+            return Current.bandwidths
+        }
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = tableView.indexPathForRow(at: location), let cell = tableView.cellForRow(at: indexPath) else { return nil }
+        os_log("3D touch event in bandwidth for row %d", log: Log.general, type: .info, indexPath.row)
+        let frame = tableView.convert(cell.frame, to: view)
+        previewingContext.sourceRect = frame
+        let recentsController = storyboard?.instantiateViewController(withIdentifier: "RecentsViewController") as! RecentsViewController
+        recentsController.Current = Current
+        if let recents = recentsForRow(at: indexPath) {
+            recentsController.recents = recents
+        }
+        switch indexPath.row {
+        case 1:
+            recentsController.recentsTitle = "Signals"
+         default:
+            recentsController.recentsTitle = "Bandwidths"
+        }
+        
+        recentsController.loadViewIfNeeded()
+        
+        return recentsController
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+    }
+    
+    
+}

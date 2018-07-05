@@ -114,6 +114,22 @@ class Recents {
         return stack[ currentIndex ]
     }
     
+    func valueFor(_ row: Int) -> Double? {
+        if let value = stack[ row ].value {
+            return value
+        } else {
+            return nil
+        }
+    }
+    
+    func typeFor(_ row: Int) -> RecentType {
+        return stack[ row ].type
+    }
+    
+    func count() -> Int {
+        return stack.map { $0.value }.compactMap{ $0 }.count
+    }
+    
     // saving/loading from disk
     func save(with key: String) {
         

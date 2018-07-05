@@ -80,6 +80,9 @@ class SpectroViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 3D touch
+        registerForPreviewing(with: self, sourceView: view)
+        
         // localize
         
         aboutButton.title = .about
@@ -341,3 +344,47 @@ extension SpectroViewController {
     }
 }
 
+extension SpectroViewController: UIViewControllerPreviewingDelegate {
+    
+    func recentsForRow(at indexPath: IndexPath) -> Recents? {
+        guard let Current = Current else { return nil }
+        switch indexPath.row {
+        case 1:
+            return Current.excitations
+        case 2:
+            return Current.signals
+        default:
+            return Current.shifts
+        }
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = myTableView.indexPathForRow(at: location), let cell = myTableView.cellForRow(at: indexPath) else { return nil }
+        os_log("3D touch event in spectro for row %d", log: Log.general, type: .info, indexPath.row)
+        let frame = myTableView.convert(cell.frame, to: view)
+        previewingContext.sourceRect = frame
+        let recentsController = storyboard?.instantiateViewController(withIdentifier: "RecentsViewController") as! RecentsViewController
+        recentsController.Current = Current
+        if let recents = recentsForRow(at: indexPath) {
+            recentsController.recents = recents
+        }
+        switch indexPath.row {
+        case 1:
+            recentsController.recentsTitle = "Excitations"
+        case 2:
+            recentsController.recentsTitle = "Signals"
+        default:
+            recentsController.recentsTitle = "Shifts"
+        }
+        
+        recentsController.loadViewIfNeeded()
+        
+        return recentsController
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+    }
+    
+    
+}
