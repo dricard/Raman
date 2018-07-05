@@ -267,13 +267,13 @@ extension SpectroViewController {
                             case .shiftInMev:
                                 Current.raman.updateParameter(newValue, forDataSource: 4, inWhichTab: .spectroscopy)
                             default:
-                                os_log("Wrong type for shift in swipe action", log: Log.general, type: .error)
+                                os_log("Wrong type for shift in leading swipe action", log: Log.general, type: .error)
                             }
                             tableView.reloadData()
                         }
                     }
                 default:
-                    os_log("Wrong value for indexPath.row in swipe action: %d", log: Log.general, type: .error, indexPath.row)
+                    os_log("Wrong value for indexPath.row in leading swipe action: %d", log: Log.general, type: .error, indexPath.row)
                 }
                 
 //                let newValue = Current.memory.previous(dataSource: .spectroscopy, parameter: indexPath.row)
@@ -325,13 +325,13 @@ extension SpectroViewController {
                             case .shiftInMev:
                                 Current.raman.updateParameter(newValue, forDataSource: 4, inWhichTab: .spectroscopy)
                             default:
-                                os_log("Wrong type for shift in swipe action", log: Log.general, type: .error)
+                                os_log("Wrong type for shift in trainling swipe action", log: Log.general, type: .error)
                             }
                             tableView.reloadData()
                         }
                     }
                 default:
-                    os_log("Wrong value for indexPath.row in swipe action: %d", log: Log.general, type: .error, indexPath.row)
+                    os_log("Wrong value for indexPath.row in trailing swipe action: %d", log: Log.general, type: .error, indexPath.row)
                 }
                 
 

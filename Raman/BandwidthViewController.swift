@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class BandwidthViewController: UIViewController {
 
@@ -46,11 +47,12 @@ class BandwidthViewController: UIViewController {
             self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")!]
         
         
-        // set tab bar
-        self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
+            // set tab bar
+        self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
         self.tabBarController?.tabBar.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
+            
         self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarUnselectedTextColor")
-         
+            
         // update theme mode switch button
         switch Current.selectedTheme.mode {
         case .darkMode:
@@ -100,6 +102,16 @@ class BandwidthViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        guard let Current = Current else { return }
+        
+        if let value = Current.signals.current().value {
+            os_log("setting bandwidth wavelength to current signals track", log: Log.general, type: .info)
+        Current.raman.updateParameter(value, forDataSource: 0, inWhichTab: .bandwidth)
+        } else {
+            os_log("invalid value for current signal value in bandwidth", log: Log.general, type: .error)
+        }
+        
         updateInterface()
     }
     
@@ -139,6 +151,36 @@ extension BandwidthViewController: UITableViewDataSource {
             cell.dataImageView?.image = UIImage(named: "bw_light\(indexPath.row)")
         }
         
+        // set images on both sides of cell depending on available data in recents
+        switch indexPath.row {
+        case 0:
+            os_log("configuring cell for bandwidth signal with row = %d", log: Log.general, type: .debug, indexPath.row)
+            if Current.signals.left() {
+                cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            } else {
+                cell.leftDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            }
+            if Current.signals.righ() {
+                cell.rightDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            } else {
+                cell.rightDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            }
+        case 1, 2, 3:
+            os_log("configuring cell for bandwidth with row = %d", log: Log.general, type: .debug, indexPath.row)
+            if Current.bandwidths.left() {
+                cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            } else {
+                cell.leftDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            }
+            if Current.bandwidths.righ() {
+                cell.rightDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            } else {
+                cell.rightDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            }
+         default:
+            cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            cell.rightDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -188,14 +230,47 @@ extension BandwidthViewController: UITableViewDelegate {
 
 extension BandwidthViewController {
     
+    // this goes left
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let previous = UIContextualAction(style: .normal, title: "previous") { (action, view, completionHandler) in
             if let Current = self.Current {
-                let newValue = Current.memory.previous(dataSource: .bandwidth, parameter: indexPath.row)
-                if newValue != 0.0 {
-                    Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
-                    tableView.reloadData()
+                
+                switch indexPath.row {
+                case 0:
+                    if Current.signals.moveLeft() {
+                        if let newValue = Current.signals.current().value {
+                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
+                            tableView.reloadData()
+                        }
+                    }
+                case 1, 2, 3:
+                    if Current.bandwidths.moveLeft() {
+                        if let newValue = Current.bandwidths.current().value {
+                            let type = Current.bandwidths.current().type
+                            
+                            switch type {
+                            case .bandwidthInCm:
+                                Current.raman.updateParameter(newValue, forDataSource: 1, inWhichTab: .bandwidth)
+                            case .bandwidthInNm:
+                                Current.raman.updateParameter(newValue, forDataSource: 2, inWhichTab: .bandwidth)
+                            case .bandwidthInGhz:
+                                Current.raman.updateParameter(newValue, forDataSource: 3, inWhichTab: .bandwidth)
+                            default:
+                                os_log("Wrong type for bandwidth in lead swipe action", log: Log.general, type: .error)
+                            }
+                            tableView.reloadData()
+                        }
+                    }
+                default:
+                    os_log("Wrong value for indexPath.row in bandwidth lead swipe action: %d", log: Log.general, type: .error, indexPath.row)
                 }
+                
+
+//                let newValue = Current.memory.previous(dataSource: .bandwidth, parameter: indexPath.row)
+//                if newValue != 0.0 {
+//                    Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
+//                    tableView.reloadData()
+//                }
             }
             completionHandler(true)
         }
@@ -207,14 +282,46 @@ extension BandwidthViewController {
         return config
     }
     
+    // this goes right
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let next = UIContextualAction(style: .normal, title: "next") { (action, view, completionHandler) in
             if let Current = self.Current {
-                let newValue = Current.memory.next(dataSource: .bandwidth, parameter: indexPath.row)
-                if newValue != 0.0 {
-                    Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
-                    tableView.reloadData()
+
+                switch indexPath.row {
+                case 0:
+                    if Current.signals.moveRight() {
+                        if let newValue = Current.signals.current().value {
+                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
+                            tableView.reloadData()
+                        }
+                    }
+                case 1, 2, 3:
+                    if Current.bandwidths.moveRight() {
+                        if let newValue = Current.bandwidths.current().value {
+                            let type = Current.bandwidths.current().type
+                            
+                            switch type {
+                            case .bandwidthInCm:
+                                Current.raman.updateParameter(newValue, forDataSource: 1, inWhichTab: .bandwidth)
+                            case .bandwidthInNm:
+                                Current.raman.updateParameter(newValue, forDataSource: 2, inWhichTab: .bandwidth)
+                            case .bandwidthInGhz:
+                                Current.raman.updateParameter(newValue, forDataSource: 3, inWhichTab: .bandwidth)
+                            default:
+                                os_log("Wrong type for bandwidth in trainling swipe action", log: Log.general, type: .error)
+                            }
+                            tableView.reloadData()
+                        }
+                    }
+                default:
+                    os_log("Wrong value for indexPath.row in bandwidth trailing swipe action: %d", log: Log.general, type: .error, indexPath.row)
                 }
+                
+//                let newValue = Current.memory.next(dataSource: .bandwidth, parameter: indexPath.row)
+//                if newValue != 0.0 {
+//                    Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
+//                    tableView.reloadData()
+//                }
             }
             completionHandler(true)
         }
