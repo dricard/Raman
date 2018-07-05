@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21126B2F1F151D9000CBB8B3 /* ShowMemoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21126B2E1F151D9000CBB8B3 /* ShowMemoryViewController.swift */; };
 		2115376A1EF59CF90006AC64 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211537691EF59CF90006AC64 /* CalculatorViewController.swift */; };
 		2115376C1EF5BC4F0006AC64 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115376B1EF5BC4F0006AC64 /* Calculator.swift */; };
 		21368BC31EF42EC800DB6096 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21368BC21EF42EC800DB6096 /* StoreKit.framework */; };
@@ -24,10 +23,8 @@
 		215AB9E41EF3208400555AB4 /* ThemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215AB9E31EF3208400555AB4 /* ThemeMode.swift */; };
 		215AF03520EC5604006EC28F /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215AF03420EC5604006EC28F /* Log.swift */; };
 		2170FF131F19507C00CB726A /* CalculatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2170FF121F19507C00CB726A /* CalculatorButton.swift */; };
-		218660861EF825C700995D82 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218660851EF825C700995D82 /* Memory.swift */; };
 		21B272CA20ED04D400AD6322 /* Recents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B272C920ED04D400AD6322 /* Recents.swift */; };
 		21B537BA1EF717AF00744E9A /* TooltipPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B537B91EF717AF00744E9A /* TooltipPopoverViewController.swift */; };
-		21CF58561F22545800217E04 /* MemoryDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CF58551F22545800217E04 /* MemoryDisplayTableViewCell.swift */; };
 		21DBEA441E2C59E600C8436B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21DBEA461E2C59E600C8436B /* Main.storyboard */; };
 		21DBEA481E2C5A2E00C8436B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21DBEA4A1E2C5A2E00C8436B /* Localizable.strings */; };
 		21F468AE1E2C6133004C56BA /* Strings+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F468AD1E2C6133004C56BA /* Strings+Localized.swift */; };
@@ -41,7 +38,6 @@
 
 /* Begin PBXFileReference section */
 		2107D44A1FBB587000298DC9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
-		21126B2E1F151D9000CBB8B3 /* ShowMemoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMemoryViewController.swift; sourceTree = "<group>"; };
 		211537691EF59CF90006AC64 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		2115376B1EF5BC4F0006AC64 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		21368BC21EF42EC800DB6096 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -58,10 +54,8 @@
 		215AB9E31EF3208400555AB4 /* ThemeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeMode.swift; sourceTree = "<group>"; };
 		215AF03420EC5604006EC28F /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		2170FF121F19507C00CB726A /* CalculatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorButton.swift; sourceTree = "<group>"; };
-		218660851EF825C700995D82 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		21B272C920ED04D400AD6322 /* Recents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recents.swift; sourceTree = "<group>"; };
 		21B537B91EF717AF00744E9A /* TooltipPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipPopoverViewController.swift; sourceTree = "<group>"; };
-		21CF58551F22545800217E04 /* MemoryDisplayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDisplayTableViewCell.swift; sourceTree = "<group>"; };
 		21DBEA491E2C5A2E00C8436B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		21DBEA4B1E2C5A4C00C8436B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		21DBEA4C1E2C5A7900C8436B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -102,7 +96,6 @@
 				92011B101B0D1B9300611519 /* Raman.swift */,
 				214414AB1CB2C0B700A1958D /* Constants.swift */,
 				2115376B1EF5BC4F0006AC64 /* Calculator.swift */,
-				218660851EF825C700995D82 /* Memory.swift */,
 				214A4B7720E2AA21003835FC /* Environment.swift */,
 				214A4B7920E2C683003835FC /* Version.swift */,
 				214A4B7B20E2CAC7003835FC /* Screen.swift */,
@@ -121,7 +114,6 @@
 				92011B0A1B0D1A3100611519 /* DisplayInfoViewController.swift */,
 				211537691EF59CF90006AC64 /* CalculatorViewController.swift */,
 				21B537B91EF717AF00744E9A /* TooltipPopoverViewController.swift */,
-				21126B2E1F151D9000CBB8B3 /* ShowMemoryViewController.swift */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -132,7 +124,6 @@
 				92011AF11B0D197300611519 /* LaunchScreen.xib */,
 				21DBEA461E2C59E600C8436B /* Main.storyboard */,
 				2170FF121F19507C00CB726A /* CalculatorButton.swift */,
-				21CF58551F22545800217E04 /* MemoryDisplayTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -287,13 +278,10 @@
 				92011AE91B0D197300611519 /* AppDelegate.swift in Sources */,
 				215A7B011CF9194C003B9F9B /* Theme.swift in Sources */,
 				215AF03520EC5604006EC28F /* Log.swift in Sources */,
-				218660861EF825C700995D82 /* Memory.swift in Sources */,
 				214A4B7C20E2CAC7003835FC /* Screen.swift in Sources */,
 				215A7B031CF91D07003B9F9B /* BWCell.swift in Sources */,
-				21CF58561F22545800217E04 /* MemoryDisplayTableViewCell.swift in Sources */,
 				214A4B7820E2AA21003835FC /* Environment.swift in Sources */,
 				215A7AFF1CF8DA6E003B9F9B /* DataCell.swift in Sources */,
-				21126B2F1F151D9000CBB8B3 /* ShowMemoryViewController.swift in Sources */,
 				214A4B8220E2DBA4003835FC /* Language.swift in Sources */,
 				214414AC1CB2C0B700A1958D /* Constants.swift in Sources */,
 				21B272CA20ED04D400AD6322 /* Recents.swift in Sources */,

@@ -13,8 +13,6 @@ class DisplayInfoViewController: UIViewController {
     // MARK: - Properties
     
     var Current: Environment?
-//    var selectedTheme: ThemeMode?
-//    var memory: Memory?
     
     // MARK: - Outlets
     

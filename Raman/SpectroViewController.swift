@@ -276,11 +276,6 @@ extension SpectroViewController {
                     os_log("Wrong value for indexPath.row in leading swipe action: %d", log: Log.general, type: .error, indexPath.row)
                 }
                 
-//                let newValue = Current.memory.previous(dataSource: .spectroscopy, parameter: indexPath.row)
-//                if newValue != 0.0 {
-//                    Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
-//                    tableView.reloadData()
-//                }
             }
             completionHandler(true)
         }
@@ -334,12 +329,6 @@ extension SpectroViewController {
                     os_log("Wrong value for indexPath.row in trailing swipe action: %d", log: Log.general, type: .error, indexPath.row)
                 }
                 
-
-//                let newValue = Current.memory.next(dataSource: .spectroscopy, parameter: indexPath.row)
-//                if newValue != 0.0 {
-//                    Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
-//                    tableView.reloadData()
-//                }
             }
             completionHandler(true)
         }

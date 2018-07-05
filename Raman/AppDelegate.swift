@@ -43,7 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        } else {
 //            UserDefaults.standard.set(Current.raman.bwInCm, forKey: "bwInCm")
 //        }
-//        Current.memory.getMemoryFromDisk()
         
         Current.bandwidths.load(with: "bandwidths")
         if Current.bandwidths.isEmpty {

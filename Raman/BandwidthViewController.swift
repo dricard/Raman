@@ -265,12 +265,6 @@ extension BandwidthViewController {
                     os_log("Wrong value for indexPath.row in bandwidth lead swipe action: %d", log: Log.general, type: .error, indexPath.row)
                 }
                 
-
-//                let newValue = Current.memory.previous(dataSource: .bandwidth, parameter: indexPath.row)
-//                if newValue != 0.0 {
-//                    Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
-//                    tableView.reloadData()
-//                }
             }
             completionHandler(true)
         }
@@ -317,11 +311,6 @@ extension BandwidthViewController {
                     os_log("Wrong value for indexPath.row in bandwidth trailing swipe action: %d", log: Log.general, type: .error, indexPath.row)
                 }
                 
-//                let newValue = Current.memory.next(dataSource: .bandwidth, parameter: indexPath.row)
-//                if newValue != 0.0 {
-//                    Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
-//                    tableView.reloadData()
-//                }
             }
             completionHandler(true)
         }

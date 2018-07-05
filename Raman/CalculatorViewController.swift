@@ -30,32 +30,14 @@ class CalculatorViewController: UIViewController {
             }
         }
     }
-    
-    enum Mode {
-        case dataEntry
-        case memoryOperation(MemoryOperation)
-    }
-    
-    typealias MemorySlotsRange = Int
-    
-    enum MemoryOperation {
-        case store(Double)
-        case recall
-    }
 
     // MARK: - Properties
     
     var Current: Environment?
-
-//    var raman: Raman?
-//    var selectedTheme: ThemeMode?
-//    var memory: Memory?
-    var mode: Mode = .dataEntry
     
     private var calculator = Calculator()
     private var singlePeriod = false
     private var enteringData = false
-    private var memoryOperationInProcess = false
     
     var currentValue: Double {
         get {
@@ -77,7 +59,7 @@ class CalculatorViewController: UIViewController {
     var selectedValue : Double?
     var selectedDataSource : Int?           // which value in the list we're changing
     var whichTab: Raman.DataSourceType?     // which value set we're in (spectro or bandwidth)
-
+    
     // MARK: - Outlets
     
     
@@ -105,149 +87,74 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var exponentLabel: UILabel!
     @IBOutlet weak var displayView: UIView!
     @IBOutlet weak var calculatorView: UIView!
+    @IBOutlet weak var parameterTitleLabel: UILabel!
+    @IBOutlet weak var unitsTitleLabel: UILabel!
+    @IBOutlet weak var previousValueTitleLabel: UILabel!
     
     // MARK: - Actions
     
     @IBAction func digitPressed(_ sender: UIButton) {
         guard let key = sender.currentTitle else { return }
-//        switch mode {
-//        case .dataEntry:
-            let digit: DigitType
-            switch key {
-            case ".":
-                digit = .period
-            case "⬅︎":
-                digit = .delete
-            case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
-                digit = .number(Int(key)!)
-            default:
-                digit = .error("not a defined digit")
-            }
-            enterDigit(digit)
-//        case .memoryOperation(let operation):
-//            // only accept digits 0-9 for memory operations (store or recall)
-//            guard "0123456789".contains(key), let Current = Current, let dataSource = whichTab, let parameter = selectedDataSource, let memorySlot = Int(key) else { return }
-//            switch operation {
-//            case .recall:
-//                let value = Current.memory.retrieveFrom(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot)
-//                Current.memory.currentSelection[dataSource]![parameter]! = memorySlot
-//                displayLabel.text = "\(value)"
-//            case .store(let value):
-//                displayLabel.text = "\(value)"
-//                Current.memory.addTo(dataSource: dataSource, parameter: parameter, memorySlot: memorySlot, value: value)
-//                Current.memory.currentSelection[dataSource]![parameter]! = memorySlot
-//                Current.memory.saveMemoryToDisk()
-//            }
-//            mode = .dataEntry
-//            memoryOperationInProcess = false
-//        }
+        
+        let digit: DigitType
+        switch key {
+        case ".":
+            digit = .period
+        case "⬅︎":
+            digit = .delete
+        case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
+            digit = .number(Int(key)!)
+        default:
+            digit = .error("not a defined digit")
+        }
+        enterDigit(digit)
     }
     
-//    @IBAction func memoryButtonPressed(_ sender: UIButton) {
-//        guard let key = sender.currentTitle else { return }
-//        switch key {
-//        case "M+":
-//            if !memoryOperationInProcess {
-//                guard let value = Double(displayLabel.text!) else { return }
-//                displayLabel.text = "select 0-9"
-//                mode = .memoryOperation(.store(value))
-//                memoryOperationInProcess = true
-//            }
-//        case "Mr":
-//            if !memoryOperationInProcess {
-//                displayLabel.text = "select 0-9"
-//                mode = .memoryOperation(.recall)
-//                memoryOperationInProcess = true
-//            }
-//        case "Ms":
-//            if let vc = storyboard?.instantiateViewController(withIdentifier: "ShowMemoryViewController") as? ShowMemoryViewController, let Current = Current, let dataSource = whichTab, let parameter = selectedDataSource {
-//                vc.modalPresentationStyle = .popover
-//                vc.mems = Current.memory.memoryArray(dataSource: dataSource, parameter: parameter)
-//                vc.delegate = self
-//                let stringFormat: String
-//                if let whichTab = whichTab, let selectedDataSource = selectedDataSource {
-//                    switch whichTab {
-//                    case .spectroscopy:
-//                        stringFormat = Constants.specRounding[selectedDataSource]
-//                    case .bandwidth:
-//                        stringFormat = Constants.bwRounding[selectedDataSource]
-//                    }
-//                } else {
-//                   stringFormat = ".2"
-//                }
-//                vc.formatString = stringFormat
-//                let controller = vc.popoverPresentationController!
-//                controller.delegate = self
-//                present(vc, animated: true, completion: nil)
-//            }
-//        case "Mc":
-//            if !memoryOperationInProcess {
-//                let controller = UIAlertController()
-//                controller.title = "Clear all?"
-//                controller.message = "Are you sure you want to delete all stored values?\nThis will delete all values for the current parameter."
-//                let clearAllAction = UIAlertAction(title: "Yes, delete all", style: .destructive) { (action) in
-//                    self.dismiss(animated: true, completion: nil)
-//                    guard let Current = self.Current, let dataSource = self.whichTab, let parameter = self.selectedDataSource else { return }
-//                    Current.memory.clearMemoryFor(dataSource: dataSource, parameter: parameter)
-//                }
-//                controller.addAction(clearAllAction)
-//                let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
-//                    self.dismiss(animated: true, completion: nil)
-//                }
-//                controller.addAction(cancelAction)
-//                present(controller, animated: true, completion: nil)
-//            }
-//        default:
-//            break
-//        }
-//    }
-
+    
+    
     @IBAction func operationPressed(_ sender: UIButton) {
-//        if !memoryOperationInProcess {
-            // enable entering negative numbers by pressing
-            // the '-' as the very first thing
-            if !enteringData && currentValue == 0 && sender.currentTitle == "-" {
-                displayLabel.text = "-"
-                enteringData = true
-            } else {
-                enteringData = false
-                singlePeriod = false
-                if let value = calculator.performOperation(key: sender.currentTitle!, operand: currentValue) {
-                    currentValue = value
-                }
+        
+        if !enteringData && currentValue == 0 && sender.currentTitle == "-" {
+            displayLabel.text = "-"
+            enteringData = true
+        } else {
+            enteringData = false
+            singlePeriod = false
+            if let value = calculator.performOperation(key: sender.currentTitle!, operand: currentValue) {
+                currentValue = value
             }
-            if sender.currentTitle == "⏎" {
-                guard let Current = Current else { return }
-                Current.raman.updateParameter(currentValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
-                
-                switch recentsTrack(forDataSource: selectedDataSource!, inWhichTab: whichTab!) {
-                case .excitations:
-                    Current.excitations.push(currentValue, with: .wavelength)
-                    Current.excitations.save(with: "excitations")
-                    os_log("Pushed value %.4f to excitations recents", log: Log.general, type: .debug, currentValue)
-                case .signals:
-                    Current.signals.push(currentValue, with: .wavelength)
-                    Current.signals.save(with: "signals")
-                    os_log("Pushed value %.4f to signals recents", log: Log.general, type: .debug, currentValue)
-                case .bandwidths:
-                    let type = typeForBandwidth(of: selectedDataSource!)
-                    Current.bandwidths.push(currentValue, with: type)
-                    Current.bandwidths.save(with: "bandwidths")
-                    os_log("Pushed value %.4f to bandwidths recents", log: Log.general, type: .debug, currentValue)
-                case .shifts:
-                    let type = typeForShift(of: selectedDataSource!)
-                    Current.shifts.push(currentValue, with: type)
-                    Current.shifts.save(with: "shifts")
-                    // if we changed the shift value, the signal value was also updated so we need to
-                    // also push it on the signals' stack
-                    Current.signals.push(Current.raman.signal, with: .wavelength)
-                    Current.signals.save(with: "signals")
-                    os_log("Pushed value %.4f to shifts recents", log: Log.general, type: .debug, currentValue)
-                    os_log("Pushed value %.4f to signals recents", log: Log.general, type: .debug, Current.raman.signal)
-                }
-                self.navigationController!.popViewController(animated: true)
+        }
+        if sender.currentTitle == "⏎" {
+            guard let Current = Current else { return }
+            Current.raman.updateParameter(currentValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
+            
+            switch recentsTrack(forDataSource: selectedDataSource!, inWhichTab: whichTab!) {
+            case .excitations:
+                Current.excitations.push(currentValue, with: .wavelength)
+                Current.excitations.save(with: "excitations")
+                os_log("Pushed value %.4f to excitations recents", log: Log.general, type: .debug, currentValue)
+            case .signals:
+                Current.signals.push(currentValue, with: .wavelength)
+                Current.signals.save(with: "signals")
+                os_log("Pushed value %.4f to signals recents", log: Log.general, type: .debug, currentValue)
+            case .bandwidths:
+                let type = typeForBandwidth(of: selectedDataSource!)
+                Current.bandwidths.push(currentValue, with: type)
+                Current.bandwidths.save(with: "bandwidths")
+                os_log("Pushed value %.4f to bandwidths recents", log: Log.general, type: .debug, currentValue)
+            case .shifts:
+                let type = typeForShift(of: selectedDataSource!)
+                Current.shifts.push(currentValue, with: type)
+                Current.shifts.save(with: "shifts")
+                // if we changed the shift value, the signal value was also updated so we need to
+                // also push it on the signals' stack
+                Current.signals.push(Current.raman.signal, with: .wavelength)
+                Current.signals.save(with: "signals")
+                os_log("Pushed value %.4f to shifts recents", log: Log.general, type: .debug, currentValue)
+                os_log("Pushed value %.4f to signals recents", log: Log.general, type: .debug, Current.raman.signal)
             }
-//        }
+            self.navigationController!.popViewController(animated: true)
+        }
     }
     
     @IBAction func tooltipButtonPressed(_ sender: UIButton) {
@@ -279,7 +186,7 @@ class CalculatorViewController: UIViewController {
         
         // localization
         self.title = .editValueLabel
-         
+        
         // add cancel button and localize
         let cancelButton = UIBarButtonItem(title: .cancelButton, style: .plain, target: self, action: #selector(CalculatorViewController.cancelEntry))
         navigationItem.rightBarButtonItem = cancelButton
@@ -419,22 +326,22 @@ class CalculatorViewController: UIViewController {
     func fontSizeClasses() -> [CGFloat] {
         switch view.frame.width {
         case 0...320:
-            let fontSizes: [CGFloat] = [12, 16, 13, 25, 40]
+            let fontSizes: [CGFloat] = [12, 16, 13, 25, 40, 96]
             return fontSizes
         case 321...375:
-            let fontSizes: [CGFloat] = [12, 16, 22, 25, 40]
+            let fontSizes: [CGFloat] = [12, 16, 22, 25, 40, 96]
             return fontSizes
         case 376...414:
-            let fontSizes: [CGFloat] = [12, 16, 22, 25, 40]
+            let fontSizes: [CGFloat] = [12, 16, 22, 25, 40, 96]
             return fontSizes
         case 415...768:
-            let fontSizes: [CGFloat] = [25, 24, 32, 40, 72]
+            let fontSizes: [CGFloat] = [25, 24, 32, 40, 72, 96]
             return fontSizes
         case 1024...:
-            let fontSizes: [CGFloat] = [25, 32, 40, 50, 96]
+            let fontSizes: [CGFloat] = [25, 32, 40, 50, 96, 120]
             return fontSizes
         default:
-            let fontSizes: [CGFloat] = [12, 16, 19, 25, 40]
+            let fontSizes: [CGFloat] = [12, 16, 19, 25, 40, 60]
             return fontSizes
         }
     }
@@ -444,11 +351,14 @@ class CalculatorViewController: UIViewController {
             
             let fontSizes = fontSizeClasses()
             
-            displayLabel.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
+            displayLabel.font = UIFont.boldSystemFont(ofSize: fontSizes[5])
             previousValueLabel.font = UIFont.systemFont(ofSize: fontSizes[2])
             parameterLabel.font = UIFont.systemFont(ofSize: fontSizes[2])
             unitsLabel.font = UIFont.systemFont(ofSize: fontSizes[3])
             exponentLabel.font = UIFont.systemFont(ofSize: fontSizes[0])
+            previousValueTitleLabel.font = UIFont.italicSystemFont(ofSize: fontSizes[1])
+            parameterTitleLabel.font = UIFont.italicSystemFont(ofSize: fontSizes[1])
+            unitsTitleLabel.font = UIFont.italicSystemFont(ofSize: fontSizes[1])
             
             self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
             self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
@@ -462,6 +372,7 @@ class CalculatorViewController: UIViewController {
             let buttonsColors = UIColor(named: "\(Current.selectedTheme.prefix())tableViewBackgroundColor")
             let displayColor = UIColor(named: "\(Current.selectedTheme.prefix())displayBackgroundColor")
             let displayTextColor = UIColor(named: "\(Current.selectedTheme.prefix())displayTextColor")
+            let displayTitleColor = displayTextColor?.withAlphaComponent(0.7)
             
             // set display
             displayView.backgroundColor = displayColor
@@ -470,6 +381,9 @@ class CalculatorViewController: UIViewController {
             displayLabel.textColor = displayTextColor
             unitsLabel.textColor = displayTextColor
             exponentLabel.textColor = displayTextColor
+            parameterTitleLabel.textColor = displayTitleColor
+            unitsTitleLabel.textColor = displayTitleColor
+            previousValueTitleLabel.textColor = displayTitleColor
             
             // set buttons
             digitButton0.backgroundColor = buttonsColors
@@ -526,43 +440,22 @@ class CalculatorViewController: UIViewController {
 }
 
 extension CalculatorViewController: UIPopoverPresentationControllerDelegate {
-
+    
     fileprivate func displayMemoriesTableViewSize() -> CGSize {
         return CGSize(width: 150, height: 408)
     }
-
+    
     func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
         let presentationController: UIPopoverPresentationController = popoverPresentationController.presentedViewController.popoverPresentationController!
-//        if popoverPresentationController.presentedViewController.title == "Memories" {
-//            // This is the popover that displays the memory content in a tableview
-//            popoverPresentationController.presentedViewController.preferredContentSize = displayMemoriesTableViewSize()
-//            presentationController.permittedArrowDirections = UIPopoverArrowDirection.right
-//            presentationController.sourceView = memoryButtonShow
-//            presentationController.sourceRect = memoryButtonShow.bounds
-//
-//        } else {
-            popoverPresentationController.presentedViewController.preferredContentSize = CGSize(width: 275, height: 125)
-
-            presentationController.permittedArrowDirections = UIPopoverArrowDirection.down
-            presentationController.sourceView = tooltipButton
-            presentationController.sourceRect = tooltipButton.bounds
-//        }
+        popoverPresentationController.presentedViewController.preferredContentSize = CGSize(width: 275, height: 125)
+        
+        presentationController.permittedArrowDirections = UIPopoverArrowDirection.down
+        presentationController.sourceView = tooltipButton
+        presentationController.sourceRect = tooltipButton.bounds
     }
-
+    
     // This is required to make the popover show on iPhone
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
 }
-
-//extension CalculatorViewController: CallMemoryDelegate {
-//
-//    func returnedValueIs(newValue: Double, newIndex: Int) {
-//
-//        guard let Current = Current, let dataSource = whichTab, let parameter = selectedDataSource else { return }
-//        Current.raman.updateParameter(newValue, forDataSource: selectedDataSource!, inWhichTab: whichTab!)
-//        Current.memory.currentSelection[dataSource]![parameter]! = newIndex
-//        self.navigationController!.popViewController(animated: true)
-//
-//    }
-//}
