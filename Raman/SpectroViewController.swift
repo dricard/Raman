@@ -359,7 +359,10 @@ extension SpectroViewController: UIViewControllerPreviewingDelegate {
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let indexPath = myTableView.indexPathForRow(at: location), let cell = myTableView.cellForRow(at: indexPath) else { return nil }
+
+        // convert location to the tableView's coordinate system to get the right cell
+        let locationInTableViewCoordinate = view.convert(location, to: myTableView)
+        guard let indexPath = myTableView.indexPathForRow(at: locationInTableViewCoordinate), let cell = myTableView.cellForRow(at: indexPath) else { return nil }
         os_log("3D touch event in spectro for row %d", log: Log.general, type: .info, indexPath.row)
         let frame = myTableView.convert(cell.frame, to: view)
         previewingContext.sourceRect = frame
@@ -369,9 +372,9 @@ extension SpectroViewController: UIViewControllerPreviewingDelegate {
             recentsController.recents = recents
         }
         switch indexPath.row {
-        case 1:
+        case 0:
             recentsController.recentsTitle = "Excitations"
-        case 2:
+        case 1:
             recentsController.recentsTitle = "Signals"
         default:
             recentsController.recentsTitle = "Shifts"

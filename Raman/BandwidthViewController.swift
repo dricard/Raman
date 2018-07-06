@@ -339,7 +339,10 @@ extension BandwidthViewController: UIViewControllerPreviewingDelegate {
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let indexPath = tableView.indexPathForRow(at: location), let cell = tableView.cellForRow(at: indexPath) else { return nil }
+        
+        // convert location to the tableView's coordinate system to get the right cell
+        let locationInTableViewCoordinate = view.convert(location, to: tableView)
+        guard let indexPath = tableView.indexPathForRow(at: locationInTableViewCoordinate), let cell = tableView.cellForRow(at: indexPath) else { return nil }
         os_log("3D touch event in bandwidth for row %d", log: Log.general, type: .info, indexPath.row)
         let frame = tableView.convert(cell.frame, to: view)
         previewingContext.sourceRect = frame
@@ -349,7 +352,7 @@ extension BandwidthViewController: UIViewControllerPreviewingDelegate {
             recentsController.recents = recents
         }
         switch indexPath.row {
-        case 1:
+        case 0:
             recentsController.recentsTitle = "Signals"
          default:
             recentsController.recentsTitle = "Bandwidths"
