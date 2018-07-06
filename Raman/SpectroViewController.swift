@@ -371,6 +371,7 @@ extension SpectroViewController: UIViewControllerPreviewingDelegate {
         if let recents = recentsForRow(at: indexPath) {
             recentsController.recents = recents
         }
+        recentsController.currentTab = .spectroscopy
         switch indexPath.row {
         case 0:
             recentsController.recentsTitle = "Excitations"

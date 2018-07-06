@@ -351,6 +351,7 @@ extension BandwidthViewController: UIViewControllerPreviewingDelegate {
         if let recents = recentsForRow(at: indexPath) {
             recentsController.recents = recents
         }
+        recentsController.currentTab = .bandwidth
         switch indexPath.row {
         case 0:
             recentsController.recentsTitle = "Signals"

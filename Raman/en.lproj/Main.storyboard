@@ -243,6 +243,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="gQT-Ky-dNB" id="xEo-LP-cmI"/>
+                                    <outlet property="delegate" destination="gQT-Ky-dNB" id="Uuk-Uu-qFK"/>
                                 </connections>
                             </tableView>
                         </subviews>

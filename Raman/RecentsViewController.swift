@@ -16,6 +16,7 @@ class RecentsViewController: UIViewController {
     var Current: Environment?
     var recents: Recents?
     var recentsTitle: String?
+    var currentTab: Raman.DataSourceType?
     
     // MARK: - Outlets
     
@@ -135,6 +136,54 @@ extension RecentsViewController: UITableViewDataSource {
         return cell
         
     }
-    
-    
+}
+
+extension RecentsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let Current = Current, let recents = recents, let value = recents.valueFor(indexPath.row), let recentsTitle = recentsTitle, let currentTab = currentTab else { return }
+        // update the current position in recents stack
+        recents.setCurrent(to: indexPath.row)
+        let type = recents.typeFor(indexPath.row)
+        
+        switch recentsTitle {
+        case "Excitations":
+            Current.raman.updateParameter(value, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
+        case "Signals":
+            switch currentTab {
+            case .spectroscopy:
+                Current.raman.updateParameter(value, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
+            case .bandwidth:
+                Current.raman.updateParameter(value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
+            }
+        case "Shifts":
+            switch type {
+            case .shiftInCm:
+                Current.raman.updateParameter(value, forDataSource: Constants.shiftCmIndex, inWhichTab: .spectroscopy)
+            case .shiftInGhz:
+                Current.raman.updateParameter(value, forDataSource: Constants.shiftGhzIndex, inWhichTab: .spectroscopy)
+            case .shiftInMev:
+                Current.raman.updateParameter(value, forDataSource: Constants.shiftmeVIndex, inWhichTab: .spectroscopy)
+            default:
+                os_log("Wrong parameter in didSelectRowAt in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
+            }
+        case "Bandwidths":
+            switch type {
+            case .bandwidthInCm:
+                Current.raman.updateParameter(value, forDataSource: Constants.bwCmIndex, inWhichTab: .bandwidth)
+            case .bandwidthInGhz:
+                Current.raman.updateParameter(value, forDataSource: Constants.bwGhzIndex, inWhichTab: .bandwidth)
+            case .bandwidthInNm:
+                Current.raman.updateParameter(value, forDataSource: Constants.bwNmIndex, inWhichTab: .bandwidth)
+            default:
+                os_log("Wrong parameter in didSelectRowAt in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
+            }
+
+        default:
+            os_log("Wrong parameter in didSelectRowAt in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
+        }
+        if let navigationController = self.navigationController {
+            navigationController.popToRootViewController(animated: true)
+        }
+    }
 }

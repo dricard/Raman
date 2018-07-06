@@ -114,6 +114,11 @@ class Recents {
         return stack[ currentIndex ]
     }
     
+    func setCurrent(to index: Int)  {
+        if index >= 0 && index <= max {
+            currentIndex = index
+        }
+    }
     func valueFor(_ row: Int) -> Double? {
         if let value = stack[ row ].value {
             return value
