@@ -204,8 +204,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Zx-x6-tEi">
-                                                    <rect key="frame" x="10" y="-3.5" width="283" height="50.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Zx-x6-tEi">
+                                                    <rect key="frame" x="10" y="-3.5" width="263" height="50.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="gLI-Wv-isN"/>
                                                     </constraints>
@@ -229,8 +229,8 @@
                                                 <constraint firstItem="SRd-dn-7G6" firstAttribute="leading" secondItem="IGw-ne-Oi9" secondAttribute="trailing" id="5mi-FN-4vY"/>
                                                 <constraint firstItem="9Zx-x6-tEi" firstAttribute="leading" secondItem="nMO-py-Lpd" secondAttribute="leading" constant="10" id="9O2-v3-kDh"/>
                                                 <constraint firstAttribute="trailing" secondItem="SRd-dn-7G6" secondAttribute="trailing" constant="20" id="9lD-gB-h72"/>
+                                                <constraint firstAttribute="trailing" secondItem="9Zx-x6-tEi" secondAttribute="trailing" constant="70" id="GsJ-lY-8tg"/>
                                                 <constraint firstItem="9Zx-x6-tEi" firstAttribute="centerY" secondItem="nMO-py-Lpd" secondAttribute="centerY" id="cPV-kY-Jfi"/>
-                                                <constraint firstItem="IGw-ne-Oi9" firstAttribute="leading" secondItem="9Zx-x6-tEi" secondAttribute="trailing" constant="5" id="jTL-XY-FVw"/>
                                                 <constraint firstItem="SRd-dn-7G6" firstAttribute="centerY" secondItem="IGw-ne-Oi9" secondAttribute="centerY" constant="-4" id="nNY-SG-7Vh"/>
                                             </constraints>
                                         </tableViewCellContentView>

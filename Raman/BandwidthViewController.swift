@@ -331,7 +331,7 @@ extension BandwidthViewController: UIViewControllerPreviewingDelegate {
     func recentsForRow(at indexPath: IndexPath) -> Recents? {
         guard let Current = Current else { return nil }
         switch indexPath.row {
-        case 1:
+        case 0:
             return Current.signals
         default:
             return Current.bandwidths
