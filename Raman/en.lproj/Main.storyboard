@@ -184,14 +184,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WxM-ip-KWJ">
-                                <rect key="frame" x="16" y="20" width="343" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="380" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecentsTableViewCell" id="TsB-Uv-2yX" customClass="RecentsTableViewCell" customModule="Raman" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="380" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TsB-Uv-2yX" id="nMO-py-Lpd">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="380" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRd-dn-7G6">
@@ -249,9 +249,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="pWi-UB-uVP" firstAttribute="top" secondItem="WxM-ip-KWJ" secondAttribute="bottom" id="L6L-Mc-ydV"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="WxM-ip-KWJ" secondAttribute="trailing" id="MOf-zE-NDd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WxM-ip-KWJ" secondAttribute="trailing" constant="-21" id="MOf-zE-NDd"/>
                             <constraint firstItem="WxM-ip-KWJ" firstAttribute="top" secondItem="VP2-LS-yAD" secondAttribute="bottom" id="QHP-g4-qCf"/>
-                            <constraint firstItem="WxM-ip-KWJ" firstAttribute="leading" secondItem="Vln-hW-r9j" secondAttribute="leadingMargin" id="yZg-10-2LF"/>
+                            <constraint firstItem="WxM-ip-KWJ" firstAttribute="leading" secondItem="Vln-hW-r9j" secondAttribute="leadingMargin" constant="-16" id="yZg-10-2LF"/>
                         </constraints>
                     </view>
                     <connections>
