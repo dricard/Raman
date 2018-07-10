@@ -10,7 +10,7 @@ import UIKit
 import os.log
 
 class RecentsViewController: UIViewController {
-
+    
     // MARK: - properties
     
     var Current: Environment?
@@ -46,12 +46,12 @@ class RecentsViewController: UIViewController {
             return fontSizes
         }
     }
-
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if let recentsTitle = recentsTitle {
             title = recentsTitle
         }
@@ -63,11 +63,89 @@ class RecentsViewController: UIViewController {
         if let Current = Current {
             tableView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewBackgroundColor")
         }
-//        tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        
+        // Add gesture recognizer to enable moving row with a long press
+        let longPress = UIGestureRecognizer(target: self, action: #selector(longPressGestureRecognized))
+        tableView.addGestureRecognizer(longPress)
         
         tableView.reloadData()
     }
     
+    
+    @IBAction func longPressGestureRecognized(_ sender: UILongPressGestureRecognizer) {
+        
+        var snapShot: UIView?
+        var sourceIndex: IndexPath
+        var currentLocationIndexPath: IndexPath
+        
+        os_log("longpressed", log: Log.general, type: .info)
+        switch sender.state {
+        case .began:
+            let location = sender.location(in: tableView)
+            guard let indexPath = tableView.indexPathForRow(at: location) else { return }
+            os_log("long press began with row %d", log: Log.general, type: .info, indexPath.row)
+            sourceIndex = indexPath
+            if let cell = tableView.cellForRow(at: indexPath) {
+                cell.setSelected(false, animated: false)
+                cell.setHighlighted(false, animated: false)
+                
+                // make an image from the pressed cell
+                UIGraphicsBeginImageContext(cell.bounds.size)
+                cell.layer.render(in: UIGraphicsGetCurrentContext()!)
+                let cellImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                
+                // create the imageview that will be dragged
+                if snapShot == nil {
+                    snapShot = UIImageView(image: cellImage)
+                    if let snapShot = snapShot, let cellRect = tableView.cellForRow(at: indexPath) {
+                        snapShot.frame = snapShot.bounds.offsetBy(dx: cellRect.frame.origin.x , dy: cellRect.frame.origin.y)
+                        
+                        // add dropshadow and lower opacity
+                        snapShot.layer.masksToBounds = false
+                        snapShot.layer.shadowColor = UIColor.black.cgColor
+                        snapShot.layer.shadowOffset = CGSize(width: 0, height: 0)
+                        snapShot.layer.shadowRadius = 4.0
+                        snapShot.layer.shadowOpacity = 0.7
+                        snapShot.layer.opacity = 1.0
+                        
+                        var center = cell.center
+                        snapShot.center = center
+                        snapShot.alpha = 0.0
+                        
+                        tableView.addSubview(snapShot)
+
+                        // zoom image toward user
+                        UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                            center.y = location.y
+                            snapShot.center = center
+                            snapShot.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                            snapShot.alpha = 0.98
+                            cell.alpha = 0.0
+                        }, completion: { finshied in
+                            // hide the cell while we're dragging its image around
+                            cell.isHidden = true
+                        })
+                    }
+                }
+                // set current location to initial location
+                currentLocationIndexPath = indexPath
+                
+                // enable scrolling for cell
+                
+            }
+        case .possible:
+            print("possible")
+        case .changed:
+            print("changed")
+        case .ended:
+            print("ended")
+        case .cancelled:
+            print("cancelled")
+        case .failed:
+            print("failed")
+        }
+    }
 }
 
 extension RecentsViewController: UITableViewDataSource {
@@ -79,7 +157,7 @@ extension RecentsViewController: UITableViewDataSource {
         cell.unitsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
         cell.exponentLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
         cell.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellBackgroundColor")
-
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -97,7 +175,7 @@ extension RecentsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: RecentsTableViewCell.reuseIdentifier!) as! RecentsTableViewCell
         
         guard let recents = recents, let value = recents.valueFor(indexPath.row) else { return cell }
-
+        
         configureCell(cell: cell)
         
         let type = recents.typeFor(indexPath.row)
@@ -178,7 +256,7 @@ extension RecentsViewController: UITableViewDelegate {
             default:
                 os_log("Wrong parameter in didSelectRowAt in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
             }
-
+            
         default:
             os_log("Wrong parameter in didSelectRowAt in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
         }
