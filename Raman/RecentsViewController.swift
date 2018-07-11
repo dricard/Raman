@@ -290,4 +290,28 @@ extension RecentsViewController: UITableViewDelegate {
             navigationController.popToRootViewController(animated: true)
         }
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            
+            if let recents = recents {
+                recents.stack.remove(at: indexPath.row)
+                var spot: Spot
+                switch recentsTitle {
+                case "Excitations":
+                    spot = Spot(value: nil, type: .wavelength)
+                case "Signals":
+                    spot = Spot(value: nil, type: .wavelength)
+                case "Shifts":
+                    spot = Spot(value: nil, type: .shiftInCm)
+                default:
+                    spot = Spot(value: nil, type: .bandwidthInCm)
+                }
+                recents.stack.append(spot)
+                tableView.reloadData()
+            }
+        }
+    }
+    
+
 }
