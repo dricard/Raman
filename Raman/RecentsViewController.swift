@@ -72,11 +72,14 @@ class RecentsViewController: UIViewController {
     }
     
     
+    struct TheCell {
+        static var snapShot : UIView? = nil
+    }
+    struct Initial {
+        static var indexPath : IndexPath? = nil
+    }
+    
     @IBAction func longPressGestureRecognized(_ sender: UILongPressGestureRecognizer) {
-        
-        var snapShot: UIView?
-        var sourceIndex: IndexPath
-        var currentLocationIndexPath: IndexPath
         
         os_log("longpressed", log: Log.general, type: .info)
         switch sender.state {
@@ -84,7 +87,7 @@ class RecentsViewController: UIViewController {
             let location = sender.location(in: tableView)
             guard let indexPath = tableView.indexPathForRow(at: location) else { return }
             os_log("long press began with row %d", log: Log.general, type: .info, indexPath.row)
-            sourceIndex = indexPath
+            Initial.indexPath = indexPath
             if let cell = tableView.cellForRow(at: indexPath) {
                 cell.setSelected(false, animated: false)
                 cell.setHighlighted(false, animated: false)
@@ -96,31 +99,31 @@ class RecentsViewController: UIViewController {
                 UIGraphicsEndImageContext()
                 
                 // create the imageview that will be dragged
-                if snapShot == nil {
-                    snapShot = UIImageView(image: cellImage)
-                    if let snapShot = snapShot, let cellRect = tableView.cellForRow(at: indexPath) {
-                        snapShot.frame = snapShot.bounds.offsetBy(dx: cellRect.frame.origin.x , dy: cellRect.frame.origin.y)
+                if TheCell.snapShot == nil {
+                    TheCell.snapShot = UIImageView(image: cellImage)
+                    if let cellRect = tableView.cellForRow(at: indexPath) {
+                        TheCell.snapShot!.frame = TheCell.snapShot!.bounds.offsetBy(dx: cellRect.frame.origin.x , dy: cellRect.frame.origin.y)
                         
                         // add dropshadow and lower opacity
-                        snapShot.layer.masksToBounds = false
-                        snapShot.layer.shadowColor = UIColor.black.cgColor
-                        snapShot.layer.shadowOffset = CGSize(width: 0, height: 0)
-                        snapShot.layer.shadowRadius = 4.0
-                        snapShot.layer.shadowOpacity = 0.7
-                        snapShot.layer.opacity = 1.0
+                        TheCell.snapShot!.layer.masksToBounds = false
+                        TheCell.snapShot!.layer.shadowColor = UIColor.black.cgColor
+                        TheCell.snapShot!.layer.shadowOffset = CGSize(width: 0, height: 0)
+                        TheCell.snapShot!.layer.shadowRadius = 4.0
+                        TheCell.snapShot!.layer.shadowOpacity = 0.7
+                        TheCell.snapShot!.layer.opacity = 1.0
                         
                         var center = cell.center
-                        snapShot.center = center
-                        snapShot.alpha = 0.0
+                        TheCell.snapShot!.center = center
+                        TheCell.snapShot!.alpha = 0.0
                         
-                        tableView.addSubview(snapShot)
+                        tableView.addSubview(TheCell.snapShot!)
 
                         // zoom image toward user
                         UIView.animate(withDuration: 0.25, animations: { () -> Void in
                             center.y = location.y
-                            snapShot.center = center
-                            snapShot.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-                            snapShot.alpha = 0.98
+                            TheCell.snapShot!.center = center
+                            TheCell.snapShot!.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                            TheCell.snapShot!.alpha = 0.98
                             cell.alpha = 0.0
                         }, completion: { finshied in
                             // hide the cell while we're dragging its image around
@@ -129,21 +132,44 @@ class RecentsViewController: UIViewController {
                     }
                 }
                 // set current location to initial location
-                currentLocationIndexPath = indexPath
+                Initial.indexPath = indexPath
                 
                 // enable scrolling for cell
                 
             }
-        case .possible:
-            print("possible")
         case .changed:
-            print("changed")
-        case .ended:
-            print("ended")
-        case .cancelled:
-            print("cancelled")
-        case .failed:
-            print("failed")
+            if TheCell.snapShot != nil {
+                var center = TheCell.snapShot!.center
+                let location = sender.location(in: tableView)
+                guard let indexPath = tableView.indexPathForRow(at: location), let recents = recents else { return }
+                print(indexPath.row)
+                center.y = location.y
+                if Initial.indexPath != nil && indexPath != Initial.indexPath {
+                    let spotA = Spot(value: recents.stack[indexPath.row].value, type: recents.stack[indexPath.row].type)
+                    let spotB = Spot(value: recents.stack[Initial.indexPath!.row].value, type: recents.stack[Initial.indexPath!.row].type)
+                    recents.stack[indexPath.row] = spotB
+                    recents.stack[Initial.indexPath!.row] = spotA
+//                    swap(&recents.stack[indexPath.row], &recents.stack[Initial.indexPath!.row])
+                    tableView.moveRow(at: Initial.indexPath!, to: indexPath)
+                    Initial.indexPath = indexPath
+                }
+            }
+        default:
+            if let cell = tableView.cellForRow(at: Initial.indexPath!) {
+                cell.isHidden = false
+                cell.alpha = 0.0
+                UIView.animate(withDuration: 0.25, animations: {() -> Void in
+                    TheCell.snapShot!.center = cell.center
+                    TheCell.snapShot!.transform = CGAffineTransform.identity
+                    TheCell.snapShot!.alpha = 0.0
+                    cell.alpha = 1.0
+                }, completion: { (finished) in
+                    Initial.indexPath = nil
+                    TheCell.snapShot!.removeFromSuperview()
+                    TheCell.snapShot = nil
+                    })
+            }
+            
         }
     }
 }
