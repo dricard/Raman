@@ -35,8 +35,8 @@ struct Constants {
     static let bwUnits = ["nm", "cm", "GHz", "nm"]
     static let bwEpx = ["", "-1", "", ""]
 
-    static let specRounding = [".2", ".2", ".4", ".2", ".5" ]
-    static let bwRounding = [".2", ".4", ".2", ".2" ]
+    static let specRounding = [".2", ".2", ".2", ".2", ".4" ]
+    static let bwRounding = [".2", ".2", ".2", ".2" ]
     
     static let specToolTip: [String] = [ .changeExcitationText, .changeSignalText, .changeShiftText, .changeShiftText, .changeShiftText ]
 

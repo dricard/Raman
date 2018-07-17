@@ -78,6 +78,9 @@ class BandwidthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // 3D touch
+        registerForPreviewing(with: self, sourceView: view)
+
         // localize
         self.title = .bandwidthTitle
         aboutButton.title = .about
@@ -323,3 +326,47 @@ extension BandwidthViewController {
     }
 }
 
+extension BandwidthViewController: UIViewControllerPreviewingDelegate {
+    
+    func recentsForRow(at indexPath: IndexPath) -> Recents? {
+        guard let Current = Current else { return nil }
+        switch indexPath.row {
+        case 0:
+            return Current.signals
+        default:
+            return Current.bandwidths
+        }
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        // convert location to the tableView's coordinate system to get the right cell
+        let locationInTableViewCoordinate = view.convert(location, to: tableView)
+        guard let indexPath = tableView.indexPathForRow(at: locationInTableViewCoordinate), let cell = tableView.cellForRow(at: indexPath) else { return nil }
+        os_log("3D touch event in bandwidth for row %d", log: Log.general, type: .info, indexPath.row)
+        let frame = tableView.convert(cell.frame, to: view)
+        previewingContext.sourceRect = frame
+        let recentsController = storyboard?.instantiateViewController(withIdentifier: "RecentsViewController") as! RecentsViewController
+        recentsController.Current = Current
+        if let recents = recentsForRow(at: indexPath) {
+            recentsController.recents = recents
+        }
+        recentsController.currentTab = .bandwidth
+        switch indexPath.row {
+        case 0:
+            recentsController.recentsTitle = "Signals"
+         default:
+            recentsController.recentsTitle = "Bandwidths"
+        }
+        
+        recentsController.loadViewIfNeeded()
+        
+        return recentsController
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+    }
+    
+    
+}

@@ -25,6 +25,8 @@
 		2170FF131F19507C00CB726A /* CalculatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2170FF121F19507C00CB726A /* CalculatorButton.swift */; };
 		21B272CA20ED04D400AD6322 /* Recents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B272C920ED04D400AD6322 /* Recents.swift */; };
 		21B537BA1EF717AF00744E9A /* TooltipPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B537B91EF717AF00744E9A /* TooltipPopoverViewController.swift */; };
+		21C25D5D20EE879A0082BB8E /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C25D5C20EE879A0082BB8E /* RecentsViewController.swift */; };
+		21C25D5F20EE8D0F0082BB8E /* RecentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C25D5E20EE8D0F0082BB8E /* RecentsTableViewCell.swift */; };
 		21DBEA441E2C59E600C8436B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21DBEA461E2C59E600C8436B /* Main.storyboard */; };
 		21DBEA481E2C5A2E00C8436B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21DBEA4A1E2C5A2E00C8436B /* Localizable.strings */; };
 		21F468AE1E2C6133004C56BA /* Strings+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F468AD1E2C6133004C56BA /* Strings+Localized.swift */; };
@@ -56,6 +58,8 @@
 		2170FF121F19507C00CB726A /* CalculatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorButton.swift; sourceTree = "<group>"; };
 		21B272C920ED04D400AD6322 /* Recents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recents.swift; sourceTree = "<group>"; };
 		21B537B91EF717AF00744E9A /* TooltipPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipPopoverViewController.swift; sourceTree = "<group>"; };
+		21C25D5C20EE879A0082BB8E /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
+		21C25D5E20EE8D0F0082BB8E /* RecentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsTableViewCell.swift; sourceTree = "<group>"; };
 		21DBEA491E2C5A2E00C8436B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		21DBEA4B1E2C5A4C00C8436B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		21DBEA4C1E2C5A7900C8436B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 				92011B0A1B0D1A3100611519 /* DisplayInfoViewController.swift */,
 				211537691EF59CF90006AC64 /* CalculatorViewController.swift */,
 				21B537B91EF717AF00744E9A /* TooltipPopoverViewController.swift */,
+				21C25D5C20EE879A0082BB8E /* RecentsViewController.swift */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 				21DBEA4A1E2C5A2E00C8436B /* Localizable.strings */,
 				21F468AD1E2C6133004C56BA /* Strings+Localized.swift */,
 				215AB9E31EF3208400555AB4 /* ThemeMode.swift */,
+				21C25D5E20EE8D0F0082BB8E /* RecentsTableViewCell.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -268,12 +274,14 @@
 				215AB9E41EF3208400555AB4 /* ThemeMode.swift in Sources */,
 				2115376A1EF59CF90006AC64 /* CalculatorViewController.swift in Sources */,
 				214414AA1CB2B3F400A1958D /* BandwidthViewController.swift in Sources */,
+				21C25D5D20EE879A0082BB8E /* RecentsViewController.swift in Sources */,
 				92011B111B0D1B9300611519 /* Raman.swift in Sources */,
 				214A4B7A20E2C683003835FC /* Version.swift in Sources */,
 				92011B0B1B0D1A3100611519 /* DisplayInfoViewController.swift in Sources */,
 				2115376C1EF5BC4F0006AC64 /* Calculator.swift in Sources */,
 				21B537BA1EF717AF00744E9A /* TooltipPopoverViewController.swift in Sources */,
 				92011B0D1B0D1A4300611519 /* SpectroViewController.swift in Sources */,
+				21C25D5F20EE8D0F0082BB8E /* RecentsTableViewCell.swift in Sources */,
 				214A4B7E20E2CBBE003835FC /* Device.swift in Sources */,
 				92011AE91B0D197300611519 /* AppDelegate.swift in Sources */,
 				215A7B011CF9194C003B9F9B /* Theme.swift in Sources */,

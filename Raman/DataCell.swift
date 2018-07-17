@@ -28,7 +28,7 @@ class DataCell: UITableViewCell {
         valueLabel.font = Theme.Fonts.titleFont.font
         dataLabel.font = Theme.Fonts.detailTextFont.font
         unitsLabel.font = Theme.Fonts.detailTextFont.font
-                exponentsLabel.font = Theme.Fonts.detailTextFont.font
+        exponentsLabel.font = Theme.Fonts.exponentFont.font
         
         
         // make the separator go all the way to the left edge
