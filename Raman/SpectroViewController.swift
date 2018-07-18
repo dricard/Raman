@@ -19,7 +19,7 @@ class SpectroViewController: UIViewController {
 
     // MARK: - Outlets
     
-    @IBOutlet var myTableView: UITableView!
+    @IBOutlet var tableView: UITableView!
     @IBOutlet weak var aboutButton: UIBarButtonItem!
     
     
@@ -64,16 +64,16 @@ class SpectroViewController: UIViewController {
             }
             
             // set the tableview background color (behind the cells)
-            self.myTableView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewBackgroundColor")
+            self.tableView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewBackgroundColor")
             
             // set the separator color to the same as the background
-            self.myTableView.separatorColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewSeparatorColor")
+            self.tableView.separatorColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewSeparatorColor")
             
 
         }, completion: nil)
         
         // update the display with new them
-        myTableView.reloadData()
+        tableView.reloadData()
     }
     
     // MARK: - Life cycle
@@ -91,10 +91,10 @@ class SpectroViewController: UIViewController {
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         
         // This prevents the space below the cells to have spacers
-        myTableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView()
         
         // Remove space at top of tableview
-        myTableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
         
         // add theme mode button to navigation bar
         
@@ -160,15 +160,26 @@ extension SpectroViewController: UITableViewDataSource {
     
     @objc func configureCell(cell: DataCell, indexPath: IndexPath) {
         guard let Current = Current else { return }
+        
+        // current value
         cell.valueLabel!.text = Current.raman.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
         cell.valueLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+        
+        // parameter name
         cell.dataLabel?.text = Constants.ramanShift[indexPath.row]
         cell.dataLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelTextColor")
+        
+        // parameter units
         cell.unitsLabel.text = Constants.specUnits[indexPath.row]
         cell.unitsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+        
+        // parameter units exponent
         cell.exponentsLabel.text = Constants.specExp[indexPath.row]
         cell.exponentsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+        
+        // cell background color
         cell.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellBackgroundColor")
+        
         // style view behind the value
         cell.valueLabelView.backgroundColor = UIColor.clear
         
@@ -364,10 +375,10 @@ extension SpectroViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
 
         // convert location to the tableView's coordinate system to get the right cell
-        let locationInTableViewCoordinate = view.convert(location, to: myTableView)
-        guard let indexPath = myTableView.indexPathForRow(at: locationInTableViewCoordinate), let cell = myTableView.cellForRow(at: indexPath) else { return nil }
+        let locationInTableViewCoordinate = view.convert(location, to: tableView)
+        guard let indexPath = tableView.indexPathForRow(at: locationInTableViewCoordinate), let cell = tableView.cellForRow(at: indexPath) else { return nil }
         os_log("3D touch event in spectro for row %d", log: Log.general, type: .info, indexPath.row)
-        let frame = myTableView.convert(cell.frame, to: view)
+        let frame = tableView.convert(cell.frame, to: view)
         previewingContext.sourceRect = frame
         let recentsController = storyboard?.instantiateViewController(withIdentifier: "RecentsViewController") as! RecentsViewController
         recentsController.Current = Current

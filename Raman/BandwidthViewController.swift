@@ -135,25 +135,41 @@ class BandwidthViewController: UIViewController {
 
 extension BandwidthViewController: UITableViewDataSource {
     
-    @objc func configureCell(cell: BWCell, indexPath: IndexPath) {
+    @objc func configureCell(cell: DataCell, indexPath: IndexPath) {
         guard let Current = Current else { return }
         
+        // current value
         cell.valueLabel!.text = Current.raman.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
-        cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
-        cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
-        cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
-        cell.exponentLabel.text = Constants.bwEpx[indexPath.row]
-        cell.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellBackgroundColor")
         cell.valueLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
-        cell.dataLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
-        cell.unitsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
-        cell.exponentLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
-        if Current.selectedTheme.mode == .darkMode {
-            cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
-        } else {
-            cell.dataImageView?.image = UIImage(named: "bw_light\(indexPath.row)")
-        }
+
+        // parameter name
+        cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
+        cell.dataLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelTextColor")
         
+        // parameter units
+        cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
+        cell.unitsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+        
+        // parameter units exponent
+        cell.exponentsLabel.text = Constants.bwEpx[indexPath.row]
+        cell.exponentsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+
+        // cell background color
+        cell.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellBackgroundColor")
+
+        // style view behind the value
+        cell.valueLabelView.backgroundColor = UIColor.clear
+
+        // style view behind cell's label
+        cell.labelView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelBackgroundColor")
+        
+        // row icon
+        cell.dataImageView.image = UIImage(named: "\(Current.selectedTheme.prefix())bw_\(indexPath.row)")
+
+        
+        // style view behind cell's label
+        cell.labelView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelBackgroundColor")
+
         // set images on both sides of cell depending on available data in recents
         switch indexPath.row {
         case 0:
@@ -191,11 +207,11 @@ extension BandwidthViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(80)
+        return CGFloat(99.5)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellBW", for: indexPath) as! BWCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: DataCell.reuseIdentifier, for: indexPath) as! DataCell
         
         configureCell(cell: cell, indexPath: indexPath)
         
