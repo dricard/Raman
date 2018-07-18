@@ -69,6 +69,7 @@ class SpectroViewController: UIViewController {
             // set the separator color to the same as the background
             self.myTableView.separatorColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewSeparatorColor")
             
+
         }, completion: nil)
         
         // update the display with new them
@@ -150,7 +151,7 @@ extension SpectroViewController: UITableViewDelegate {
 extension SpectroViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(80)
+        return CGFloat(99.5)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -162,14 +163,24 @@ extension SpectroViewController: UITableViewDataSource {
         cell.valueLabel!.text = Current.raman.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
         cell.valueLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
         cell.dataLabel?.text = Constants.ramanShift[indexPath.row]
-        cell.dataLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+        cell.dataLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelTextColor")
         cell.unitsLabel.text = Constants.specUnits[indexPath.row]
         cell.unitsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
         cell.exponentsLabel.text = Constants.specExp[indexPath.row]
         cell.exponentsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
         cell.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellBackgroundColor")
+        // style view behind the value
+        cell.valueLabelView.backgroundColor = UIColor.clear
+        
+        // style view behind cell's label
+        cell.labelView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelBackgroundColor")
+
         if Current.selectedTheme.mode == .darkMode {
-            cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")
+            if indexPath.row == 0 {
+                cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")
+            } else {
+                cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")
+            }
         } else {
             cell.dataImageView?.image = UIImage(named: "spectro_light\(indexPath.row)")
         }

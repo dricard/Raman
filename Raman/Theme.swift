@@ -13,6 +13,7 @@ struct Theme {
     enum Fonts {
         case titleFont
         case subTitleFont
+        case valueFont
         case detailTextFont
         case navTitleFont
         case exponentFont
@@ -20,8 +21,9 @@ struct Theme {
         var font: UIFont {
             switch self {
             case .titleFont: return UIFont.systemFont(ofSize: 32, weight: .heavy)
+            case .valueFont: return UIFont.systemFont(ofSize: 42, weight: .heavy)
             case .subTitleFont: return UIFont.systemFont(ofSize: 24, weight: .heavy)
-            case .detailTextFont: return UIFont.systemFont(ofSize: CGFloat(18))
+            case .detailTextFont: return UIFont.systemFont(ofSize: CGFloat(14))
             case .navTitleFont: return UIFont.systemFont(ofSize: 18, weight: .bold)
             case .exponentFont: return UIFont.systemFont(ofSize: CGFloat(12))
             }
