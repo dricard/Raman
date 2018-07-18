@@ -30,7 +30,7 @@ class DataCell: UITableViewCell {
         // customize the look with theme
         valueLabel.font = Theme.Fonts.valueFont.font
         dataLabel.font = Theme.Fonts.detailTextFont.font
-        unitsLabel.font = Theme.Fonts.detailTextFont.font
+        unitsLabel.font = Theme.Fonts.unitsFont.font
         exponentsLabel.font = Theme.Fonts.exponentFont.font
         
         

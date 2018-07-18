@@ -92,7 +92,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="-1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DtG-T1-Opz">
-                                                                            <rect key="frame" x="324" y="26" width="12" height="10"/>
+                                                                            <rect key="frame" x="328" y="24" width="12" height="10"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="10" id="MrP-31-cKn"/>
                                                                                 <constraint firstAttribute="width" constant="12" id="VGQ-hi-ngm"/>
@@ -104,9 +104,9 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
-                                                                        <constraint firstItem="DtG-T1-Opz" firstAttribute="centerY" secondItem="Apz-6b-iSk" secondAttribute="centerY" constant="-6" id="AGq-Fx-w47"/>
+                                                                        <constraint firstItem="DtG-T1-Opz" firstAttribute="centerY" secondItem="Apz-6b-iSk" secondAttribute="centerY" constant="-8" id="AGq-Fx-w47"/>
                                                                         <constraint firstItem="hAy-xD-04w" firstAttribute="leading" secondItem="Apz-6b-iSk" secondAttribute="leading" constant="5" id="QFA-ig-eaA"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="DtG-T1-Opz" secondAttribute="trailing" constant="4" id="S3D-aZ-HB9"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="DtG-T1-Opz" secondAttribute="trailing" id="S3D-aZ-HB9"/>
                                                                         <constraint firstItem="hAy-xD-04w" firstAttribute="centerY" secondItem="Apz-6b-iSk" secondAttribute="centerY" id="T7i-Xe-2F8"/>
                                                                         <constraint firstItem="wID-EY-isU" firstAttribute="centerY" secondItem="Apz-6b-iSk" secondAttribute="centerY" id="i3q-qz-1cd"/>
                                                                         <constraint firstItem="Tap-eX-Sf5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hAy-xD-04w" secondAttribute="trailing" constant="5" id="k4H-Tp-Gub"/>
