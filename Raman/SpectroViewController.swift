@@ -174,16 +174,8 @@ extension SpectroViewController: UITableViewDataSource {
         
         // style view behind cell's label
         cell.labelView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelBackgroundColor")
+        cell.dataImageView.image = UIImage(named: "\(Current.selectedTheme.prefix())spectro_\(indexPath.row)")
 
-        if Current.selectedTheme.mode == .darkMode {
-            if indexPath.row == 0 {
-                cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")
-            } else {
-                cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")
-            }
-        } else {
-            cell.dataImageView?.image = UIImage(named: "spectro_light\(indexPath.row)")
-        }
         // set images on both sides of cell depending on available data in recents
         switch indexPath.row {
         case 0:
