@@ -105,11 +105,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
         ]
         navBarAppearance.barStyle = UIBarStyle.blackTranslucent
-        navBarAppearance.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
+        navBarAppearance.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor\(Current.colorSet.suffix())")
         
         // set tab bar
         let tabBarAppearance = UITabBar.appearance()
-        tabBarAppearance.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
+        tabBarAppearance.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor\(Current.colorSet.suffix())")
         tabBarAppearance.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
         tabBarAppearance.unselectedItemTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
 
