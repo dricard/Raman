@@ -64,10 +64,10 @@ class SpectroViewController: UIViewController {
             }
             
             // set the tableview background color (behind the cells)
-            self.tableView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewBackgroundColor")
+            self.tableView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
             
             // set the separator color to the same as the background
-            self.tableView.separatorColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewSeparatorColor")
+            self.tableView.separatorColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
             
 
         }, completion: nil)
@@ -186,6 +186,8 @@ extension SpectroViewController: UITableViewDataSource {
         // style view behind cell's label
         cell.labelView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelBackgroundColor")
         cell.dataImageView.image = UIImage(named: "\(Current.selectedTheme.prefix())spectro_\(indexPath.row)")
+        cell.dataImageView.layer.cornerRadius = 8
+        cell.dataImageView.layer.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelBackgroundColor")?.cgColor
 
         // set images on both sides of cell depending on available data in recents
         switch indexPath.row {

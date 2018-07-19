@@ -62,10 +62,10 @@ class BandwidthViewController: UIViewController {
         }
         
         // set the tableview background color (behind the cells)
-        self.tableView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewBackgroundColor")
+        self.tableView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
         
         // set the separator color to the same as the background
-        self.tableView.separatorColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewSeparatorColor")
+        self.tableView.separatorColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
             
         }, completion: nil)
         
@@ -91,7 +91,7 @@ class BandwidthViewController: UIViewController {
         tableView.tableFooterView = UIView()
         
         // fix space on top of tableview
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
         
         // add theme mode button to navigation bar
         
@@ -165,6 +165,8 @@ extension BandwidthViewController: UITableViewDataSource {
         
         // row icon
         cell.dataImageView.image = UIImage(named: "\(Current.selectedTheme.prefix())bw_\(indexPath.row)")
+        cell.dataImageView.layer.cornerRadius = 8
+        cell.dataImageView.layer.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelBackgroundColor")?.cgColor
 
         
         // style view behind cell's label
