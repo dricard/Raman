@@ -185,7 +185,7 @@ extension SpectroViewController: UITableViewDataSource {
         
         // style view behind cell's label
         cell.labelView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelBackgroundColor")
-        cell.dataImageView.image = UIImage(named: "\(Current.selectedTheme.prefix())spectro_\(indexPath.row)")
+        cell.dataImageView.image = UIImage(named: "spectro_\(indexPath.row)")
         cell.dataImageView.layer.cornerRadius = 8
         cell.dataImageView.layer.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelBackgroundColor")?.cgColor
 

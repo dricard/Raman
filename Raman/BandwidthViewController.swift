@@ -164,7 +164,7 @@ extension BandwidthViewController: UITableViewDataSource {
         cell.labelView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelBackgroundColor")
         
         // row icon
-        cell.dataImageView.image = UIImage(named: "\(Current.selectedTheme.prefix())bw_\(indexPath.row)")
+        cell.dataImageView.image = UIImage(named: "bw_\(indexPath.row)")
         cell.dataImageView.layer.cornerRadius = 8
         cell.dataImageView.layer.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelBackgroundColor")?.cgColor
 
