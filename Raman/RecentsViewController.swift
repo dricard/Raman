@@ -61,7 +61,7 @@ class RecentsViewController: UIViewController {
         // This prevents the space below the cells to have spacers
         tableView.tableFooterView = UIView()
         if let Current = Current {
-            tableView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewBackgroundColor")
+            tableView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())tableViewBackgroundColor")
         }
         
         // Add gesture recognizer to enable moving row with a long press
@@ -179,10 +179,10 @@ extension RecentsViewController: UITableViewDataSource {
     func configureCell(cell: RecentsTableViewCell) {
         guard let Current = Current else { return }
         
-        cell.valueLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor\(Current.colorSet.suffix())")
-        cell.unitsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor\(Current.colorSet.suffix())")
-        cell.exponentLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor\(Current.colorSet.suffix())")
-        cell.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellBackgroundColor\(Current.colorSet.suffix())")
+        cell.valueLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+        cell.unitsLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+        cell.exponentLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+        cell.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
         
     }
     

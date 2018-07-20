@@ -10,7 +10,6 @@ import Foundation
 
 struct Environment {
     var raman = Raman()
-    var selectedTheme = ThemeMode()
     var version = Version()
     var screen = Screen()
     var device = Device()
@@ -25,7 +24,6 @@ struct Environment {
 extension Environment {
     static let mock = Environment(
         raman: .mock,
-        selectedTheme: .mock,
         version: .mock,
         screen: .mock,
         device: .mock,

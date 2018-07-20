@@ -24,13 +24,8 @@ class BandwidthViewController: UIViewController {
     
     @objc func themeModeButtonTapped(_ sender: UIBarButtonItem) {
         if let Current = Current {
-            switch Current.selectedTheme.mode {
-            case .darkMode:
-                Current.selectedTheme.mode = .lightMode
-            case .lightMode:
-                Current.selectedTheme.mode = .darkMode
-            }
-            UserDefaults.standard.set(Current.selectedTheme.mode.rawValue, forKey: "themeMode")
+            Current.colorSet.toggle()
+            Current.colorSet.save()
             updateInterface()
         }
     }
@@ -42,30 +37,30 @@ class BandwidthViewController: UIViewController {
         UIView.transition(with: self.view, duration: 0.5, options: .beginFromCurrentState, animations: {
 
         // set navigation bar
-        self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor\(Current.colorSet.suffix())")
-        self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")!]
-        
-        
+            self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+            self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")!]
+            
+            
             // set tab bar
-        self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor\(Current.colorSet.suffix())")
-        self.tabBarController?.tabBar.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
+            self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+            self.tabBarController?.tabBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
             
-        self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarUnselectedTextColor")
+            self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarUnselectedTextColor")
             
-        // update theme mode switch button
-        switch Current.selectedTheme.mode {
-        case .darkMode:
-            self.themeModeButton.image = UIImage(named: "lightModeIcon")
-        case .lightMode:
-            self.themeModeButton.image = UIImage(named: "darkModeIcon")
-        }
+            // update theme mode switch button
+            switch Current.colorSet.mode {
+            case .dark:
+                self.themeModeButton.image = UIImage(named: "lightModeIcon")
+            case .light:
+                self.themeModeButton.image = UIImage(named: "darkModeIcon")
+            }
         
         // set the tableview background color (behind the cells)
-        self.tableView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor\(Current.colorSet.suffix())")
+        self.tableView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
         
         // set the separator color to the same as the background
-        self.tableView.separatorColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor\(Current.colorSet.suffix())")
+        self.tableView.separatorColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
             
         }, completion: nil)
         
@@ -140,37 +135,37 @@ extension BandwidthViewController: UITableViewDataSource {
         
         // current value
         cell.valueLabel!.text = Current.raman.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
-        cell.valueLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor\(Current.colorSet.suffix())")
+        cell.valueLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
 
         // parameter name
         cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
-        cell.dataLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelTextColor\(Current.colorSet.suffix())")
+        cell.dataLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelTextColor")
         
         // parameter units
         cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
-        cell.unitsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor\(Current.colorSet.suffix())")
+        cell.unitsLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
         
         // parameter units exponent
         cell.exponentsLabel.text = Constants.bwEpx[indexPath.row]
-        cell.exponentsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor\(Current.colorSet.suffix())")
+        cell.exponentsLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
 
         // cell background color
-        cell.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellBackgroundColor\(Current.colorSet.suffix())")
+        cell.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
 
         // style view behind the value
         cell.valueLabelView.backgroundColor = UIColor.clear
 
         // style view behind cell's label
-        cell.labelView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelBackgroundColor\(Current.colorSet.suffix())")
+        cell.labelView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")
         
         // row icon
         cell.dataImageView.image = UIImage(named: "bw_\(indexPath.row)")
         cell.dataImageView.layer.cornerRadius = 8
-        cell.dataImageView.layer.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelBackgroundColor\(Current.colorSet.suffix())")?.cgColor
+        cell.dataImageView.layer.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")?.cgColor
 
         
         // style view behind cell's label
-        cell.labelView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellLabelBackgroundColor\(Current.colorSet.suffix())")
+        cell.labelView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")
 
         // set images on both sides of cell depending on available data in recents
         switch indexPath.row {
@@ -290,7 +285,7 @@ extension BandwidthViewController {
             completionHandler(true)
         }
         if let Current = Current {
-            previous.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())swipeActionColor")
+            previous.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())swipeActionColor")
         }
         let config = UISwipeActionsConfiguration(actions: [previous])
         config.performsFirstActionWithFullSwipe = true
@@ -336,7 +331,7 @@ extension BandwidthViewController {
             completionHandler(true)
         }
         if let Current = Current {
-            next.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())swipeActionColor")
+            next.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())swipeActionColor")
         }
         let config = UISwipeActionsConfiguration(actions: [next])
         config.performsFirstActionWithFullSwipe = true

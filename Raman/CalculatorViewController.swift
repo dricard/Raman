@@ -360,18 +360,18 @@ class CalculatorViewController: UIViewController {
             parameterTitleLabel.font = UIFont.italicSystemFont(ofSize: fontSizes[1])
             unitsTitleLabel.font = UIFont.italicSystemFont(ofSize: fontSizes[1])
             
-            self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor\(Current.colorSet.suffix())")
-            self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")!]
+            self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+            self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")!]
             
             // set tab bar
-            self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor\(Current.colorSet.suffix())")
-            self.tabBarController?.tabBar.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
-            self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
+            self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+            self.tabBarController?.tabBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+            self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
             
-            let buttonsColors = UIColor(named: "\(Current.selectedTheme.prefix())tableViewBackgroundColor")
-            let displayColor = UIColor(named: "\(Current.selectedTheme.prefix())displayBackgroundColor")
-            let displayTextColor = UIColor(named: "\(Current.selectedTheme.prefix())displayTextColor")
+            let buttonsColors = UIColor(named: "\(Current.colorSet.prefix())tableViewBackgroundColor")
+            let displayColor = UIColor(named: "\(Current.colorSet.prefix())displayBackgroundColor")
+            let displayTextColor = UIColor(named: "\(Current.colorSet.prefix())displayTextColor")
             let displayTitleColor = displayTextColor?.withAlphaComponent(0.7)
             
             // set display
@@ -387,52 +387,52 @@ class CalculatorViewController: UIViewController {
             
             // set buttons
             digitButton0.backgroundColor = buttonsColors
-            digitButton0.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            digitButton0.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             digitButton0.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton9.backgroundColor = buttonsColors
-            digitButton9.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            digitButton9.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             digitButton9.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton8.backgroundColor = buttonsColors
-            digitButton8.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            digitButton8.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             digitButton8.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton7.backgroundColor = buttonsColors
-            digitButton7.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            digitButton7.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             digitButton7.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton6.backgroundColor = buttonsColors
-            digitButton6.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            digitButton6.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             digitButton6.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton5.backgroundColor = buttonsColors
-            digitButton5.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            digitButton5.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             digitButton5.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton4.backgroundColor = buttonsColors
-            digitButton4.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            digitButton4.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             digitButton4.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton3.backgroundColor = buttonsColors
-            digitButton3.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            digitButton3.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             digitButton3.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton2.backgroundColor = buttonsColors
-            digitButton2.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            digitButton2.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             digitButton2.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButton1.backgroundColor = buttonsColors
-            digitButton1.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            digitButton1.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             digitButton1.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButtonPeriod.backgroundColor = buttonsColors
-            digitButtonPeriod.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            digitButtonPeriod.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             digitButtonPeriod.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             digitButtonBackspace.backgroundColor = buttonsColors
-            digitButtonBackspace.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            digitButtonBackspace.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             digitButtonBackspace.titleLabel?.font = UIFont.systemFont(ofSize: fontSizes[4])
             operationButtonEqual.backgroundColor = buttonsColors
-            operationButtonEqual.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            operationButtonEqual.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             operationButtonEqual.titleLabel?.font = UIFont.systemFont(ofSize: fontSizes[4])
             operationButtonPlus.backgroundColor = buttonsColors
-            operationButtonPlus.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            operationButtonPlus.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             operationButtonPlus.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             operationButtonMinus.backgroundColor = buttonsColors
-            operationButtonMinus.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            operationButtonMinus.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             operationButtonMinus.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSizes[4])
             tooltipButton.backgroundColor = buttonsColors
-            tooltipButton.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+            tooltipButton.tintColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             tooltipButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizes[4])
         }
     }
