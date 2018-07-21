@@ -376,7 +376,7 @@ class CalculatorViewController: UIViewController {
             self.tabBarController?.tabBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
             self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
             
-            let buttonsColors = UIColor(named: "\(Current.colorSet.prefix())tableViewBackgroundColor")
+            let buttonsColors = UIColor(named: "\(Current.colorSet.prefix())displayBackgroundColor")
             let displayColor = UIColor(named: "\(Current.colorSet.prefix())displayBackgroundColor")
             let displayTextColor = UIColor(named: "\(Current.colorSet.prefix())displayTextColor")
             let displayTitleColor = displayTextColor?.withAlphaComponent(0.7)

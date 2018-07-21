@@ -71,6 +71,15 @@ class RecentsViewController: UIViewController {
         tableView.reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
+
+    // MARK: - actions
     
     struct TheCell {
         static var snapShot : UIView? = nil

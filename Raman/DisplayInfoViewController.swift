@@ -21,7 +21,12 @@ class DisplayInfoViewController: UIViewController {
     @IBOutlet weak var helpButton: UIButton!
     @IBOutlet weak var supportButton: UIButton!
     @IBOutlet weak var doneButton: UIBarButtonItem!
-
+    @IBOutlet weak var lightThemeLabel: UILabel!
+    @IBOutlet weak var darkThemeLabel: UILabel!
+    @IBOutlet weak var lightSwitchLabel: UILabel!
+    @IBOutlet weak var darkSwitchLabel: UILabel!
+    @IBOutlet weak var themeSwitch: UISwitch!
+    
     @IBOutlet weak var light_set_0_button: UIButton!
     @IBOutlet weak var light_set_1_button: UIButton!
     @IBOutlet weak var light_set_2_button: UIButton!
@@ -41,41 +46,71 @@ class DisplayInfoViewController: UIViewController {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set0
         updateDisplay()
-        changeDisplayColors()
+        changeDisplayColors(for: .light, animated: true)
     }
     @IBAction func light_set_1_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set1
         updateDisplay()
-        changeDisplayColors()
+        changeDisplayColors(for: .light, animated: true)
     }
     @IBAction func light_set_2_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set2
         updateDisplay()
+        changeDisplayColors(for: .light, animated: true)
     }
     @IBAction func light_set_3_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set3
         updateDisplay()
+        changeDisplayColors(for: .light, animated: true)
     }
     @IBAction func light_set_4_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set4
         updateDisplay()
+        changeDisplayColors(for: .light, animated: true)
     }
     
     @IBAction func dark_set_0_buttonPressed(_ sender: Any) {
-    }
+        guard let Current = Current else { return }
+        Current.colorSet.darkSet = .set0
+        updateDisplay()
+        changeDisplayColors(for: .dark, animated: true)
+  }
     @IBAction func dark_set_1_buttonPressed(_ sender: Any) {
+        guard let Current = Current else { return }
+        Current.colorSet.darkSet = .set1
+        updateDisplay()
+        changeDisplayColors(for: .dark, animated: true)
     }
     @IBAction func dark_set_2_buttonPressed(_ sender: Any) {
+        guard let Current = Current else { return }
+        Current.colorSet.darkSet = .set2
+        updateDisplay()
+        changeDisplayColors(for: .dark, animated: true)
     }
     @IBAction func dark_set_3_buttonPressed(_ sender: Any) {
+        guard let Current = Current else { return }
+        Current.colorSet.darkSet = .set3
+        updateDisplay()
+        changeDisplayColors(for: .dark, animated: true)
     }
     @IBAction func dark_set_4_buttonPressed(_ sender: Any) {
-    }
+        guard let Current = Current else { return }
+        Current.colorSet.darkSet = .set4
+        updateDisplay()
+        changeDisplayColors(for: .dark, animated: true)
+   }
     
+    @IBAction func themeSwitchPressed(_ sender: Any) {
+        if let Current = Current {
+            Current.colorSet.toggle()
+            Current.colorSet.save()
+            changeDisplayColors(for: Current.colorSet.mode, animated: true)
+        }
+    }
     
     // MARK: - Life Cycle
     
@@ -86,9 +121,6 @@ class DisplayInfoViewController: UIViewController {
         supportButton.setTitle(.supportButton, for: .normal)
         doneButton.title = .doneButton
         
-        if let Current = Current {
-            versionNumberLabel.text = "v. " + Current.version.release + " (" + Current.version.build + ")"
-        }
         let today = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy"
@@ -98,6 +130,12 @@ class DisplayInfoViewController: UIViewController {
         view.backgroundColor = UIColor(red:1.00, green:0.99, blue:0.94, alpha:1.00)
         
         updateDisplay()
+        if let Current = Current {
+            versionNumberLabel.text = "v. " + Current.version.release + " (" + Current.version.build + ")"
+            changeDisplayColors(for: Current.colorSet.mode , animated: false)
+            themeSwitch.isOn = Current.colorSet.mode == .dark
+        }
+
      }
     
     // MARK: - User actions
@@ -130,18 +168,39 @@ class DisplayInfoViewController: UIViewController {
     
     // MARK: - Utilities
     
-    func changeDisplayColors() {
-        guard let Current = Current else { return }
-        
-        UIView.transition(with: self.view, duration: 0.5, options: .beginFromCurrentState, animations: {
-            
+    func changeDisplayColors(for currentMode:  ThemeModes,animated: Bool) {
+        guard let Current = Current,  currentMode == Current.colorSet.mode else { return }
+        print("yes")
+        if animated {
+            UIView.transition(with: self.view, duration: 0.5, options: .beginFromCurrentState, animations: {
+                
+                // set navigation bar
+                self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+                self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+                self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")!]
+                self.view.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
+                self.darkThemeLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+                self.lightThemeLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+                self.lightSwitchLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+                self.darkSwitchLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+                self.helpButton.titleLabel?.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+                self.supportButton.titleLabel?.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+                self.themeSwitch.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
+            }, completion: nil)
+        } else {
             // set navigation bar
-            self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
-            self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")!]
-            self.view.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
-        }, completion: nil)
-        
+            navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+            navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")!]
+            view.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
+            darkThemeLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+            lightThemeLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+            lightSwitchLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+            darkSwitchLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+            helpButton.titleLabel?.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+            supportButton.titleLabel?.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+            themeSwitch.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
+        }
     }
     
     func updateDisplay() {
@@ -150,109 +209,208 @@ class DisplayInfoViewController: UIViewController {
         
         light_set_0_button.backgroundColor = UIColor(named: "0_light_navBarTintColor")
         light_set_1_button.backgroundColor = UIColor(named: "1_light_navBarTintColor")
+        light_set_2_button.backgroundColor = UIColor(named: "2_light_navBarTintColor")
 
         switch Current.colorSet.lightSet.rawValue {
         case 0:
             light_set_0_button.layer.borderColor = UIColor.black.cgColor
-            light_set_0_button.layer.borderWidth = 4
+            light_set_0_button.layer.borderWidth = 5
             light_set_0_button.layer.cornerRadius = 8
-            light_set_1_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_1_button.layer.borderWidth = 0
+            light_set_1_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_1_button.layer.borderWidth = 3
             light_set_1_button.layer.cornerRadius = 0
-            light_set_2_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_2_button.layer.borderWidth = 0
+            light_set_2_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_2_button.layer.borderWidth = 3
             light_set_2_button.layer.cornerRadius = 0
-            light_set_3_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_3_button.layer.borderWidth = 0
+            light_set_3_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_3_button.layer.borderWidth = 3
             light_set_3_button.layer.cornerRadius = 0
-            light_set_4_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_4_button.layer.borderWidth = 0
+            light_set_4_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_4_button.layer.borderWidth = 3
             light_set_4_button.layer.cornerRadius = 0
         case 1:
-            light_set_0_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_0_button.layer.borderWidth = 0
+            light_set_0_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_0_button.layer.borderWidth = 3
             light_set_0_button.layer.cornerRadius = 0
             light_set_1_button.layer.borderColor = UIColor.black.cgColor
-            light_set_1_button.layer.borderWidth = 4
+            light_set_1_button.layer.borderWidth = 5
             light_set_1_button.layer.cornerRadius = 8
-            light_set_2_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_2_button.layer.borderWidth = 0
+            light_set_2_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_2_button.layer.borderWidth = 3
             light_set_2_button.layer.cornerRadius = 0
-            light_set_3_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_3_button.layer.borderWidth = 0
+            light_set_3_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_3_button.layer.borderWidth = 3
             light_set_3_button.layer.cornerRadius = 0
-            light_set_4_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_4_button.layer.borderWidth = 0
+            light_set_4_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_4_button.layer.borderWidth = 3
             light_set_4_button.layer.cornerRadius = 0
         case 2:
-            light_set_0_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_0_button.layer.borderWidth = 0
+            light_set_0_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_0_button.layer.borderWidth = 3
             light_set_0_button.layer.cornerRadius = 0
-            light_set_1_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_1_button.layer.borderWidth = 0
+            light_set_1_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_1_button.layer.borderWidth = 3
             light_set_1_button.layer.cornerRadius = 0
             light_set_2_button.layer.borderColor = UIColor.black.cgColor
-            light_set_2_button.layer.borderWidth = 4
+            light_set_2_button.layer.borderWidth = 5
             light_set_2_button.layer.cornerRadius = 8
-            light_set_3_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_3_button.layer.borderWidth = 0
+            light_set_3_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_3_button.layer.borderWidth = 3
             light_set_3_button.layer.cornerRadius = 0
-            light_set_4_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_4_button.layer.borderWidth = 0
+            light_set_4_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_4_button.layer.borderWidth = 3
             light_set_4_button.layer.cornerRadius = 0
         case 3:
-            light_set_0_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_0_button.layer.borderWidth = 0
+            light_set_0_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_0_button.layer.borderWidth = 3
             light_set_0_button.layer.cornerRadius = 0
-            light_set_1_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_1_button.layer.borderWidth = 0
+            light_set_1_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_1_button.layer.borderWidth = 3
             light_set_1_button.layer.cornerRadius = 0
-            light_set_2_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_2_button.layer.borderWidth = 0
+            light_set_2_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_2_button.layer.borderWidth = 3
             light_set_2_button.layer.cornerRadius = 0
             light_set_3_button.layer.borderColor = UIColor.black.cgColor
-            light_set_3_button.layer.borderWidth = 4
+            light_set_3_button.layer.borderWidth = 5
             light_set_3_button.layer.cornerRadius = 8
-            light_set_4_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_4_button.layer.borderWidth = 0
+            light_set_4_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_4_button.layer.borderWidth = 3
             light_set_4_button.layer.cornerRadius = 0
         case 4:
-            light_set_0_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_0_button.layer.borderWidth = 0
+            light_set_0_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_0_button.layer.borderWidth = 3
             light_set_0_button.layer.cornerRadius = 0
-            light_set_1_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_1_button.layer.borderWidth = 0
+            light_set_1_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_1_button.layer.borderWidth = 3
             light_set_1_button.layer.cornerRadius = 0
-            light_set_2_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_2_button.layer.borderWidth = 0
+            light_set_2_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_2_button.layer.borderWidth = 3
             light_set_2_button.layer.cornerRadius = 0
-            light_set_3_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_3_button.layer.borderWidth = 0
+            light_set_3_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_3_button.layer.borderWidth = 3
             light_set_3_button.layer.cornerRadius = 0
             light_set_4_button.layer.borderColor = UIColor.black.cgColor
-            light_set_4_button.layer.borderWidth = 4
+            light_set_4_button.layer.borderWidth = 5
             light_set_4_button.layer.cornerRadius = 8
         default:
             light_set_0_button.layer.borderColor = UIColor.black.cgColor
-            light_set_0_button.layer.borderWidth = 4
+            light_set_0_button.layer.borderWidth = 5
             light_set_0_button.layer.cornerRadius = 8
-            light_set_1_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_1_button.layer.borderWidth = 0
+            light_set_1_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_1_button.layer.borderWidth = 3
             light_set_1_button.layer.cornerRadius = 0
-            light_set_2_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_2_button.layer.borderWidth = 0
+            light_set_2_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_2_button.layer.borderWidth = 3
             light_set_2_button.layer.cornerRadius = 0
-            light_set_3_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_3_button.layer.borderWidth = 0
+            light_set_3_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_3_button.layer.borderWidth = 3
             light_set_3_button.layer.cornerRadius = 0
-            light_set_4_button.layer.borderColor = UIColor.clear.cgColor
-            light_set_4_button.layer.borderWidth = 0
+            light_set_4_button.layer.borderColor = UIColor.darkGray.cgColor
+            light_set_4_button.layer.borderWidth = 3
             light_set_4_button.layer.cornerRadius = 0
        }
+        
         dark_set_0_button.backgroundColor = UIColor(named: "0_dark_navBarTintColor")
-        dark_set_0_button.layer.borderColor = UIColor.lightGray.cgColor
-        dark_set_0_button.layer.borderWidth = 4
-        dark_set_0_button.layer.cornerRadius = 8
+        dark_set_1_button.backgroundColor = UIColor(named: "1_dark_navBarTintColor")
+
+        switch Current.colorSet.darkSet.rawValue {
+        case 0:
+            dark_set_0_button.layer.borderColor = UIColor.lightGray.cgColor
+            dark_set_0_button.layer.borderWidth = 4
+            dark_set_0_button.layer.cornerRadius = 8
+            dark_set_1_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_1_button.layer.borderWidth = 0
+            dark_set_1_button.layer.cornerRadius = 0
+            dark_set_2_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_2_button.layer.borderWidth = 0
+            dark_set_2_button.layer.cornerRadius = 0
+            dark_set_3_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_3_button.layer.borderWidth = 0
+            dark_set_3_button.layer.cornerRadius = 0
+            dark_set_4_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_4_button.layer.borderWidth = 0
+            dark_set_4_button.layer.cornerRadius = 0
+        case 1:
+            dark_set_0_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_0_button.layer.borderWidth = 0
+            dark_set_0_button.layer.cornerRadius = 0
+            dark_set_1_button.layer.borderColor = UIColor.lightGray.cgColor
+            dark_set_1_button.layer.borderWidth = 4
+            dark_set_1_button.layer.cornerRadius = 8
+            dark_set_2_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_2_button.layer.borderWidth = 0
+            dark_set_2_button.layer.cornerRadius = 0
+            dark_set_3_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_3_button.layer.borderWidth = 0
+            dark_set_3_button.layer.cornerRadius = 0
+            dark_set_4_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_4_button.layer.borderWidth = 0
+            dark_set_4_button.layer.cornerRadius = 0
+        case 2:
+            dark_set_0_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_0_button.layer.borderWidth = 0
+            dark_set_0_button.layer.cornerRadius = 0
+            dark_set_1_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_1_button.layer.borderWidth = 0
+            dark_set_1_button.layer.cornerRadius = 0
+            dark_set_2_button.layer.borderColor = UIColor.lightGray.cgColor
+            dark_set_2_button.layer.borderWidth = 4
+            dark_set_2_button.layer.cornerRadius = 8
+            dark_set_3_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_3_button.layer.borderWidth = 0
+            dark_set_3_button.layer.cornerRadius = 0
+            dark_set_4_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_4_button.layer.borderWidth = 0
+            dark_set_4_button.layer.cornerRadius = 0
+        case 3:
+            dark_set_0_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_0_button.layer.borderWidth = 0
+            dark_set_0_button.layer.cornerRadius = 0
+            dark_set_1_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_1_button.layer.borderWidth = 0
+            dark_set_1_button.layer.cornerRadius = 0
+            dark_set_2_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_2_button.layer.borderWidth = 0
+            dark_set_2_button.layer.cornerRadius = 0
+            dark_set_3_button.layer.borderColor = UIColor.lightGray.cgColor
+            dark_set_3_button.layer.borderWidth = 4
+            dark_set_3_button.layer.cornerRadius = 8
+            dark_set_4_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_4_button.layer.borderWidth = 0
+            dark_set_4_button.layer.cornerRadius = 0
+        case 4:
+            dark_set_0_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_0_button.layer.borderWidth = 0
+            dark_set_0_button.layer.cornerRadius = 0
+            dark_set_1_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_1_button.layer.borderWidth = 0
+            dark_set_1_button.layer.cornerRadius = 0
+            dark_set_2_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_2_button.layer.borderWidth = 0
+            dark_set_2_button.layer.cornerRadius = 0
+            dark_set_3_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_3_button.layer.borderWidth = 0
+            dark_set_3_button.layer.cornerRadius = 0
+            dark_set_4_button.layer.borderColor = UIColor.lightGray.cgColor
+            dark_set_4_button.layer.borderWidth = 4
+            dark_set_4_button.layer.cornerRadius = 8
+        default:
+            dark_set_0_button.layer.borderColor = UIColor.lightGray.cgColor
+            dark_set_0_button.layer.borderWidth = 4
+            dark_set_0_button.layer.cornerRadius = 8
+            dark_set_1_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_1_button.layer.borderWidth = 0
+            dark_set_1_button.layer.cornerRadius = 0
+            dark_set_2_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_2_button.layer.borderWidth = 0
+            dark_set_2_button.layer.cornerRadius = 0
+            dark_set_3_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_3_button.layer.borderWidth = 0
+            dark_set_3_button.layer.cornerRadius = 0
+            dark_set_4_button.layer.borderColor = UIColor.clear.cgColor
+            dark_set_4_button.layer.borderWidth = 0
+            dark_set_4_button.layer.cornerRadius = 0
+        }
 
     }
 }
