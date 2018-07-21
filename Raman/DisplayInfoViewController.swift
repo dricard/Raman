@@ -41,11 +41,13 @@ class DisplayInfoViewController: UIViewController {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set0
         updateDisplay()
+        changeDisplayColors()
     }
     @IBAction func light_set_1_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set1
         updateDisplay()
+        changeDisplayColors()
     }
     @IBAction func light_set_2_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
@@ -128,12 +130,27 @@ class DisplayInfoViewController: UIViewController {
     
     // MARK: - Utilities
     
+    func changeDisplayColors() {
+        guard let Current = Current else { return }
+        
+        UIView.transition(with: self.view, duration: 0.5, options: .beginFromCurrentState, animations: {
+            
+            // set navigation bar
+            self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+            self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")!]
+            self.view.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
+        }, completion: nil)
+        
+    }
+    
     func updateDisplay() {
         
         guard let Current = Current else { return }
         
         light_set_0_button.backgroundColor = UIColor(named: "0_light_navBarTintColor")
-        
+        light_set_1_button.backgroundColor = UIColor(named: "1_light_navBarTintColor")
+
         switch Current.colorSet.lightSet.rawValue {
         case 0:
             light_set_0_button.layer.borderColor = UIColor.black.cgColor

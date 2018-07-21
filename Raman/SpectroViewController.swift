@@ -62,7 +62,7 @@ class SpectroViewController: UIViewController {
             self.tableView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
             
             // set the separator color to the same as the background
-            self.tableView.separatorColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+            self.tableView.separatorColor = UIColor(named: "\(Current.colorSet.prefix())tableViewSeparatorColor")
             
 
         }, completion: nil)
