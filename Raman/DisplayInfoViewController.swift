@@ -45,30 +45,35 @@ class DisplayInfoViewController: UIViewController {
     @IBAction func light_set_0_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set0
+        Current.colorSet.save()
         updateDisplay()
         changeDisplayColors(for: .light, animated: true)
     }
     @IBAction func light_set_1_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set1
+        Current.colorSet.save()
         updateDisplay()
         changeDisplayColors(for: .light, animated: true)
     }
     @IBAction func light_set_2_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set2
+        Current.colorSet.save()
         updateDisplay()
         changeDisplayColors(for: .light, animated: true)
     }
     @IBAction func light_set_3_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set3
+        Current.colorSet.save()
         updateDisplay()
         changeDisplayColors(for: .light, animated: true)
     }
     @IBAction func light_set_4_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set4
+        Current.colorSet.save()
         updateDisplay()
         changeDisplayColors(for: .light, animated: true)
     }
@@ -76,30 +81,35 @@ class DisplayInfoViewController: UIViewController {
     @IBAction func dark_set_0_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.darkSet = .set0
+        Current.colorSet.save()
         updateDisplay()
         changeDisplayColors(for: .dark, animated: true)
   }
     @IBAction func dark_set_1_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.darkSet = .set1
+        Current.colorSet.save()
         updateDisplay()
         changeDisplayColors(for: .dark, animated: true)
     }
     @IBAction func dark_set_2_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.darkSet = .set2
+        Current.colorSet.save()
         updateDisplay()
         changeDisplayColors(for: .dark, animated: true)
     }
     @IBAction func dark_set_3_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.darkSet = .set3
+        Current.colorSet.save()
         updateDisplay()
         changeDisplayColors(for: .dark, animated: true)
     }
     @IBAction func dark_set_4_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.darkSet = .set4
+        Current.colorSet.save()
         updateDisplay()
         changeDisplayColors(for: .dark, animated: true)
    }
@@ -312,7 +322,8 @@ class DisplayInfoViewController: UIViewController {
         
         dark_set_0_button.backgroundColor = UIColor(named: "0_dark_navBarTintColor")
         dark_set_1_button.backgroundColor = UIColor(named: "1_dark_navBarTintColor")
-
+        dark_set_2_button.backgroundColor = UIColor(named: "2_dark_navBarTintColor")
+        
         switch Current.colorSet.darkSet.rawValue {
         case 0:
             dark_set_0_button.layer.borderColor = UIColor.lightGray.cgColor
