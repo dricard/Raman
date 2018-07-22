@@ -170,7 +170,7 @@ class DisplayInfoViewController: UIViewController {
     
     func changeDisplayColors(for currentMode:  ThemeModes,animated: Bool) {
         guard let Current = Current,  currentMode == Current.colorSet.mode else { return }
-        print("yes")
+
         if animated {
             UIView.transition(with: self.view, duration: 0.5, options: .beginFromCurrentState, animations: {
                 
