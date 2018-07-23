@@ -10,6 +10,12 @@ import UIKit
 
 class Raman {
 
+    // Notifications
+    
+//    static let changedNotification = Notification.Name("RamanChanged")
+    
+    public static var ramanChangedNotification = Notification.Name.init("com.hexaedre.raman.ramanChangedNotification")
+
     // MARK: Constants
     
     let cInAir = 299709000
@@ -28,7 +34,7 @@ class Raman {
         case bandwidth
     }
     
-    // MARK: Computed properties
+    // MARK: - Computed properties
     
     var shiftInCm : Double {
         get {
@@ -42,6 +48,11 @@ class Raman {
         set {
             if pump != 0 && ( newValue < (1.0 / (0.0000001 * pump)) - 1.0 ) {
                 signal = 1.0 / ( 1.0 / pump - ( 0.0000001 * newValue ))
+                let userInfo: [AnyHashable:Any]? = [
+                    "changedValue": "shiftInCm",
+                    "rowsToUpdate": [1, 3, 4]
+                ]
+                NotificationCenter.default.post(name: Raman.ramanChangedNotification, object: self, userInfo: userInfo)
                 UserDefaults.standard.set(signal, forKey: "signal")
             } else {
                 let alternateValue : Double
@@ -69,6 +80,11 @@ class Raman {
         set {
             if pump != 0 && newValue > -1.0 * Double(cInAir) / pump {
                 signal = newValue * pow(pump, 2.0) / Double(cInAir) + pump
+                let userInfo: [AnyHashable:Any]? = [
+                    "changedValue": "shiftInGhz",
+                    "rowsToUpdate": [1, 2, 4]
+                ]
+                NotificationCenter.default.post(name: Raman.ramanChangedNotification, object: self, userInfo: userInfo)
                 UserDefaults.standard.set(signal, forKey: "signal")
             } else {
                 let alternateValue : Double
@@ -96,6 +112,11 @@ class Raman {
         set {
             if pump != 0 && newValue != 0 && newValue < (1240600.0 / pump) {
                 signal = 1240600.0 / (1240600.0 / pump - newValue)
+                let userInfo: [AnyHashable:Any]? = [
+                    "changedValue": "shiftInMev",
+                    "rowsToUpdate": [1, 2, 3]
+                ]
+                NotificationCenter.default.post(name: Raman.ramanChangedNotification, object: self, userInfo: userInfo)
                 UserDefaults.standard.set(signal, forKey: "signal")
             } else {
                 let alternateValue = (1240600.0 / pump) - 1
@@ -164,7 +185,7 @@ class Raman {
         self.bwInCm = bwInCm
     }
     
-    // MARK: Methods
+    // MARK: - Methods
     
     func lamdaS(_ lambda: Double, bandwidth: Double) -> Double {
         if lambda != 0 {
@@ -282,9 +303,19 @@ class Raman {
             switch forDataSource {
             case Constants.excitationIndex:
                 pump = value
+                let userInfo: [AnyHashable:Any]? = [
+                    "changedValue": "excitation",
+                    "rowsToUpdate": [2, 3, 4]
+                ]
+                NotificationCenter.default.post(name: Raman.ramanChangedNotification, object: self, userInfo: userInfo)
                 UserDefaults.standard.set(pump, forKey: "pump")
             case Constants.signalIndex:
                 signal = value
+                let userInfo: [AnyHashable:Any]? = [
+                    "changedValue": "signal",
+                    "rowsToUpdate": [2, 3, 4]
+                ]
+                NotificationCenter.default.post(name: Raman.ramanChangedNotification, object: self, userInfo: userInfo)
                 UserDefaults.standard.set(signal, forKey: "signal")
             case Constants.shiftCmIndex:
                 shiftInCm = value
