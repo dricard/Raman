@@ -14,7 +14,8 @@ class Raman {
     
 //    static let changedNotification = Notification.Name("RamanChanged")
     
-    public static var ramanChangedNotification = Notification.Name.init("com.hexaedre.raman.ramanChangedNotification")
+    public static var spectroChangedNotification = Notification.Name.init("com.hexaedre.raman.spectroChangedNotification")
+    public static var bandwidthChangedNotification = Notification.Name.init("com.hexaedre.raman.bandwidthChangedNotification")
 
     // MARK: Constants
     
@@ -44,7 +45,7 @@ class Raman {
                     Constants.shiftmeVIndex
                 ]
             ]
-            NotificationCenter.default.post(name: Raman.ramanChangedNotification, object: self, userInfo: userInfo)
+            NotificationCenter.default.post(name: Raman.spectroChangedNotification, object: self, userInfo: userInfo)
             UserDefaults.standard.set(_signal, forKey: Constants.keyForSignal)
 
         }
@@ -64,7 +65,7 @@ class Raman {
                     Constants.shiftmeVIndex
                 ]
             ]
-            NotificationCenter.default.post(name: Raman.ramanChangedNotification, object: self, userInfo: userInfo)
+            NotificationCenter.default.post(name: Raman.spectroChangedNotification, object: self, userInfo: userInfo)
             UserDefaults.standard.set(_pump, forKey: Constants.keyForPump)
         }
     }
@@ -82,7 +83,7 @@ class Raman {
                     Constants.bwNmIndex
                 ]
             ]
-            NotificationCenter.default.post(name: Raman.ramanChangedNotification, object: self, userInfo: userInfo)
+            NotificationCenter.default.post(name: Raman.bandwidthChangedNotification, object: self, userInfo: userInfo)
             UserDefaults.standard.set(bwInCm, forKey: Constants.keyForBwInCm)
         }
     }
@@ -101,7 +102,7 @@ class Raman {
                     Constants.bwNmIndex
                 ]
             ]
-            NotificationCenter.default.post(name: Raman.ramanChangedNotification, object: self, userInfo: userInfo)
+            NotificationCenter.default.post(name: Raman.bandwidthChangedNotification, object: self, userInfo: userInfo)
             UserDefaults.standard.set(bwLambda, forKey: Constants.keyForBwLambda)
         }
     }

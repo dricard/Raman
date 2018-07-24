@@ -39,7 +39,6 @@ class DataCell: UITableViewCell {
         layoutMargins = UIEdgeInsets.zero
         
         // style view behind cell's label
-        print(labelView.bounds.height)
         labelView.layer.cornerRadius = labelView.bounds.height / 2
                 
     }

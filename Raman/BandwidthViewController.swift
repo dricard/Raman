@@ -68,10 +68,13 @@ class BandwidthViewController: UIViewController {
         tableView.reloadData()
     }
     
-    // MARK: Lyfe Cycle
+    // - MARK: Lyfe Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // register observer for value updates from Model
+        NotificationCenter.default.addObserver(self, selector: #selector(updateParameter), name: Raman.bandwidthChangedNotification, object: nil)
 
         // 3D touch
         registerForPreviewing(with: self, sourceView: view)
@@ -113,6 +116,29 @@ class BandwidthViewController: UIViewController {
         updateInterface()
     }
     
+    // MARK: - Updates to parameters
+    
+    @objc func updateParameter(_ notification: NSNotification) {
+        // receveived a notification of changed value
+        if let userInfo = notification.userInfo {
+            os_log("Received notification in bandwidth with userInfo: %s", log: Log.general, type: .info, "\(userInfo)")
+            var indexPaths = [IndexPath]()
+            if let rowsToUpdate = userInfo["rowsToUpdate"] as? [Int] {
+                for row in rowsToUpdate {
+                    indexPaths.append(IndexPath(row: row, section: 0))
+                }
+            }
+            DispatchQueue.main.async {
+                UIView.transition(with: self.view, duration: 0.5, options: .beginFromCurrentState, animations: {
+                    self.tableView.reloadRows(at: indexPaths, with: UITableViewRowAnimation.left)
+                    
+                }, completion: nil)
+            }
+        } else {
+            os_log("Received notification without userInfo in bandwidth", log: Log.general, type: .error)
+        }
+    }
+
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -256,7 +282,6 @@ extension BandwidthViewController {
                     if Current.signals.moveLeft() {
                         if let newValue = Current.signals.current().value {
                             Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
-                            tableView.reloadData()
                         }
                     }
                 case 1, 2, 3:
@@ -274,7 +299,6 @@ extension BandwidthViewController {
                             default:
                                 os_log("Wrong type for bandwidth in lead swipe action", log: Log.general, type: .error)
                             }
-                            tableView.reloadData()
                         }
                     }
                 default:
@@ -302,7 +326,6 @@ extension BandwidthViewController {
                     if Current.signals.moveRight() {
                         if let newValue = Current.signals.current().value {
                             Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
-                            tableView.reloadData()
                         }
                     }
                 case 1, 2, 3:
@@ -320,7 +343,6 @@ extension BandwidthViewController {
                             default:
                                 os_log("Wrong type for bandwidth in trainling swipe action", log: Log.general, type: .error)
                             }
-                            tableView.reloadData()
                         }
                     }
                 default:

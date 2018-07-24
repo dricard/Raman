@@ -77,7 +77,7 @@ class SpectroViewController: UIViewController {
         super.viewDidLoad()
         
         // register observer for value updates from Model
-        NotificationCenter.default.addObserver(self, selector: #selector(updateParameter), name: Raman.ramanChangedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateParameter), name: Raman.spectroChangedNotification, object: nil)
         
         // 3D touch
         registerForPreviewing(with: self, sourceView: view)
@@ -114,7 +114,7 @@ class SpectroViewController: UIViewController {
     @objc func updateParameter(_ notification: NSNotification) {
         // receveived a notification of changed value
         if let userInfo = notification.userInfo {
-            print("Received notification with userInfo: \(userInfo)")
+            os_log("Received notification in spectro with userInfo: %s", log: Log.general, type: .info, "\(userInfo)")
             var indexPaths = [IndexPath]()
             if let rowsToUpdate = userInfo["rowsToUpdate"] as? [Int] {
                 for row in rowsToUpdate {
@@ -127,8 +127,9 @@ class SpectroViewController: UIViewController {
                     
                 }, completion: nil)
             }
+            
         } else {
-            print("Received notification without userInfo")
+            os_log("Received notification without userInfo in spectro", log: Log.general, type: .error)
         }
     }
 
@@ -284,14 +285,12 @@ extension SpectroViewController {
                     if Current.excitations.moveLeft() {
                         if let newValue = Current.excitations.current().value {
                             Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
-//                            tableView.reloadData()
                         }
                     }
                 case 1:
                     if Current.signals.moveLeft() {
                         if let newValue = Current.signals.current().value {
                             Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
-//                            tableView.reloadData()
                         }
                     }
                 case 2, 3, 4:
@@ -309,7 +308,6 @@ extension SpectroViewController {
                             default:
                                 os_log("Wrong type for shift in leading swipe action", log: Log.general, type: .error)
                             }
-//                            tableView.reloadData()
                         }
                     }
                 default:
@@ -337,14 +335,12 @@ extension SpectroViewController {
                     if Current.excitations.moveRight() {
                         if let newValue = Current.excitations.current().value {
                             Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
-//                            tableView.reloadData()
                         }
                     }
                 case 1:
                     if Current.signals.moveRight() {
                         if let newValue = Current.signals.current().value {
                             Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
-//                            tableView.reloadData()
                         }
                     }
                 case 2, 3, 4:
@@ -362,7 +358,6 @@ extension SpectroViewController {
                             default:
                                 os_log("Wrong type for shift in trainling swipe action", log: Log.general, type: .error)
                             }
-//                            tableView.reloadData()
                         }
                     }
                 default:
