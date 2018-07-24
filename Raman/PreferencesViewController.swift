@@ -119,8 +119,6 @@ class PreferencesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = .aboutRaman
-        helpButton.setTitle(.helpButton, for: .normal)
-        supportButton.setTitle(.supportButton, for: .normal)
         doneButton.title = .doneButton
         instructionsLabel.text = .preferencesInstructions
         creditsLabel.text = .credits
@@ -129,6 +127,9 @@ class PreferencesViewController: UIViewController {
         lightSwitchLabel.text = String.lightSwitchName
         darkSwitchLabel.text = String.darkSwitchName
         
+        helpButton.setTitle(.helpButton, for: .normal)
+        supportButton.setTitle(.supportButton, for: .normal)
+
         let today = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy"
@@ -191,9 +192,20 @@ class PreferencesViewController: UIViewController {
                 self.lightThemeLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
                 self.lightSwitchLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
                 self.darkSwitchLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
-                self.helpButton.titleLabel?.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
-                self.supportButton.titleLabel?.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
                 self.themeSwitch.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
+                
+                self.helpButton.titleLabel?.textColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+                self.helpButton.layer.backgroundColor = UIColor(named:"\(Current.colorSet.prefix())navBarTintColor")!.cgColor
+                self.helpButton.layer.cornerRadius = 8
+                self.helpButton.layer.borderWidth = 2
+                self.helpButton.layer.borderColor = UIColor(named: "\(Current.colorSet.prefix())swipeActionColor")!.cgColor
+
+                self.supportButton.titleLabel?.textColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+                self.supportButton.layer.backgroundColor = UIColor(named:"\(Current.colorSet.prefix())navBarTintColor")!.cgColor
+                self.supportButton.layer.cornerRadius = 8
+                self.supportButton.layer.borderWidth = 2
+                self.supportButton.layer.borderColor = UIColor(named: "\(Current.colorSet.prefix())swipeActionColor")!.cgColor
+
             }, completion: nil)
         } else {
             // set navigation bar
@@ -205,9 +217,20 @@ class PreferencesViewController: UIViewController {
             lightThemeLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             lightSwitchLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             darkSwitchLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
-            helpButton.titleLabel?.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
-            supportButton.titleLabel?.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             themeSwitch.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
+            // style buttons
+            helpButton.titleLabel?.textColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+            helpButton.layer.backgroundColor = UIColor(named:"\(Current.colorSet.prefix())navBarTintColor")!.cgColor
+            helpButton.layer.cornerRadius = 8
+            helpButton.layer.borderWidth = 2
+            helpButton.layer.borderColor = UIColor(named: "\(Current.colorSet.prefix())swipeActionColor")!.cgColor
+            
+            supportButton.titleLabel?.textColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+            supportButton.layer.backgroundColor = UIColor(named:"\(Current.colorSet.prefix())navBarTintColor")!.cgColor
+            supportButton.layer.cornerRadius = 8
+            supportButton.layer.borderWidth = 2
+            supportButton.layer.borderColor = UIColor(named: "\(Current.colorSet.prefix())swipeActionColor")!.cgColor
+
         }
     }
     

@@ -723,10 +723,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EsQ-Gp-rxA">
-                                <rect key="frame" x="283" y="561" width="82" height="30"/>
+                                <rect key="frame" x="215" y="531" width="150" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="lJI-QE-dBd"/>
-                                    <constraint firstAttribute="height" constant="30" id="rPF-W5-iBP"/>
+                                    <constraint firstAttribute="width" constant="150" id="lJI-QE-dBd"/>
+                                    <constraint firstAttribute="height" constant="60" id="rPF-W5-iBP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Reach out">
@@ -737,10 +737,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wb-Iw-9SU">
-                                <rect key="frame" x="10" y="561" width="77" height="30"/>
+                                <rect key="frame" x="10" y="531" width="150" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="DiE-vD-37w"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="xlp-up-gJk"/>
+                                    <constraint firstAttribute="height" constant="60" id="DiE-vD-37w"/>
+                                    <constraint firstAttribute="width" constant="150" id="xlp-up-gJk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="More Info">
