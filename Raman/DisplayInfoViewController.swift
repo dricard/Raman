@@ -1,5 +1,5 @@
 //
-//  DisplayInfoViewController.swift
+//  PreferencesViewController.swift
 //  BasicRaman
 //
 //  Created by Denis Ricard on 2015-05-12.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DisplayInfoViewController: UIViewController {
+class PreferencesViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -26,6 +26,8 @@ class DisplayInfoViewController: UIViewController {
     @IBOutlet weak var lightSwitchLabel: UILabel!
     @IBOutlet weak var darkSwitchLabel: UILabel!
     @IBOutlet weak var themeSwitch: UISwitch!
+    @IBOutlet weak var instructionsLabel: UILabel!
+    @IBOutlet weak var creditsLabel: UILabel!
     
     @IBOutlet weak var light_set_0_button: UIButton!
     @IBOutlet weak var light_set_1_button: UIButton!

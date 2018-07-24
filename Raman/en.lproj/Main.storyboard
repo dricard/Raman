@@ -701,10 +701,10 @@
             </objects>
             <point key="canvasLocation" x="4716" y="1289.5052473763119"/>
         </scene>
-        <!--Display Info View Controller-->
+        <!--Preferences View Controller-->
         <scene sceneID="and-ks-IMd">
             <objects>
-                <viewController id="bJE-JC-EHF" customClass="DisplayInfoViewController" customModule="Raman" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bJE-JC-EHF" customClass="PreferencesViewController" customModule="Raman" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2cf-zY-TgY"/>
                         <viewControllerLayoutGuide type="bottom" id="O9e-QU-Kkj"/>
@@ -1012,6 +1012,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="copyrightLabel" destination="4Zy-dp-xcR" id="55q-zV-2NM"/>
+                        <outlet property="creditsLabel" destination="Q9T-8b-Vgq" id="ffJ-1h-7tf"/>
                         <outlet property="darkSwitchLabel" destination="eja-JI-PpL" id="AjV-DA-tXE"/>
                         <outlet property="darkThemeLabel" destination="m5i-NY-EG1" id="9QF-xs-KKV"/>
                         <outlet property="dark_set_0_button" destination="gsq-SA-i9O" id="mX1-b7-1wE"/>
@@ -1021,6 +1022,7 @@
                         <outlet property="dark_set_4_button" destination="8ba-KT-oqI" id="PLi-Y1-2M2"/>
                         <outlet property="doneButton" destination="AXl-DV-TsA" id="gOS-jU-7sw"/>
                         <outlet property="helpButton" destination="7wb-Iw-9SU" id="UKT-co-6YR"/>
+                        <outlet property="instructionsLabel" destination="Rdq-QM-pcU" id="3PU-Eo-suY"/>
                         <outlet property="lightSwitchLabel" destination="xXE-eB-PHf" id="3mI-Sn-XcY"/>
                         <outlet property="lightThemeLabel" destination="nJH-JS-wuk" id="9Id-Ek-oAm"/>
                         <outlet property="light_set_0_button" destination="zBA-IO-pET" id="OgX-ax-YjV"/>
@@ -1432,7 +1434,7 @@
     <resources>
         <image name="bandwidth" width="25" height="25"/>
         <image name="bandwidth_unselected" width="25" height="25"/>
-        <image name="gear" width="34" height="34"/>
+        <image name="gear" width="24" height="24"/>
         <image name="logo_210" width="210" height="210"/>
         <image name="spectro" width="25" height="25"/>
         <image name="spectro_unselected" width="25" height="25"/>

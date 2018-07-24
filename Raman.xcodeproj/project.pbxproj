@@ -34,7 +34,7 @@
 		92011AE91B0D197300611519 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011AE81B0D197300611519 /* AppDelegate.swift */; };
 		92011AF01B0D197300611519 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92011AEF1B0D197300611519 /* Images.xcassets */; };
 		92011AF31B0D197300611519 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92011AF11B0D197300611519 /* LaunchScreen.xib */; };
-		92011B0B1B0D1A3100611519 /* DisplayInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B0A1B0D1A3100611519 /* DisplayInfoViewController.swift */; };
+		92011B0B1B0D1A3100611519 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B0A1B0D1A3100611519 /* PreferencesViewController.swift */; };
 		92011B0D1B0D1A4300611519 /* SpectroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B0C1B0D1A4300611519 /* SpectroViewController.swift */; };
 		92011B111B0D1B9300611519 /* Raman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B101B0D1B9300611519 /* Raman.swift */; };
 /* End PBXBuildFile section */
@@ -71,7 +71,7 @@
 		92011AE81B0D197300611519 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92011AEF1B0D197300611519 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		92011AF21B0D197300611519 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		92011B0A1B0D1A3100611519 /* DisplayInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayInfoViewController.swift; sourceTree = "<group>"; };
+		92011B0A1B0D1A3100611519 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		92011B0C1B0D1A4300611519 /* SpectroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectroViewController.swift; sourceTree = "<group>"; };
 		92011B101B0D1B9300611519 /* Raman.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Raman.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,7 +118,7 @@
 			children = (
 				92011B0C1B0D1A4300611519 /* SpectroViewController.swift */,
 				214414A91CB2B3F400A1958D /* BandwidthViewController.swift */,
-				92011B0A1B0D1A3100611519 /* DisplayInfoViewController.swift */,
+				92011B0A1B0D1A3100611519 /* PreferencesViewController.swift */,
 				211537691EF59CF90006AC64 /* CalculatorViewController.swift */,
 				21B537B91EF717AF00744E9A /* TooltipPopoverViewController.swift */,
 				21C25D5C20EE879A0082BB8E /* RecentsViewController.swift */,
@@ -281,7 +281,7 @@
 				21E17078210122A3004B9C14 /* Colors.swift in Sources */,
 				92011B111B0D1B9300611519 /* Raman.swift in Sources */,
 				214A4B7A20E2C683003835FC /* Version.swift in Sources */,
-				92011B0B1B0D1A3100611519 /* DisplayInfoViewController.swift in Sources */,
+				92011B0B1B0D1A3100611519 /* PreferencesViewController.swift in Sources */,
 				2115376C1EF5BC4F0006AC64 /* Calculator.swift in Sources */,
 				21B537BA1EF717AF00744E9A /* TooltipPopoverViewController.swift in Sources */,
 				92011B0D1B0D1A4300611519 /* SpectroViewController.swift in Sources */,
