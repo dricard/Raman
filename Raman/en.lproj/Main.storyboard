@@ -194,7 +194,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Raman" id="PFG-Qa-reW">
-                        <barButtonItem key="rightBarButtonItem" title="About" id="Lut-yW-VsL">
+                        <barButtonItem key="rightBarButtonItem" title="About" image="gear" id="Lut-yW-VsL">
                             <connections>
                                 <segue destination="LBY-a0-3HX" kind="popoverPresentation" identifier="showAboutSegue" popoverAnchorBarButtonItem="Lut-yW-VsL" id="csL-tJ-eTk">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -1411,7 +1411,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Raman" id="oaj-Mb-86v">
-                        <barButtonItem key="rightBarButtonItem" title="About" id="Nxc-Qc-jHY">
+                        <barButtonItem key="rightBarButtonItem" title="About" image="gear" id="Nxc-Qc-jHY">
                             <connections>
                                 <segue destination="LBY-a0-3HX" kind="popoverPresentation" popoverAnchorBarButtonItem="Nxc-Qc-jHY" id="stc-84-s8w">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -1432,11 +1432,12 @@
     <resources>
         <image name="bandwidth" width="25" height="25"/>
         <image name="bandwidth_unselected" width="25" height="25"/>
+        <image name="gear" width="34" height="34"/>
         <image name="logo_210" width="210" height="210"/>
         <image name="spectro" width="25" height="25"/>
         <image name="spectro_unselected" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="csL-tJ-eTk"/>
+        <segue reference="stc-84-s8w"/>
     </inferredMetricsTieBreakers>
 </document>
