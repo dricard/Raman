@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Current.shifts.isEmpty = false
         }
         if let value = Current.shifts.current().value {
-            Current.raman.updateParameter(value, forDataSource: Current.shifts.current().type.rawValue + 2, inWhichTab: .spectroscopy)
+            Current.raman.updateParameter(value, forDataSource: Current.shifts.current().type.rawValue + 1, inWhichTab: .spectroscopy)
         }
         Current.signals.load(with: "signals")
         if Current.signals.isEmpty {

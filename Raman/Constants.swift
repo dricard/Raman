@@ -10,6 +10,13 @@ import UIKit
 
 struct Constants {
 
+    // UserDefaults keys
+    
+    static let keyForSignal = "signal"
+    static let keyForPump = "pump"
+    static let keyForBwInCm = "bwInCm"
+    static let keyForBwLambda = "bwLambda"
+    
     // Spectroscopy index
     
     static let excitationIndex = 0
