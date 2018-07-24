@@ -29,3 +29,9 @@
 "changeExcitationBWText" = "Changer la longueur d'onde de référence modifiera toutes les valeurs de décalage Raman.";
 "changeBandwidthText" = "Changer ce décalage Raman modifiera les deux autres valeurs de décalage en fonction de la longueur d'onde de référence.";
 "at" = "chez";
+"instructions" = "Choisissez une couleur pour chaque mode";
+"credits" = "Réalisé par Denis Ricard chez Hexaedre";
+"lightThemeLabel" = "Office mode colors";
+"darkThemeLabel" = "Lab mode colors";
+"darkSwitch" = "Lab";
+"lightSwitch" = "Office";

@@ -122,6 +122,12 @@ class PreferencesViewController: UIViewController {
         helpButton.setTitle(.helpButton, for: .normal)
         supportButton.setTitle(.supportButton, for: .normal)
         doneButton.title = .doneButton
+        instructionsLabel.text = .preferencesInstructions
+        creditsLabel.text = .credits
+        lightThemeLabel.text = String.lightThemeLabel
+        darkThemeLabel.text = String.darkThemeLabel
+        lightSwitchLabel.text = String.lightSwitchName
+        darkSwitchLabel.text = String.darkSwitchName
         
         let today = Date()
         let formatter = DateFormatter()

@@ -29,3 +29,9 @@
 "changeExcitationBWText" = "Changing the excitation wavelength used for bandwidth calculations will modify the Raman bandwidth values.";
 "changeBandwidthText" = "Changing the current Raman bandwidth value will modify the other two units values (using the current selected excitation wavelength).";
 "at" = "at";
+"instructions" = "Choose a color for each mode";
+"credits" = "Made by Denis Ricard at Hexaedre";
+"lightThemeLabel" = "Office mode colors";
+"darkThemeLabel" = "Lab mode colors";
+"darkSwitch" = "Lab";
+"lightSwitch" = "Office";
