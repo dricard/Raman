@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate func loadUserPrefs() {
         // Load user's data
         
-        Current.bandwidths.load(with: "bandwidths")
+        Current.bandwidths.load(with: Constants.recentsBandwidthsKey)
         if Current.bandwidths.isEmpty {
             Current.bandwidths.push(70.00, with: .shiftInCm)
             Current.bandwidths.isEmpty = false
@@ -28,15 +28,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Current.raman.updateParameter(value, forDataSource: Current.bandwidths.current().type.rawValue - 3, inWhichTab: .bandwidth)
         }
 
-        Current.excitations.load(with: "excitations")
+        Current.excitations.load(with: Constants.recentsExcitationKey)
         if Current.excitations.isEmpty {
             Current.excitations.push(532.00, with: .wavelength)
             Current.excitations.isEmpty = false
         }
         if let value = Current.excitations.current().value {
-            Current.raman.updateParameter(value, forDataSource: 0, inWhichTab: .spectroscopy)
+            Current.raman.updateParameter(value, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
         }
-        Current.shifts.load(with: "shifts")
+        Current.shifts.load(with: Constants.recentsShiftsKey)
         if Current.shifts.isEmpty {
             Current.shifts.push(70.00, with: .shiftInCm)
             Current.shifts.isEmpty = false
@@ -44,14 +44,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let value = Current.shifts.current().value {
             Current.raman.updateParameter(value, forDataSource: Current.shifts.current().type.rawValue + 1, inWhichTab: .spectroscopy)
         }
-        Current.signals.load(with: "signals")
+        Current.signals.load(with: Constants.recentsSignalsKey)
         if Current.signals.isEmpty {
             Current.signals.push(533.99, with: .wavelength)
             Current.signals.isEmpty = false
             Current.raman.signal = 533.99
         }
         if let value = Current.signals.current().value {
-            Current.raman.updateParameter(value, forDataSource: 1, inWhichTab: .spectroscopy)
+            Current.raman.updateParameter(value, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
         }
         
         Current.colorSet.load()

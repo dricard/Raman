@@ -41,12 +41,17 @@ struct Spot {
 }
 
 class Recents {
+    
+    // MARK: - Properties
+    
     let max = 9
     var stack = [ Spot ]()
     private var currentIndex = 0
     var isEmpty = false
+    var key: String
     
-    init(for type: RecentType) {
+    init(for type: RecentType, with key: String) {
+        self.key = key
         for _ in 0...max {
             self.stack.append(Spot( value: nil, type: type))
         }
@@ -80,6 +85,7 @@ class Recents {
             if stack[ currentIndex << 1].value != nil {
                 // yes there is, so switch left to that one
                 currentIndex = currentIndex << 1
+                save()
                 return true
             } else {
                 return false
@@ -93,6 +99,7 @@ class Recents {
         } else {
             if stack[ currentIndex >> 1].value != nil {
                 currentIndex = currentIndex >> 1
+                save()
                 return true
             } else {
                 return false
@@ -107,7 +114,7 @@ class Recents {
         stack[0].value = newValue
         stack[0].type = type
         currentIndex = 0
-//        print(stack)
+        save()
     }
     
     func current() -> Spot {
@@ -117,8 +124,10 @@ class Recents {
     func setCurrent(to index: Int)  {
         if index >= 0 && index <= max {
             currentIndex = index
+            save()
         }
     }
+    
     func valueFor(_ row: Int) -> Double? {
         if let value = stack[ row ].value {
             return value
@@ -135,8 +144,8 @@ class Recents {
         return stack.map { $0.value }.compactMap{ $0 }.count
     }
     
-    // saving/loading from disk
-    func save(with key: String) {
+    // MARK: - saving/loading from disk
+    func save() {
         
         let noValue: Double = -1.0
         for (index, spot) in stack.enumerated() {
@@ -153,10 +162,11 @@ class Recents {
         UserDefaults.standard.set(currentIndex, forKey: currentKey)
     }
     
-    func load(with key: String) {
+    func load(with loadKey: String) {
         var noDataOnDisk = false
         stack.removeAll()
         let noValue: Double = -1.0
+        key = loadKey
         for index in 0...max {
             let valueKey = "\(key)_value_\(index)"
             let typeKey = "\(key)_type_\(index)"
@@ -202,12 +212,12 @@ class Recents {
 }
 
 extension Recents {
-    static let mockWavelengths = Recents(for: .wavelength)
-    static let mockShiftInCm = Recents(for: .shiftInCm)
-    static let mockShiftInGhz = Recents(for: .shiftInGhz)
-    static let mockShiftInMev = Recents(for: .shiftInMev)
-    static let mockBandwidthInCm = Recents(for: .bandwidthInCm)
-    static let mockBandwidthInGhz = Recents(for: .bandwidthInGhz)
-    static let mockBandwidthInNm = Recents(for: .bandwidthInNm)
+    static let mockWavelengths = Recents(for: .wavelength, with: Constants.recentsSignalsKey)
+    static let mockShiftInCm = Recents(for: .shiftInCm, with: Constants.recentsShiftsKey)
+    static let mockShiftInGhz = Recents(for: .shiftInGhz, with: Constants.recentsShiftsKey)
+    static let mockShiftInMev = Recents(for: .shiftInMev, with: Constants.recentsShiftsKey)
+    static let mockBandwidthInCm = Recents(for: .bandwidthInCm, with: Constants.recentsBandwidthsKey)
+    static let mockBandwidthInGhz = Recents(for: .bandwidthInGhz, with: Constants.recentsBandwidthsKey)
+    static let mockBandwidthInNm = Recents(for: .bandwidthInNm, with: Constants.recentsBandwidthsKey)
 
 }

@@ -14,10 +14,10 @@ struct Environment {
     var screen = Screen()
     var device = Device()
     var locale = Language()
-    var excitations = Recents(for: .wavelength)
-    var signals = Recents(for: .wavelength)
-    var shifts = Recents(for: .shiftInCm)
-    var bandwidths = Recents(for: .bandwidthInCm)
+    var excitations = Recents(for: .wavelength, with: Constants.recentsExcitationKey)
+    var signals = Recents(for: .wavelength, with: Constants.recentsSignalsKey)
+    var shifts = Recents(for: .shiftInCm, with: Constants.recentsShiftsKey)
+    var bandwidths = Recents(for: .bandwidthInCm, with: Constants.recentsBandwidthsKey)
     var colorSet = Colors()
 }
 

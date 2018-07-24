@@ -17,6 +17,11 @@ struct Constants {
     static let keyForBwInCm = "bwInCm"
     static let keyForBwLambda = "bwLambda"
     
+    static let recentsExcitationKey = "excitations"
+    static let recentsShiftsKey = "shifts"
+    static let recentsSignalsKey = "signals"
+    static let recentsBandwidthsKey = "bandwidths"
+    
     // Spectroscopy index
     
     static let excitationIndex = 0
