@@ -281,30 +281,30 @@ extension SpectroViewController {
             if let Current = self.Current {
                 
                 switch indexPath.row {
-                case 0:
+                case Constants.excitationIndex:
                     if Current.excitations.moveLeft() {
                         if let newValue = Current.excitations.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
+                            Current.raman.updateParameter(newValue, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
                         }
                     }
-                case 1:
+                case Constants.signalIndex:
                     if Current.signals.moveLeft() {
                         if let newValue = Current.signals.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
+                            Current.raman.updateParameter(newValue, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
                         }
                     }
-                case 2, 3, 4:
+                case Constants.shiftCmIndex, Constants.shiftGhzIndex, Constants.shiftmeVIndex:
                     if Current.shifts.moveLeft() {
                         if let newValue = Current.shifts.current().value {
                             let type = Current.shifts.current().type
                             
                             switch type {
                             case .shiftInCm:
-                                Current.raman.updateParameter(newValue, forDataSource: 2, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftCmIndex, inWhichTab: .spectroscopy)
                             case .shiftInGhz:
-                                Current.raman.updateParameter(newValue, forDataSource: 3, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftGhzIndex, inWhichTab: .spectroscopy)
                             case .shiftInMev:
-                                Current.raman.updateParameter(newValue, forDataSource: 4, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftmeVIndex, inWhichTab: .spectroscopy)
                             default:
                                 os_log("Wrong type for shift in leading swipe action", log: Log.general, type: .error)
                             }
@@ -331,30 +331,30 @@ extension SpectroViewController {
             if let Current = self.Current {
                 
                 switch indexPath.row {
-                case 0:
+                case Constants.excitationIndex:
                     if Current.excitations.moveRight() {
                         if let newValue = Current.excitations.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
+                            Current.raman.updateParameter(newValue, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
                         }
                     }
-                case 1:
+                case Constants.signalIndex:
                     if Current.signals.moveRight() {
                         if let newValue = Current.signals.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
+                            Current.raman.updateParameter(newValue, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
                         }
                     }
-                case 2, 3, 4:
+                case Constants.shiftCmIndex, Constants.shiftGhzIndex, Constants.shiftmeVIndex:
                     if Current.shifts.moveRight() {
                         if let newValue = Current.shifts.current().value {
                             let type = Current.shifts.current().type
                             
                             switch type {
                             case .shiftInCm:
-                                Current.raman.updateParameter(newValue, forDataSource: 2, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftCmIndex, inWhichTab: .spectroscopy)
                             case .shiftInGhz:
-                                Current.raman.updateParameter(newValue, forDataSource: 3, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftGhzIndex, inWhichTab: .spectroscopy)
                             case .shiftInMev:
-                                Current.raman.updateParameter(newValue, forDataSource: 4, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftmeVIndex, inWhichTab: .spectroscopy)
                             default:
                                 os_log("Wrong type for shift in trainling swipe action", log: Log.general, type: .error)
                             }
@@ -381,11 +381,12 @@ extension SpectroViewController: UIViewControllerPreviewingDelegate {
     func recentsForRow(at indexPath: IndexPath) -> Recents? {
         guard let Current = Current else { return nil }
         switch indexPath.row {
-        case 0:
+        case Constants.excitationIndex:
             return Current.excitations
-        case 1:
+        case Constants.signalIndex:
             return Current.signals
         default:
+            // all other cases are shifts, handled by the same recents
             return Current.shifts
         }
     }
@@ -405,11 +406,12 @@ extension SpectroViewController: UIViewControllerPreviewingDelegate {
         }
         recentsController.currentTab = .spectroscopy
         switch indexPath.row {
-        case 0:
+        case Constants.excitationIndex:
             recentsController.recentsTitle = "Excitations"
-        case 1:
+        case Constants.signalIndex:
             recentsController.recentsTitle = "Signals"
         default:
+            // all other cases are shifts, handled by the same recents
             recentsController.recentsTitle = "Shifts"
         }
         
