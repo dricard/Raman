@@ -142,7 +142,6 @@ class SpectroViewController: UIViewController {
             }
          }
     }
-    
  }
 
 // MARK: - Tableview delegates

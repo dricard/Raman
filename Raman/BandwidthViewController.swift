@@ -104,14 +104,14 @@ class BandwidthViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let Current = Current else { return }
-        
-        if let value = Current.signals.current().value {
-            os_log("setting bandwidth wavelength to current signals track", log: Log.general, type: .info)
-        Current.raman.updateParameter(value, forDataSource: 0, inWhichTab: .bandwidth)
-        } else {
-            os_log("invalid value for current signal value in bandwidth", log: Log.general, type: .error)
-        }
+//        guard let Current = Current else { return }
+//        
+//        if let value = Current.signals.current().value {
+//            os_log("setting bandwidth wavelength to current signals track", log: Log.general, type: .info)
+//        Current.raman.updateParameter(value, forDataSource: 0, inWhichTab: .bandwidth)
+//        } else {
+//            os_log("invalid value for current signal value in bandwidth", log: Log.general, type: .error)
+//        }
         
         updateInterface()
     }
@@ -152,7 +152,7 @@ class BandwidthViewController: UIViewController {
 
 }
 
-// MARK: TableView DataSource
+// MARK: - TableView DataSource
 
 extension BandwidthViewController: UITableViewDataSource {
     

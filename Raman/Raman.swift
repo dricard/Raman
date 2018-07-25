@@ -97,7 +97,6 @@ class Raman {
                 "changedValue": "bwLambda",
                 "rowsToUpdate": [
                     Constants.bwExcitationIndex,
-                    Constants.bwCmIndex,
                     Constants.bwGhzIndex,
                     Constants.bwNmIndex
                 ]
