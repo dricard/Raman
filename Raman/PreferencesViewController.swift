@@ -43,67 +43,65 @@ class PreferencesViewController: UIViewController {
     
     
     // MARK: - actions
+    private func colorChanged(for currentMode: ThemeModes, animated: Bool) {
+        guard let Current = Current else { return }
+
+        Current.colorSet.save()
+        updateDisplay()
+        changeDisplayColors(for: currentMode, animated: animated)
+
+    }
     
     @IBAction func light_set_0_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set0
-        updateDisplay()
-        changeDisplayColors(for: .light, animated: true)
+        colorChanged(for: .light, animated: true)
     }
     @IBAction func light_set_1_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set1
-        updateDisplay()
-        changeDisplayColors(for: .light, animated: true)
+        colorChanged(for: .light, animated: true)
     }
     @IBAction func light_set_2_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set2
-        updateDisplay()
-        changeDisplayColors(for: .light, animated: true)
+        colorChanged(for: .light, animated: true)
     }
     @IBAction func light_set_3_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set3
-        updateDisplay()
-        changeDisplayColors(for: .light, animated: true)
+        colorChanged(for: .light, animated: true)
     }
     @IBAction func light_set_4_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.lightSet = .set4
-        updateDisplay()
-        changeDisplayColors(for: .light, animated: true)
+        colorChanged(for: .light, animated: true)
     }
     
     @IBAction func dark_set_0_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.darkSet = .set0
-        updateDisplay()
-        changeDisplayColors(for: .dark, animated: true)
+        colorChanged(for: .dark, animated: true)
   }
     @IBAction func dark_set_1_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.darkSet = .set1
-        updateDisplay()
-        changeDisplayColors(for: .dark, animated: true)
+        colorChanged(for: .dark, animated: true)
     }
     @IBAction func dark_set_2_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.darkSet = .set2
-        updateDisplay()
-        changeDisplayColors(for: .dark, animated: true)
+        colorChanged(for: .dark, animated: true)
     }
     @IBAction func dark_set_3_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.darkSet = .set3
-        updateDisplay()
-        changeDisplayColors(for: .dark, animated: true)
+        colorChanged(for: .dark, animated: true)
     }
     @IBAction func dark_set_4_buttonPressed(_ sender: Any) {
         guard let Current = Current else { return }
         Current.colorSet.darkSet = .set4
-        updateDisplay()
-        changeDisplayColors(for: .dark, animated: true)
+        colorChanged(for: .dark, animated: true)
    }
     
     @IBAction func themeSwitchPressed(_ sender: Any) {
@@ -177,7 +175,7 @@ class PreferencesViewController: UIViewController {
     
     // MARK: - Utilities
     
-    func changeDisplayColors(for currentMode:  ThemeModes,animated: Bool) {
+    func changeDisplayColors(for currentMode:  ThemeModes, animated: Bool) {
         guard let Current = Current,  currentMode == Current.colorSet.mode else { return }
 
         if animated {
