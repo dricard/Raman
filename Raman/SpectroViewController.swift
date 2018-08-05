@@ -19,7 +19,7 @@ class SpectroViewController: UIViewController {
 
     // MARK: - Outlets
     
-    @IBOutlet var myTableView: UITableView!
+    @IBOutlet var tableView: UITableView!
     @IBOutlet weak var aboutButton: UIBarButtonItem!
     
     
@@ -27,13 +27,8 @@ class SpectroViewController: UIViewController {
     
     @objc func themeModeButtonTapped(_ sender: UIBarButtonItem) {
         if let Current = Current {
-            switch Current.selectedTheme.mode {
-            case .darkMode:
-                Current.selectedTheme.mode = .lightMode
-            case .lightMode:
-                Current.selectedTheme.mode = .darkMode
-            }
-            UserDefaults.standard.set(Current.selectedTheme.mode.rawValue, forKey: "themeMode")
+            Current.colorSet.toggle()
+            Current.colorSet.save()
             updateInterface()
         }
     }
@@ -43,42 +38,46 @@ class SpectroViewController: UIViewController {
         guard let Current = Current else { return }
         
         UIView.transition(with: self.view, duration: 0.5, options: .beginFromCurrentState, animations: {
-            
+        
             // set navigation bar
-            self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
-            self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")!]
+            self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+            self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")!]
             
             // set tab bar
-            self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
-            self.tabBarController?.tabBar.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
+            self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+            self.tabBarController?.tabBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
 
-            self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarUnselectedTextColor")
+            self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarUnselectedTextColor")
             
             // update theme mode switch button
-            switch Current.selectedTheme.mode {
-            case .darkMode:
+            switch Current.colorSet.mode {
+            case .dark:
                 self.themeModeButton.image = UIImage(named: "lightModeIcon")
-            case .lightMode:
+            case .light:
                 self.themeModeButton.image = UIImage(named: "darkModeIcon")
             }
             
             // set the tableview background color (behind the cells)
-            self.myTableView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewBackgroundColor")
+            self.tableView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
             
             // set the separator color to the same as the background
-            self.myTableView.separatorColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewSeparatorColor")
+            self.tableView.separatorColor = UIColor(named: "\(Current.colorSet.prefix())tableViewSeparatorColor")
             
+
         }, completion: nil)
         
         // update the display with new them
-        myTableView.reloadData()
+        tableView.reloadData()
     }
     
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // register observer for value updates from Model
+        NotificationCenter.default.addObserver(self, selector: #selector(updateParameter), name: Raman.spectroChangedNotification, object: nil)
         
         // 3D touch
         registerForPreviewing(with: self, sourceView: view)
@@ -90,10 +89,10 @@ class SpectroViewController: UIViewController {
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         
         // This prevents the space below the cells to have spacers
-        myTableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView()
         
         // Remove space at top of tableview
-        myTableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
         
         // add theme mode button to navigation bar
         
@@ -110,16 +109,39 @@ class SpectroViewController: UIViewController {
         updateInterface()
     }
     
+    // MARK: - Updates to parameters
+    
+    @objc func updateParameter(_ notification: NSNotification) {
+        // receveived a notification of changed value
+        if let userInfo = notification.userInfo {
+            os_log("Received notification in spectro with userInfo: %s", log: Log.general, type: .info, "\(userInfo)")
+            var indexPaths = [IndexPath]()
+            if let rowsToUpdate = userInfo["rowsToUpdate"] as? [Int] {
+                for row in rowsToUpdate {
+                    indexPaths.append(IndexPath(row: row, section: 0))
+                }
+            }
+            DispatchQueue.main.async {
+                UIView.transition(with: self.view, duration: 0.8, options: .beginFromCurrentState, animations: {
+                    self.tableView.reloadRows(at: indexPaths, with: UITableViewRowAnimation.left)
+                    
+                }, completion: nil)
+            }
+            
+        } else {
+            os_log("Received notification without userInfo in spectro", log: Log.general, type: .error)
+        }
+    }
+
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showAboutSegue" {
-            if let nvc = segue.destination as? UINavigationController, let vc = nvc.topViewController as? DisplayInfoViewController {
+            if let nvc = segue.destination as? UINavigationController, let vc = nvc.topViewController as? PreferencesViewController {
                 vc.Current = self.Current
             }
          }
     }
-    
  }
 
 // MARK: - Tableview delegates
@@ -150,7 +172,7 @@ extension SpectroViewController: UITableViewDelegate {
 extension SpectroViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(80)
+        return CGFloat(99.5)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -159,20 +181,35 @@ extension SpectroViewController: UITableViewDataSource {
     
     @objc func configureCell(cell: DataCell, indexPath: IndexPath) {
         guard let Current = Current else { return }
+        
+        // current value
         cell.valueLabel!.text = Current.raman.specData(indexPath.row).format(Constants.specRounding[indexPath.row])
-        cell.valueLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+        cell.valueLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+        
+        // parameter name
         cell.dataLabel?.text = Constants.ramanShift[indexPath.row]
-        cell.dataLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+        cell.dataLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelTextColor")
+        
+        // parameter units
         cell.unitsLabel.text = Constants.specUnits[indexPath.row]
-        cell.unitsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
+        cell.unitsLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+        
+        // parameter units exponent
         cell.exponentsLabel.text = Constants.specExp[indexPath.row]
-        cell.exponentsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
-        cell.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellBackgroundColor")
-        if Current.selectedTheme.mode == .darkMode {
-            cell.dataImageView?.image = UIImage(named: "spectro\(indexPath.row)")
-        } else {
-            cell.dataImageView?.image = UIImage(named: "spectro_light\(indexPath.row)")
-        }
+        cell.exponentsLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+        
+        // cell background color
+        cell.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
+
+        // style view behind the value
+        cell.valueLabelView.backgroundColor = UIColor.clear
+        
+        // style view behind cell's label
+        cell.labelView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")
+        cell.dataImageView.image = UIImage(named: "spectro_\(indexPath.row)")
+        cell.dataImageView.layer.cornerRadius = 8
+        cell.dataImageView.layer.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")?.cgColor
+
         // set images on both sides of cell depending on available data in recents
         switch indexPath.row {
         case 0:
@@ -243,36 +280,33 @@ extension SpectroViewController {
             if let Current = self.Current {
                 
                 switch indexPath.row {
-                case 0:
+                case Constants.excitationIndex:
                     if Current.excitations.moveLeft() {
                         if let newValue = Current.excitations.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
-                            tableView.reloadData()
+                            Current.raman.updateParameter(newValue, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
                         }
                     }
-                case 1:
+                case Constants.signalIndex:
                     if Current.signals.moveLeft() {
                         if let newValue = Current.signals.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
-                            tableView.reloadData()
+                            Current.raman.updateParameter(newValue, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
                         }
                     }
-                case 2, 3, 4:
+                case Constants.shiftCmIndex, Constants.shiftGhzIndex, Constants.shiftmeVIndex:
                     if Current.shifts.moveLeft() {
                         if let newValue = Current.shifts.current().value {
                             let type = Current.shifts.current().type
                             
                             switch type {
                             case .shiftInCm:
-                                Current.raman.updateParameter(newValue, forDataSource: 2, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftCmIndex, inWhichTab: .spectroscopy)
                             case .shiftInGhz:
-                                Current.raman.updateParameter(newValue, forDataSource: 3, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftGhzIndex, inWhichTab: .spectroscopy)
                             case .shiftInMev:
-                                Current.raman.updateParameter(newValue, forDataSource: 4, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftmeVIndex, inWhichTab: .spectroscopy)
                             default:
                                 os_log("Wrong type for shift in leading swipe action", log: Log.general, type: .error)
                             }
-                            tableView.reloadData()
                         }
                     }
                 default:
@@ -283,7 +317,7 @@ extension SpectroViewController {
             completionHandler(true)
         }
         if let Current = Current {
-            previous.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())swipeActionColor")
+            previous.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())swipeActionColor")
         }
         let config = UISwipeActionsConfiguration(actions: [previous])
         config.performsFirstActionWithFullSwipe = true
@@ -296,36 +330,33 @@ extension SpectroViewController {
             if let Current = self.Current {
                 
                 switch indexPath.row {
-                case 0:
+                case Constants.excitationIndex:
                     if Current.excitations.moveRight() {
                         if let newValue = Current.excitations.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
-                            tableView.reloadData()
+                            Current.raman.updateParameter(newValue, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
                         }
                     }
-                case 1:
+                case Constants.signalIndex:
                     if Current.signals.moveRight() {
                         if let newValue = Current.signals.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .spectroscopy)
-                            tableView.reloadData()
+                            Current.raman.updateParameter(newValue, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
                         }
                     }
-                case 2, 3, 4:
+                case Constants.shiftCmIndex, Constants.shiftGhzIndex, Constants.shiftmeVIndex:
                     if Current.shifts.moveRight() {
                         if let newValue = Current.shifts.current().value {
                             let type = Current.shifts.current().type
                             
                             switch type {
                             case .shiftInCm:
-                                Current.raman.updateParameter(newValue, forDataSource: 2, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftCmIndex, inWhichTab: .spectroscopy)
                             case .shiftInGhz:
-                                Current.raman.updateParameter(newValue, forDataSource: 3, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftGhzIndex, inWhichTab: .spectroscopy)
                             case .shiftInMev:
-                                Current.raman.updateParameter(newValue, forDataSource: 4, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftmeVIndex, inWhichTab: .spectroscopy)
                             default:
                                 os_log("Wrong type for shift in trainling swipe action", log: Log.general, type: .error)
                             }
-                            tableView.reloadData()
                         }
                     }
                 default:
@@ -336,7 +367,7 @@ extension SpectroViewController {
             completionHandler(true)
         }
         if let Current = Current {
-            next.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())swipeActionColor")
+            next.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())swipeActionColor")
         }
         let config = UISwipeActionsConfiguration(actions: [next])
         config.performsFirstActionWithFullSwipe = true
@@ -349,11 +380,12 @@ extension SpectroViewController: UIViewControllerPreviewingDelegate {
     func recentsForRow(at indexPath: IndexPath) -> Recents? {
         guard let Current = Current else { return nil }
         switch indexPath.row {
-        case 0:
+        case Constants.excitationIndex:
             return Current.excitations
-        case 1:
+        case Constants.signalIndex:
             return Current.signals
         default:
+            // all other cases are shifts, handled by the same recents
             return Current.shifts
         }
     }
@@ -361,10 +393,10 @@ extension SpectroViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
 
         // convert location to the tableView's coordinate system to get the right cell
-        let locationInTableViewCoordinate = view.convert(location, to: myTableView)
-        guard let indexPath = myTableView.indexPathForRow(at: locationInTableViewCoordinate), let cell = myTableView.cellForRow(at: indexPath) else { return nil }
+        let locationInTableViewCoordinate = view.convert(location, to: tableView)
+        guard let indexPath = tableView.indexPathForRow(at: locationInTableViewCoordinate), let cell = tableView.cellForRow(at: indexPath) else { return nil }
         os_log("3D touch event in spectro for row %d", log: Log.general, type: .info, indexPath.row)
-        let frame = myTableView.convert(cell.frame, to: view)
+        let frame = tableView.convert(cell.frame, to: view)
         previewingContext.sourceRect = frame
         let recentsController = storyboard?.instantiateViewController(withIdentifier: "RecentsViewController") as! RecentsViewController
         recentsController.Current = Current
@@ -373,11 +405,12 @@ extension SpectroViewController: UIViewControllerPreviewingDelegate {
         }
         recentsController.currentTab = .spectroscopy
         switch indexPath.row {
-        case 0:
+        case Constants.excitationIndex:
             recentsController.recentsTitle = "Excitations"
-        case 1:
+        case Constants.signalIndex:
             recentsController.recentsTitle = "Signals"
         default:
+            // all other cases are shifts, handled by the same recents
             recentsController.recentsTitle = "Shifts"
         }
         

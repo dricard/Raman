@@ -19,13 +19,19 @@ extension String {
     // MARK: - Info view
     
     static let aboutRaman = NSLocalizedString("About Raman")
-    static let madeBy = NSLocalizedString("is made by")
-    static let ideaBy = NSLocalizedString("Based on an original idea by")
-    static let thanksTo = NSLocalizedString("Special thanks to")
+    static let preferencesInstructions = NSLocalizedString("instructions")
+    static let credits = NSLocalizedString("credits")
+    static let lightThemeLabel = NSLocalizedString("lightThemeLabel")
+    static let darkThemeLabel = NSLocalizedString("darkThemeLabel")
+    static let lightSwitchName = NSLocalizedString("lightSwitch")
+    static let darkSwitchName = NSLocalizedString("darkSwitch")
+//    static let madeBy = NSLocalizedString("is made by")
+//    static let ideaBy = NSLocalizedString("Based on an original idea by")
+//    static let thanksTo = NSLocalizedString("Special thanks to")
     static let helpButton = NSLocalizedString("Help")
     static let supportButton = NSLocalizedString("Support")
     static let doneButton = NSLocalizedString("Done")
-    static let atLabel = NSLocalizedString("at")
+//    static let atLabel = NSLocalizedString("at")
     
     // MARK: - Spectro tableview
     static let excitationText = NSLocalizedString("Excitation wavelength")

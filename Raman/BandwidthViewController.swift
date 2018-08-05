@@ -24,13 +24,8 @@ class BandwidthViewController: UIViewController {
     
     @objc func themeModeButtonTapped(_ sender: UIBarButtonItem) {
         if let Current = Current {
-            switch Current.selectedTheme.mode {
-            case .darkMode:
-                Current.selectedTheme.mode = .lightMode
-            case .lightMode:
-                Current.selectedTheme.mode = .darkMode
-            }
-            UserDefaults.standard.set(Current.selectedTheme.mode.rawValue, forKey: "themeMode")
+            Current.colorSet.toggle()
+            Current.colorSet.save()
             updateInterface()
         }
     }
@@ -42,30 +37,30 @@ class BandwidthViewController: UIViewController {
         UIView.transition(with: self.view, duration: 0.5, options: .beginFromCurrentState, animations: {
 
         // set navigation bar
-        self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
-        self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")!]
-        
-        
+            self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+            self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")!]
+            
+            
             // set tab bar
-        self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTintColor")
-        self.tabBarController?.tabBar.tintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarTextColor")
+            self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+            self.tabBarController?.tabBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
             
-        self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(Current.selectedTheme.prefix())navBarUnselectedTextColor")
+            self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarUnselectedTextColor")
             
-        // update theme mode switch button
-        switch Current.selectedTheme.mode {
-        case .darkMode:
-            self.themeModeButton.image = UIImage(named: "lightModeIcon")
-        case .lightMode:
-            self.themeModeButton.image = UIImage(named: "darkModeIcon")
-        }
+            // update theme mode switch button
+            switch Current.colorSet.mode {
+            case .dark:
+                self.themeModeButton.image = UIImage(named: "lightModeIcon")
+            case .light:
+                self.themeModeButton.image = UIImage(named: "darkModeIcon")
+            }
         
         // set the tableview background color (behind the cells)
-        self.tableView.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewBackgroundColor")
+        self.tableView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
         
         // set the separator color to the same as the background
-        self.tableView.separatorColor = UIColor(named: "\(Current.selectedTheme.prefix())tableViewSeparatorColor")
+        self.tableView.separatorColor = UIColor(named: "\(Current.colorSet.prefix())tableViewSeparatorColor")
             
         }, completion: nil)
         
@@ -73,10 +68,13 @@ class BandwidthViewController: UIViewController {
         tableView.reloadData()
     }
     
-    // MARK: Lyfe Cycle
+    // - MARK: Lyfe Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // register observer for value updates from Model
+        NotificationCenter.default.addObserver(self, selector: #selector(updateParameter), name: Raman.bandwidthChangedNotification, object: nil)
 
         // 3D touch
         registerForPreviewing(with: self, sourceView: view)
@@ -91,7 +89,7 @@ class BandwidthViewController: UIViewController {
         tableView.tableFooterView = UIView()
         
         // fix space on top of tableview
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
         
         // add theme mode button to navigation bar
         
@@ -106,23 +104,46 @@ class BandwidthViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let Current = Current else { return }
-        
-        if let value = Current.signals.current().value {
-            os_log("setting bandwidth wavelength to current signals track", log: Log.general, type: .info)
-        Current.raman.updateParameter(value, forDataSource: 0, inWhichTab: .bandwidth)
-        } else {
-            os_log("invalid value for current signal value in bandwidth", log: Log.general, type: .error)
-        }
+//        guard let Current = Current else { return }
+//        
+//        if let value = Current.signals.current().value {
+//            os_log("setting bandwidth wavelength to current signals track", log: Log.general, type: .info)
+//        Current.raman.updateParameter(value, forDataSource: 0, inWhichTab: .bandwidth)
+//        } else {
+//            os_log("invalid value for current signal value in bandwidth", log: Log.general, type: .error)
+//        }
         
         updateInterface()
     }
     
+    // MARK: - Updates to parameters
+    
+    @objc func updateParameter(_ notification: NSNotification) {
+        // receveived a notification of changed value
+        if let userInfo = notification.userInfo {
+            os_log("Received notification in bandwidth with userInfo: %s", log: Log.general, type: .info, "\(userInfo)")
+            var indexPaths = [IndexPath]()
+            if let rowsToUpdate = userInfo["rowsToUpdate"] as? [Int] {
+                for row in rowsToUpdate {
+                    indexPaths.append(IndexPath(row: row, section: 0))
+                }
+            }
+            DispatchQueue.main.async {
+                UIView.transition(with: self.view, duration: 0.8, options: .beginFromCurrentState, animations: {
+                    self.tableView.reloadRows(at: indexPaths, with: UITableViewRowAnimation.left)
+                    
+                }, completion: nil)
+            }
+        } else {
+            os_log("Received notification without userInfo in bandwidth", log: Log.general, type: .error)
+        }
+    }
+
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showAboutSegue" {
-            if let nvc = segue.destination as? UINavigationController, let vc = nvc.topViewController as? DisplayInfoViewController {
+            if let nvc = segue.destination as? UINavigationController, let vc = nvc.topViewController as? PreferencesViewController {
                 vc.Current = self.Current
             }
         }
@@ -131,29 +152,47 @@ class BandwidthViewController: UIViewController {
 
 }
 
-// MARK: TableView DataSource
+// MARK: - TableView DataSource
 
 extension BandwidthViewController: UITableViewDataSource {
     
-    @objc func configureCell(cell: BWCell, indexPath: IndexPath) {
+    @objc func configureCell(cell: DataCell, indexPath: IndexPath) {
         guard let Current = Current else { return }
         
+        // current value
         cell.valueLabel!.text = Current.raman.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
+        cell.valueLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+
+        // parameter name
         cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
-        cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
-        cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
-        cell.exponentLabel.text = Constants.bwEpx[indexPath.row]
-        cell.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())cellBackgroundColor")
-        cell.valueLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
-        cell.dataLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
-        cell.unitsLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
-        cell.exponentLabel.textColor = UIColor(named: "\(Current.selectedTheme.prefix())cellTextColor")
-        if Current.selectedTheme.mode == .darkMode {
-            cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
-        } else {
-            cell.dataImageView?.image = UIImage(named: "bw_light\(indexPath.row)")
-        }
+        cell.dataLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelTextColor")
         
+        // parameter units
+        cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
+        cell.unitsLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+        
+        // parameter units exponent
+        cell.exponentsLabel.text = Constants.bwEpx[indexPath.row]
+        cell.exponentsLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+
+        // cell background color
+        cell.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
+
+        // style view behind the value
+        cell.valueLabelView.backgroundColor = UIColor.clear
+
+        // style view behind cell's label
+        cell.labelView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")
+        
+        // row icon
+        cell.dataImageView.image = UIImage(named: "bw_\(indexPath.row)")
+        cell.dataImageView.layer.cornerRadius = 8
+        cell.dataImageView.layer.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")?.cgColor
+
+        
+        // style view behind cell's label
+        cell.labelView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")
+
         // set images on both sides of cell depending on available data in recents
         switch indexPath.row {
         case 0:
@@ -191,11 +230,11 @@ extension BandwidthViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(80)
+        return CGFloat(99.5)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellBW", for: indexPath) as! BWCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: DataCell.reuseIdentifier, for: indexPath) as! DataCell
         
         configureCell(cell: cell, indexPath: indexPath)
         
@@ -239,29 +278,27 @@ extension BandwidthViewController {
             if let Current = self.Current {
                 
                 switch indexPath.row {
-                case 0:
+                case Constants.bwExcitationIndex:
                     if Current.signals.moveLeft() {
                         if let newValue = Current.signals.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
-                            tableView.reloadData()
+                            Current.raman.updateParameter(newValue, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
                         }
                     }
-                case 1, 2, 3:
+                case Constants.bwCmIndex, Constants.bwNmIndex, Constants.bwGhzIndex:
                     if Current.bandwidths.moveLeft() {
                         if let newValue = Current.bandwidths.current().value {
                             let type = Current.bandwidths.current().type
                             
                             switch type {
                             case .bandwidthInCm:
-                                Current.raman.updateParameter(newValue, forDataSource: 1, inWhichTab: .bandwidth)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.bwCmIndex, inWhichTab: .bandwidth)
                             case .bandwidthInNm:
-                                Current.raman.updateParameter(newValue, forDataSource: 2, inWhichTab: .bandwidth)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.bwNmIndex, inWhichTab: .bandwidth)
                             case .bandwidthInGhz:
-                                Current.raman.updateParameter(newValue, forDataSource: 3, inWhichTab: .bandwidth)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.bwGhzIndex, inWhichTab: .bandwidth)
                             default:
                                 os_log("Wrong type for bandwidth in lead swipe action", log: Log.general, type: .error)
                             }
-                            tableView.reloadData()
                         }
                     }
                 default:
@@ -272,7 +309,7 @@ extension BandwidthViewController {
             completionHandler(true)
         }
         if let Current = Current {
-            previous.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())swipeActionColor")
+            previous.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())swipeActionColor")
         }
         let config = UISwipeActionsConfiguration(actions: [previous])
         config.performsFirstActionWithFullSwipe = true
@@ -285,29 +322,27 @@ extension BandwidthViewController {
             if let Current = self.Current {
 
                 switch indexPath.row {
-                case 0:
+                case Constants.bwExcitationIndex:
                     if Current.signals.moveRight() {
                         if let newValue = Current.signals.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
-                            tableView.reloadData()
+                            Current.raman.updateParameter(newValue, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
                         }
                     }
-                case 1, 2, 3:
+                case Constants.bwCmIndex, Constants.bwNmIndex, Constants.bwGhzIndex:
                     if Current.bandwidths.moveRight() {
                         if let newValue = Current.bandwidths.current().value {
                             let type = Current.bandwidths.current().type
                             
                             switch type {
                             case .bandwidthInCm:
-                                Current.raman.updateParameter(newValue, forDataSource: 1, inWhichTab: .bandwidth)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.bwCmIndex, inWhichTab: .bandwidth)
                             case .bandwidthInNm:
-                                Current.raman.updateParameter(newValue, forDataSource: 2, inWhichTab: .bandwidth)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.bwNmIndex, inWhichTab: .bandwidth)
                             case .bandwidthInGhz:
-                                Current.raman.updateParameter(newValue, forDataSource: 3, inWhichTab: .bandwidth)
+                                Current.raman.updateParameter(newValue, forDataSource: Constants.bwGhzIndex, inWhichTab: .bandwidth)
                             default:
                                 os_log("Wrong type for bandwidth in trainling swipe action", log: Log.general, type: .error)
                             }
-                            tableView.reloadData()
                         }
                     }
                 default:
@@ -318,7 +353,7 @@ extension BandwidthViewController {
             completionHandler(true)
         }
         if let Current = Current {
-            next.backgroundColor = UIColor(named: "\(Current.selectedTheme.prefix())swipeActionColor")
+            next.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())swipeActionColor")
         }
         let config = UISwipeActionsConfiguration(actions: [next])
         config.performsFirstActionWithFullSwipe = true
@@ -331,9 +366,10 @@ extension BandwidthViewController: UIViewControllerPreviewingDelegate {
     func recentsForRow(at indexPath: IndexPath) -> Recents? {
         guard let Current = Current else { return nil }
         switch indexPath.row {
-        case 0:
+        case Constants.bwExcitationIndex:
             return Current.signals
         default:
+            // all other cases are bandwidths and handles by the same recents
             return Current.bandwidths
         }
     }
@@ -353,7 +389,7 @@ extension BandwidthViewController: UIViewControllerPreviewingDelegate {
         }
         recentsController.currentTab = .bandwidth
         switch indexPath.row {
-        case 0:
+        case Constants.bwExcitationIndex:
             recentsController.recentsTitle = "Signals"
          default:
             recentsController.recentsTitle = "Bandwidths"

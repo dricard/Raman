@@ -10,6 +10,18 @@ import UIKit
 
 struct Constants {
 
+    // UserDefaults keys
+    
+    static let keyForSignal = "signal"
+    static let keyForPump = "pump"
+    static let keyForBwInCm = "bwInCm"
+    static let keyForBwLambda = "bwLambda"
+    
+    static let recentsExcitationKey = "excitations"
+    static let recentsShiftsKey = "shifts"
+    static let recentsSignalsKey = "signals"
+    static let recentsBandwidthsKey = "bandwidths"
+    
     // Spectroscopy index
     
     static let excitationIndex = 0
@@ -35,7 +47,7 @@ struct Constants {
     static let bwUnits = ["nm", "cm", "GHz", "nm"]
     static let bwEpx = ["", "-1", "", ""]
 
-    static let specRounding = [".2", ".2", ".2", ".2", ".4" ]
+    static let specRounding = [".2", ".2", ".2", ".2", ".2" ]
     static let bwRounding = [".2", ".2", ".2", ".2" ]
     
     static let specToolTip: [String] = [ .changeExcitationText, .changeSignalText, .changeShiftText, .changeShiftText, .changeShiftText ]

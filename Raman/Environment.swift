@@ -10,21 +10,20 @@ import Foundation
 
 struct Environment {
     var raman = Raman()
-    var selectedTheme = ThemeMode()
     var version = Version()
     var screen = Screen()
     var device = Device()
     var locale = Language()
-    var excitations = Recents(for: .wavelength)
-    var signals = Recents(for: .wavelength)
-    var shifts = Recents(for: .shiftInCm)
-    var bandwidths = Recents(for: .bandwidthInCm)
+    var excitations = Recents(for: .wavelength, with: Constants.recentsExcitationKey)
+    var signals = Recents(for: .wavelength, with: Constants.recentsSignalsKey)
+    var shifts = Recents(for: .shiftInCm, with: Constants.recentsShiftsKey)
+    var bandwidths = Recents(for: .bandwidthInCm, with: Constants.recentsBandwidthsKey)
+    var colorSet = Colors()
 }
 
 extension Environment {
     static let mock = Environment(
         raman: .mock,
-        selectedTheme: .mock,
         version: .mock,
         screen: .mock,
         device: .mock,
@@ -32,6 +31,7 @@ extension Environment {
         excitations: .mockWavelengths,
         signals: .mockWavelengths,
         shifts: .mockShiftInCm,
-        bandwidths: .mockBandwidthInNm
+        bandwidths: .mockBandwidthInNm,
+        colorSet: .mock
     )
 }
