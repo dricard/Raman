@@ -122,7 +122,7 @@ class SpectroViewController: UIViewController {
                 }
             }
             DispatchQueue.main.async {
-                UIView.transition(with: self.view, duration: 0.5, options: .beginFromCurrentState, animations: {
+                UIView.transition(with: self.view, duration: 0.8, options: .beginFromCurrentState, animations: {
                     self.tableView.reloadRows(at: indexPaths, with: UITableViewRowAnimation.left)
                     
                 }, completion: nil)
