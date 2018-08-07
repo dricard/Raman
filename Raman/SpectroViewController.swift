@@ -282,28 +282,28 @@ extension SpectroViewController {
                 switch indexPath.row {
                 case Constants.excitationIndex:
                     if Current.excitations.moveLeft() {
-                        if let newValue = Current.excitations.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
+                        if let spot = Current.excitations.current() {
+                            Current.raman.updateParameter(spot.value, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
                         }
                     }
                 case Constants.signalIndex:
                     if Current.signals.moveLeft() {
-                        if let newValue = Current.signals.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
+                        if let spot = Current.signals.current() {
+                            Current.raman.updateParameter(spot.value, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
                         }
                     }
                 case Constants.shiftCmIndex, Constants.shiftGhzIndex, Constants.shiftmeVIndex:
                     if Current.shifts.moveLeft() {
-                        if let newValue = Current.shifts.current().value {
-                            let type = Current.shifts.current().type
+                        if let spot = Current.shifts.current() {
+                            let type = spot.type
                             
                             switch type {
                             case .shiftInCm:
-                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftCmIndex, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.shiftCmIndex, inWhichTab: .spectroscopy)
                             case .shiftInGhz:
-                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftGhzIndex, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.shiftGhzIndex, inWhichTab: .spectroscopy)
                             case .shiftInMev:
-                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftmeVIndex, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.shiftmeVIndex, inWhichTab: .spectroscopy)
                             default:
                                 os_log("Wrong type for shift in leading swipe action", log: Log.general, type: .error)
                             }
@@ -332,28 +332,28 @@ extension SpectroViewController {
                 switch indexPath.row {
                 case Constants.excitationIndex:
                     if Current.excitations.moveRight() {
-                        if let newValue = Current.excitations.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
+                        if let spot = Current.excitations.current() {
+                            Current.raman.updateParameter(spot.value, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
                         }
                     }
                 case Constants.signalIndex:
                     if Current.signals.moveRight() {
-                        if let newValue = Current.signals.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
+                        if let spot = Current.signals.current() {
+                            Current.raman.updateParameter(spot.value, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
                         }
                     }
                 case Constants.shiftCmIndex, Constants.shiftGhzIndex, Constants.shiftmeVIndex:
                     if Current.shifts.moveRight() {
-                        if let newValue = Current.shifts.current().value {
-                            let type = Current.shifts.current().type
+                        if let spot = Current.shifts.current() {
+                            let type = spot.type
                             
                             switch type {
                             case .shiftInCm:
-                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftCmIndex, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.shiftCmIndex, inWhichTab: .spectroscopy)
                             case .shiftInGhz:
-                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftGhzIndex, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.shiftGhzIndex, inWhichTab: .spectroscopy)
                             case .shiftInMev:
-                                Current.raman.updateParameter(newValue, forDataSource: Constants.shiftmeVIndex, inWhichTab: .spectroscopy)
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.shiftmeVIndex, inWhichTab: .spectroscopy)
                             default:
                                 os_log("Wrong type for shift in trainling swipe action", log: Log.general, type: .error)
                             }

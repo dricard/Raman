@@ -280,22 +280,22 @@ extension BandwidthViewController {
                 switch indexPath.row {
                 case Constants.bwExcitationIndex:
                     if Current.signals.moveLeft() {
-                        if let newValue = Current.signals.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
+                        if let spot = Current.signals.current() {
+                            Current.raman.updateParameter(spot.value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
                         }
                     }
                 case Constants.bwCmIndex, Constants.bwNmIndex, Constants.bwGhzIndex:
                     if Current.bandwidths.moveLeft() {
-                        if let newValue = Current.bandwidths.current().value {
-                            let type = Current.bandwidths.current().type
+                        if let spot = Current.bandwidths.current() {
+                            let type = spot.type
                             
                             switch type {
                             case .bandwidthInCm:
-                                Current.raman.updateParameter(newValue, forDataSource: Constants.bwCmIndex, inWhichTab: .bandwidth)
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.bwCmIndex, inWhichTab: .bandwidth)
                             case .bandwidthInNm:
-                                Current.raman.updateParameter(newValue, forDataSource: Constants.bwNmIndex, inWhichTab: .bandwidth)
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.bwNmIndex, inWhichTab: .bandwidth)
                             case .bandwidthInGhz:
-                                Current.raman.updateParameter(newValue, forDataSource: Constants.bwGhzIndex, inWhichTab: .bandwidth)
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.bwGhzIndex, inWhichTab: .bandwidth)
                             default:
                                 os_log("Wrong type for bandwidth in lead swipe action", log: Log.general, type: .error)
                             }
@@ -324,22 +324,23 @@ extension BandwidthViewController {
                 switch indexPath.row {
                 case Constants.bwExcitationIndex:
                     if Current.signals.moveRight() {
-                        if let newValue = Current.signals.current().value {
-                            Current.raman.updateParameter(newValue, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
+                        if let spot = Current.signals.current() {
+                            Current.raman.updateParameter(spot.value
+                                , forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
                         }
                     }
                 case Constants.bwCmIndex, Constants.bwNmIndex, Constants.bwGhzIndex:
                     if Current.bandwidths.moveRight() {
-                        if let newValue = Current.bandwidths.current().value {
-                            let type = Current.bandwidths.current().type
+                        if let spot = Current.bandwidths.current() {
+                            let type = spot.type
                             
                             switch type {
                             case .bandwidthInCm:
-                                Current.raman.updateParameter(newValue, forDataSource: Constants.bwCmIndex, inWhichTab: .bandwidth)
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.bwCmIndex, inWhichTab: .bandwidth)
                             case .bandwidthInNm:
-                                Current.raman.updateParameter(newValue, forDataSource: Constants.bwNmIndex, inWhichTab: .bandwidth)
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.bwNmIndex, inWhichTab: .bandwidth)
                             case .bandwidthInGhz:
-                                Current.raman.updateParameter(newValue, forDataSource: Constants.bwGhzIndex, inWhichTab: .bandwidth)
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.bwGhzIndex, inWhichTab: .bandwidth)
                             default:
                                 os_log("Wrong type for bandwidth in trainling swipe action", log: Log.general, type: .error)
                             }

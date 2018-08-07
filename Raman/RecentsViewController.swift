@@ -154,13 +154,15 @@ class RecentsViewController: UIViewController {
                 print(indexPath.row)
                 center.y = location.y
                 if Initial.indexPath != nil && indexPath != Initial.indexPath {
-                    let spotA = Spot(value: recents.stack[indexPath.row].value, type: recents.stack[indexPath.row].type)
-                    let spotB = Spot(value: recents.stack[Initial.indexPath!.row].value, type: recents.stack[Initial.indexPath!.row].type)
-                    recents.stack[indexPath.row] = spotB
-                    recents.stack[Initial.indexPath!.row] = spotA
-//                    swap(&recents.stack[indexPath.row], &recents.stack[Initial.indexPath!.row])
-                    tableView.moveRow(at: Initial.indexPath!, to: indexPath)
-                    Initial.indexPath = indexPath
+                    if let spot_a = recents.stack[indexPath.row], let spot_b = recents.stack[Initial.indexPath!.row] {
+                        let spotA = Spot(value: spot_a.value, type: spot_a.type)
+                        let spotB = Spot(value: spot_b.value, type: spot_b.type)
+                        recents.stack[indexPath.row] = spotB
+                        recents.stack[Initial.indexPath!.row] = spotA
+                        //                    swap(&recents.stack[indexPath.row], &recents.stack[Initial.indexPath!.row])
+                        tableView.moveRow(at: Initial.indexPath!, to: indexPath)
+                        Initial.indexPath = indexPath
+                    }
                 }
             }
         default:
@@ -213,39 +215,39 @@ extension RecentsViewController: UITableViewDataSource {
         
         configureCell(cell: cell)
         
-        let type = recents.typeFor(indexPath.row)
-        
-        switch type {
-        case .wavelength:
-            cell.unitsLabel.text = "nm"
-            cell.exponentLabel.text = ""
-            cell.valueLabel.text = "\(value.format(Constants.specRounding[0]))"
-        case .shiftInCm:
-            cell.unitsLabel.text = "cm"
-            cell.exponentLabel.text = "-1"
-            cell.valueLabel.text = "\(value.format(Constants.specRounding[2]))"
-        case .shiftInGhz:
-            cell.unitsLabel.text = "GHz"
-            cell.exponentLabel.text = ""
-            cell.valueLabel.text = "\(value.format(Constants.specRounding[3]))"
-        case .shiftInMev:
-            cell.unitsLabel.text = "MeV"
-            cell.exponentLabel.text = ""
-            cell.valueLabel.text = "\(value.format(Constants.specRounding[4]))"
-        case .bandwidthInCm:
-            cell.unitsLabel.text = "cm"
-            cell.exponentLabel.text = "-1"
-            cell.valueLabel.text = "\(value.format(Constants.bwRounding[1]))"
-        case .bandwidthInGhz:
-            cell.unitsLabel.text = "GHz"
-            cell.exponentLabel.text = ""
-            cell.valueLabel.text = "\(value.format(Constants.bwRounding[2]))"
-        case .bandwidthInNm:
-            cell.unitsLabel.text = "nm"
-            cell.exponentLabel.text = ""
-            cell.valueLabel.text = "\(value.format(Constants.bwRounding[3]))"
+        if let type = recents.typeFor(indexPath.row) {
+            
+            switch type {
+            case .wavelength:
+                cell.unitsLabel.text = "nm"
+                cell.exponentLabel.text = ""
+                cell.valueLabel.text = "\(value.format(Constants.specRounding[0]))"
+            case .shiftInCm:
+                cell.unitsLabel.text = "cm"
+                cell.exponentLabel.text = "-1"
+                cell.valueLabel.text = "\(value.format(Constants.specRounding[2]))"
+            case .shiftInGhz:
+                cell.unitsLabel.text = "GHz"
+                cell.exponentLabel.text = ""
+                cell.valueLabel.text = "\(value.format(Constants.specRounding[3]))"
+            case .shiftInMev:
+                cell.unitsLabel.text = "MeV"
+                cell.exponentLabel.text = ""
+                cell.valueLabel.text = "\(value.format(Constants.specRounding[4]))"
+            case .bandwidthInCm:
+                cell.unitsLabel.text = "cm"
+                cell.exponentLabel.text = "-1"
+                cell.valueLabel.text = "\(value.format(Constants.bwRounding[1]))"
+            case .bandwidthInGhz:
+                cell.unitsLabel.text = "GHz"
+                cell.exponentLabel.text = ""
+                cell.valueLabel.text = "\(value.format(Constants.bwRounding[2]))"
+            case .bandwidthInNm:
+                cell.unitsLabel.text = "nm"
+                cell.exponentLabel.text = ""
+                cell.valueLabel.text = "\(value.format(Constants.bwRounding[3]))"
+            }
         }
-        
         return cell
         
     }
@@ -257,43 +259,44 @@ extension RecentsViewController: UITableViewDelegate {
         guard let Current = Current, let recents = recents, let value = recents.valueFor(indexPath.row), let recentsTitle = recentsTitle, let currentTab = currentTab else { return }
         // update the current position in recents stack
         recents.setCurrent(to: indexPath.row)
-        let type = recents.typeFor(indexPath.row)
-        
-        switch recentsTitle {
-        case "Excitations":
-            Current.raman.updateParameter(value, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
-        case "Signals":
-            switch currentTab {
-            case .spectroscopy:
-                Current.raman.updateParameter(value, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
-            case .bandwidth:
-                Current.raman.updateParameter(value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
-            }
-        case "Shifts":
-            switch type {
-            case .shiftInCm:
-                Current.raman.updateParameter(value, forDataSource: Constants.shiftCmIndex, inWhichTab: .spectroscopy)
-            case .shiftInGhz:
-                Current.raman.updateParameter(value, forDataSource: Constants.shiftGhzIndex, inWhichTab: .spectroscopy)
-            case .shiftInMev:
-                Current.raman.updateParameter(value, forDataSource: Constants.shiftmeVIndex, inWhichTab: .spectroscopy)
-            default:
-                os_log("Wrong parameter in didSelectRowAt in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
-            }
-        case "Bandwidths":
-            switch type {
-            case .bandwidthInCm:
-                Current.raman.updateParameter(value, forDataSource: Constants.bwCmIndex, inWhichTab: .bandwidth)
-            case .bandwidthInGhz:
-                Current.raman.updateParameter(value, forDataSource: Constants.bwGhzIndex, inWhichTab: .bandwidth)
-            case .bandwidthInNm:
-                Current.raman.updateParameter(value, forDataSource: Constants.bwNmIndex, inWhichTab: .bandwidth)
-            default:
-                os_log("Wrong parameter in didSelectRowAt in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
-            }
+        if let type = recents.typeFor(indexPath.row) {
             
-        default:
-            os_log("Wrong parameter in didSelectRowAt in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
+            switch recentsTitle {
+            case "Excitations":
+                Current.raman.updateParameter(value, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
+            case "Signals":
+                switch currentTab {
+                case .spectroscopy:
+                    Current.raman.updateParameter(value, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
+                case .bandwidth:
+                    Current.raman.updateParameter(value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
+                }
+            case "Shifts":
+                switch type {
+                case .shiftInCm:
+                    Current.raman.updateParameter(value, forDataSource: Constants.shiftCmIndex, inWhichTab: .spectroscopy)
+                case .shiftInGhz:
+                    Current.raman.updateParameter(value, forDataSource: Constants.shiftGhzIndex, inWhichTab: .spectroscopy)
+                case .shiftInMev:
+                    Current.raman.updateParameter(value, forDataSource: Constants.shiftmeVIndex, inWhichTab: .spectroscopy)
+                default:
+                    os_log("Wrong parameter in didSelectRowAt in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
+                }
+            case "Bandwidths":
+                switch type {
+                case .bandwidthInCm:
+                    Current.raman.updateParameter(value, forDataSource: Constants.bwCmIndex, inWhichTab: .bandwidth)
+                case .bandwidthInGhz:
+                    Current.raman.updateParameter(value, forDataSource: Constants.bwGhzIndex, inWhichTab: .bandwidth)
+                case .bandwidthInNm:
+                    Current.raman.updateParameter(value, forDataSource: Constants.bwNmIndex, inWhichTab: .bandwidth)
+                default:
+                    os_log("Wrong parameter in didSelectRowAt in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
+                }
+                
+            default:
+                os_log("Wrong parameter in didSelectRowAt in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
+            }
         }
         if let navigationController = self.navigationController {
             navigationController.popToRootViewController(animated: true)
@@ -304,19 +307,7 @@ extension RecentsViewController: UITableViewDelegate {
         if editingStyle == UITableViewCellEditingStyle.delete {
             
             if let recents = recents {
-                recents.stack.remove(at: indexPath.row)
-                var spot: Spot
-                switch recentsTitle {
-                case "Excitations":
-                    spot = Spot(value: nil, type: .wavelength)
-                case "Signals":
-                    spot = Spot(value: nil, type: .wavelength)
-                case "Shifts":
-                    spot = Spot(value: nil, type: .shiftInCm)
-                default:
-                    spot = Spot(value: nil, type: .bandwidthInCm)
-                }
-                recents.stack.append(spot)
+                recents.remove(at: indexPath.row)
                 tableView.reloadData()
             }
         }

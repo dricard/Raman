@@ -36,7 +36,7 @@ enum RecentType: Int {
 }
 
 struct Spot {
-    var value: Double? = nil
+    var value: Double
     var type: RecentType
 }
 
@@ -45,15 +45,15 @@ class Recents {
     // MARK: - Properties
     
     let max = 9
-    var stack = [ Spot ]()
+    var stack = [ Spot? ]()
     private var currentIndex = 0
-    var isEmpty = false
+    var isEmpty = true
     var key: String
     
     init(for type: RecentType, with key: String) {
         self.key = key
         for _ in 0...max {
-            self.stack.append(Spot( value: nil, type: type))
+            self.stack.append(nil)
         }
     }
     
@@ -64,7 +64,7 @@ class Recents {
         } else {
             let lefty = currentIndex << 1
             os_log("Returning status of left data for position %d with lefty = %d", log: Log.general, type: .debug, currentIndex, lefty)
-            return stack[currentIndex << 1].value != nil
+            return stack[currentIndex << 1] != nil
         }
     }
     
@@ -72,7 +72,7 @@ class Recents {
         if currentIndex == currentIndex >> 1 {
             return false
         } else {
-            return stack[currentIndex >> 1].value != nil
+            return stack[currentIndex >> 1] != nil
         }
     }
     
@@ -82,7 +82,7 @@ class Recents {
             return false
         } else {
             // check if there *is* a value to the left of the current Spot
-            if stack[ currentIndex << 1].value != nil {
+            if stack[ currentIndex << 1] != nil {
                 // yes there is, so switch left to that one
                 currentIndex = currentIndex << 1
                 save()
@@ -97,7 +97,7 @@ class Recents {
         if currentIndex == currentIndex >> 1 {
             return false
         } else {
-            if stack[ currentIndex >> 1].value != nil {
+            if stack[ currentIndex >> 1] != nil {
                 currentIndex = currentIndex >> 1
                 save()
                 return true
@@ -107,17 +107,25 @@ class Recents {
         }
     }
 
+    
+    /// Push a new value onto the recents stack
+    ///
+    /// - Parameters:
+    ///   - newValue: value to be added
+    ///   - type: type of the value
     func push(_ newValue: Double, with type: RecentType) {
+        // we make room at index 0 by moving each value to the next position
         for i in (1...max).reversed() {
             stack[i] = stack[i - 1]
         }
-        stack[0].value = newValue
-        stack[0].type = type
+        // then we set the new value at index 0
+        stack[0] = Spot(value: newValue, type: type)
+        // and reset the current position at 0
         currentIndex = 0
         save()
     }
     
-    func current() -> Spot {
+    func current() -> Spot? {
         return stack[ currentIndex ]
     }
     
@@ -129,76 +137,95 @@ class Recents {
     }
     
     func valueFor(_ row: Int) -> Double? {
-        if let value = stack[ row ].value {
-            return value
+        if let spot = stack[ row ] {
+            return spot.value
         } else {
             return nil
         }
     }
     
-    func typeFor(_ row: Int) -> RecentType {
-        return stack[ row ].type
+    func typeFor(_ row: Int) -> RecentType? {
+        if let spot = stack [ row ] {
+            return spot.type
+        } else {
+            return nil
+        }
     }
     
     func count() -> Int {
-        return stack.map { $0.value }.compactMap{ $0 }.count
+        return stack.compactMap{ $0 }.count
+    }
+    
+    func compact() {
+        let nonNilValues = stack.compactMap { $0 }
+        stack = nonNilValues
+        let missing = max - stack.count + 1
+        if missing > 0 {
+            for _ in 1...missing {
+                stack.append(nil)
+            }
+        }
+    }
+    
+    func remove(at index: Int) {
+        stack.remove(at: index)
+        compact()
     }
     
     // MARK: - saving/loading from disk
     func save() {
-        
         let noValue: Double = -1.0
         for (index, spot) in stack.enumerated() {
             let valueKey = "\(key)_value_\(index)"
             let typeKey = "\(key)_type_\(index)"
-            if let value = spot.value {
-                UserDefaults.standard.set(value, forKey: valueKey)
+            if let spot = spot {
+                UserDefaults.standard.set(spot.value, forKey: valueKey)
+                UserDefaults.standard.set(spot.type.rawValue, forKey: typeKey)
             } else {
                 UserDefaults.standard.set(noValue, forKey: valueKey)
+                UserDefaults.standard.set(noValue, forKey: typeKey)
             }
-            UserDefaults.standard.set(spot.type.rawValue, forKey: typeKey)
         }
         let currentKey = "\(key)_current"
         UserDefaults.standard.set(currentIndex, forKey: currentKey)
     }
     
-    func load(with loadKey: String) {
+    func load(with key: String) {
         var noDataOnDisk = false
         stack.removeAll()
         let noValue: Double = -1.0
-        key = loadKey
+//        key = loadKey
         for index in 0...max {
             let valueKey = "\(key)_value_\(index)"
             let typeKey = "\(key)_type_\(index)"
             let value = UserDefaults.standard.double(forKey: valueKey)
             let typeIndex = UserDefaults.standard.integer(forKey: typeKey)
-            let type: RecentType
-            switch typeIndex {
-            case 0:
-                type = .wavelength
-            case 1:
-                type = .shiftInCm
-            case 2:
-                type = .shiftInGhz
-            case 3:
-                type = .shiftInMev
-            case 4:
-                type = .bandwidthInCm
-            case 5:
-                type = .bandwidthInGhz
-            case 6:
-                type = .bandwidthInNm
-            default:
-                os_log("Wrong typeIndex in load(): %d", log: Log.general, type: .error, typeIndex)
-                type = .wavelength
-            }
             if value == noValue || value == 0.0 {
                 if index == 0 {
                     noDataOnDisk = true
                 }
-                let spot = Spot(value: nil, type: type)
-                stack.append(spot)
+                stack.append(nil)
             } else {
+                let type: RecentType
+                switch typeIndex {
+                case 0:
+                    type = .wavelength
+                case 1:
+                    type = .shiftInCm
+                case 2:
+                    type = .shiftInGhz
+                case 3:
+                    type = .shiftInMev
+                case 4:
+                    type = .bandwidthInCm
+                case 5:
+                    type = .bandwidthInGhz
+                case 6:
+                    type = .bandwidthInNm
+                default:
+                    os_log("Wrong typeIndex in load(): %d", log: Log.general, type: .error, typeIndex)
+                    type = .wavelength
+                }
                 let spot = Spot(value: value, type: type)
                 stack.append(spot)
             }

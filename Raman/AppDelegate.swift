@@ -24,8 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Current.bandwidths.push(70.00, with: .shiftInCm)
             Current.bandwidths.isEmpty = false
         }
-        if let value = Current.bandwidths.current().value {
-            Current.raman.updateParameter(value, forDataSource: Current.bandwidths.current().type.rawValue - 3, inWhichTab: .bandwidth)
+        if let spot = Current.bandwidths.current() {
+            Current.raman.updateParameter(spot.value, forDataSource: spot.type.rawValue - 3, inWhichTab: .bandwidth)
         }
 
         Current.excitations.load(with: Constants.recentsExcitationKey)
@@ -33,16 +33,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Current.excitations.push(532.00, with: .wavelength)
             Current.excitations.isEmpty = false
         }
-        if let value = Current.excitations.current().value {
-            Current.raman.updateParameter(value, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
+        if let spot = Current.excitations.current() {
+            Current.raman.updateParameter(spot.value, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
         }
         Current.shifts.load(with: Constants.recentsShiftsKey)
         if Current.shifts.isEmpty {
             Current.shifts.push(70.00, with: .shiftInCm)
             Current.shifts.isEmpty = false
         }
-        if let value = Current.shifts.current().value {
-            Current.raman.updateParameter(value, forDataSource: Current.shifts.current().type.rawValue + 1, inWhichTab: .spectroscopy)
+        if let spot = Current.shifts.current() {
+            Current.raman.updateParameter(spot.value, forDataSource: spot.type.rawValue + 1, inWhichTab: .spectroscopy)
         }
         Current.signals.load(with: Constants.recentsSignalsKey)
         if Current.signals.isEmpty {
@@ -50,8 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Current.signals.isEmpty = false
             Current.raman.signal = 533.99
         }
-        if let value = Current.signals.current().value {
-            Current.raman.updateParameter(value, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
+        if let spot = Current.signals.current() {
+            Current.raman.updateParameter(spot.value, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
         }
         
         Current.colorSet.load()
