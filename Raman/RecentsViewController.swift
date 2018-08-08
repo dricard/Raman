@@ -263,7 +263,7 @@ extension RecentsViewController: UITableViewDataSource {
 extension RecentsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let Current = Current, let recents = recents, let value = recents.valueFor(indexPath.row), let recentsTitle = recentsTitle, let currentTab = currentTab else { return }
+        guard let Current = Current, let recents = recents, let value = recents.valueFor(indexPath.row), let recentsTitle = recentsTitle else { return }
         // update the current position in recents stack
         recents.setCurrent(to: indexPath.row)
         if let type = recents.typeFor(indexPath.row) {
@@ -272,12 +272,14 @@ extension RecentsViewController: UITableViewDelegate {
             case "Excitations":
                 Current.raman.updateParameter(value, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
             case "Signals":
-                switch currentTab {
-                case .spectroscopy:
-                    Current.raman.updateParameter(value, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
-                case .bandwidth:
-                    Current.raman.updateParameter(value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
-                }
+//                switch currentTab {
+//                case .spectroscopy:
+                Current.raman.updateParameter(value, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
+//                case .bandwidth:
+//                    Current.raman.updateParameter(value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
+//                }
+            case "Wavelengths":
+                Current.raman.updateParameter(value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
             case "Shifts":
                 switch type {
                 case .shiftInCm:

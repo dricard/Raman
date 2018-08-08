@@ -104,14 +104,16 @@ class BandwidthViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        guard let Current = Current else { return }
-//        
-//        if let value = Current.signals.current().value {
-//            os_log("setting bandwidth wavelength to current signals track", log: Log.general, type: .info)
-//        Current.raman.updateParameter(value, forDataSource: 0, inWhichTab: .bandwidth)
-//        } else {
-//            os_log("invalid value for current signal value in bandwidth", log: Log.general, type: .error)
-//        }
+        guard let Current = Current else { return }
+        
+        if let spot = Current.wavelengths.current() {
+            os_log("setting bandwidth wavelength to current wavelength track", log: Log.general, type: .info)
+            if Current.raman.bwLambda != spot.value {
+                Current.raman.updateParameter(spot.value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
+            }
+        } else {
+            os_log("invalid value for current wavelength value in bandwidth", log: Log.general, type: .error)
+        }
         
         updateInterface()
     }
@@ -196,13 +198,13 @@ extension BandwidthViewController: UITableViewDataSource {
         // set images on both sides of cell depending on available data in recents
         switch indexPath.row {
         case 0:
-            os_log("configuring cell for bandwidth signal with row = %d", log: Log.general, type: .debug, indexPath.row)
-            if Current.signals.left() {
+            os_log("configuring cell for bandwidth wavelength with row = %d", log: Log.general, type: .debug, indexPath.row)
+            if Current.wavelengths.left() {
                 cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
             } else {
                 cell.leftDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
             }
-            if Current.signals.righ() {
+            if Current.wavelengths.righ() {
                 cell.rightDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
             } else {
                 cell.rightDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
@@ -279,8 +281,8 @@ extension BandwidthViewController {
                 
                 switch indexPath.row {
                 case Constants.bwExcitationIndex:
-                    if Current.signals.moveLeft() {
-                        if let spot = Current.signals.current() {
+                    if Current.wavelengths.moveLeft() {
+                        if let spot = Current.wavelengths.current() {
                             Current.raman.updateParameter(spot.value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
                         }
                     }
@@ -323,8 +325,8 @@ extension BandwidthViewController {
 
                 switch indexPath.row {
                 case Constants.bwExcitationIndex:
-                    if Current.signals.moveRight() {
-                        if let spot = Current.signals.current() {
+                    if Current.wavelengths.moveRight() {
+                        if let spot = Current.wavelengths.current() {
                             Current.raman.updateParameter(spot.value
                                 , forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
                         }
@@ -368,7 +370,7 @@ extension BandwidthViewController: UIViewControllerPreviewingDelegate {
         guard let Current = Current else { return nil }
         switch indexPath.row {
         case Constants.bwExcitationIndex:
-            return Current.signals
+            return Current.wavelengths
         default:
             // all other cases are bandwidths and handles by the same recents
             return Current.bandwidths
@@ -391,7 +393,7 @@ extension BandwidthViewController: UIViewControllerPreviewingDelegate {
         recentsController.currentTab = .bandwidth
         switch indexPath.row {
         case Constants.bwExcitationIndex:
-            recentsController.recentsTitle = "Signals"
+            recentsController.recentsTitle = "Wavelength"
          default:
             recentsController.recentsTitle = "Bandwidths"
         }

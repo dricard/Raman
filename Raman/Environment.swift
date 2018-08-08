@@ -16,6 +16,7 @@ struct Environment {
     var locale = Language()
     var excitations = Recents(for: .wavelength, with: Constants.recentsExcitationKey)
     var signals = Recents(for: .wavelength, with: Constants.recentsSignalsKey)
+    var wavelengths = Recents(for: .wavelength, with: Constants.recentsWavelengthKey)
     var shifts = Recents(for: .shiftInCm, with: Constants.recentsShiftsKey)
     var bandwidths = Recents(for: .bandwidthInCm, with: Constants.recentsBandwidthsKey)
     var colorSet = Colors()
@@ -30,6 +31,7 @@ extension Environment {
         locale: .mock,
         excitations: .mockWavelengths,
         signals: .mockWavelengths,
+        wavelengths: .mockWavelengths,
         shifts: .mockShiftInCm,
         bandwidths: .mockBandwidthInNm,
         colorSet: .mock

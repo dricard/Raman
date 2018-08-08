@@ -147,6 +147,10 @@ class CalculatorViewController: UIViewController {
                 Current.signals.push(Current.raman.signal, with: .wavelength)
                 os_log("Pushed value %.4f to shifts recents", log: Log.general, type: .debug, currentValue)
                 os_log("Pushed value %.4f to signals recents", log: Log.general, type: .debug, Current.raman.signal)
+            case .wavelengths:
+                Current.wavelengths.push(currentValue, with: .wavelength)
+                os_log("Pushed value %.4f to wavelength recents", log: Log.general, type: .debug, currentValue)
+
             }
             self.navigationController!.popViewController(animated: true)
         }
@@ -272,6 +276,7 @@ class CalculatorViewController: UIViewController {
     enum Track {
         case excitations
         case signals
+        case wavelengths
         case bandwidths
         case shifts
     }
@@ -280,17 +285,17 @@ class CalculatorViewController: UIViewController {
         switch inWhichTab {
         case .spectroscopy:
             switch forDataSource {
-            case 0:
+            case Constants.excitationIndex:
                 return .excitations
-            case 1:
+            case Constants.signalIndex:
                 return .signals
             default:
                 return .shifts
             }
         case .bandwidth:
             switch forDataSource {
-            case 0:
-                return .signals
+            case Constants.bwExcitationIndex:
+                return .wavelengths
             default:
                 return .bandwidths
             }

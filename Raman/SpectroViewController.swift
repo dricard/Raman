@@ -67,7 +67,7 @@ class SpectroViewController: UIViewController {
 
         }, completion: nil)
         
-        // update the display with new them
+        // update the display with new theme
         tableView.reloadData()
     }
     
@@ -105,7 +105,7 @@ class SpectroViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // udate all data
+        // update all data
         updateInterface()
     }
     

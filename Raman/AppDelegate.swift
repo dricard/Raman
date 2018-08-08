@@ -49,7 +49,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let spot = Current.signals.current() {
             Current.raman.updateParameter(spot.value, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
         }
-        
+        Current.wavelengths.load(with: Constants.recentsWavelengthKey)
+        if Current.wavelengths.isEmpty {
+            Current.wavelengths.push(533.99, with: .wavelength)
+            Current.raman.bwLambda = 533.99
+        }
+        if let spot = Current.wavelengths.current() {
+            Current.raman.updateParameter(spot.value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
+        }
+
         Current.colorSet.load()
         
         os_log("LoadUserPrefs was completed", log: Log.general, type: .info)

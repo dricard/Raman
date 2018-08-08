@@ -20,6 +20,7 @@ struct Constants {
     static let recentsExcitationKey = "excitations"
     static let recentsShiftsKey = "shifts"
     static let recentsSignalsKey = "signals"
+    static let recentsWavelengthKey = "wavelenghts"
     static let recentsBandwidthsKey = "bandwidths"
     
     // Spectroscopy index
