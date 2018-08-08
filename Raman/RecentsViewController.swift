@@ -81,6 +81,7 @@ class RecentsViewController: UIViewController {
 
     // MARK: - actions
     
+    // These help with the drag & drop re-ordering of the rows
     struct TheCell {
         static var snapShot : UIView? = nil
     }
@@ -187,14 +188,17 @@ class RecentsViewController: UIViewController {
 
 extension RecentsViewController: UITableViewDataSource {
     
-    func configureCell(cell: RecentsTableViewCell) {
+    func configureCell(cell: RecentsTableViewCell, highlightFor: Bool) {
         guard let Current = Current else { return }
         
         cell.valueLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
         cell.unitsLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
         cell.exponentLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
-        cell.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
-        
+        if highlightFor {
+            cell.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")
+        } else {
+            cell.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -213,7 +217,10 @@ extension RecentsViewController: UITableViewDataSource {
         
         guard let recents = recents, let value = recents.valueFor(indexPath.row) else { return cell }
         
-        configureCell(cell: cell)
+        // see if this cell is the currently selected value
+        let currentlyDisplayedValue = recents.index == indexPath.row
+        
+        configureCell(cell: cell, highlightFor: currentlyDisplayedValue)
         
         if let type = recents.typeFor(indexPath.row) {
             

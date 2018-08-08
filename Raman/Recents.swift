@@ -60,6 +60,10 @@ class Recents {
         }
     }
     
+    var index: Int {
+        return currentIndex
+    }
+    
     func left() -> Bool {
         if currentIndex == currentIndex << 1 {
             os_log("End of recent data going left", log: Log.general, type: .debug)
