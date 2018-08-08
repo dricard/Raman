@@ -185,9 +185,13 @@ extension BandwidthViewController: UITableViewDataSource {
 
         // style view behind cell's label
         cell.labelView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")
-        
+        var smallSuffix = ""
+        if rowHeight < 85 {
+            smallSuffix = "_small"
+        }
+
         // row icon
-        cell.dataImageView.image = UIImage(named: "bw_\(indexPath.row)")
+        cell.dataImageView.image = UIImage(named: "bw_\(indexPath.row)" + smallSuffix)
         cell.dataImageView.layer.cornerRadius = 8
         cell.dataImageView.layer.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")?.cgColor
 
@@ -231,7 +235,7 @@ extension BandwidthViewController: UITableViewDataSource {
         return Constants.ramanBandwidth.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    var rowHeight: CGFloat {
         if let navigationController = navigationController, let tabBarController = tabBarController {
             let rowHeight = ( view.frame.height - navigationController.navigationBar.frame.height - tabBarController.tabBar.frame.height - UIApplication.shared.statusBarFrame.height ) / 5
             print("\(rowHeight)")
@@ -241,6 +245,10 @@ extension BandwidthViewController: UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return rowHeight
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DataCell.reuseIdentifier, for: indexPath) as! DataCell
         

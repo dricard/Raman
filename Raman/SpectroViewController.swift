@@ -171,7 +171,7 @@ extension SpectroViewController: UITableViewDelegate {
 
 extension SpectroViewController: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    var rowHeight: CGFloat {
         if let navigationController = navigationController, let tabBarController = tabBarController {
             let rowHeight = ( view.frame.height - navigationController.navigationBar.frame.height - tabBarController.tabBar.frame.height - UIApplication.shared.statusBarFrame.height ) / 5
             print("\(rowHeight)")
@@ -179,6 +179,10 @@ extension SpectroViewController: UITableViewDataSource {
         } else {
             return CGFloat(99.5)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return rowHeight
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -212,7 +216,11 @@ extension SpectroViewController: UITableViewDataSource {
         
         // style view behind cell's label
         cell.labelView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")
-        cell.dataImageView.image = UIImage(named: "spectro_\(indexPath.row)")
+        var smallSuffix = ""
+        if rowHeight < 85 {
+            smallSuffix = "_small"
+        }
+        cell.dataImageView.image = UIImage(named: "spectro_\(indexPath.row)" + smallSuffix)
         cell.dataImageView.layer.cornerRadius = 8
         cell.dataImageView.layer.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")?.cgColor
 
