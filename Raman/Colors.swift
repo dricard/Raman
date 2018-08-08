@@ -70,7 +70,7 @@ class Colors {
                 _mode = .dark
             }
         } else {
-            _mode = .light
+            _mode = .dark
             darkSet = .set2
             lightSet = .set2
             return

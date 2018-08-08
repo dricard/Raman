@@ -174,7 +174,6 @@ extension SpectroViewController: UITableViewDataSource {
     var rowHeight: CGFloat {
         if let navigationController = navigationController, let tabBarController = tabBarController {
             let rowHeight = ( view.frame.height - navigationController.navigationBar.frame.height - tabBarController.tabBar.frame.height - UIApplication.shared.statusBarFrame.height ) / 5
-            print("\(rowHeight)")
             return rowHeight
         } else {
             return CGFloat(99.5)

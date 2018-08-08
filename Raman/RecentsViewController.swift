@@ -152,7 +152,6 @@ class RecentsViewController: UIViewController {
                 var center = TheCell.snapShot!.center
                 let location = sender.location(in: tableView)
                 guard let indexPath = tableView.indexPathForRow(at: location), let recents = recents else { return }
-                print(indexPath.row)
                 center.y = location.y
                 if Initial.indexPath != nil && indexPath != Initial.indexPath {
                     if let spot_a = recents.stack[indexPath.row], let spot_b = recents.stack[Initial.indexPath!.row] {
