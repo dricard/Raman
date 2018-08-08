@@ -80,7 +80,8 @@ class Raman {
                 "rowsToUpdate": [
                     Constants.bwCmIndex,
                     Constants.bwGhzIndex,
-                    Constants.bwNmIndex
+                    Constants.bwNmIndex,
+                    Constants.bwmeVIndex
                 ]
             ]
             NotificationCenter.default.post(name: Raman.bandwidthChangedNotification, object: self, userInfo: userInfo)
@@ -98,7 +99,8 @@ class Raman {
                 "rowsToUpdate": [
                     Constants.bwExcitationIndex,
                     Constants.bwGhzIndex,
-                    Constants.bwNmIndex
+                    Constants.bwNmIndex,
+                    Constants.bwmeVIndex
                 ]
             ]
             NotificationCenter.default.post(name: Raman.bandwidthChangedNotification, object: self, userInfo: userInfo)
@@ -348,21 +350,26 @@ class Raman {
                 if value > -10000 && value < 10000 {
                     return (true, nil)
                 } else {
-                    return (false, "Please enter a shift in the range +/- 10000cm-1")
+                    return (false, "Please enter a bandwidth in the range +/- 10000cm-1")
                 }
             case Constants.bwGhzIndex:
                 if value > -90000000 && value < 90000000 {
                     return (true, nil)
                 } else {
-                    return (false, "Please enter a shift in the range +/- 90000000GHz")
+                    return (false, "Please enter a bandwidth in the range +/- 90000000GHz")
                 }
             case Constants.bwNmIndex:
                 if value > -10000 && value < 10000 {
                     return (true, nil)
                 } else {
-                    return (false, "Please enter a shift in the range +/- 10000meV")
+                    return (false, "Please enter a bandwidth in the range +/- 10000 nm")
                 }
-            default:
+            case Constants.bwmeVIndex:
+                if value > -10000 && value < 10000 {
+                    return (true, nil)
+                } else {
+                    return (false, "Please enter a bandwidth in the range +/- 10000meV")
+                }            default:
                 print("ERROR in checkForValidValue of Bandwidth data - \(value) for \(forDataSource)")
                 return(true, nil)
             }
