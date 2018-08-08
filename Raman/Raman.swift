@@ -172,7 +172,7 @@ class Raman {
             if _pump != 0 && _signal != 0 {
                 return ( 1240.6 / _pump - 1240.6 / _signal ) * 1000.0
             } else {
-                print("ERROR in shiftInMev -- invalud value for variable named 'pump' or 'signal'")
+                print("ERROR in shiftInMev -- invalid value for variable named 'pump' or 'signal'")
                 return 0.0
             }
         }
@@ -184,7 +184,7 @@ class Raman {
                 let alternateValue = (1240600.0 / _pump) - 1
                 // we use signal instead of _signal to trigger an update and a save
                 signal = 1240600.0 / (1240600.0 / _pump - alternateValue)
-                print("ERROR in shiftInMev -- invalud value for variable named 'pump' or 'newValue'")
+                print("ERROR in shiftInMev -- invalid value for variable named 'pump' or 'newValue'")
             }
         }
     }
@@ -210,6 +210,15 @@ class Raman {
         }
     }
     
+    var bwInMeV : Double {
+        get {
+            return bwInCm * 0.123984
+        }
+        set {
+            bwInCm = newValue / 0.123984
+        }
+    }
+
     var bwInNm : Double {
         get {
             if _bwLambda != 0 {
@@ -279,6 +288,7 @@ class Raman {
         case Constants.bwCmIndex: return bwInCm
         case Constants.bwGhzIndex: return bwInGhz
         case Constants.bwNmIndex: return bwInNm
+        case Constants.bwmeVIndex: return bwInMeV
         default:
             print("ERROR in Raman.swift - wrong argument for bwData: \(index)")
             return 1.0
@@ -387,6 +397,8 @@ class Raman {
                 bwInGhz = value
             case Constants.bwNmIndex:
                 bwInNm = value
+            case Constants.bwmeVIndex:
+                bwInMeV = value
             default:
                 print("ERROR in updateParameter - default case for Bandwidth should not happen")
             }

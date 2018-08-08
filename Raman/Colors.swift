@@ -23,8 +23,8 @@ enum ThemeModes: String {
 
 class Colors {
     
-    var darkSet: ColorSets = .set0
-    var lightSet: ColorSets = .set0
+    var darkSet: ColorSets = .set2
+    var lightSet: ColorSets = .set2
     private var _mode: ThemeModes = .light
     
     var mode: ThemeModes {
@@ -71,6 +71,9 @@ class Colors {
             }
         } else {
             _mode = .light
+            darkSet = .set2
+            lightSet = .set2
+            return
         }
         let savedDarkSet = UserDefaults.standard.integer(forKey: "darkSet")
         switch savedDarkSet {
@@ -85,7 +88,7 @@ class Colors {
         case 4:
             darkSet = .set4
         default:
-            darkSet = .set0
+            darkSet = .set2
         }
         
         let savedLightSet = UserDefaults.standard.integer(forKey: "lightSet")
@@ -101,7 +104,7 @@ class Colors {
         case 4:
             lightSet = .set4
         default:
-            lightSet = .set0
+            lightSet = .set2
         }
     }
 }

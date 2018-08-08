@@ -209,7 +209,7 @@ extension BandwidthViewController: UITableViewDataSource {
             } else {
                 cell.rightDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
             }
-        case 1, 2, 3:
+        case 1, 2, 3, 4:
             os_log("configuring cell for bandwidth with row = %d", log: Log.general, type: .debug, indexPath.row)
             if Current.bandwidths.left() {
                 cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
