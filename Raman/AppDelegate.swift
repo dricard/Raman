@@ -21,8 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Current.bandwidths.load(with: Constants.recentsBandwidthsKey)
         if Current.bandwidths.isEmpty {
-            Current.bandwidths.push(70.00, with: .shiftInCm)
-            Current.bandwidths.isEmpty = false
+            Current.bandwidths.push(70.00, with: .bandwidthInCm)
         }
         if let spot = Current.bandwidths.current() {
             Current.raman.updateParameter(spot.value, forDataSource: spot.type.rawValue - 3, inWhichTab: .bandwidth)
@@ -31,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Current.excitations.load(with: Constants.recentsExcitationKey)
         if Current.excitations.isEmpty {
             Current.excitations.push(532.00, with: .wavelength)
-            Current.excitations.isEmpty = false
         }
         if let spot = Current.excitations.current() {
             Current.raman.updateParameter(spot.value, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
@@ -39,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Current.shifts.load(with: Constants.recentsShiftsKey)
         if Current.shifts.isEmpty {
             Current.shifts.push(70.00, with: .shiftInCm)
-            Current.shifts.isEmpty = false
         }
         if let spot = Current.shifts.current() {
             Current.raman.updateParameter(spot.value, forDataSource: spot.type.rawValue + 1, inWhichTab: .spectroscopy)
@@ -47,7 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Current.signals.load(with: Constants.recentsSignalsKey)
         if Current.signals.isEmpty {
             Current.signals.push(533.99, with: .wavelength)
-            Current.signals.isEmpty = false
             Current.raman.signal = 533.99
         }
         if let spot = Current.signals.current() {

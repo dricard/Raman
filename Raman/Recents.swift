@@ -26,7 +26,7 @@ fileprivate func >>(lhs:Int, rhs:Int) -> Int {
 }
 
 enum RecentType: Int {
-    case wavelength
+    case wavelength = 0
     case shiftInCm
     case shiftInGhz
     case shiftInMev
@@ -47,8 +47,11 @@ class Recents {
     let max = 9
     var stack = [ Spot? ]()
     private var currentIndex = 0
-    var isEmpty = true
     var key: String
+    
+    var isEmpty: Bool {
+        return count() == 0
+    }
     
     init(for type: RecentType, with key: String) {
         self.key = key
@@ -107,6 +110,27 @@ class Recents {
         }
     }
 
+    private func isAlreadyInRecent(_ value: Double) -> Bool {
+        for spot in stack.compactMap( { $0 } ){
+            if value == spot.value {
+                // this value is already in the recents list
+                return true
+            }
+        }
+        // we didn't find any value matching for the answer is no
+        return false
+    }
+    
+    private func switchTo(_ value: Double) {
+        for (index, spot) in stack.enumerated() {
+            if let spot = spot {
+                if spot.value == value {
+                    currentIndex = index
+                }
+            }
+        }
+        save()
+    }
     
     /// Push a new value onto the recents stack
     ///
@@ -114,15 +138,22 @@ class Recents {
     ///   - newValue: value to be added
     ///   - type: type of the value
     func push(_ newValue: Double, with type: RecentType) {
-        // we make room at index 0 by moving each value to the next position
-        for i in (1...max).reversed() {
-            stack[i] = stack[i - 1]
+        // first we check if the value is already in our recents
+        if isAlreadyInRecent(newValue) {
+            // and if so we just make that the current value
+            switchTo(newValue)
+        } else {
+            // otherwise we push the new value on the stack
+            // we make room at index 0 by moving each value to the next position
+            for i in (1...max).reversed() {
+                stack[i] = stack[i - 1]
+            }
+            // then we set the new value at index 0
+            stack[0] = Spot(value: newValue, type: type)
+            // and reset the current position at 0
+            currentIndex = 0
+            save()
         }
-        // then we set the new value at index 0
-        stack[0] = Spot(value: newValue, type: type)
-        // and reset the current position at 0
-        currentIndex = 0
-        save()
     }
     
     func current() -> Spot? {
@@ -168,6 +199,9 @@ class Recents {
     }
     
     func remove(at index: Int) {
+        if index == currentIndex && index > count() - 2 {
+            currentIndex = count() - 2 >= 0 ? count() - 2 : 0
+        }
         stack.remove(at: index)
         compact()
     }
@@ -191,19 +225,18 @@ class Recents {
     }
     
     func load(with key: String) {
-        var noDataOnDisk = false
+//        var noDataOnDisk = false
         stack.removeAll()
         let noValue: Double = -1.0
-//        key = loadKey
         for index in 0...max {
             let valueKey = "\(key)_value_\(index)"
             let typeKey = "\(key)_type_\(index)"
             let value = UserDefaults.standard.double(forKey: valueKey)
             let typeIndex = UserDefaults.standard.integer(forKey: typeKey)
             if value == noValue || value == 0.0 {
-                if index == 0 {
-                    noDataOnDisk = true
-                }
+//                if index == 0 {
+//                    noDataOnDisk = true
+//                }
                 stack.append(nil)
             } else {
                 let type: RecentType
@@ -229,12 +262,9 @@ class Recents {
                 let spot = Spot(value: value, type: type)
                 stack.append(spot)
             }
-            let currentKey = "\(key)_current"
-            currentIndex = UserDefaults.standard.integer(forKey: currentKey)
-            if noDataOnDisk {
-                isEmpty = true
-            }
         }
+        let currentKey = "\(key)_current"
+        currentIndex = UserDefaults.standard.integer(forKey: currentKey)
     }
 }
 
