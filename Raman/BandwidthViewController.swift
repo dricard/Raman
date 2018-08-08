@@ -232,7 +232,13 @@ extension BandwidthViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(99.5)
+        if let navigationController = navigationController, let tabBarController = tabBarController {
+            let rowHeight = ( view.frame.height - navigationController.navigationBar.frame.height - tabBarController.tabBar.frame.height - UIApplication.shared.statusBarFrame.height ) / 5
+            print("\(rowHeight)")
+            return rowHeight
+        } else {
+            return CGFloat(99.5)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
