@@ -52,6 +52,9 @@ class RecentsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // register observer for value updates from Model
+        NotificationCenter.default.addObserver(self, selector: #selector(updateParameter), name: Recents.recentsChangedNotification, object: nil)
+
         if let recentsTitle = recentsTitle {
             title = recentsTitle
         }
@@ -78,6 +81,24 @@ class RecentsViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
     }
+
+    // MARK: - Updates to parameters
+    
+    @objc func updateParameter(_ notification: NSNotification) {
+        // receveived a notification of changed value
+        if let userInfo = notification.userInfo {
+            os_log("Received notification in recents with userInfo: %s", log: Log.general, type: .info, "\(userInfo)")
+            guard let newIndex = userInfo["newIndex"] as? Int else { return }
+            DispatchQueue.main.async {
+                self.updateRamanValue(for: newIndex)
+                self.tableView.reloadData()
+            }
+            
+        } else {
+            os_log("Received notification without userInfo in recents", log: Log.general, type: .error)
+        }
+    }
+    
 
     // MARK: - actions
     
@@ -260,23 +281,16 @@ extension RecentsViewController: UITableViewDataSource {
 }
 
 extension RecentsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        guard let Current = Current, let recents = recents, let value = recents.valueFor(indexPath.row), let recentsTitle = recentsTitle else { return }
-        // update the current position in recents stack
-        recents.setCurrent(to: indexPath.row)
-        if let type = recents.typeFor(indexPath.row) {
+    
+    func updateRamanValue(for index: Int) {
+        guard let Current = Current, let recents = recents, let value = recents.valueFor(index), let recentsTitle = recentsTitle else { return }
+        if let type = recents.typeFor(index) {
             
             switch recentsTitle {
             case "Excitations":
                 Current.raman.updateParameter(value, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
             case "Signals":
-//                switch currentTab {
-//                case .spectroscopy:
                 Current.raman.updateParameter(value, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
-//                case .bandwidth:
-//                    Current.raman.updateParameter(value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
-//                }
             case "Wavelengths":
                 Current.raman.updateParameter(value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
             case "Shifts":
@@ -288,7 +302,7 @@ extension RecentsViewController: UITableViewDelegate {
                 case .shiftInMev:
                     Current.raman.updateParameter(value, forDataSource: Constants.shiftmeVIndex, inWhichTab: .spectroscopy)
                 default:
-                    os_log("Wrong parameter in didSelectRowAt in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
+                    os_log("Wrong parameter in changeSelectedRecent in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
                 }
             case "Bandwidths":
                 switch type {
@@ -299,13 +313,28 @@ extension RecentsViewController: UITableViewDelegate {
                 case .bandwidthInNm:
                     Current.raman.updateParameter(value, forDataSource: Constants.bwNmIndex, inWhichTab: .bandwidth)
                 default:
-                    os_log("Wrong parameter in didSelectRowAt in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
+                    os_log("Wrong parameter in changeSelectedRecent in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
                 }
                 
             default:
-                os_log("Wrong parameter in didSelectRowAt in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
+                os_log("Wrong parameter in changeSelectedRecent in RecentsVC: %s", log: Log.general, type: .error, recentsTitle)
             }
         }
+
+    }
+    
+    func changeSelectedRecent(to index: Int) {
+        guard let Current = Current, let recents = recents else { return }
+        // update the current position in recents stack
+        recents.setCurrent(to: index)
+        // update the corresponding Raman parameter
+        updateRamanValue(for: index)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        changeSelectedRecent(to: indexPath.row)
+        
         if let navigationController = self.navigationController {
             navigationController.popToRootViewController(animated: true)
         }
@@ -316,7 +345,7 @@ extension RecentsViewController: UITableViewDelegate {
             
             if let recents = recents {
                 recents.remove(at: indexPath.row)
-                tableView.reloadData()
+//                tableView.reloadData()
             }
         }
     }

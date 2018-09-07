@@ -42,6 +42,10 @@ struct Spot {
 
 class Recents {
     
+    // MARK: - Notifications
+    
+    public static var recentsChangedNotification = Notification.Name.init("com.hexaedre.raman.recentsChangedNotification")
+    
     // MARK: - Properties
     
     let max = 9
@@ -133,6 +137,10 @@ class Recents {
                 }
             }
         }
+        let userInfo: [AnyHashable:Any]? = [
+            "newIndex": currentIndex
+        ]
+        NotificationCenter.default.post(name: Recents.recentsChangedNotification, object: self, userInfo: userInfo)
         save()
     }
     
@@ -156,6 +164,10 @@ class Recents {
             stack[0] = Spot(value: newValue, type: type)
             // and reset the current position at 0
             currentIndex = 0
+            let userInfo: [AnyHashable:Any]? = [
+                "newIndex": currentIndex
+            ]
+            NotificationCenter.default.post(name: Recents.recentsChangedNotification, object: self, userInfo: userInfo)
             save()
         }
     }
@@ -167,6 +179,10 @@ class Recents {
     func setCurrent(to index: Int)  {
         if index >= 0 && index <= max {
             currentIndex = index
+            let userInfo: [AnyHashable:Any]? = [
+                "newIndex": index
+            ]
+            NotificationCenter.default.post(name: Recents.recentsChangedNotification, object: self, userInfo: userInfo)
             save()
         }
     }
@@ -203,11 +219,23 @@ class Recents {
     }
     
     func remove(at index: Int) {
-        if index == currentIndex && index > count() - 2 {
-            currentIndex = count() - 2 >= 0 ? count() - 2 : 0
+        if index < currentIndex {
+            os_log("Deleting at a low index: %d with current: %d", log: Log.general, type: .debug, index, currentIndex)
+            currentIndex -= 1
+        } else if index > currentIndex {
+            // we do nothing the current index can stay the same
+            os_log("Deleting at a high index: %d with current: %d", log: Log.general, type: .debug, index, currentIndex)
+        } else {
+            os_log("Deleting at index: %d with current: %d", log: Log.general, type: .debug, index, currentIndex)
+            currentIndex = 0
         }
         stack.remove(at: index)
         compact()
+        let userInfo: [AnyHashable:Any]? = [
+            "newIndex": currentIndex
+        ]
+        NotificationCenter.default.post(name: Recents.recentsChangedNotification, object: self, userInfo: userInfo)
+        save()
     }
     
     // MARK: - saving/loading from disk
@@ -260,6 +288,9 @@ class Recents {
                 case 6:
                     type = .bandwidthInNm
                 default:
+                    // here we can't avoid the default case because we're reading from disk an integer
+                    // to map to our enum, but if the save function does its job we should never encounter
+                    // this case
                     os_log("Wrong typeIndex in load(): %d", log: Log.general, type: .error, typeIndex)
                     type = .wavelength
                 }

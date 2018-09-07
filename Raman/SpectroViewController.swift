@@ -225,7 +225,7 @@ extension SpectroViewController: UITableViewDataSource {
 
         // set images on both sides of cell depending on available data in recents
         switch indexPath.row {
-        case 0:
+        case Constants.excitationIndex:
             os_log("configuring cell for excitations with row = %d", log: Log.general, type: .debug, indexPath.row)
             if Current.excitations.left() {
                 cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
@@ -237,7 +237,7 @@ extension SpectroViewController: UITableViewDataSource {
             } else {
                 cell.rightDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
             }
-        case 1:
+        case Constants.signalIndex:
             os_log("configuring cell for signals with row = %d", log: Log.general, type: .debug, indexPath.row)
             if Current.signals.left() {
                 cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
@@ -249,7 +249,8 @@ extension SpectroViewController: UITableViewDataSource {
             } else {
                 cell.rightDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
             }
-        case 2, 3, 4:
+        case Constants.shiftCmIndex, Constants.shiftGhzIndex, Constants.shiftmeVIndex:
+            os_log("configuring cell for shifts with row = %d", log: Log.general, type: .debug, indexPath.row)
             if Current.shifts.left() {
                 cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
             } else {
@@ -261,8 +262,9 @@ extension SpectroViewController: UITableViewDataSource {
                 cell.rightDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
             }
         default:
-            cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
-            cell.rightDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            os_log("Wrong indexPath.row in configureCell() in SpectroVC: %d", log: Log.general, type: .error, indexPath.row)
+            cell.leftDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            cell.rightDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
         }
         
     }
