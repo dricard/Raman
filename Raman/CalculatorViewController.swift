@@ -229,6 +229,9 @@ class CalculatorViewController: UIViewController {
     // MARK: - Data entry
     
     func enterDigit(_ digitPressed: DigitType) {
+        if let Current = Current {
+            Current.sounds.playKeyClick()
+        }
         switch digitPressed {
         case .period:
             if singlePeriod {

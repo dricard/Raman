@@ -10,6 +10,8 @@
 		2115376A1EF59CF90006AC64 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211537691EF59CF90006AC64 /* CalculatorViewController.swift */; };
 		2115376C1EF5BC4F0006AC64 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115376B1EF5BC4F0006AC64 /* Calculator.swift */; };
 		21368BC31EF42EC800DB6096 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21368BC21EF42EC800DB6096 /* StoreKit.framework */; };
+		2140CADD2142FDB800B44C67 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2140CADC2142FDB800B44C67 /* Sounds.swift */; };
+		2140CAE02143020E00B44C67 /* click_10.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2140CADF2143020E00B44C67 /* click_10.caf */; };
 		214414AA1CB2B3F400A1958D /* BandwidthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214414A91CB2B3F400A1958D /* BandwidthViewController.swift */; };
 		214414AC1CB2C0B700A1958D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214414AB1CB2C0B700A1958D /* Constants.swift */; };
 		214A4B7820E2AA21003835FC /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214A4B7720E2AA21003835FC /* Environment.swift */; };
@@ -44,6 +46,8 @@
 		211537691EF59CF90006AC64 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		2115376B1EF5BC4F0006AC64 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		21368BC21EF42EC800DB6096 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		2140CADC2142FDB800B44C67 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
+		2140CADF2143020E00B44C67 /* click_10.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = click_10.caf; sourceTree = "<group>"; };
 		214414A91CB2B3F400A1958D /* BandwidthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BandwidthViewController.swift; sourceTree = "<group>"; };
 		214414AB1CB2C0B700A1958D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		214A4B7720E2AA21003835FC /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 				21F468AD1E2C6133004C56BA /* Strings+Localized.swift */,
 				215AB9E31EF3208400555AB4 /* ThemeMode.swift */,
 				21C25D5E20EE8D0F0082BB8E /* RecentsTableViewCell.swift */,
+				2140CADC2142FDB800B44C67 /* Sounds.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 		92011AE61B0D197200611519 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2140CADF2143020E00B44C67 /* click_10.caf */,
 				92011AE81B0D197300611519 /* AppDelegate.swift */,
 				92011AEF1B0D197300611519 /* Images.xcassets */,
 				92011AE71B0D197300611519 /* Info.plist */,
@@ -260,6 +266,7 @@
 			files = (
 				21DBEA481E2C5A2E00C8436B /* Localizable.strings in Resources */,
 				21DBEA441E2C59E600C8436B /* Main.storyboard in Resources */,
+				2140CAE02143020E00B44C67 /* click_10.caf in Resources */,
 				92011AF31B0D197300611519 /* LaunchScreen.xib in Resources */,
 				92011AF01B0D197300611519 /* Images.xcassets in Resources */,
 			);
@@ -289,6 +296,7 @@
 				214A4B7E20E2CBBE003835FC /* Device.swift in Sources */,
 				92011AE91B0D197300611519 /* AppDelegate.swift in Sources */,
 				215A7B011CF9194C003B9F9B /* Theme.swift in Sources */,
+				2140CADD2142FDB800B44C67 /* Sounds.swift in Sources */,
 				215AF03520EC5604006EC28F /* Log.swift in Sources */,
 				214A4B7C20E2CAC7003835FC /* Screen.swift in Sources */,
 				215A7B031CF91D07003B9F9B /* BWCell.swift in Sources */,

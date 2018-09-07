@@ -20,6 +20,7 @@ struct Environment {
     var shifts = Recents(for: .shiftInCm, with: Constants.recentsShiftsKey)
     var bandwidths = Recents(for: .bandwidthInCm, with: Constants.recentsBandwidthsKey)
     var colorSet = Colors()
+    var sounds = Sounds()
 }
 
 extension Environment {
@@ -34,6 +35,7 @@ extension Environment {
         wavelengths: .mockWavelengths,
         shifts: .mockShiftInCm,
         bandwidths: .mockBandwidthInNm,
-        colorSet: .mock
+        colorSet: .mock,
+        sounds: .mock
     )
 }
