@@ -10,6 +10,19 @@ import UIKit
 
 struct Constants {
 
+    // UserDefaults keys
+    
+    static let keyForSignal = "signal"
+    static let keyForPump = "pump"
+    static let keyForBwInCm = "bwInCm"
+    static let keyForBwLambda = "bwLambda"
+    
+    static let recentsExcitationKey = "excitations"
+    static let recentsShiftsKey = "shifts"
+    static let recentsSignalsKey = "signals"
+    static let recentsWavelengthKey = "wavelenghts"
+    static let recentsBandwidthsKey = "bandwidths"
+    
     // Spectroscopy index
     
     static let excitationIndex = 0
@@ -24,21 +37,21 @@ struct Constants {
     static let bwCmIndex = 1
     static let bwGhzIndex = 2
     static let bwNmIndex = 3
-    
+    static let bwmeVIndex = 4
     
     static let ramanShift: [String] = [ .excitationText, .signalText, .shiftText, .shiftText, .shiftText]
     
-    static let ramanBandwidth: [String] = [ .wavelength, .bandwidth, .bandwidth, .bandwidth]
+    static let ramanBandwidth: [String] = [ .wavelength, .bandwidth, .bandwidth, .bandwidth, .bandwidth]
     
-    static let specUnits = ["nm", "nm", "cm", "GHz", "MeV"]
+    static let specUnits = ["nm", "nm", "cm", "GHz", "meV"]
     static let specExp = ["", "", "-1", "", ""]
-    static let bwUnits = ["nm", "cm", "GHz", "nm"]
-    static let bwEpx = ["", "-1", "", ""]
+    static let bwUnits = ["nm", "cm", "GHz", "nm", "meV"]
+    static let bwEpx = ["", "-1", "", "", ""]
 
-    static let specRounding = [".2", ".2", ".4", ".2", ".5" ]
-    static let bwRounding = [".2", ".4", ".2", ".2" ]
+    static let specRounding = [".2", ".2", ".2", ".2", ".2" ]
+    static let bwRounding = [".2", ".2", ".2", ".2", ".2" ]
     
     static let specToolTip: [String] = [ .changeExcitationText, .changeSignalText, .changeShiftText, .changeShiftText, .changeShiftText ]
 
-    static let bwToolTip: [String] = [ .changeExcitationBWText, .changeBandwidthText, .changeBandwidthText, .changeBandwidthText]
+    static let bwToolTip: [String] = [ .changeExcitationBWText, .changeBandwidthText, .changeBandwidthText, .changeBandwidthText, .changeBandwidthText]
 }

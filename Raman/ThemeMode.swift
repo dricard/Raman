@@ -8,14 +8,26 @@
 
 import Foundation
 
-enum ThemeModes: Int {
-    case darkMode = 1
-    case lightMode
-}
 
 class ThemeMode {
     
-    // MARK: - Properties
-    var mode: ThemeModes = .darkMode
+    init(mode: ThemeModes = .dark) {
+        self.mode = mode
+    }
     
+    // MARK: - Properties
+    var mode: ThemeModes = .dark
+    
+    func prefix() -> String {
+        switch mode {
+        case .dark:
+            return "dark_"
+        case .light:
+            return "light_"
+        }
+    }
+}
+
+extension ThemeMode {
+    static let mock = ThemeMode.init(mode: .light)
 }

@@ -7,107 +7,95 @@
 //
 
 import UIKit
-import StoreKit
+import os.log
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var raman = Raman()
-    var selectedTheme = ThemeMode()
-    let iapHelper = IAPHelper(prodIds: Set(["com.hexaedre.Raman.memories"]))
-    var memory = Memory()
+    var Current = Environment()
     
     fileprivate func loadUserPrefs() {
         // Load user's data
         
-        let signal = UserDefaults.standard.double(forKey: "signal")
-        if signal != 0 {
-            raman.signal = signal
-        } else {
-            UserDefaults.standard.set(raman.signal, forKey: "signal")
+        Current.bandwidths.load(with: Constants.recentsBandwidthsKey)
+        if Current.bandwidths.isEmpty {
+            Current.bandwidths.push(70.00, with: .bandwidthInCm)
         }
-        let pump = UserDefaults.standard.double(forKey: "pump")
-        if pump != 0 {
-            raman.pump = pump
-        } else {
-            UserDefaults.standard.set(raman.pump, forKey: "pump")
+        if let spot = Current.bandwidths.current() {
+            Current.raman.updateParameter(spot.value, forDataSource: spot.type.rawValue - 3, inWhichTab: .bandwidth)
         }
-        let bwLambda = UserDefaults.standard.double(forKey: "bwLambda")
-        if bwLambda != 0 {
-            raman.bwLambda = bwLambda
-        } else {
-            UserDefaults.standard.set(raman.bwLambda, forKey: "bwLambda")
+
+        Current.excitations.load(with: Constants.recentsExcitationKey)
+        if Current.excitations.isEmpty {
+            Current.excitations.push(532.00, with: .wavelength)
         }
-        let bwInCm = UserDefaults.standard.double(forKey: "bwInCm")
-        if bwInCm != 0 {
-            raman.bwInCm = bwInCm
-        } else {
-            UserDefaults.standard.set(raman.bwInCm, forKey: "bwInCm")
+        if let spot = Current.excitations.current() {
+            Current.raman.updateParameter(spot.value, forDataSource: Constants.excitationIndex, inWhichTab: .spectroscopy)
         }
-        memory.getMemoryFromDisk()
+        Current.shifts.load(with: Constants.recentsShiftsKey)
+        if Current.shifts.isEmpty {
+            Current.shifts.push(70.00, with: .shiftInCm)
+        }
+        if let spot = Current.shifts.current() {
+            Current.raman.updateParameter(spot.value, forDataSource: spot.type.rawValue + 1, inWhichTab: .spectroscopy)
+        }
+        Current.signals.load(with: Constants.recentsSignalsKey)
+        if Current.signals.isEmpty {
+            Current.signals.push(533.99, with: .wavelength)
+            Current.raman.signal = 533.99
+        }
+        if let spot = Current.signals.current() {
+            Current.raman.updateParameter(spot.value, forDataSource: Constants.signalIndex, inWhichTab: .spectroscopy)
+        }
+        Current.wavelengths.load(with: Constants.recentsWavelengthKey)
+        if Current.wavelengths.isEmpty {
+            Current.wavelengths.push(533.99, with: .wavelength)
+            Current.raman.bwLambda = 533.99
+        }
+        if let spot = Current.wavelengths.current() {
+            Current.raman.updateParameter(spot.value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
+        }
+
+        Current.colorSet.load()
         
-        // theme mode selected
-        let mode = UserDefaults.standard.integer(forKey: "themeMode")
-        if mode > 0 {
-            if let theme = ThemeModes(rawValue: mode) {
-                selectedTheme.mode = theme
-            } else {
-                selectedTheme.mode = ThemeModes.darkMode
-            }
-        } else {
-            UserDefaults.standard.set(ThemeModes.darkMode.rawValue, forKey: "themeMode")
-        }
-        
-    }
+        os_log("LoadUserPrefs was completed", log: Log.general, type: .info)
+}
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         loadUserPrefs()
         
-        window?.tintColor = Theme.color(for: .windowTintColor, with: selectedTheme.mode)
+        window?.tintColor = UIColor(named: "windowTintColor")
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.titleTextAttributes = [
             NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue): Theme.Fonts.navTitleFont.font,
             NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(red:0.29, green:0.38, blue:0.42, alpha:1.00)
         ]
         navBarAppearance.barStyle = UIBarStyle.blackTranslucent
-        navBarAppearance.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
+        navBarAppearance.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
         
         // set tab bar
         let tabBarAppearance = UITabBar.appearance()
-        tabBarAppearance.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
-        tabBarAppearance.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-        if #available(iOS 10.0, *) {
-            tabBarAppearance.unselectedItemTintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-        } else {
-            // Fallback on earlier versions
-        }
-        
-        iapHelper.requestProducts { (products) in
-            guard let products = products else { return }
-            
-            // testing
-            print(products.map { $0.productIdentifier })
-        }
-        
+        tabBarAppearance.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+        tabBarAppearance.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+        tabBarAppearance.unselectedItemTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+
         // Dependency injection
         
         guard let tabController = window?.rootViewController as? UITabBarController else { return true }
         
+        /* FOR TESTING */
+//        Current = .mock
+//        UserDefaults.standard.setValue([Current.locale.representation()], forKey: "AppleLanguages")
+//        UserDefaults.standard.synchronize()
+        /* TESTING END */
+        
         for vc in tabController.childViewControllers {
-            if let navController = vc as? UINavigationController, let viewController = navController.topViewController as? ViewController {
-                viewController.raman = raman
-                viewController.selectedTheme = selectedTheme
-                viewController.memory = memory
-                var iapContainer = viewController as IAPContainer
-                iapContainer.iapHelper = iapHelper
+            if let navController = vc as? UINavigationController, let viewController = navController.topViewController as? SpectroViewController {
+                viewController.Current = Current
             } else if let navController = vc as? UINavigationController, let viewController = navController.topViewController as? BandwidthViewController {
-                viewController.raman = raman
-                viewController.selectedTheme = selectedTheme
-                viewController.memory = memory
-                var iapContainer = viewController as IAPContainer
-                iapContainer.iapHelper = iapHelper
+                viewController.Current = Current
             }
         }
         

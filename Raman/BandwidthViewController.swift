@@ -7,23 +7,15 @@
 //
 
 import UIKit
-import StoreKit
+import os.log
 
-class BandwidthViewController: UIViewController, IAPContainer {
+class BandwidthViewController: UIViewController {
 
     // MARK: properties
     
-    var raman: Raman?
-    var selectedTheme: ThemeMode?
+    var Current: Environment?
+
     var themeModeButton: UIBarButtonItem!
-    var memory : Memory?
-    var iapHelper: IAPHelper? {
-        didSet {
-            updateIAPHelper()
-        }
-    }
-    // this will be set when iapHelper is set through the updateIAPHelper function
-    private var memoriesProduct: SKProduct?
 
     // MARK: Outlets
     
@@ -31,52 +23,44 @@ class BandwidthViewController: UIViewController, IAPContainer {
     @IBOutlet weak var aboutButton: UIBarButtonItem!
     
     @objc func themeModeButtonTapped(_ sender: UIBarButtonItem) {
-        if let selectedTheme = selectedTheme {
-            switch selectedTheme.mode {
-            case .darkMode:
-                self.selectedTheme?.mode = .lightMode
-            case .lightMode:
-                self.selectedTheme?.mode = .darkMode
-            }
-            UserDefaults.standard.set(selectedTheme.mode.rawValue, forKey: "themeMode")
+        if let Current = Current {
+            Current.colorSet.toggle()
+            Current.colorSet.save()
             updateInterface()
         }
     }
     
     func updateInterface() {
-        guard let selectedTheme = selectedTheme else { return }
+        guard let Current = Current else { return }
         
         // display theme mode button for this mode
         UIView.transition(with: self.view, duration: 0.5, options: .beginFromCurrentState, animations: {
 
         // set navigation bar
-        self.navigationController?.navigationBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
-        self.navigationController?.navigationBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): Theme.color(for: .navBarTextColor, with: selectedTheme.mode)]
-        
-        
-        // set tab bar
-        self.tabBarController?.tabBar.barTintColor = Theme.color(for: .navBarTintColor, with: selectedTheme.mode)
-        self.tabBarController?.tabBar.tintColor = Theme.color(for: .navBarTextColor, with: selectedTheme.mode)
-        if #available(iOS 10.0, *) {
-            self.tabBarController?.tabBar.unselectedItemTintColor = Theme.color(for: .navBarUnselectedTextColor, with: selectedTheme.mode)
-        } else {
-            // Fallback on earlier versions
-        }
-        
-        // update theme mode switch button
-        switch selectedTheme.mode {
-        case .darkMode:
-            self.themeModeButton.image = UIImage(named: "lightModeIcon")
-        case .lightMode:
-            self.themeModeButton.image = UIImage(named: "darkModeIcon")
-        }
+            self.navigationController?.navigationBar.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+            self.navigationController?.navigationBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")!]
+            
+            
+            // set tab bar
+            self.tabBarController?.tabBar.barTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
+            self.tabBarController?.tabBar.tintColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
+            
+            self.tabBarController?.tabBar.unselectedItemTintColor = UIColor(named: "\(Current.colorSet.prefix())navBarUnselectedTextColor")
+            
+            // update theme mode switch button
+            switch Current.colorSet.mode {
+            case .dark:
+                self.themeModeButton.image = UIImage(named: "lightModeIcon")
+            case .light:
+                self.themeModeButton.image = UIImage(named: "darkModeIcon")
+            }
         
         // set the tableview background color (behind the cells)
-        self.tableView.backgroundColor = Theme.color(for: .tableViewBackgroundColor, with: selectedTheme.mode)
+        self.tableView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())navBarTintColor")
         
         // set the separator color to the same as the background
-        self.tableView.separatorColor = Theme.color(for: .tableViewSeparatorColor, with: selectedTheme.mode)
+        self.tableView.separatorColor = UIColor(named: "\(Current.colorSet.prefix())tableViewSeparatorColor")
             
         }, completion: nil)
         
@@ -84,26 +68,28 @@ class BandwidthViewController: UIViewController, IAPContainer {
         tableView.reloadData()
     }
     
-    // MARK: Lyfe Cycle
+    // - MARK: Lyfe Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // register observer for value updates from Model
+        NotificationCenter.default.addObserver(self, selector: #selector(updateParameter), name: Raman.bandwidthChangedNotification, object: nil)
+
+        // 3D touch
+        registerForPreviewing(with: self, sourceView: view)
+
         // localize
         self.title = .bandwidthTitle
         aboutButton.title = .about
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            navigationController?.navigationItem.largeTitleDisplayMode = .always
-        } else {
-            // Fallback on earlier versions
-        }
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
 
         // This prevents the space below the cells to have spacers
         tableView.tableFooterView = UIView()
         
         // fix space on top of tableview
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsetsMake(-35, 0, 0, 0)
         
         // add theme mode button to navigation bar
         
@@ -117,57 +103,153 @@ class BandwidthViewController: UIViewController, IAPContainer {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        guard let Current = Current else { return }
+        
+        if let spot = Current.wavelengths.current() {
+            os_log("setting bandwidth wavelength to current wavelength track", log: Log.general, type: .info)
+            if Current.raman.bwLambda != spot.value {
+                Current.raman.updateParameter(spot.value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
+            }
+        } else {
+            os_log("invalid value for current wavelength value in bandwidth", log: Log.general, type: .error)
+        }
+        
         updateInterface()
     }
     
+    // MARK: - Updates to parameters
+    
+    @objc func updateParameter(_ notification: NSNotification) {
+        // receveived a notification of changed value
+        if let userInfo = notification.userInfo {
+            os_log("Received notification in bandwidth with userInfo: %s", log: Log.general, type: .info, "\(userInfo)")
+            var indexPaths = [IndexPath]()
+            if let rowsToUpdate = userInfo["rowsToUpdate"] as? [Int] {
+                for row in rowsToUpdate {
+                    indexPaths.append(IndexPath(row: row, section: 0))
+                }
+            }
+            DispatchQueue.main.async {
+                UIView.transition(with: self.view, duration: 0.8, options: .beginFromCurrentState, animations: {
+                    self.tableView.reloadRows(at: indexPaths, with: UITableViewRowAnimation.left)
+                    
+                }, completion: nil)
+            }
+        } else {
+            os_log("Received notification without userInfo in bandwidth", log: Log.general, type: .error)
+        }
+    }
+
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showAboutSegue" {
-            if let nvc = segue.destination as? UINavigationController, let vc = nvc.topViewController as? DisplayInfoViewController {
-                vc.memory = self.memory
-                vc.iapHelper = self.iapHelper
+            if let nvc = segue.destination as? UINavigationController, let vc = nvc.topViewController as? PreferencesViewController {
+                vc.Current = self.Current
             }
         }
     }
 
+
 }
 
-// MARK: TableView DataSource
+// MARK: - TableView DataSource
 
 extension BandwidthViewController: UITableViewDataSource {
     
-    @objc func configureCell(cell: BWCell, indexPath: IndexPath) {
-        guard let raman = raman, let selectedTheme = selectedTheme else { return }
+    @objc func configureCell(cell: DataCell, indexPath: IndexPath) {
+        guard let Current = Current else { return }
         
-        cell.valueLabel!.text = raman.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
+        // current value
+        cell.valueLabel!.text = Current.raman.bwData(indexPath.row).format(Constants.bwRounding[indexPath.row])
+        cell.valueLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+
+        // parameter name
         cell.dataLabel?.text = Constants.ramanBandwidth[indexPath.row]
-        cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
-        cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
-        cell.exponentLabel.text = Constants.bwEpx[indexPath.row]
-        cell.backgroundColor = Theme.color(for: .cellBackgroundColor, with: selectedTheme.mode)
-        cell.valueLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
-        cell.dataLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
-        cell.unitsLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
-        cell.exponentLabel.textColor = Theme.color(for: .cellTextColor, with: selectedTheme.mode)
-        if selectedTheme.mode == .darkMode {
-            cell.dataImageView?.image = UIImage(named: "bw\(indexPath.row)")
-        } else {
-            cell.dataImageView?.image = UIImage(named: "bw_light\(indexPath.row)")
-        }
+        cell.dataLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelTextColor")
         
+        // parameter units
+        cell.unitsLabel.text = Constants.bwUnits[indexPath.row]
+        cell.unitsLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+        
+        // parameter units exponent
+        cell.exponentsLabel.text = Constants.bwEpx[indexPath.row]
+        cell.exponentsLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+
+        // cell background color
+        cell.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
+
+        // style view behind the value
+        cell.valueLabelView.backgroundColor = UIColor.clear
+
+        // style view behind cell's label
+        cell.labelView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")
+        var smallSuffix = ""
+        if rowHeight < 85 {
+            smallSuffix = "_small"
+        }
+
+        // row icon
+        cell.dataImageView.image = UIImage(named: "bw_\(indexPath.row)" + smallSuffix)
+        cell.dataImageView.layer.cornerRadius = 8
+        cell.dataImageView.layer.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")?.cgColor
+
+        
+        // style view behind cell's label
+        cell.labelView.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellLabelBackgroundColor")
+
+        // set images on both sides of cell depending on available data in recents
+        switch indexPath.row {
+        case 0:
+            os_log("configuring cell for bandwidth wavelength with row = %d", log: Log.general, type: .debug, indexPath.row)
+            if Current.wavelengths.left() {
+                cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            } else {
+                cell.leftDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            }
+            if Current.wavelengths.righ() {
+                cell.rightDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            } else {
+                cell.rightDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            }
+        case 1, 2, 3, 4:
+            os_log("configuring cell for bandwidth with row = %d", log: Log.general, type: .debug, indexPath.row)
+            if Current.bandwidths.left() {
+                cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            } else {
+                cell.leftDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            }
+            if Current.bandwidths.righ() {
+                cell.rightDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            } else {
+                cell.rightDataAvailableImageView.image = UIImage(named: "noDataAvailable.png")
+            }
+         default:
+            cell.leftDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+            cell.rightDataAvailableImageView.image = UIImage(named: "dataAvailable.png")
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.ramanBandwidth.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(80)
+    var rowHeight: CGFloat {
+        if let navigationController = navigationController, let tabBarController = tabBarController {
+            let rowHeight = ( view.frame.height - navigationController.navigationBar.frame.height - tabBarController.tabBar.frame.height - UIApplication.shared.statusBarFrame.height ) / 5
+            return rowHeight
+        } else {
+            return CGFloat(99.5)
+        }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return rowHeight
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellBW", for: indexPath) as! BWCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: DataCell.reuseIdentifier, for: indexPath) as! DataCell
         
         configureCell(cell: cell, indexPath: indexPath)
         
@@ -179,93 +261,164 @@ extension BandwidthViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let raman = raman else { return }
+        guard let Current = Current else { return }
         
         /* Push the changeValueViewController */
         let controller = storyboard!.instantiateViewController(withIdentifier: "CalculatorViewController") as! CalculatorViewController
 
         controller.selectedDataSource = indexPath.row
-        controller.selectedValue = raman.bwData(indexPath.row)
+        controller.selectedValue = Current.raman.bwData(indexPath.row)
         controller.myUnits = Constants.bwUnits[indexPath.row]
         controller.myExp = Constants.bwEpx[indexPath.row]
         controller.toolTipString = Constants.bwToolTip[indexPath.row]
         controller.whichTab = Raman.DataSourceType.bandwidth
-        controller.raman = raman
-        controller.selectedTheme = selectedTheme
-        controller.memory = memory
+        controller.Current = Current
         
         navigationController!.pushViewController(controller, animated: true)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        guard let memory = memory else { return false }
-        return memory.isPurchased
+        return true
     }
     
 }
 
 // MARK: - Swipe actions (iOS11+)
 
-@available(iOS 11.0, *)
 extension BandwidthViewController {
     
+    // this goes left
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if let memory = memory, memory.isPurchased {
-            let previous = UIContextualAction(style: .normal, title: "previous") { (action, view, completionHandler) in
-                if let memory = self.memory, let raman = self.raman {
-                    let newValue = memory.previous(dataSource: .bandwidth, parameter: indexPath.row)
-                    if newValue != 0.0 {
-                        raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
-                        tableView.reloadData()
+        let previous = UIContextualAction(style: .normal, title: "previous") { (action, view, completionHandler) in
+            if let Current = self.Current {
+                
+                switch indexPath.row {
+                case Constants.bwExcitationIndex:
+                    if Current.wavelengths.moveLeft() {
+                        if let spot = Current.wavelengths.current() {
+                            Current.raman.updateParameter(spot.value, forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
+                        }
                     }
+                case Constants.bwCmIndex, Constants.bwNmIndex, Constants.bwGhzIndex:
+                    if Current.bandwidths.moveLeft() {
+                        if let spot = Current.bandwidths.current() {
+                            let type = spot.type
+                            
+                            switch type {
+                            case .bandwidthInCm:
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.bwCmIndex, inWhichTab: .bandwidth)
+                            case .bandwidthInNm:
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.bwNmIndex, inWhichTab: .bandwidth)
+                            case .bandwidthInGhz:
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.bwGhzIndex, inWhichTab: .bandwidth)
+                            default:
+                                os_log("Wrong type for bandwidth in lead swipe action", log: Log.general, type: .error)
+                            }
+                        }
+                    }
+                default:
+                    os_log("Wrong value for indexPath.row in bandwidth lead swipe action: %d", log: Log.general, type: .error, indexPath.row)
                 }
-                completionHandler(true)
+                
             }
-            if let selectedTheme = selectedTheme {
-                previous.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
-            }
-            let config = UISwipeActionsConfiguration(actions: [previous])
-            config.performsFirstActionWithFullSwipe = true
-            return config
-        } else {
-            return nil
+            completionHandler(true)
         }
+        if let Current = Current {
+            previous.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())swipeActionColor")
+        }
+        let config = UISwipeActionsConfiguration(actions: [previous])
+        config.performsFirstActionWithFullSwipe = true
+        return config
     }
     
+    // this goes right
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if let memory = memory, memory.isPurchased {
-            let next = UIContextualAction(style: .normal, title: "next") { (action, view, completionHandler) in
-                if let memory = self.memory, let raman = self.raman {
-                    let newValue = memory.next(dataSource: .bandwidth, parameter: indexPath.row)
-                    if newValue != 0.0 {
-                        raman.updateParameter(newValue, forDataSource: indexPath.row, inWhichTab: .bandwidth)
-                        tableView.reloadData()
+        let next = UIContextualAction(style: .normal, title: "next") { (action, view, completionHandler) in
+            if let Current = self.Current {
+
+                switch indexPath.row {
+                case Constants.bwExcitationIndex:
+                    if Current.wavelengths.moveRight() {
+                        if let spot = Current.wavelengths.current() {
+                            Current.raman.updateParameter(spot.value
+                                , forDataSource: Constants.bwExcitationIndex, inWhichTab: .bandwidth)
+                        }
                     }
+                case Constants.bwCmIndex, Constants.bwNmIndex, Constants.bwGhzIndex:
+                    if Current.bandwidths.moveRight() {
+                        if let spot = Current.bandwidths.current() {
+                            let type = spot.type
+                            
+                            switch type {
+                            case .bandwidthInCm:
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.bwCmIndex, inWhichTab: .bandwidth)
+                            case .bandwidthInNm:
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.bwNmIndex, inWhichTab: .bandwidth)
+                            case .bandwidthInGhz:
+                                Current.raman.updateParameter(spot.value, forDataSource: Constants.bwGhzIndex, inWhichTab: .bandwidth)
+                            default:
+                                os_log("Wrong type for bandwidth in trainling swipe action", log: Log.general, type: .error)
+                            }
+                        }
+                    }
+                default:
+                    os_log("Wrong value for indexPath.row in bandwidth trailing swipe action: %d", log: Log.general, type: .error, indexPath.row)
                 }
-                completionHandler(true)
+                
             }
-            if let selectedTheme = selectedTheme {
-                next.backgroundColor = Theme.color(for: .swipeActionColor, with: selectedTheme.mode)
-            }
-            let config = UISwipeActionsConfiguration(actions: [next])
-            config.performsFirstActionWithFullSwipe = true
-            return config
-        } else {
-            return nil
+            completionHandler(true)
         }
+        if let Current = Current {
+            next.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())swipeActionColor")
+        }
+        let config = UISwipeActionsConfiguration(actions: [next])
+        config.performsFirstActionWithFullSwipe = true
+        return config
     }
 }
 
-extension BandwidthViewController {
-    private func updateIAPHelper() {
-        passIAPHelperToChildren()
-        
-        guard let iapHelper = iapHelper else { return }
-        
-        iapHelper.requestProducts { (products) in
-            guard let products = products else { return }
-            self.memoriesProduct = products.filter{ $0.productIdentifier == RamanIAPHelper.memories.productId }.first
+extension BandwidthViewController: UIViewControllerPreviewingDelegate {
+    
+    func recentsForRow(at indexPath: IndexPath) -> Recents? {
+        guard let Current = Current else { return nil }
+        switch indexPath.row {
+        case Constants.bwExcitationIndex:
+            return Current.wavelengths
+        default:
+            // all other cases are bandwidths and handles by the same recents
+            return Current.bandwidths
         }
     }
-
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        // convert location to the tableView's coordinate system to get the right cell
+        let locationInTableViewCoordinate = view.convert(location, to: tableView)
+        guard let indexPath = tableView.indexPathForRow(at: locationInTableViewCoordinate), let cell = tableView.cellForRow(at: indexPath) else { return nil }
+        os_log("3D touch event in bandwidth for row %d", log: Log.general, type: .info, indexPath.row)
+        let frame = tableView.convert(cell.frame, to: view)
+        previewingContext.sourceRect = frame
+        let recentsController = storyboard?.instantiateViewController(withIdentifier: "RecentsViewController") as! RecentsViewController
+        recentsController.Current = Current
+        if let recents = recentsForRow(at: indexPath) {
+            recentsController.recents = recents
+        }
+        recentsController.currentTab = .bandwidth
+        switch indexPath.row {
+        case Constants.bwExcitationIndex:
+            recentsController.recentsTitle = "Wavelength"
+         default:
+            recentsController.recentsTitle = "Bandwidths"
+        }
+        
+        recentsController.loadViewIfNeeded()
+        
+        return recentsController
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+    }
+    
+    
 }
