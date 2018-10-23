@@ -113,7 +113,10 @@ class CalculatorViewController: UIViewController {
     
     
     @IBAction func operationPressed(_ sender: UIButton) {
-        
+        if let Current = Current {
+            Current.sounds.playKeyClick()
+        }
+
         if !enteringData && currentValue == 0 && sender.currentTitle == "-" {
             displayLabel.text = "-"
             enteringData = true

@@ -324,7 +324,7 @@ extension RecentsViewController: UITableViewDelegate {
     }
     
     func changeSelectedRecent(to index: Int) {
-        guard let Current = Current, let recents = recents else { return }
+        guard let recents = recents else { return }
         // update the current position in recents stack
         recents.setCurrent(to: index)
         // update the corresponding Raman parameter

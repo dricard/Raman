@@ -17,8 +17,6 @@ class Sounds {
     private var keyClickSound: AVAudioPlayer!
 //    private var popSound: AVAudioPlayer!
     var audioEngine: AVAudioEngine!
-
-    private var keyClickBuffer: Int = 0
     
     init() {
         
@@ -28,7 +26,7 @@ class Sounds {
         
         do {
             self.keyClickSound = try AVAudioPlayer.init(contentsOf: keyClickURL)
-            self.keyClickSound!.delegate = (self as! AVAudioPlayerDelegate)
+//            self.keyClickSound!.delegate = (self as! AVAudioPlayerDelegate)
         } catch let error as NSError {
             print("Could not create audioPlayer \(error), \(error.userInfo)")
         }
@@ -36,27 +34,11 @@ class Sounds {
     }
 
     func playKeyClick() {
-        keyClickBuffer += 1
-        print("Increasing buffer: \(keyClickBuffer)")
-        if keyClickBuffer == 1 {
-            // this is the first time we press a key, so start the first sound
-            // the others will come from didFinish
-            keyClickSound.play()
-            print("Playing first sound")
-        }
+        keyClickSound.stop()
+        keyClickSound.currentTime = 0
+        keyClickSound.play()
     }
-
-}
-
-extension Sounds {
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        keyClickBuffer -= 1
-        print("Decreasing buffer: \(keyClickBuffer)")
-        if keyClickBuffer > 0 {
-            keyClickSound.play()
-            print("Playing sound #\(keyClickBuffer + 1)")
-        }
-    }
+    
 }
 
 extension Sounds {
