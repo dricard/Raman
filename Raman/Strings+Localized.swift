@@ -25,6 +25,7 @@ extension String {
     static let darkThemeLabel = NSLocalizedString("darkThemeLabel")
     static let lightSwitchName = NSLocalizedString("lightSwitch")
     static let darkSwitchName = NSLocalizedString("darkSwitch")
+    static let keyClickSwitchName = NSLocalizedString("keyClicksLabel")
 //    static let madeBy = NSLocalizedString("is made by")
 //    static let ideaBy = NSLocalizedString("Based on an original idea by")
 //    static let thanksTo = NSLocalizedString("Special thanks to")

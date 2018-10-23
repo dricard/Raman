@@ -38,6 +38,7 @@ class CalculatorViewController: UIViewController {
     private var calculator = Calculator()
     private var singlePeriod = false
     private var enteringData = false
+    private var keyClicks = false
     
     var currentValue: Double {
         get {
@@ -113,7 +114,7 @@ class CalculatorViewController: UIViewController {
     
     
     @IBAction func operationPressed(_ sender: UIButton) {
-        if let Current = Current {
+        if let Current = Current, keyClicks {
             Current.sounds.playKeyClick()
         }
 
@@ -219,6 +220,9 @@ class CalculatorViewController: UIViewController {
         } else {
             os_log("ERROR in CalculatorViewController viewDidLoad: trying to unwrap nil value in viewDidLoad", log: Log.general, type: .error)
         }
+        if let Current = Current {
+            keyClicks = UserDefaults.standard.bool(forKey: Current.keyClicksKey)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -232,7 +236,7 @@ class CalculatorViewController: UIViewController {
     // MARK: - Data entry
     
     func enterDigit(_ digitPressed: DigitType) {
-        if let Current = Current {
+        if let Current = Current, keyClicks {
             Current.sounds.playKeyClick()
         }
         switch digitPressed {

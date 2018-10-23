@@ -40,6 +40,8 @@ class PreferencesViewController: UIViewController {
     @IBOutlet weak var dark_set_2_button: UIButton!
     @IBOutlet weak var dark_set_3_button: UIButton!
     @IBOutlet weak var dark_set_4_button: UIButton!
+    @IBOutlet weak var keyClickLabel: UILabel!
+    @IBOutlet weak var keyClickSwitch: UISwitch!
     
     
     // MARK: - actions
@@ -112,6 +114,11 @@ class PreferencesViewController: UIViewController {
         }
     }
     
+    @IBAction func keyClickSwitchPressed(_ sender: UISwitch) {
+        guard let Current = Current else { return }
+        UserDefaults.standard.set(sender.isOn, forKey: Current.keyClicksKey)
+    }
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -124,6 +131,7 @@ class PreferencesViewController: UIViewController {
         darkThemeLabel.text = String.darkThemeLabel
         lightSwitchLabel.text = String.lightSwitchName
         darkSwitchLabel.text = String.darkSwitchName
+        keyClickLabel.text = String.keyClickSwitchName
         
         helpButton.setTitle(.helpButton, for: .normal)
         supportButton.setTitle(.supportButton, for: .normal)
@@ -141,6 +149,7 @@ class PreferencesViewController: UIViewController {
             versionNumberLabel.text = "v. " + Current.version.release + " (" + Current.version.build + ")"
             changeDisplayColors(for: Current.colorSet.mode , animated: false)
             themeSwitch.isOn = Current.colorSet.mode == .dark
+            keyClickSwitch.isOn = UserDefaults.standard.bool(forKey: Current.keyClicksKey)
         }
 
      }
@@ -191,6 +200,8 @@ class PreferencesViewController: UIViewController {
                 self.lightSwitchLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
                 self.darkSwitchLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
                 self.themeSwitch.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
+                self.keyClickSwitch.backgroundColor = UIColor(named:  "\(Current.colorSet.prefix())cellBackgroundColor")
+                self.keyClickLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
                 
                 self.helpButton.titleLabel?.textColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
                 self.helpButton.layer.backgroundColor = UIColor(named:"\(Current.colorSet.prefix())navBarTintColor")!.cgColor
@@ -216,6 +227,9 @@ class PreferencesViewController: UIViewController {
             lightSwitchLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             darkSwitchLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
             themeSwitch.backgroundColor = UIColor(named: "\(Current.colorSet.prefix())cellBackgroundColor")
+            keyClickSwitch.backgroundColor = UIColor(named:  "\(Current.colorSet.prefix())cellBackgroundColor")
+            keyClickLabel.textColor = UIColor(named: "\(Current.colorSet.prefix())cellTextColor")
+
             // style buttons
             helpButton.titleLabel?.textColor = UIColor(named: "\(Current.colorSet.prefix())navBarTextColor")
             helpButton.layer.backgroundColor = UIColor(named:"\(Current.colorSet.prefix())navBarTintColor")!.cgColor

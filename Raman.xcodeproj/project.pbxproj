@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		2115376A1EF59CF90006AC64 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211537691EF59CF90006AC64 /* CalculatorViewController.swift */; };
 		2115376C1EF5BC4F0006AC64 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2115376B1EF5BC4F0006AC64 /* Calculator.swift */; };
+		2122A59A217F4CED00BE471F /* click_10.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2122A599217F4CED00BE471F /* click_10.caf */; };
 		21368BC31EF42EC800DB6096 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21368BC21EF42EC800DB6096 /* StoreKit.framework */; };
 		2140CADD2142FDB800B44C67 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2140CADC2142FDB800B44C67 /* Sounds.swift */; };
-		2140CAE02143020E00B44C67 /* click_10.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2140CADF2143020E00B44C67 /* click_10.caf */; };
 		214414AA1CB2B3F400A1958D /* BandwidthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214414A91CB2B3F400A1958D /* BandwidthViewController.swift */; };
 		214414AC1CB2C0B700A1958D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214414AB1CB2C0B700A1958D /* Constants.swift */; };
 		214A4B7820E2AA21003835FC /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214A4B7720E2AA21003835FC /* Environment.swift */; };
@@ -45,9 +45,9 @@
 		2107D44A1FBB587000298DC9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		211537691EF59CF90006AC64 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		2115376B1EF5BC4F0006AC64 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		2122A599217F4CED00BE471F /* click_10.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = click_10.caf; sourceTree = "<group>"; };
 		21368BC21EF42EC800DB6096 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2140CADC2142FDB800B44C67 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
-		2140CADF2143020E00B44C67 /* click_10.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = click_10.caf; sourceTree = "<group>"; };
 		214414A91CB2B3F400A1958D /* BandwidthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BandwidthViewController.swift; sourceTree = "<group>"; };
 		214414AB1CB2C0B700A1958D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		214A4B7720E2AA21003835FC /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 		92011AE61B0D197200611519 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2140CADF2143020E00B44C67 /* click_10.caf */,
+				2122A599217F4CED00BE471F /* click_10.caf */,
 				92011AE81B0D197300611519 /* AppDelegate.swift */,
 				92011AEF1B0D197300611519 /* Images.xcassets */,
 				92011AE71B0D197300611519 /* Info.plist */,
@@ -266,7 +266,7 @@
 			files = (
 				21DBEA481E2C5A2E00C8436B /* Localizable.strings in Resources */,
 				21DBEA441E2C59E600C8436B /* Main.storyboard in Resources */,
-				2140CAE02143020E00B44C67 /* click_10.caf in Resources */,
+				2122A59A217F4CED00BE471F /* click_10.caf in Resources */,
 				92011AF31B0D197300611519 /* LaunchScreen.xib in Resources */,
 				92011AF01B0D197300611519 /* Images.xcassets in Resources */,
 			);

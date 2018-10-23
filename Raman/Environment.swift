@@ -21,6 +21,7 @@ struct Environment {
     var bandwidths = Recents(for: .bandwidthInCm, with: Constants.recentsBandwidthsKey)
     var colorSet = Colors()
     var sounds = Sounds()
+    let keyClicksKey = "keyClicks"
 }
 
 extension Environment {

@@ -31,7 +31,8 @@
 "at" = "chez";
 "instructions" = "Choisissez une couleur pour chaque mode";
 "credits" = "Réalisé par Denis Ricard chez Hexaedre";
-"lightThemeLabel" = "Office mode colors";
-"darkThemeLabel" = "Lab mode colors";
-"darkSwitch" = "Lab";
-"lightSwitch" = "Office";
+"lightThemeLabel" = "Couleurs pour bureau";
+"darkThemeLabel" = "Couleurs pour labo";
+"darkSwitch" = "Labo";
+"lightSwitch" = "Bureau";
+"keyClicksLabel" = "Son pour clavier";
