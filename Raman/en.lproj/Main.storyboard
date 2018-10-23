@@ -196,9 +196,7 @@
                     <navigationItem key="navigationItem" title="Raman" id="PFG-Qa-reW">
                         <barButtonItem key="rightBarButtonItem" title="About" image="gear" id="Lut-yW-VsL">
                             <connections>
-                                <segue destination="LBY-a0-3HX" kind="popoverPresentation" identifier="showAboutSegue" popoverAnchorBarButtonItem="Lut-yW-VsL" id="csL-tJ-eTk">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
+                                <segue destination="LBY-a0-3HX" kind="show" identifier="showAboutSegue" id="csL-tJ-eTk"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -723,7 +721,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EsQ-Gp-rxA">
-                                <rect key="frame" x="215" y="531" width="150" height="60"/>
+                                <rect key="frame" x="215" y="482" width="150" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="lJI-QE-dBd"/>
                                     <constraint firstAttribute="height" constant="60" id="rPF-W5-iBP"/>
@@ -737,7 +735,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wb-Iw-9SU">
-                                <rect key="frame" x="10" y="531" width="150" height="60"/>
+                                <rect key="frame" x="10" y="482" width="150" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="DiE-vD-37w"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="xlp-up-gJk"/>
@@ -751,7 +749,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2015 Hexaedre" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4Zy-dp-xcR">
-                                <rect key="frame" x="112.5" y="642" width="150" height="18"/>
+                                <rect key="frame" x="112.5" y="593" width="150" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="QpM-PP-ErK"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="hp3-BH-gZd"/>
@@ -761,7 +759,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LF2-0y-O7q">
-                                <rect key="frame" x="5" y="642" width="40" height="17"/>
+                                <rect key="frame" x="5" y="593" width="40" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="2zq-wH-OqP"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="jG7-EP-tSW"/>
@@ -778,7 +776,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raman is made by Denis Ricard at Hexaedre" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="Q9T-8b-Vgq">
-                                <rect key="frame" x="72" y="622" width="231" height="14"/>
+                                <rect key="frame" x="72" y="573" width="231" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="cVv-Fc-O7S"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="231" id="dNm-e9-Pk8"/>
@@ -1273,9 +1271,7 @@
                     <navigationItem key="navigationItem" title="Raman" id="oaj-Mb-86v">
                         <barButtonItem key="rightBarButtonItem" title="About" image="gear" id="Nxc-Qc-jHY">
                             <connections>
-                                <segue destination="LBY-a0-3HX" kind="popoverPresentation" identifier="showAboutSegue" popoverAnchorBarButtonItem="Nxc-Qc-jHY" id="stc-84-s8w">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
+                                <segue destination="LBY-a0-3HX" kind="show" identifier="showAboutSegue" id="stc-84-s8w"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
