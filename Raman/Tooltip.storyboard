@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.30.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.19.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tooltip Popover View Controller-->
+        <scene sceneID="8M4-d1-JE3">
+            <objects>
+                <viewController storyboardIdentifier="TooltipPopoverViewController" id="txV-AN-QPh" customClass="TooltipPopoverViewController" customModule="Raman" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PSc-jh-NRg"/>
+                        <viewControllerLayoutGuide type="bottom" id="9zj-Dc-npW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ggF-BB-BxI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="z8Q-LO-mxG">
+                                <rect key="frame" x="21" y="25" width="333" height="637"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="z8Q-LO-mxG" firstAttribute="top" secondItem="PSc-jh-NRg" secondAttribute="bottom" constant="5" id="IIr-Oa-vUD"/>
+                            <constraint firstItem="9zj-Dc-npW" firstAttribute="top" secondItem="z8Q-LO-mxG" secondAttribute="bottom" constant="5" id="KCI-Wj-phd"/>
+                            <constraint firstItem="z8Q-LO-mxG" firstAttribute="leading" secondItem="ggF-BB-BxI" secondAttribute="leadingMargin" constant="5" id="U0z-jF-OnS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="z8Q-LO-mxG" secondAttribute="trailing" constant="5" id="WwQ-eg-jtu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tooltipLabel" destination="z8Q-LO-mxG" id="Dle-pz-YGH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pfR-vV-mvm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4716" y="1289.5052473763119"/>
+        </scene>
+    </scenes>
+</document>

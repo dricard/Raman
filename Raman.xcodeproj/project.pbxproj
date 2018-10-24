@@ -24,6 +24,12 @@
 		215A7B031CF91D07003B9F9B /* BWCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A7B021CF91D07003B9F9B /* BWCell.swift */; };
 		215AB9E41EF3208400555AB4 /* ThemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215AB9E31EF3208400555AB4 /* ThemeMode.swift */; };
 		215AF03520EC5604006EC28F /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215AF03420EC5604006EC28F /* Log.swift */; };
+		216C408D2180B26A00B82DEE /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216C408C2180B26A00B82DEE /* Preferences.storyboard */; };
+		216C408F2180B28D00B82DEE /* Spectro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216C408E2180B28D00B82DEE /* Spectro.storyboard */; };
+		216C40912180B2A800B82DEE /* Bandwidth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216C40902180B2A800B82DEE /* Bandwidth.storyboard */; };
+		216C40932180B2DC00B82DEE /* Recents.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216C40922180B2DC00B82DEE /* Recents.storyboard */; };
+		216C40952180B2F800B82DEE /* Calculator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216C40942180B2F800B82DEE /* Calculator.storyboard */; };
+		216C40972180B31A00B82DEE /* Tooltip.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216C40962180B31A00B82DEE /* Tooltip.storyboard */; };
 		2170FF131F19507C00CB726A /* CalculatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2170FF121F19507C00CB726A /* CalculatorButton.swift */; };
 		21B272CA20ED04D400AD6322 /* Recents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B272C920ED04D400AD6322 /* Recents.swift */; };
 		21B537BA1EF717AF00744E9A /* TooltipPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B537B91EF717AF00744E9A /* TooltipPopoverViewController.swift */; };
@@ -60,6 +66,12 @@
 		215A7B021CF91D07003B9F9B /* BWCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWCell.swift; sourceTree = "<group>"; };
 		215AB9E31EF3208400555AB4 /* ThemeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeMode.swift; sourceTree = "<group>"; };
 		215AF03420EC5604006EC28F /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		216C408C2180B26A00B82DEE /* Preferences.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
+		216C408E2180B28D00B82DEE /* Spectro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Spectro.storyboard; sourceTree = "<group>"; };
+		216C40902180B2A800B82DEE /* Bandwidth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Bandwidth.storyboard; sourceTree = "<group>"; };
+		216C40922180B2DC00B82DEE /* Recents.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Recents.storyboard; sourceTree = "<group>"; };
+		216C40942180B2F800B82DEE /* Calculator.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calculator.storyboard; sourceTree = "<group>"; };
+		216C40962180B31A00B82DEE /* Tooltip.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tooltip.storyboard; sourceTree = "<group>"; };
 		2170FF121F19507C00CB726A /* CalculatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorButton.swift; sourceTree = "<group>"; };
 		21B272C920ED04D400AD6322 /* Recents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recents.swift; sourceTree = "<group>"; };
 		21B537B91EF717AF00744E9A /* TooltipPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipPopoverViewController.swift; sourceTree = "<group>"; };
@@ -134,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				92011AF11B0D197300611519 /* LaunchScreen.xib */,
-				21DBEA461E2C59E600C8436B /* Main.storyboard */,
 				2170FF121F19507C00CB726A /* CalculatorButton.swift */,
 			);
 			name = View;
@@ -153,6 +164,20 @@
 				2140CADC2142FDB800B44C67 /* Sounds.swift */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		216C408B2180B22800B82DEE /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				216C40962180B31A00B82DEE /* Tooltip.storyboard */,
+				216C40942180B2F800B82DEE /* Calculator.storyboard */,
+				216C40922180B2DC00B82DEE /* Recents.storyboard */,
+				216C40902180B2A800B82DEE /* Bandwidth.storyboard */,
+				216C408E2180B28D00B82DEE /* Spectro.storyboard */,
+				216C408C2180B26A00B82DEE /* Preferences.storyboard */,
+				21DBEA461E2C59E600C8436B /* Main.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 		92011ADA1B0D197200611519 = {
@@ -175,6 +200,7 @@
 		92011AE51B0D197200611519 /* Raman */ = {
 			isa = PBXGroup;
 			children = (
+				216C408B2180B22800B82DEE /* Storyboards */,
 				215A7AFD1CF8D993003B9F9B /* UI */,
 				215A7AFC1CF8D94F003B9F9B /* View */,
 				215A7AFA1CF8BF9B003B9F9B /* Model */,
@@ -264,11 +290,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				216C40912180B2A800B82DEE /* Bandwidth.storyboard in Resources */,
 				21DBEA481E2C5A2E00C8436B /* Localizable.strings in Resources */,
+				216C408F2180B28D00B82DEE /* Spectro.storyboard in Resources */,
 				21DBEA441E2C59E600C8436B /* Main.storyboard in Resources */,
 				2122A59A217F4CED00BE471F /* click_10.caf in Resources */,
+				216C408D2180B26A00B82DEE /* Preferences.storyboard in Resources */,
+				216C40952180B2F800B82DEE /* Calculator.storyboard in Resources */,
 				92011AF31B0D197300611519 /* LaunchScreen.xib in Resources */,
+				216C40972180B31A00B82DEE /* Tooltip.storyboard in Resources */,
 				92011AF01B0D197300611519 /* Images.xcassets in Resources */,
+				216C40932180B2DC00B82DEE /* Recents.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.30.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rcr-VY-9iD">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.19.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Calculator View Controller-->
+        <scene sceneID="RbI-db-Lhx">
+            <objects>
+                <viewController storyboardIdentifier="CalculatorViewController" id="it3-1f-xjb" customClass="CalculatorViewController" customModule="Raman" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dxD-5j-HzA"/>
+                        <viewControllerLayoutGuide type="bottom" id="I1e-Xo-dwK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gDD-4W-4kP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pef-Ie-efo">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHk-us-aBA">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="221"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="b3G-a6-jd7">
+                                                <rect key="frame" x="5" y="0.0" width="365" height="218"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="GKY-6e-fzT">
+                                                        <rect key="frame" x="0.0" y="0.0" width="365" height="50"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bxQ-4z-QLQ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="177.5" height="42"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parameter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fU3-mZ-e4v">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="177.5" height="20.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yTj-nG-fGX">
+                                                                        <rect key="frame" x="0.0" y="20.5" width="177.5" height="21.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K9x-TS-SAg">
+                                                                <rect key="frame" x="177.5" y="0.0" width="10" height="50"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="10" id="vdF-eC-278"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ucd-n0-sPc">
+                                                                <rect key="frame" x="187.5" y="0.0" width="177.5" height="42"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current value" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJK-Fo-xQJ">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="177.5" height="20.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="687.23" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Cf1-i1-E44">
+                                                                        <rect key="frame" x="0.0" y="20.5" width="177.5" height="21.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="bxQ-4z-QLQ" firstAttribute="width" secondItem="ucd-n0-sPc" secondAttribute="width" id="Q2h-W7-NhJ"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="548.31" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7Ob-zC-OqJ">
+                                                        <rect key="frame" x="0.0" y="50" width="365" height="118"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="60"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Ihs-fj-Zf8">
+                                                        <rect key="frame" x="0.0" y="168" width="365" height="50"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="parameter units" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3EQ-an-10N">
+                                                                <rect key="frame" x="0.0" y="29.5" width="120.5" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="hUz-iA-sV2">
+                                                                <rect key="frame" x="120.5" y="0.0" width="244.5" height="50"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAL-iZ-ODP">
+                                                                        <rect key="frame" x="232.5" y="0.0" width="12" height="20"/>
+                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="cm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="16J-G2-tzj">
+                                                                        <rect key="frame" x="208.5" y="20" width="36" height="30"/>
+                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="hUz-iA-sV2" firstAttribute="top" secondItem="Ihs-fj-Zf8" secondAttribute="top" id="8V9-Sg-xLz"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="7Ob-zC-OqJ" firstAttribute="centerY" secondItem="b3G-a6-jd7" secondAttribute="centerY" id="6C7-Em-0uO"/>
+                                                    <constraint firstItem="Ihs-fj-Zf8" firstAttribute="top" secondItem="b3G-a6-jd7" secondAttribute="top" constant="168" id="p3t-Sc-WZO"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="b3G-a6-jd7" firstAttribute="top" secondItem="CHk-us-aBA" secondAttribute="top" id="FGi-rA-ZFm"/>
+                                            <constraint firstItem="GKY-6e-fzT" firstAttribute="top" secondItem="CHk-us-aBA" secondAttribute="top" id="GqQ-VB-Y9y"/>
+                                            <constraint firstItem="GKY-6e-fzT" firstAttribute="leading" secondItem="CHk-us-aBA" secondAttribute="leading" constant="5" id="X6O-Ml-dsp"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ihs-fj-Zf8" secondAttribute="bottom" constant="3" id="sKh-4J-ZRz"/>
+                                            <constraint firstAttribute="trailing" secondItem="b3G-a6-jd7" secondAttribute="trailing" constant="5" id="uzf-Ns-AyO"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="58A-7D-Uvb">
+                                        <rect key="frame" x="0.0" y="221" width="375" height="426"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4vJ-Mx-DCm">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="426"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5X1-YJ-rZL">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="106.5"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPR-d2-MCn" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                                                <state key="normal" title="7"/>
+                                                                <connections>
+                                                                    <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="aJt-9N-ImQ"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WA3-BD-AAH" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="94" y="0.0" width="93.5" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                                                <state key="normal" title="8"/>
+                                                                <connections>
+                                                                    <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="cAc-Gv-87Q"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N4P-J5-aUx" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="187.5" y="0.0" width="94" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                                                <state key="normal" title="9"/>
+                                                                <connections>
+                                                                    <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="lVJ-cA-hxw"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Siu-yr-IDh" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                                                <state key="normal" title="⬅︎"/>
+                                                                <connections>
+                                                                    <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="m97-CC-GB8"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2nC-DW-mhI">
+                                                        <rect key="frame" x="0.0" y="106.5" width="375" height="106.5"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lke-SV-lOy" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                                                <state key="normal" title="4"/>
+                                                                <connections>
+                                                                    <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="lqv-nS-gS5"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v3u-vF-fDw" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="94" y="0.0" width="93.5" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                                                <state key="normal" title="5"/>
+                                                                <connections>
+                                                                    <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="Ez5-Zf-1g7"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAR-cg-xCw" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="187.5" y="0.0" width="94" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                                                <state key="normal" title="6"/>
+                                                                <connections>
+                                                                    <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="YC8-6o-fyA"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOc-t4-blb" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                                                <state key="normal" title="+"/>
+                                                                <connections>
+                                                                    <action selector="operationPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="zKI-il-42B"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="qjV-Qi-5Ww">
+                                                        <rect key="frame" x="0.0" y="213" width="375" height="106.5"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPG-ZJ-sQe" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                                                <state key="normal" title="1"/>
+                                                                <connections>
+                                                                    <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="eaR-jX-ojh"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSE-d0-LKN" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="94" y="0.0" width="93.5" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                                                <state key="normal" title="2"/>
+                                                                <connections>
+                                                                    <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="32I-ps-Yoc"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ins-ZF-LJ1" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="187.5" y="0.0" width="94" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                                                <state key="normal" title="3"/>
+                                                                <connections>
+                                                                    <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="pLs-lq-rJL"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KT6-3g-spo" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                                                <state key="normal" title="-"/>
+                                                                <connections>
+                                                                    <action selector="operationPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="mEw-vr-5Se"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7Q3-hs-fQV">
+                                                        <rect key="frame" x="0.0" y="319.5" width="375" height="106.5"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iU-zd-Ed5" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="94" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                                                <state key="normal" title="?"/>
+                                                                <connections>
+                                                                    <action selector="tooltipButtonPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="M2a-gK-LTM"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LzD-dC-hIA" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="94" y="0.0" width="93.5" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                                                <state key="normal" title="0"/>
+                                                                <connections>
+                                                                    <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="i6L-Tk-c9h"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVE-90-hws" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="187.5" y="0.0" width="94" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                                                <state key="normal" title="."/>
+                                                                <connections>
+                                                                    <action selector="digitPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="L0l-ib-PWX"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79A-u8-6ZM" customClass="CalculatorButton" customModule="Raman" customModuleProvider="target">
+                                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="106.5"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
+                                                                <state key="normal" title="⏎"/>
+                                                                <connections>
+                                                                    <action selector="operationPressed:" destination="it3-1f-xjb" eventType="touchUpInside" id="pZM-uL-xdV"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="qjV-Qi-5Ww" firstAttribute="top" secondItem="2nC-DW-mhI" secondAttribute="bottom" id="2pl-SZ-9u6"/>
+                                                    <constraint firstItem="2nC-DW-mhI" firstAttribute="top" secondItem="5X1-YJ-rZL" secondAttribute="bottom" id="I5z-W5-RXa"/>
+                                                    <constraint firstItem="7Q3-hs-fQV" firstAttribute="top" secondItem="qjV-Qi-5Ww" secondAttribute="bottom" id="Y5y-Ni-7pn"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="5X1-YJ-rZL" firstAttribute="top" secondItem="58A-7D-Uvb" secondAttribute="top" id="5F5-ou-7yR"/>
+                                            <constraint firstItem="4vJ-Mx-DCm" firstAttribute="leading" secondItem="58A-7D-Uvb" secondAttribute="leading" id="9Gw-TW-zPz"/>
+                                            <constraint firstItem="2nC-DW-mhI" firstAttribute="leading" secondItem="58A-7D-Uvb" secondAttribute="leading" id="9K4-vb-hWU"/>
+                                            <constraint firstAttribute="bottom" secondItem="4vJ-Mx-DCm" secondAttribute="bottom" id="Eyq-Bd-g79"/>
+                                            <constraint firstItem="7Q3-hs-fQV" firstAttribute="leading" secondItem="58A-7D-Uvb" secondAttribute="leading" id="Ffl-HO-RAr"/>
+                                            <constraint firstAttribute="bottom" secondItem="7Q3-hs-fQV" secondAttribute="bottom" id="GxP-zY-V6K"/>
+                                            <constraint firstItem="qjV-Qi-5Ww" firstAttribute="leading" secondItem="58A-7D-Uvb" secondAttribute="leading" id="Jyo-9c-5nZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="2nC-DW-mhI" secondAttribute="trailing" id="PL7-In-kBj"/>
+                                            <constraint firstAttribute="trailing" secondItem="4vJ-Mx-DCm" secondAttribute="trailing" id="PX0-mn-4Ps"/>
+                                            <constraint firstAttribute="trailing" secondItem="qjV-Qi-5Ww" secondAttribute="trailing" id="Swk-rn-Ag2"/>
+                                            <constraint firstItem="4vJ-Mx-DCm" firstAttribute="top" secondItem="58A-7D-Uvb" secondAttribute="top" id="V55-EH-j5T"/>
+                                            <constraint firstAttribute="trailing" secondItem="5X1-YJ-rZL" secondAttribute="trailing" id="bjv-qL-ZyK"/>
+                                            <constraint firstItem="5X1-YJ-rZL" firstAttribute="leading" secondItem="58A-7D-Uvb" secondAttribute="leading" id="jEX-By-Cma"/>
+                                            <constraint firstAttribute="trailing" secondItem="7Q3-hs-fQV" secondAttribute="trailing" id="pW0-I1-Ufy"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="CHk-us-aBA" secondAttribute="trailing" id="5Jv-f1-IeP"/>
+                                    <constraint firstItem="58A-7D-Uvb" firstAttribute="leading" secondItem="pef-Ie-efo" secondAttribute="leading" id="6BS-JX-zUF"/>
+                                    <constraint firstItem="CHk-us-aBA" firstAttribute="top" secondItem="pef-Ie-efo" secondAttribute="top" id="WQ9-uC-b5i"/>
+                                    <constraint firstAttribute="bottom" secondItem="58A-7D-Uvb" secondAttribute="bottom" id="efX-2b-tgu"/>
+                                    <constraint firstAttribute="trailing" secondItem="58A-7D-Uvb" secondAttribute="trailing" id="pnx-41-0WS"/>
+                                    <constraint firstItem="CHk-us-aBA" firstAttribute="leading" secondItem="pef-Ie-efo" secondAttribute="leading" id="skQ-3C-ObC"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pef-Ie-efo" firstAttribute="top" secondItem="dxD-5j-HzA" secondAttribute="bottom" id="2Co-6W-Ezv"/>
+                            <constraint firstItem="I1e-Xo-dwK" firstAttribute="top" secondItem="pef-Ie-efo" secondAttribute="bottom" id="RWV-O1-2qe"/>
+                            <constraint firstAttribute="trailing" secondItem="pef-Ie-efo" secondAttribute="trailing" id="d4V-bT-Z16"/>
+                            <constraint firstItem="pef-Ie-efo" firstAttribute="leading" secondItem="gDD-4W-4kP" secondAttribute="leading" id="lfJ-Pg-7TB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="calculatorView" destination="58A-7D-Uvb" id="duB-3Y-xbA"/>
+                        <outlet property="digitButton0" destination="LzD-dC-hIA" id="Bny-dG-5LR"/>
+                        <outlet property="digitButton1" destination="bPG-ZJ-sQe" id="h0D-je-yt9"/>
+                        <outlet property="digitButton2" destination="WSE-d0-LKN" id="hg6-pc-vA1"/>
+                        <outlet property="digitButton3" destination="Ins-ZF-LJ1" id="Wye-5i-050"/>
+                        <outlet property="digitButton4" destination="Lke-SV-lOy" id="bFp-mb-Bz0"/>
+                        <outlet property="digitButton5" destination="v3u-vF-fDw" id="WkG-Ix-y7U"/>
+                        <outlet property="digitButton6" destination="bAR-cg-xCw" id="xYv-SP-aVS"/>
+                        <outlet property="digitButton7" destination="fPR-d2-MCn" id="s9H-CG-wCT"/>
+                        <outlet property="digitButton8" destination="WA3-BD-AAH" id="ajE-gX-iXe"/>
+                        <outlet property="digitButton9" destination="N4P-J5-aUx" id="n1Y-5A-o6e"/>
+                        <outlet property="digitButtonBackspace" destination="Siu-yr-IDh" id="mSj-7w-CXz"/>
+                        <outlet property="digitButtonPeriod" destination="oVE-90-hws" id="MC3-pZ-vir"/>
+                        <outlet property="displayLabel" destination="7Ob-zC-OqJ" id="jBt-fL-7wL"/>
+                        <outlet property="displayView" destination="CHk-us-aBA" id="1Re-aF-Phv"/>
+                        <outlet property="exponentLabel" destination="vAL-iZ-ODP" id="g6R-Jw-YkP"/>
+                        <outlet property="operationButtonEqual" destination="79A-u8-6ZM" id="Tjp-Yi-I9g"/>
+                        <outlet property="operationButtonMinus" destination="KT6-3g-spo" id="nqa-ob-dOb"/>
+                        <outlet property="operationButtonPlus" destination="TOc-t4-blb" id="ETJ-tp-PhI"/>
+                        <outlet property="parameterLabel" destination="yTj-nG-fGX" id="QLi-As-18a"/>
+                        <outlet property="parameterTitleLabel" destination="fU3-mZ-e4v" id="VD9-06-2Jb"/>
+                        <outlet property="previousValueLabel" destination="Cf1-i1-E44" id="4Ta-Ja-K2s"/>
+                        <outlet property="previousValueTitleLabel" destination="RJK-Fo-xQJ" id="bfn-fN-RNX"/>
+                        <outlet property="tooltipButton" destination="0iU-zd-Ed5" id="fRL-rc-QUw"/>
+                        <outlet property="unitsLabel" destination="16J-G2-tzj" id="7ua-Y1-yI6"/>
+                        <outlet property="unitsTitleLabel" destination="3EQ-an-10N" id="fxx-ZN-Vh8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T2g-R1-6Xv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3832.8000000000002" y="1289.5052473763119"/>
+        </scene>
+        <!--Tooltip Popover View Controller-->
+        <scene sceneID="8M4-d1-JE3">
+            <objects>
+                <viewController storyboardIdentifier="TooltipPopoverViewController" id="txV-AN-QPh" customClass="TooltipPopoverViewController" customModule="Raman" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PSc-jh-NRg"/>
+                        <viewControllerLayoutGuide type="bottom" id="9zj-Dc-npW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ggF-BB-BxI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="z8Q-LO-mxG">
+                                <rect key="frame" x="21" y="25" width="333" height="637"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="z8Q-LO-mxG" firstAttribute="top" secondItem="PSc-jh-NRg" secondAttribute="bottom" constant="5" id="IIr-Oa-vUD"/>
+                            <constraint firstItem="9zj-Dc-npW" firstAttribute="top" secondItem="z8Q-LO-mxG" secondAttribute="bottom" constant="5" id="KCI-Wj-phd"/>
+                            <constraint firstItem="z8Q-LO-mxG" firstAttribute="leading" secondItem="ggF-BB-BxI" secondAttribute="leadingMargin" constant="5" id="U0z-jF-OnS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="z8Q-LO-mxG" secondAttribute="trailing" constant="5" id="WwQ-eg-jtu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tooltipLabel" destination="z8Q-LO-mxG" id="Dle-pz-YGH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pfR-vV-mvm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4716" y="1289.5052473763119"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="8la-mt-I6m">
+            <objects>
+                <tabBarController id="rcr-VY-9iD" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="SGM-DM-cSx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="pm3-bG-XLf" kind="relationship" relationship="viewControllers" id="RNE-9Q-sb5"/>
+                        <segue destination="g5j-Rx-cRS" kind="relationship" relationship="viewControllers" id="U5P-Mt-ENL"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FyG-RN-5Nu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-578" y="875"/>
+        </scene>
+        <!--Preferences-->
+        <scene sceneID="2zN-zk-iW1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Preferences" id="GyJ-vU-cfZ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="STZ-YP-gEM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-579" y="1443"/>
+        </scene>
+        <!--Spectro-->
+        <scene sceneID="tq2-UT-4fL">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Spectro" id="pm3-bG-XLf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="pq1-oU-Kbl"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MkI-py-CYz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-206" y="1375"/>
+        </scene>
+        <!--Bandwidth-->
+        <scene sceneID="pz0-JM-LM9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Bandwidth" id="g5j-Rx-cRS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="bFM-Ql-3Ek"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AyE-gf-B4N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-953" y="1375"/>
+        </scene>
+        <!--RecentsViewController-->
+        <scene sceneID="4h8-PJ-fvH">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="RecentsViewController" storyboardName="Recents" referencedIdentifier="RecentsViewController" id="rRI-cg-How" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s6k-bp-lKU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-578" y="1528"/>
+        </scene>
+    </scenes>
+</document>

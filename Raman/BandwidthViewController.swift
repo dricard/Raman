@@ -97,6 +97,8 @@ class BandwidthViewController: UIViewController {
         
         navigationItem.leftBarButtonItem = themeModeButton
         
+        // Use different font sizes depending on the size of the screen.
+
         updateInterface()
         
     }
